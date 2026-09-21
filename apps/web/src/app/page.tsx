@@ -20,6 +20,7 @@ import { HolographicMemberCard } from "@/components/cards/holographic-member-car
 import { BangladeshBranchAtlas } from "@/components/geo/bangladesh-branch-atlas";
 import { HeritageChronicleTimeline } from "@/components/heritage/heritage-chronicle-timeline";
 import { InteractiveOrganogram } from "@/components/governance/interactive-organogram";
+import { OrgLogo } from "@/components/brand/org-logo";
 
 export default function TenantPublicPortfolio() {
   const [lang, setLang] = useState<"en" | "bn">("en");
@@ -33,19 +34,9 @@ export default function TenantPublicPortfolio() {
       {/* ================= 1. FROSTED GLASS NAVIGATION ================= */}
       <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/75 backdrop-blur-2xl">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-amber-400 flex items-center justify-center font-extrabold text-white text-lg shadow-lg">
-              BMA
-            </div>
-            <div>
-              <div className="font-bold text-base tracking-tight text-white leading-tight">
-                {lang === "en" ? "Bangladesh Medical Association" : "বাংলাদেশ মেডিকেল এসোসিয়েশন"}
-              </div>
-              <div className="text-xs text-muted-foreground font-bangla">
-                {lang === "en" ? "Chattogram Metropolitan Division" : "চট্টগ্রাম মহানগর বিভাগ"}
-              </div>
-            </div>
-          </div>
+          <Link href="/">
+            <OrgLogo size="md" />
+          </Link>
 
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground">
             <a href="#atlas" className="hover:text-white transition-colors">
@@ -445,21 +436,14 @@ export default function TenantPublicPortfolio() {
       {/* ================= 9. EDITORIAL FOOTER ================= */}
       <footer className="mt-auto border-t border-white/10 bg-slate-950 py-16 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="space-y-3 md:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-bold text-white text-sm">
-                BMA
-              </div>
-              <span className="font-bold text-base text-white">
-                Bangladesh Medical Association — Chattogram
-              </span>
-            </div>
+          <div className="space-y-4 md:col-span-2">
+            <OrgLogo size="lg" />
             <p className="text-xs text-muted-foreground max-w-md leading-relaxed">
               Autonomous statutory association governing medical ethics, continuing medical education,
-              and professional welfare across Chattogram Division.
+              and professional welfare across Chattogram Division. Registered under Societies Registration Act XXI of 1860.
             </p>
-            <div className="text-xs text-slate-500 pt-2">
-              Powered by Multi-Tenant Organization Operating System · MySQL 8.0 & Next.js 15
+            <div className="text-xs text-slate-500 pt-1">
+              Powered by Multi-Tenant Organization Operating System · MySQL 8.0 & Next.js 15 PWA
             </div>
           </div>
 

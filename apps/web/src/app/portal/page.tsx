@@ -23,6 +23,7 @@ import {
 import { Button, Badge, Card, CardContent } from "@org/ui";
 import Link from "next/link";
 import { RoleSelector } from "@/components/auth/role-selector";
+import { OrgLogo } from "@/components/brand/org-logo";
 
 interface PortalModule {
   title: string;
@@ -170,22 +171,13 @@ export default function MemberPortalDashboard() {
       {/* Top Header */}
       <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/85 backdrop-blur-2xl">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg"
-            >
-              BMA
-            </Link>
-            <div>
-              <Link href="/" className="font-bold text-base tracking-tight text-white hover:text-amber-400 transition-colors">
-                {lang === "en" ? "Member & Officer Central Secretariat" : "সদস্য ও নির্বাহী পরিষদ পোর্টাল"}
-              </Link>
-              <div className="text-xs text-slate-400 font-bangla">
-                {lang === "en" ? "Chattogram Metropolitan Division" : "চট্টগ্রাম মহানগর বিভাগ • ডিজিটাল গভর্ন্যান্স"}
-              </div>
-            </div>
-          </div>
+          <Link href="/">
+            <OrgLogo
+              size="md"
+              subtitle="Central Secretariat Portal"
+              subtitleBn="সদস্য ও নির্বাহী পরিষদ পোর্টাল"
+            />
+          </Link>
 
           <div className="flex items-center gap-4">
             <button

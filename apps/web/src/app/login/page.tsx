@@ -7,7 +7,6 @@ import {
   Lock,
   ArrowRight,
   ShieldCheck,
-  Building,
   CheckCircle2,
   ArrowLeft,
   KeyRound,
@@ -16,6 +15,7 @@ import {
 import { Button } from "@org/ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { OrgLogo } from "@/components/brand/org-logo";
 
 export default function MemberLoginPage() {
   const router = useRouter();
@@ -89,10 +89,8 @@ export default function MemberLoginPage() {
       <main className="max-w-md w-full mx-auto px-6 py-12 flex-1 flex flex-col justify-center">
         <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8 shadow-2xl backdrop-blur-2xl space-y-6">
           {/* Header & Crest */}
-          <div className="text-center space-y-2">
-            <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto text-amber-400">
-              <Building className="w-7 h-7" />
-            </div>
+          <div className="text-center space-y-3">
+            <OrgLogo variant="mark" size="lg" className="mx-auto justify-center" />
             <h1 className="text-2xl font-display font-bold text-white tracking-tight">
               Member & Council Sign In
             </h1>
