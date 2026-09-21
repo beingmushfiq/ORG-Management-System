@@ -17,6 +17,9 @@ import {
 import { Button, Badge } from "@org/ui";
 import { BranchGalaxy } from "@/components/3d/branch-galaxy";
 import { HolographicMemberCard } from "@/components/cards/holographic-member-card";
+import { BangladeshBranchAtlas } from "@/components/geo/bangladesh-branch-atlas";
+import { HeritageChronicleTimeline } from "@/components/heritage/heritage-chronicle-timeline";
+import { InteractiveOrganogram } from "@/components/governance/interactive-organogram";
 
 export default function TenantPublicPortfolio() {
   const [lang, setLang] = useState<"en" | "bn">("en");
@@ -44,27 +47,27 @@ export default function TenantPublicPortfolio() {
             </div>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-muted-foreground">
-            <a href="#about" className="hover:text-white transition-colors">
-              {lang === "en" ? "About" : "পরিচিতি"}
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+            <a href="#atlas" className="hover:text-white transition-colors">
+              {lang === "en" ? "Branch Atlas" : "শাখা মানচিত্র"}
             </a>
-            <a href="#hierarchy" className="hover:text-white transition-colors">
-              {lang === "en" ? "Branch Network" : "শাখা নেটওয়ার্ক"}
+            <a href="#heritage" className="hover:text-white transition-colors">
+              {lang === "en" ? "Heritage (1952–2026)" : "ঐতিহ্য ও ইতিহাস"}
             </a>
-            <a href="#leadership" className="hover:text-white transition-colors">
-              {lang === "en" ? "Leadership" : "নেতৃত্ব"}
+            <a href="#organogram" className="hover:text-white transition-colors">
+              {lang === "en" ? "Organogram" : "সাংগঠনিক কাঠামো"}
             </a>
+            <Link href="/journal" className="hover:text-white transition-colors">
+              {lang === "en" ? "Journal" : "জার্নাল"}
+            </Link>
+            <Link href="/memorial" className="hover:text-white transition-colors">
+              {lang === "en" ? "Memorial" : "স্মৃতি চিরন্তন"}
+            </Link>
             <Link href="/events" className="hover:text-white transition-colors">
               {lang === "en" ? "Conferences" : "সম্মেলন"}
             </Link>
             <Link href="/notices" className="hover:text-white transition-colors">
-              {lang === "en" ? "Gazette & Notices" : "বিজ্ঞপ্তি"}
-            </Link>
-            <Link href="/causes" className="hover:text-white transition-colors">
-              {lang === "en" ? "Causes" : "তহবিল"}
-            </Link>
-            <Link href="/gallery" className="hover:text-white transition-colors">
-              {lang === "en" ? "Gallery" : "গ্যালারি"}
+              {lang === "en" ? "Notices" : "বিজ্ঞপ্তি"}
             </Link>
           </nav>
 
@@ -81,23 +84,27 @@ export default function TenantPublicPortfolio() {
             </Button>
 
             {/* Private Portal Gateway */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-xs font-semibold hover:text-white"
-            >
-              {lang === "en" ? "Portal Login" : "লগইন"}
-            </Button>
+            <Link href="/portal">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-xs font-semibold hover:text-white"
+              >
+                {lang === "en" ? "Portal Login" : "লগইন"}
+              </Button>
+            </Link>
 
             {/* Direct Member Onboarding Funnel */}
-            <Button
-              variant="primary"
-              size="sm"
-              className="gap-1.5 text-xs font-semibold shadow-lg shadow-primary/20"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              {lang === "en" ? "Apply for Membership" : "সদস্যপদ আবেদন"}
-            </Button>
+            <Link href="/portal/concierge">
+              <Button
+                variant="primary"
+                size="sm"
+                className="gap-1.5 text-xs font-semibold shadow-lg shadow-primary/20"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                {lang === "en" ? "Fast-Track Concierge" : "দ্রুত সেবা কেন্দ্র"}
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
@@ -205,6 +212,24 @@ export default function TenantPublicPortfolio() {
 
         {/* 3D WebGL Canvas */}
         <BranchGalaxy />
+      </section>
+
+      {/* ================= 4B. BANGLADESH BRANCH & DIVISION ATLAS ================= */}
+      <section id="atlas" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div className="mb-10 text-center max-w-3xl mx-auto">
+          <Badge variant="warning" className="mb-2">
+            64-District Presence
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            {lang === "en" ? "National Branch & Hospital Atlas" : "সারাদেশের শাখা ও হাসপাতাল নেটওয়ার্ক"}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-2">
+            {lang === "en"
+              ? "Select any administrative division or district branch to inspect local executive leadership, active registered doctors, and 24/7 doctor emergency helplines."
+              : "বিভাগ অথবা জেলা শাখা নির্বাচন করে স্থানীয় নেতৃত্ব, সক্রিয় চিকিৎসকদের বিবরণ এবং সার্বক্ষণিক জরুরি সহায়তা লাইন দেখুন।"}
+          </p>
+        </div>
+        <BangladeshBranchAtlas />
       </section>
 
       {/* ================= 5. HOLOGRAPHIC 3D MEMBER CARD SHOWCASE ================= */}
@@ -320,6 +345,16 @@ export default function TenantPublicPortfolio() {
         </div>
       </section>
 
+      {/* ================= 6B. INTERACTIVE ORGANOGRAM & COMMITTEES ================= */}
+      <section id="organogram" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <InteractiveOrganogram />
+      </section>
+
+      {/* ================= 6C. HISTORICAL HERITAGE CHRONICLE ================= */}
+      <section id="heritage" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <HeritageChronicleTimeline />
+      </section>
+
       {/* ================= 7. NOTICE VAULT & OFFICIAL CIRCULARS ================= */}
       <section id="notices" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
         <div className="flex items-center justify-between mb-10">
@@ -433,10 +468,13 @@ export default function TenantPublicPortfolio() {
               Institutional Links
             </h5>
             <ul className="space-y-2 text-xs text-muted-foreground">
-              <li><a href="#about" className="hover:text-white">Constitutional Bylaws</a></li>
-              <li><a href="#leadership" className="hover:text-white">Roll of Honor</a></li>
-              <li><a href="#events" className="hover:text-white">Scientific Sessions</a></li>
-              <li><a href="#notices" className="hover:text-white">Gazette Publications</a></li>
+              <li><Link href="/journal" className="hover:text-white transition-colors">Peer-Reviewed Journal (ISSN 0301-4975)</Link></li>
+              <li><Link href="/memorial" className="hover:text-white transition-colors">Memorial Hall of Eternal Respect</Link></li>
+              <li><Link href="/events" className="hover:text-white transition-colors">Scientific Sessions & Conferences</Link></li>
+              <li><Link href="/notices" className="hover:text-white transition-colors">Official Gazette & Circulars</Link></li>
+              <li><Link href="/causes" className="hover:text-white transition-colors">Physician Welfare Fund</Link></li>
+              <li><Link href="/portal/concierge" className="hover:text-white transition-colors">Member Fast-Track Concierge</Link></li>
+              <li><Link href="/portal/reports" className="hover:text-white transition-colors">Societies Act 1860 Registers</Link></li>
             </ul>
           </div>
 

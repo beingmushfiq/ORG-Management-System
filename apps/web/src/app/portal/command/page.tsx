@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent } from "@org/ui";
 import Link from "next/link";
+import { ExecutiveMorningBriefing } from "@/components/command/executive-morning-briefing";
 
 interface BranchHealthMetric {
   id: string;
@@ -113,6 +114,9 @@ export default function ExecutiveCommandWarRoom() {
 
       {/* Main Container */}
       <main className="max-w-7xl w-full mx-auto px-6 py-8 space-y-8">
+        {/* Executive Daily Morning Briefing Card */}
+        <ExecutiveMorningBriefing />
+
         {/* Real-Time Command Velocity Ticker */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card className="border-slate-800 bg-slate-900/50 backdrop-blur-xl">

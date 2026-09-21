@@ -16,6 +16,8 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
+  FileCheck,
+  Scale,
   type LucideIcon,
 } from "lucide-react";
 import { Button, Badge, Card, CardContent } from "@org/ui";
@@ -137,6 +139,26 @@ const MODULES: PortalModule[] = [
     icon: Shield,
     badge: "SuperAdmin",
     accentColor: "from-slate-700 to-slate-900",
+  },
+  {
+    title: "Member Fast-Track Concierge",
+    titleBn: "ডিজিটাল সেবা ও সনদ ডেস্ক",
+    description: "Instant Certificates of Good Standing, NBR Tax Rebate Statements, and Chamber directory updater.",
+    descriptionBn: "চারিত্রিক ও পেশাগত প্রশংসাপত্র, আয়কর সনদ এবং রোগী দেখার চেম্বার সময়সূচী হালনাগাদ।",
+    href: "/portal/concierge",
+    icon: FileCheck,
+    badge: "Concierge",
+    accentColor: "from-amber-500 to-yellow-600",
+  },
+  {
+    title: "Meeting Minutes & Resolutions",
+    titleBn: "কার্যবিবরণী ও রেজোলিউশন",
+    description: "Formal statutory meeting minutes compiler, roll-call attendance, and signed resolution PDFs.",
+    descriptionBn: "নির্বাহী সভার কার্যবিবরণী প্রণয়ন, কোরাম পর্যবেক্ষণ ও ১-ক্লিকে রেজোলিউশন প্রস্তুতকরণ।",
+    href: "/portal/command/resolutions",
+    icon: Scale,
+    badge: "Governance",
+    accentColor: "from-indigo-600 to-purple-600",
   },
 ];
 
