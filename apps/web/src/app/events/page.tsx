@@ -76,7 +76,7 @@ const EVENTS_DATA: EventItem[] = [
     keynoteSpeaker: "Dr. Shah Alam",
     keynoteSpeakerDesignation: "Senior Consultant, National Heart Foundation",
     description:
-      "Interactive case discussions on acute coronary syndrome protocols, evidence-based ECG interpretation, and hands-on simulation with recognized BMDC CPD accreditation points.",
+      "Interactive case discussions on highway trauma protocols, evidence-based crash response, and hands-on simulation with recognized Road Safety CPD accreditation points.",
     descriptionBn:
       "হৃদরোগ চিকিৎসা ও প্রাথমিক কেয়ারের আধুনিক গাইডলাইন, ক্লিনিক্যাল কেস স্টাডি এবং সিমুলেশন প্রশিক্ষণ।",
   },
@@ -338,7 +338,7 @@ export default function EventsDirectoryPage() {
       <footer className="border-t border-white/10 bg-slate-950 py-10 px-6 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            © 2026 Bangladesh Medical Association • Standing Committee for Academic & International Affairs
+            © 2026 Road Safety Movement • Standing Committee for Academic & Public Advocacy
           </div>
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-slate-300 transition-colors">

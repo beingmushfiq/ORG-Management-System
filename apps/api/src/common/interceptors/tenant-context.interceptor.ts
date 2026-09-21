@@ -24,8 +24,12 @@ export class TenantContextInterceptor implements NestInterceptor {
 
     // Platform routes that bypass per-tenant scoping
     if (
-      url.includes("/api/public/health") ||
-      url.includes("/public/health") ||
+      url === "/api" ||
+      url === "/api/" ||
+      url === "/api/health" ||
+      url === "/health" ||
+      url.includes("/api/public") ||
+      url.includes("/public") ||
       url.includes("/api/superadmin")
     ) {
       return next.handle();

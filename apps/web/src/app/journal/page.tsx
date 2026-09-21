@@ -66,8 +66,8 @@ const SAMPLE_ARTICLES: ArticleItem[] = [
     id: "art-03",
     title: "Universal Health Coverage and the Essential Health Service Package: Policy Directions for Bangladesh 2026-2035",
     titleBn: "সার্বজনীন স্বাস্থ্য সুরক্ষা ও অত্যাবশ্যকীয় সেবা প্যাকেজ: বাংলাদেশ প্রেক্ষিত ২০২৬-২০৩৫",
-    authors: "Prof. Dr. Mahmudul Hasan, Dr. Kazi Mostafa",
-    affiliations: "Central Executive Council, Bangladesh Medical Association",
+    authors: "Prof. Dr. Mahmudul Hasan, Engr. Tanvir Ahmed",
+    affiliations: "Research & Policy Council, Road Safety Movement",
     category: "EDITORIAL",
     categoryLabel: "Executive Editorial",
     volume: "Vol. 55",
@@ -103,16 +103,16 @@ export default function MedicalJournalPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg"
+              className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center font-black text-slate-950 text-sm shadow-lg"
             >
-              BMA
+              RSM
             </Link>
             <div>
               <Link href="/" className="font-bold text-base tracking-tight text-white hover:text-amber-400 transition-colors">
-                {lang === "en" ? "Bangladesh Medical Journal" : "বাংলাদেশ মেডিকেল জার্নাল"}
+                {lang === "en" ? "Road Safety & Trauma Research Journal" : "সড়ক নিরাপত্তা ও ট্রমা গবেষণা জার্নাল"}
               </Link>
               <div className="text-xs text-slate-400 font-bangla">
-                {lang === "en" ? "Official Peer-Reviewed Quarterly Scientific Publication • ISSN 0301-4975" : "বাংলাদেশ মেডিকেল এসোসিয়েশনের অফিসিয়াল বিজ্ঞান সাময়িকী (আইএসএসএন: ০৩০১-৪৯৭৫)"}
+                {lang === "en" ? "Official Peer-Reviewed Quarterly Scientific Publication • ISSN 0301-4975" : "নিরাপদ সড়ক আন্দোলনের অফিসিয়াল গবেষণা সাময়িকী (আইএসএসএন: ০৩০১-৪৯৭৫)"}
               </div>
             </div>
           </div>
@@ -146,8 +146,8 @@ export default function MedicalJournalPage() {
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
               {lang === "en"
-                ? "The official scientific organ of the Bangladesh Medical Association, publishing high-impact peer-reviewed medical research, clinical trials, and epidemiological field surveys continuously since 1972."
-                : "১৯৭২ সাল থেকে নিরবচ্ছিন্নভাবে প্রকাশিত চিকিৎসাবিজ্ঞানীদের গবেষণামূলক মূল প্রবন্ধ, ক্লিনিক্যাল অডিট এবং স্বাস্থ্যনীতি সংক্রান্ত প্রকাশনা।"}
+                ? "The official scientific research organ of the Road Safety Movement, publishing high-impact peer-reviewed crash research, forensic engineering, trauma clinical trials, and epidemiological field surveys continuously since 2018."
+                : "২০১৮ সাল থেকে নিরবচ্ছিন্নভাবে প্রকাশিত সড়ক দুর্ঘটনা বিশ্লেষণ, ট্রাফিক ফরেনসিক্স এবং ট্রমা ব্যবস্থাপনা সংক্রান্ত গবেষণা প্রকাশনা।"}
             </p>
           </div>
 
@@ -243,7 +243,7 @@ export default function MedicalJournalPage() {
       {/* Footer */}
       <footer className="border-t border-white/10 bg-slate-950 py-10 px-6 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>© 2026 Bangladesh Medical Journal • Standing Committee for Publications</div>
+          <div>© 2026 Road Safety Movement Journal • Standing Committee for Research & Publications</div>
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-slate-300 transition-colors">
               {lang === "en" ? "Home" : "মূলপাতা"}

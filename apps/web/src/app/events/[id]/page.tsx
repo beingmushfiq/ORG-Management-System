@@ -66,7 +66,7 @@ export default function EventProgramDetailPage() {
             </Badge>
             <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
               <Award className="w-3.5 h-3.5" />
-              8.0 BMDC CPD Accredited Credits
+              8.0 Road Safety CPD Accredited Credits
             </span>
           </div>
 
@@ -324,7 +324,7 @@ export default function EventProgramDetailPage() {
       {/* Footer */}
       <footer className="border-t border-white/10 bg-slate-950 py-10 px-6 text-center text-xs text-slate-500">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>© 2026 Bangladesh Medical Association • All Rights Reserved.</div>
+          <div>© 2026 Road Safety Movement • All Rights Reserved.</div>
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-slate-300 transition-colors">
               {lang === "en" ? "Home" : "মূলপাতা"}

@@ -1,15 +1,21 @@
 import {
   Controller,
   Get,
+  Post,
+  Body,
   Param,
   NotFoundException,
 } from "@nestjs/common";
 import { Public } from "../../common/decorators/public.decorator";
 import { prisma } from "@org/database";
+import { MembershipService } from "../membership/membership.service";
+import { CreateMemberApplicationDto } from "../membership/dto/create-member-application.dto";
 
 @Public()
 @Controller("public")
 export class PublicController {
+  constructor(private readonly membershipService: MembershipService) {}
+
   @Get("health")
   getHealth() {
     return {
@@ -17,6 +23,11 @@ export class PublicController {
       timestamp: new Date().toISOString(),
       service: "Organization Operating System API",
     };
+  }
+
+  @Post("apply")
+  async apply(@Body() dto: CreateMemberApplicationDto) {
+    return this.membershipService.applyMembership(dto);
   }
 
   @Get("org/:slug")

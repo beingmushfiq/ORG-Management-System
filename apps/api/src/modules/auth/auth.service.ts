@@ -264,10 +264,22 @@ export class AuthService {
       throw new BadRequestException("Organization not found.");
     }
 
+    const cleanId = email.trim();
+    let normalizedPhone = "";
+    try {
+      normalizedPhone = this.normalizePhoneNumber(cleanId);
+    } catch {
+      // Ignored if not a phone format
+    }
+
     const user = await prisma.user.findFirst({
       where: {
         organizationId: organization.id,
-        email: email.toLowerCase().trim(),
+        OR: [
+          { email: cleanId.toLowerCase() },
+          { phone: cleanId },
+          ...(normalizedPhone ? [{ phone: normalizedPhone }] : []),
+        ],
       },
       include: {
         userPositions: {

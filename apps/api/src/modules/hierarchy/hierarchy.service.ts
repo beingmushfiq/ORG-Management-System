@@ -81,6 +81,23 @@ export class HierarchyService {
   }
 
   /**
+   * Returns a flat list of all active branch nodes for the organization.
+   */
+  async listBranches(organizationId: string) {
+    return prisma.branchNode.findMany({
+      where: { organizationId, isActive: true },
+      orderBy: [{ depth: "asc" }, { name: "asc" }],
+      include: {
+        _count: {
+          select: {
+            userPositions: true,
+          },
+        },
+      },
+    });
+  }
+
+  /**
    * Creates a new branch node under an optional parent.
    */
   async createBranchNode(

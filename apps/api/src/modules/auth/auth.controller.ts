@@ -8,6 +8,7 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  BadRequestException,
 } from "@nestjs/common";
 import { Response, Request } from "express";
 import { AuthService } from "./auth.service";
@@ -23,22 +24,32 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Public()
-  @Post("otp/send")
+  @Post(["send-otp", "otp/send"])
   @HttpCode(HttpStatus.OK)
   async sendOtp(@Body() dto: SendOtpDto) {
-    return this.authService.sendSmsOtp(dto.organizationSlug, dto.phone);
+    const phone = dto.phone || dto.phoneOrEmail;
+    if (!phone) {
+      throw new BadRequestException("Phone number is required.");
+    }
+    const slug = dto.organizationSlug || "rsm-bd";
+    return this.authService.sendSmsOtp(slug, phone);
   }
 
   @Public()
-  @Post("otp/verify")
+  @Post(["verify-otp", "otp/verify"])
   @HttpCode(HttpStatus.OK)
   async verifyOtp(
     @Body() dto: VerifyOtpDto,
     @Res({ passthrough: true }) res: Response
   ) {
+    const phone = dto.phone || dto.phoneOrEmail;
+    if (!phone) {
+      throw new BadRequestException("Phone number is required.");
+    }
+    const slug = dto.organizationSlug || "rsm-bd";
     return this.authService.verifySmsOtp(
-      dto.organizationSlug,
-      dto.phone,
+      slug,
+      phone,
       dto.code,
       res
     );
@@ -51,9 +62,14 @@ export class AuthController {
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) res: Response
   ) {
+    const email = dto.email || dto.phoneOrEmail;
+    if (!email) {
+      throw new BadRequestException("Email or phone is required.");
+    }
+    const slug = dto.organizationSlug || "rsm-bd";
     return this.authService.loginWithPassword(
-      dto.organizationSlug,
-      dto.email,
+      slug,
+      email,
       dto.password,
       res
     );
@@ -68,10 +84,14 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response
   ) {
     const user = (req as any).user;
+    const targetId = dto.targetPositionId || dto.userPositionId;
+    if (!targetId) {
+      throw new BadRequestException("Target position ID is required.");
+    }
     return this.authService.switchActivePosition(
       user.id,
       user.organizationId,
-      dto.targetPositionId,
+      targetId,
       res
     );
   }

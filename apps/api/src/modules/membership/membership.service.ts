@@ -177,8 +177,9 @@ export class MembershipService {
    * Public or Assisted Member Application Onboarding.
    */
   async applyMembership(dto: CreateMemberApplicationDto) {
+    const slug = dto.organizationSlug || "rsm-bd";
     const org = await prisma.organization.findUnique({
-      where: { slug: dto.organizationSlug },
+      where: { slug },
     });
 
     if (!org) {

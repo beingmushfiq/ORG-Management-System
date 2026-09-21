@@ -40,12 +40,14 @@ export class GovernanceController {
   }
 
   @Patch("meetings/:id/schedule")
+  @Post("meetings/:id/schedule")
   @RequirePermission("GOVERNANCE", "CREATE")
   async scheduleMeeting(@Req() req: any, @Param("id") id: string) {
     return this.governanceService.scheduleMeeting(req.organizationId, id);
   }
 
   @Patch("meetings/:id/minutes")
+  @Post("meetings/:id/minutes")
   @RequirePermission("GOVERNANCE", "CREATE")
   async recordMinutes(
     @Req() req: any,
@@ -59,6 +61,7 @@ export class GovernanceController {
   }
 
   @Patch("meetings/:id/approve")
+  @Post("meetings/:id/approve")
   @RequirePermission("GOVERNANCE", "APPROVE")
   async approveMinutes(@Req() req: any, @Param("id") id: string) {
     return this.governanceService.approveMinutes(

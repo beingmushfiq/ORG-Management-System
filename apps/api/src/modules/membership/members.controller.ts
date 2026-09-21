@@ -53,6 +53,7 @@ export class MembersController {
   }
 
   @Patch(":id/endorse")
+  @Post(":id/endorse")
   @RequirePermission("MEMBERS", "ENDORSE")
   async endorse(
     @Req() req: any,
@@ -68,6 +69,7 @@ export class MembersController {
   }
 
   @Patch(":id/approve")
+  @Post(":id/approve")
   @RequirePermission("MEMBERS", "APPROVE")
   async approve(
     @Req() req: any,
@@ -83,6 +85,7 @@ export class MembersController {
   }
 
   @Patch(":id/suspend")
+  @Post(":id/suspend")
   @RequirePermission("MEMBERS", "SUSPEND")
   async suspend(
     @Req() req: any,

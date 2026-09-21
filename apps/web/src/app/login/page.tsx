@@ -17,6 +17,7 @@ import { Button } from "@org/ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { OrgLogo } from "@/components/brand/org-logo";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { apiClient } from "@/lib/api-client";
 
 export default function MemberLoginPage() {
@@ -91,53 +92,56 @@ export default function MemberLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-primary/30">
+    <div className="min-h-screen bg-background text-foreground flex flex-col justify-between selection:bg-amber-500/20 transition-colors">
       {/* Top Bar */}
-      <header className="px-6 py-4 border-b border-slate-800 bg-slate-900/60 flex items-center justify-between">
+      <header className="px-6 py-4 border-b border-border bg-card/70 backdrop-blur-xl flex items-center justify-between">
         <Link
           href="/"
-          className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-mono tracking-wider uppercase"
+          className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5 text-xs font-mono tracking-wider uppercase"
         >
           <ArrowLeft className="w-4 h-4" /> Back to Official Portal
         </Link>
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span className="text-xs font-mono text-slate-300">Institutional Security</span>
+        <div className="flex items-center gap-3">
+          <ThemeToggle variant="pill" />
+          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-mono">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Institutional Security</span>
+          </div>
         </div>
       </header>
 
       {/* Main Login Card */}
       <main className="max-w-md w-full mx-auto px-6 py-12 flex-1 flex flex-col justify-center">
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-8 shadow-2xl space-y-6">
+        <div className="rounded-2xl border border-border bg-card p-8 shadow-2xl space-y-6 text-card-foreground">
           {/* Header & Crest */}
           <div className="text-center space-y-2">
             <OrgLogo variant="mark" size="lg" className="mx-auto justify-center" />
-            <h1 className="text-xl font-bold text-white tracking-tight">
+            <h1 className="text-xl font-bold text-foreground tracking-tight">
               Member & Council Sign In
             </h1>
-            <p className="text-xs text-slate-400 font-bangla">
-              বাংলাদেশ মেডিকেল এসোসিয়েশন — প্রাতিষ্ঠানিক একাউন্ট
+            <p className="text-xs text-muted-foreground font-bangla">
+              নিরাপদ সড়ক আন্দোলন — জাতীয় নির্বাহী ও স্বেচ্ছাসেবী পোর্টাল
             </p>
           </div>
 
           {/* Error Banner */}
           {errorMessage && (
-            <div className="p-3 rounded-lg bg-red-950/50 border border-red-800/80 text-red-200 text-xs flex items-start gap-2">
-              <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-700 dark:text-red-300 text-xs flex items-start gap-2">
+              <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
               <span>{errorMessage}</span>
             </div>
           )}
 
           {/* Success Banner */}
           {successMessage && (
-            <div className="p-3 rounded-lg bg-emerald-950/50 border border-emerald-800/80 text-emerald-200 text-xs flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
               <span>{successMessage}</span>
             </div>
           )}
 
           {/* Login Method Toggle */}
-          <div className="grid grid-cols-2 p-1 rounded-lg bg-slate-950 border border-slate-800 text-xs font-medium">
+          <div className="grid grid-cols-2 p-1 rounded-xl bg-muted border border-border text-xs font-medium">
             <button
               type="button"
               onClick={() => {
@@ -145,10 +149,10 @@ export default function MemberLoginPage() {
                 setOtpSent(false);
                 setErrorMessage(null);
               }}
-              className={`py-2 rounded transition-colors flex items-center justify-center gap-1.5 ${
+              className={`py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
                 loginMethod === "PHONE_OTP"
-                  ? "bg-primary text-white font-semibold shadow-sm"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-primary text-primary-foreground font-semibold shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Phone className="w-3.5 h-3.5" /> Mobile OTP
@@ -159,10 +163,10 @@ export default function MemberLoginPage() {
                 setLoginMethod("EMAIL_PASSWORD");
                 setErrorMessage(null);
               }}
-              className={`py-2 rounded transition-colors flex items-center justify-center gap-1.5 ${
+              className={`py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
                 loginMethod === "EMAIL_PASSWORD"
-                  ? "bg-primary text-white font-semibold shadow-sm"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-primary text-primary-foreground font-semibold shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Mail className="w-3.5 h-3.5" /> Email & Password
@@ -174,11 +178,11 @@ export default function MemberLoginPage() {
             !otpSent ? (
               <form onSubmit={handleSendOtp} className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono uppercase text-slate-400">
+                  <label className="text-xs font-mono uppercase text-muted-foreground">
                     Registered Mobile Number
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3.5 top-2.5 text-xs text-slate-500 font-mono">
+                    <span className="absolute left-3.5 top-2.5 text-xs text-muted-foreground font-mono">
                       +88
                     </span>
                     <input
@@ -187,10 +191,10 @@ export default function MemberLoginPage() {
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
                       placeholder="017XXXXXXXX"
-                      className="w-full pl-12 pr-4 py-2 rounded-lg border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-primary font-mono"
+                      className="w-full pl-12 pr-4 py-2 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:border-primary font-mono"
                     />
                   </div>
-                  <p className="text-[11px] text-slate-500 font-bangla">
+                  <p className="text-[11px] text-muted-foreground font-bangla">
                     আপনার নিবন্ধিত মোবাইল নাম্বারে একটি ৬-সংখ্যার ওটিপি পাঠানো হবে।
                   </p>
                 </div>
@@ -208,7 +212,7 @@ export default function MemberLoginPage() {
               </form>
             ) : (
               <form onSubmit={handleVerifyOtp} className="space-y-4">
-                <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 font-mono flex items-center justify-between">
+                <div className="p-3 rounded-lg bg-muted border border-border text-xs text-foreground font-mono flex items-center justify-between">
                   <span>Code sent to: {phoneNumber}</span>
                   <button
                     type="button"
@@ -216,14 +220,14 @@ export default function MemberLoginPage() {
                       setOtpSent(false);
                       setOtpCode("");
                     }}
-                    className="text-primary hover:underline text-[11px]"
+                    className="text-primary hover:underline text-[11px] font-semibold"
                   >
                     Change
                   </button>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono uppercase text-slate-400">
+                  <label className="text-xs font-mono uppercase text-muted-foreground">
                     6-Digit Verification Code
                   </label>
                   <input
@@ -233,14 +237,14 @@ export default function MemberLoginPage() {
                     value={otpCode}
                     onChange={(e) => setOtpCode(e.target.value)}
                     placeholder="Enter 6-digit code"
-                    className="w-full text-center tracking-widest text-xl py-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white font-mono focus:outline-none focus:border-primary"
+                    className="w-full text-center tracking-widest text-xl py-2.5 rounded-lg border border-input bg-background text-foreground font-mono focus:outline-none focus:border-primary"
                   />
-                  <div className="flex justify-between items-center text-[11px] text-slate-500 pt-1 font-mono">
+                  <div className="flex justify-between items-center text-[11px] text-muted-foreground pt-1 font-mono">
                     <span>Valid for 5 minutes</span>
                     <button
                       type="button"
                       onClick={handleSendOtp}
-                      className="text-primary hover:underline flex items-center gap-1"
+                      className="text-primary hover:underline flex items-center gap-1 font-semibold"
                     >
                       <RotateCw className="w-3 h-3" /> Resend Code
                     </button>
@@ -262,31 +266,31 @@ export default function MemberLoginPage() {
           ) : (
             <form onSubmit={handleEmailLogin} className="space-y-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-mono uppercase text-slate-400">Official Email</label>
+                <label className="text-xs font-mono uppercase text-muted-foreground">Official Email</label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 absolute left-3.5 top-3 text-slate-500" />
+                  <Mail className="w-4 h-4 absolute left-3.5 top-3 text-muted-foreground" />
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="doctor@bma-ctg.org"
-                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-primary"
+                    placeholder="organizer@roadsafetymovement.org"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-mono uppercase text-slate-400">Password</label>
+                <label className="text-xs font-mono uppercase text-muted-foreground">Password</label>
                 <div className="relative">
-                  <Lock className="w-4 h-4 absolute left-3.5 top-3 text-slate-500" />
+                  <Lock className="w-4 h-4 absolute left-3.5 top-3 text-muted-foreground" />
                   <input
                     type="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-primary"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-input bg-background text-sm text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -305,18 +309,18 @@ export default function MemberLoginPage() {
           )}
 
           {/* New Member Prompt */}
-          <div className="pt-4 border-t border-slate-800 text-center text-xs text-slate-400">
+          <div className="pt-4 border-t border-border text-center text-xs text-muted-foreground">
             <span>Not a member yet? </span>
-            <Link href="/apply" className="text-primary hover:underline font-medium">
-              Apply for Membership
+            <Link href="/apply" className="text-primary hover:underline font-semibold">
+              Apply for Volunteer Pass
             </Link>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="py-4 text-center text-xs text-slate-500 font-mono">
-        Secured with Strict Tenant Isolation & Encrypted Session Cookies · BMA
+      <footer className="py-4 text-center text-xs text-muted-foreground font-mono">
+        Secured with Strict Tenant Isolation & Encrypted Session Cookies · Road Safety Movement (RSM)
       </footer>
     </div>
   );

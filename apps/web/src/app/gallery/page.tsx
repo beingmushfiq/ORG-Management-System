@@ -366,7 +366,7 @@ export default function GalleryArchivePage() {
       {/* Footer */}
       <footer className="border-t border-white/10 bg-slate-950 py-10 px-6 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>© 2026 Bangladesh Medical Association • Standing Committee for Press, Media & Publications</div>
+          <div>© 2026 Road Safety Movement • Standing Committee for Press, Media & Publications</div>
           <div className="flex items-center gap-6">
             <Link href="/" className="hover:text-slate-300 transition-colors">
               {lang === "en" ? "Home" : "মূলপাতা"}

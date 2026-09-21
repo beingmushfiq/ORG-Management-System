@@ -61,7 +61,7 @@ const MOCK_REGISTRY: Record<string, VerificationRecord> = {
 
 export default function MemberVerificationPage() {
   const params = useParams();
-  const rawId = (params["id"] as string) || "BMA-LIFE-0001";
+  const rawId = (params["id"] as string) || "RSM-VOL-2018-001";
   const memberId = decodeURIComponent(rawId).toUpperCase();
 
   const [isScanning, setIsScanning] = useState(true);
@@ -72,16 +72,16 @@ export default function MemberVerificationPage() {
     const timer = setTimeout(() => {
       const match = MOCK_REGISTRY[memberId] || {
         memberId,
-        fullName: "Dr. Mohammad Hasan",
-        fullNameBn: "ডাঃ মোহাম্মদ হাসান",
-        tier: "GENERAL",
+        fullName: "Engr. Tanvir Ahmed",
+        fullNameBn: "প্রকৌশলী তানভীর আহমেদ",
+        tier: "LIFE",
         status: "ACTIVE",
-        branchName: "Panchlaish Medical College Unit",
-        joinedDate: "February 20, 2024",
+        branchName: "Dhaka Central Secretariat",
+        joinedDate: "August 01, 2018",
         validThrough: "December 31, 2026",
         securityHash: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-        issuerOrg: "Bangladesh Medical Association — Chattogram",
-        issuerOrgBn: "বাংলাদেশ মেডিকেল এসোসিয়েশন — চট্টগ্রাম",
+        issuerOrg: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
+        issuerOrgBn: "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়",
       };
       setRecord(match);
       setIsScanning(false);
@@ -93,20 +93,20 @@ export default function MemberVerificationPage() {
   return (
     <div className="min-h-screen bg-background text-foreground p-6 sm:p-12 max-w-4xl mx-auto space-y-8">
       {/* Top Header */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-6">
+      <div className="flex items-center justify-between border-b border-border pb-6">
         <div>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-white mb-2"
+            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-2"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Public Home
           </Link>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-            <ShieldCheck className="w-8 h-8 text-emerald-400" />
+          <h1 className="text-3xl font-extrabold text-foreground tracking-tight flex items-center gap-3">
+            <ShieldCheck className="w-8 h-8 text-emerald-500" />
             Public Trust & Credential Verification Desk
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-            Official cryptographic registry for Bangladesh Medical Association (Chattogram Branch).
+            Official cryptographic registry for Road Safety Movement (নিরাপদ সড়ক আন্দোলন).
           </p>
         </div>
         <Badge variant="success" className="px-3 py-1 text-xs">
@@ -120,7 +120,7 @@ export default function MemberVerificationPage() {
           <div className="w-20 h-20 rounded-2xl bg-primary/20 border border-primary/40 flex items-center justify-center text-primary mb-6 animate-pulse">
             <QrCode className="w-10 h-10" />
           </div>
-          <div className="text-xl font-bold text-white tracking-tight">
+          <div className="text-xl font-bold text-foreground tracking-tight">
             Scanning Cryptographic Hash & Ledger...
           </div>
           <p className="text-xs text-muted-foreground mt-1 font-mono">
@@ -128,27 +128,27 @@ export default function MemberVerificationPage() {
           </p>
 
           {/* Animated Laser Bar */}
-          <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent animate-bounce opacity-80" />
+          <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent animate-bounce opacity-80" />
         </Card>
       ) : record ? (
         /* Verification Verified Result Card */
         <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
           <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <div>
-                <div className="text-xs uppercase font-bold text-emerald-400 tracking-wider">
+                <div className="text-xs uppercase font-bold text-emerald-600 dark:text-emerald-400 tracking-wider">
                   Official Verification Status
                 </div>
-                <div className="text-xl font-extrabold text-white mt-0.5">
-                  Verified Active Member in Good Standing
+                <div className="text-xl font-extrabold text-foreground mt-0.5">
+                  Verified Active Activist in Good Standing
                 </div>
               </div>
             </div>
             <Badge variant="warning" className="text-xs px-3 py-1 font-bold">
-              {record.tier} Member
+              {record.tier} Pass
             </Badge>
           </div>
 
@@ -161,55 +161,55 @@ export default function MemberVerificationPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-1">
+                <div className="p-4 rounded-xl bg-muted/40 border border-border space-y-1">
                   <div className="text-xs text-muted-foreground">Member Full Name</div>
-                  <div className="text-lg font-bold text-white">{record.fullName}</div>
+                  <div className="text-lg font-bold text-foreground">{record.fullName}</div>
                   <div className="text-xs text-muted-foreground font-bangla">{record.fullNameBn}</div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-1">
-                  <div className="text-xs text-muted-foreground">Membership Registration No.</div>
-                  <div className="text-lg font-mono font-bold text-amber-400">{record.memberId}</div>
-                  <div className="text-xs text-emerald-400 flex items-center gap-1 font-medium">
+                <div className="p-4 rounded-xl bg-muted/40 border border-border space-y-1">
+                  <div className="text-xs text-muted-foreground">Pass Registration No.</div>
+                  <div className="text-lg font-mono font-bold text-amber-600 dark:text-amber-400">{record.memberId}</div>
+                  <div className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-medium">
                     <CheckCircle2 className="w-3.5 h-3.5" /> Standing: {record.status}
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-1">
+                <div className="p-4 rounded-xl bg-muted/40 border border-border space-y-1">
                   <div className="text-xs text-muted-foreground flex items-center gap-1.5">
-                    <Building className="w-3.5 h-3.5 text-primary" /> Affiliated Branch Node
+                    <Building className="w-3.5 h-3.5 text-primary" /> Affiliated Chapter Unit
                   </div>
-                  <div className="text-sm font-semibold text-white">{record.branchName}</div>
+                  <div className="text-sm font-semibold text-foreground">{record.branchName}</div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-1">
+                <div className="p-4 rounded-xl bg-muted/40 border border-border space-y-1">
                   <div className="text-xs text-muted-foreground flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-amber-400" /> Validity & Tenure
+                    <Calendar className="w-3.5 h-3.5 text-amber-500" /> Validity & Tenure
                   </div>
-                  <div className="text-sm font-semibold text-slate-200">{record.validThrough}</div>
+                  <div className="text-sm font-semibold text-foreground">{record.validThrough}</div>
                 </div>
               </div>
 
               {/* Security Hash Proof */}
-              <div className="p-4 rounded-xl bg-slate-950/80 border border-white/10 space-y-1">
+              <div className="p-4 rounded-xl bg-muted/40 border border-border space-y-1">
                 <div className="text-[11px] uppercase font-bold text-muted-foreground flex items-center justify-between">
                   <span>Cryptographic Seal (SHA-256)</span>
-                  <span className="text-emerald-400 font-mono">TAMPER-PROOF</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-mono">TAMPER-PROOF</span>
                 </div>
-                <div className="text-xs font-mono text-slate-400 break-all pt-1">
+                <div className="text-xs font-mono text-muted-foreground break-all pt-1">
                   {record.securityHash}
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-between pt-4 border-t border-white/10 gap-3">
+              <div className="flex flex-wrap items-center justify-between pt-4 border-t border-border gap-3">
                 <div className="text-xs text-muted-foreground">
-                  Issued by: <strong className="text-white">{record.issuerOrg}</strong>
+                  Issued by: <strong className="text-foreground">{record.issuerOrg}</strong>
                 </div>
 
                 <div className="flex gap-2">
                   <Button variant="outline" size="sm" className="gap-1.5 text-xs">
-                    <FileCheck className="w-3.5 h-3.5" /> Download Letter of Good Standing
+                    <FileCheck className="w-3.5 h-3.5" /> Download Accreditation Letter
                   </Button>
                   <Button size="sm" className="gap-1.5 text-xs shadow-md">
                     <Download className="w-3.5 h-3.5" /> Save Vector Pass (PDF)
@@ -222,7 +222,7 @@ export default function MemberVerificationPage() {
       ) : (
         <Card className="p-10 text-center">
           <AlertCircle className="w-12 h-12 text-rose-500 mx-auto mb-3" />
-          <h3 className="text-xl font-bold text-white">Record Not Found</h3>
+          <h3 className="text-xl font-bold text-foreground">Record Not Found</h3>
           <p className="text-xs text-muted-foreground mt-1">
             No member record matches identifier &apos;{memberId}&apos; in the registry.
           </p>
