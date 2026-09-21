@@ -1,6 +1,7 @@
 {
   "name": "org-management-system",
   "version": "0.1.0",
+  "description": "Enterprise multi-tenant SaaS for institutional bodies, professional syndicates, and civic foundations in Bangladesh. Features 4-layer tenant isolation, BigInt paisa ledger (EPS, bKash, Nagad), 3D WebGL branch galaxy, 64-district atlas, hybrid elections, and statutory Societies Act 1860 compliance.",
   "private": true,
   "scripts": {
     "build": "turbo run build",
