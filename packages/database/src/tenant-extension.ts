@@ -21,6 +21,11 @@ const TENANT_SCOPED_MODELS = [
   "Ballot",
   "ActivityLog",
   "AuditLog",
+  "AuthOtp",
+  "UserSession",
+  "Meeting",
+  "MeetingResolution",
+  "ImpersonationLog",
 ] as const;
 
 type TenantScopedModel = (typeof TENANT_SCOPED_MODELS)[number];
@@ -56,6 +61,14 @@ export const createTenantPrismaClient = (
                 "groupBy",
               ].includes(operation)
             ) {
+              args.where = {
+                ...args.where,
+                organizationId,
+              };
+            }
+
+            // Defensively scope findUnique by converting to findFirst with organizationId
+            if (operation === "findUnique" || operation === "findUniqueOrThrow") {
               args.where = {
                 ...args.where,
                 organizationId,

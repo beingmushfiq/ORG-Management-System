@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { PrismaClient, MembershipTier, MemberStatus, InvoiceStatus, PaymentMethod } from "@prisma/client";
+import { PrismaClient, MembershipTier, MemberStatus, InvoiceStatus, PaymentMethod, MeetingStatus } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -188,6 +188,42 @@ async function main() {
       ticketFeePaisa: BigInt(250000), // ৳2,500.00
       pointsAwarded: 25,
       isPublic: true,
+    },
+  });
+
+  // 6. Seed Official Executive Governance Meeting & Numbered Resolution
+  const executiveMeeting = await prisma.meeting.create({
+    data: {
+      organizationId: tenant.id,
+      branchNodeId: centralNode.id,
+      title: "1st Ordinary Meeting of Executive Council (Term 2026-2028)",
+      titleBn: "কার্যনির্বাহী পরিষদের ১ম সাধারণ সভা (মেয়াদ ২০২৬-২০২৮)",
+      category: "CENTRAL_EXECUTIVE_COUNCIL",
+      status: MeetingStatus.MINUTES_APPROVED,
+      scheduledAt: new Date("2026-02-10T11:00:00Z"),
+      venue: "Central Secretariat Council Chamber, BMA Bhaban",
+      venueBn: "কেন্দ্রীয় সচিবালয় কাউন্সিল কক্ষ, বিএমএ ভবন",
+      presidedById: demoLeader.id,
+      recordedById: gsPos.id,
+      quorumCount: 18,
+      totalEligibleCount: 21,
+      minutesHtml: "<p>The meeting commenced at 11:00 AM under the presidency of Prof. Dr. Mujibul Haque. Quorum was verified.</p>",
+      minutesHtmlBn: "<p>অধ্যাপক ডাঃ মুজিবুল হকের সভাপতিত্বে সকাল ১১:০০ ঘটিকায় সভা শুরু হয়। কোরাম যাচাই সম্পন্ন হয়।</p>",
+      approvedAt: new Date("2026-02-12T14:00:00Z"),
+      approvedById: demoLeader.id,
+    },
+  });
+
+  await prisma.meetingResolution.create({
+    data: {
+      organizationId: tenant.id,
+      meetingId: executiveMeeting.id,
+      resolutionNumber: "RES-BMA-2026-001",
+      agendaTitle: "Adoption of 2026 Annual Budget & Welfare Fund Allocation",
+      decisionText: "Unanimously resolved that the annual operating budget for fiscal year 2026 and 15% welfare reserve allocation are approved.",
+      decisionTextBn: "সর্বসম্মতভাবে সিদ্ধান্ত গৃহীত হয় যে ২০২৬ অর্থবছরের বার্ষিক পরিচালন বাজেট এবং ১৫% কল্যাণ তহবিল বরাদ্দ অনুমোদন করা হলো।",
+      isUnanimous: true,
+      status: "ADOPTED",
     },
   });
 
