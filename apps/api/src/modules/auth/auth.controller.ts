@@ -18,10 +18,14 @@ import { LoginDto } from "./dto/login.dto";
 import { SwitchPositionDto } from "./dto/switch-position.dto";
 import { Public } from "../../common/decorators/public.decorator";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { JwtService } from "@nestjs/jwt";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly jwtService: JwtService
+  ) {}
 
   @Public()
   @Post(["send-otp", "otp/send"])
@@ -96,18 +100,32 @@ export class AuthController {
     );
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Public()
   @Post("logout")
   @HttpCode(HttpStatus.OK)
   async logout(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response
   ) {
-    const user = (req as any).user;
+    let user = (req as any).user;
+    if (!user) {
+      const token =
+        (req as any).cookies?.["access_token"] ||
+        (req.headers["authorization"]?.startsWith("Bearer ")
+          ? req.headers["authorization"].split(" ")[1]
+          : null);
+      if (token) {
+        try {
+          user = this.jwtService.decode(token);
+        } catch {
+          // Ignored if malformed
+        }
+      }
+    }
     return this.authService.logout(
-      user.id,
-      user.organizationId,
-      user.sessionId,
+      user?.sub || user?.id,
+      user?.organizationId,
+      user?.sessionId,
       res
     );
   }

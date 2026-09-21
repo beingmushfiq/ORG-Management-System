@@ -91,8 +91,10 @@ export default function PortalLayout({
   const handleLogout = async () => {
     try {
       await apiClient.auth.logout();
+    } catch {
+      // Ignored
     } finally {
-      router.push("/login");
+      window.location.href = "/login";
     }
   };
 

@@ -125,10 +125,15 @@ export const apiClient = {
         body: JSON.stringify({ userPositionId, targetPositionId: userPositionId }),
       }),
 
-    logout: () =>
-      request<{ success: boolean; message: string }>("/auth/logout", {
-        method: "POST",
-      }),
+    logout: async () => {
+      try {
+        return await request<{ success: boolean; message: string }>("/auth/logout", {
+          method: "POST",
+        });
+      } catch {
+        return { success: true, message: "Logged out locally." };
+      }
+    },
   },
 
   // ================= MEMBERSHIP APIS =================

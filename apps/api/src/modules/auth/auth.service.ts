@@ -360,8 +360,8 @@ export class AuthService {
   /**
    * Logs out the user by revoking the database session and clearing cookies.
    */
-  async logout(userId: string, organizationId: string, sessionId?: string, res?: Response) {
-    if (sessionId) {
+  async logout(userId?: string, organizationId?: string, sessionId?: string, res?: Response) {
+    if (sessionId && userId && organizationId) {
       await prisma.userSession.updateMany({
         where: { id: sessionId, userId, organizationId },
         data: { isRevoked: true },
@@ -373,15 +373,21 @@ export class AuthService {
       res.clearCookie("refresh_token", { path: "/" });
     }
 
-    await prisma.auditLog.create({
-      data: {
-        organizationId,
-        actorId: userId,
-        action: "AUTH:LOGOUT",
-        targetEntity: "UserSession",
-        targetId: sessionId || userId,
-      },
-    });
+    if (organizationId && userId) {
+      try {
+        await prisma.auditLog.create({
+          data: {
+            organizationId,
+            actorId: userId,
+            action: "AUTH:LOGOUT",
+            targetEntity: "UserSession",
+            targetId: sessionId || userId,
+          },
+        });
+      } catch {
+        // Non-blocking audit log
+      }
+    }
 
     return { success: true, message: "Logged out successfully." };
   }
