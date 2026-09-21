@@ -6,4 +6,8 @@ export * from "./components/toast";
 export * from "./components/copy-button";
 export * from "./components/skeleton";
 export * from "./components/tooltip";
+export * from "./components/table";
+export * from "./components/empty-state";
+export * from "./components/page-header";
+export * from "./components/dialog";
 export * from "./lib/utils";

@@ -10,18 +10,18 @@ export interface ButtonProps
     | "secondary"
     | "outline"
     | "ghost"
-    | "glass"
     | "destructive"
+    | "institutional"
     | "gold"
     | "navy"
     | "emerald"
+    | "glass"
     | "subtle";
   size?: "sm" | "md" | "lg" | "icon";
   loading?: boolean;
   loadingText?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-  shimmer?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -35,7 +35,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loadingText,
       leftIcon,
       rightIcon,
-      shimmer = false,
       children,
       disabled,
       ...props
@@ -44,40 +43,42 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const variantClasses = {
       primary:
-        "bg-[hsl(var(--primary))] text-white hover:opacity-90 shadow-md shadow-primary/20 active:scale-[0.98] border border-primary/20",
+        "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm border border-transparent",
       secondary:
-        "bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] hover:bg-opacity-80 active:scale-[0.98]",
+        "bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border/40",
       outline:
-        "border border-border/70 bg-transparent text-slate-200 hover:bg-white/5 hover:border-slate-500/50 active:scale-[0.98]",
+        "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
       ghost:
-        "text-slate-300 hover:bg-white/5 hover:text-white active:scale-[0.98]",
-      glass:
-        "bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 shadow-lg shadow-black/30 active:scale-[0.98]",
+        "hover:bg-accent hover:text-accent-foreground text-foreground",
       destructive:
-        "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md shadow-rose-950/40 active:scale-[0.98]",
+        "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
+      institutional:
+        "bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 shadow-sm",
       gold:
-        "bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-950 font-bold border border-amber-300/40 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:brightness-105 active:scale-[0.98]",
+        "bg-amber-600 text-white hover:bg-amber-700 shadow-sm font-medium",
       navy:
-        "bg-slate-900 border border-amber-500/30 text-amber-300 hover:bg-slate-800 hover:border-amber-400/60 shadow-md shadow-slate-950/50 active:scale-[0.98]",
+        "bg-slate-900 text-slate-100 hover:bg-slate-800 border border-slate-700",
       emerald:
-        "bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-md shadow-emerald-600/25 active:scale-[0.98] border border-emerald-500/30",
+        "bg-emerald-700 text-white hover:bg-emerald-800 shadow-sm font-medium",
+      glass:
+        "bg-card/90 border border-border text-foreground hover:bg-accent",
       subtle:
-        "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 active:scale-[0.98]",
+        "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground",
     };
 
     const sizeClasses = {
       sm: "h-8 px-3 text-xs rounded-md gap-1.5",
-      md: "h-10 px-4 py-2 text-sm rounded-lg gap-2",
-      lg: "h-12 px-6 text-base rounded-xl font-medium gap-2.5",
-      icon: "h-10 w-10 rounded-lg flex items-center justify-center p-0",
+      md: "h-9 px-4 py-2 text-sm rounded-md gap-2",
+      lg: "h-11 px-6 text-base rounded-md font-medium gap-2.5",
+      icon: "h-9 w-9 rounded-md flex items-center justify-center p-0",
     };
 
     const isButtonDisabled = disabled || loading;
 
     const baseClasses = cn(
-      "relative inline-flex items-center justify-center font-medium transition-all duration-150 select-none overflow-hidden group",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
-      "disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none",
+      "inline-flex items-center justify-center font-medium transition-colors select-none",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "disabled:pointer-events-none disabled:opacity-50",
       variantClasses[variant],
       sizeClasses[size],
       className
@@ -98,15 +99,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isButtonDisabled}
         {...props}
       >
-        {/* Shimmer light sweep reflection effect */}
-        {shimmer && (
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"
-          />
-        )}
-
-        {/* Loading Spinner */}
         {loading && (
           <svg
             className="animate-spin h-4 w-4 text-current flex-shrink-0"
@@ -131,21 +123,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </svg>
         )}
 
-        {/* Left Icon (hidden if loading and no loadingText) */}
         {!loading && leftIcon && (
-          <span className="inline-flex flex-shrink-0 transition-transform duration-150 group-hover:-translate-x-0.5">
-            {leftIcon}
-          </span>
+          <span className="inline-flex flex-shrink-0">{leftIcon}</span>
         )}
 
-        {/* Content / Label */}
         <span>{loading && loadingText ? loadingText : children}</span>
 
-        {/* Right Icon */}
         {!loading && rightIcon && (
-          <span className="inline-flex flex-shrink-0 transition-transform duration-150 group-hover:translate-x-0.5">
-            {rightIcon}
-          </span>
+          <span className="inline-flex flex-shrink-0">{rightIcon}</span>
         )}
       </button>
     );
