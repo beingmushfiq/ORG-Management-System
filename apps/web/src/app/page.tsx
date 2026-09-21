@@ -14,7 +14,7 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
-import { Button, Badge } from "@org/ui";
+import { Button, Badge, Card, CopyButton } from "@org/ui";
 import { BranchGalaxy } from "@/components/3d/branch-galaxy";
 import { HolographicMemberCard } from "@/components/cards/holographic-member-card";
 import { BangladeshBranchAtlas } from "@/components/geo/bangladesh-branch-atlas";
@@ -147,19 +147,35 @@ export default function TenantPublicPortfolio() {
 
         {/* Primary Call-to-Actions */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Button size="lg" className="gap-2 text-sm font-semibold shadow-xl shadow-primary/25">
-            {lang === "en" ? "Register as Associate Member" : "সহযোগী সদস্যপদ আবেদন"}
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+          <Link href="/apply">
+            <Button
+              variant="gold"
+              size="lg"
+              shimmer
+              rightIcon={<ArrowRight className="w-4 h-4" />}
+            >
+              {lang === "en" ? "Register as Associate Member" : "সহযোগী সদস্যপদ আবেদন"}
+            </Button>
+          </Link>
 
-          <Button
-            variant="glass"
-            size="lg"
-            className="gap-2 text-sm font-semibold border-white/15 text-white"
-          >
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            {lang === "en" ? "Verify Member Registry" : "সদস্য রেজিস্ট্রি যাচাই"}
-          </Button>
+          <Link href="/verify/member/BMAC-2026-00421">
+            <Button
+              variant="glass"
+              size="lg"
+              leftIcon={<ShieldCheck className="w-4 h-4 text-emerald-400" />}
+            >
+              {lang === "en" ? "Verify Member Registry" : "সদস্য রেজিস্ট্রি যাচাই"}
+            </Button>
+          </Link>
+
+          <Link href="/portal/concierge">
+            <Button
+              variant="navy"
+              size="lg"
+            >
+              {lang === "en" ? "Fast-Track Concierge" : "মেম্বার কনসিয়ার্জ"}
+            </Button>
+          </Link>
         </div>
 
         {/* ================= 3. STATS TICKER ================= */}
@@ -170,9 +186,11 @@ export default function TenantPublicPortfolio() {
             { label: lang === "en" ? "Active Local Units" : "সক্রিয় স্থানীয় ইউনিট", value: "14" },
             { label: lang === "en" ? "Relief Disbursed" : "জরুরি চিকিৎসা সহায়তা", value: "৳1.4 Cr" },
           ].map((stat, i) => (
-            <div
+            <Card
               key={i}
-              className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center text-center"
+              interactive
+              accent={i === 0 ? "gold" : i === 1 ? "blue" : i === 2 ? "emerald" : "none"}
+              className="p-6 flex flex-col items-center justify-center text-center"
             >
               <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
                 {stat.value}
@@ -180,7 +198,7 @@ export default function TenantPublicPortfolio() {
               <div className="mt-1 text-xs sm:text-sm text-muted-foreground font-medium">
                 {stat.label}
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </section>
@@ -427,10 +445,15 @@ export default function TenantPublicPortfolio() {
               <input
                 type="text"
                 placeholder="e.g. BMA-LIFE-0001"
-                className="h-12 px-5 rounded-xl bg-slate-900/80 border border-white/15 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm flex-1"
+                className="h-12 px-5 rounded-xl bg-slate-900/80 border border-white/15 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-amber-400 text-sm flex-1"
               />
-              <Button size="lg" className="h-12 text-sm font-semibold gap-2 shadow-lg">
-                <ShieldCheck className="w-4 h-4" />
+              <Button
+                variant="gold"
+                size="lg"
+                shimmer
+                leftIcon={<ShieldCheck className="w-4 h-4" />}
+                className="h-12 text-sm font-semibold shadow-lg"
+              >
                 {lang === "en" ? "Verify Status" : "যাচাই করুন"}
               </Button>
             </div>
@@ -471,18 +494,24 @@ export default function TenantPublicPortfolio() {
             <h5 className="text-xs font-bold uppercase tracking-wider text-white mb-3">
               Secretariat Contact
             </h5>
-            <ul className="space-y-2.5 text-xs text-muted-foreground">
+            <ul className="space-y-3 text-xs text-muted-foreground">
               <li className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" />
                 <span>BMA Bhaban, K.B. Fazlul Kader Road, Chattogram, Bangladesh</span>
               </li>
-              <li className="flex items-center gap-2">
-                <PhoneCall className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>+880 1819 000111</span>
+              <li className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <PhoneCall className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <span>+880 1819 000111</span>
+                </div>
+                <CopyButton text="+8801819000111" />
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-primary shrink-0" />
-                <span>secretariat@bma-ctg.org</span>
+              <li className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>secretariat@bma-ctg.org</span>
+                </div>
+                <CopyButton text="secretariat@bma-ctg.org" />
               </li>
             </ul>
           </div>

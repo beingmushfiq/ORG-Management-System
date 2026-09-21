@@ -10,7 +10,7 @@ import {
   QrCode,
   Printer,
 } from "lucide-react";
-import { Button, Badge, Card, CardContent, useToast } from "@org/ui";
+import { Button, Badge, Card, CardContent, useToast, CopyButton } from "@org/ui";
 import Link from "next/link";
 
 export default function MemberConciergePage() {
@@ -18,6 +18,9 @@ export default function MemberConciergePage() {
   const [showGoodStandingModal, setShowGoodStandingModal] = useState(false);
   const [showTaxModal, setShowTaxModal] = useState(false);
   const [chamberSaved, setChamberSaved] = useState(false);
+  const [isGeneratingGoodStanding, setIsGeneratingGoodStanding] = useState(false);
+  const [isGeneratingTax, setIsGeneratingTax] = useState(false);
+  const [isSavingChamber, setIsSavingChamber] = useState(false);
   const { success } = useToast();
 
   // Chamber State
@@ -26,14 +29,42 @@ export default function MemberConciergePage() {
   const [visitingHours, setVisitingHours] = useState("5:00 PM - 9:00 PM (Sat - Thu)");
   const [phone, setPhone] = useState("01819-112233");
 
+  const handleGenerateGoodStanding = () => {
+    setIsGeneratingGoodStanding(true);
+    setTimeout(() => {
+      setIsGeneratingGoodStanding(false);
+      setShowGoodStandingModal(true);
+      success(
+        "Certificate Cryptographically Signed",
+        "Certificate of Good Standing #CERT-GS-2026-08821 generated with official QR seal."
+      );
+    }, 700);
+  };
+
+  const handleGenerateTax = () => {
+    setIsGeneratingTax(true);
+    setTimeout(() => {
+      setIsGeneratingTax(false);
+      setShowTaxModal(true);
+      success(
+        "Tax Statement Compiled",
+        "Fiscal Year 2026-2027 statement generated under Section 44(2)."
+      );
+    }, 700);
+  };
+
   const handleSaveChamber = (e: React.FormEvent) => {
     e.preventDefault();
-    setChamberSaved(true);
-    success(
-      "Chamber Directory Synchronized",
-      "Your hospital practice hours and room number have been updated in the national BMA directory."
-    );
-    setTimeout(() => setChamberSaved(false), 3000);
+    setIsSavingChamber(true);
+    setTimeout(() => {
+      setIsSavingChamber(false);
+      setChamberSaved(true);
+      success(
+        "Chamber Directory Synchronized",
+        "Your hospital practice hours and room number have been updated in the national BMA directory."
+      );
+      setTimeout(() => setChamberSaved(false), 3000);
+    }, 600);
   };
 
   return (
@@ -124,10 +155,15 @@ export default function MemberConciergePage() {
               <div className="pt-2 flex items-center justify-between border-t border-white/5 text-xs">
                 <span className="text-slate-400 font-mono">Format: Signed PDF with QR Hash</span>
                 <Button
-                  onClick={() => setShowGoodStandingModal(true)}
-                  className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs gap-1.5"
+                  onClick={handleGenerateGoodStanding}
+                  variant="gold"
+                  size="sm"
+                  shimmer
+                  loading={isGeneratingGoodStanding}
+                  loadingText="Signing..."
+                  leftIcon={<Download className="w-3.5 h-3.5" />}
+                  className="font-bold text-xs"
                 >
-                  <Download className="w-3.5 h-3.5" />
                   {lang === "en" ? "Generate & Download" : "সনদ গ্রহণ করুন"}
                 </Button>
               </div>
@@ -167,10 +203,14 @@ export default function MemberConciergePage() {
               <div className="pt-2 flex items-center justify-between border-t border-white/5 text-xs">
                 <span className="text-slate-400 font-mono">Deduction Ref: NBR-BMA-TAX-8821</span>
                 <Button
-                  onClick={() => setShowTaxModal(true)}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs gap-1.5"
+                  onClick={handleGenerateTax}
+                  variant="emerald"
+                  size="sm"
+                  loading={isGeneratingTax}
+                  loadingText="Compiling..."
+                  leftIcon={<Download className="w-3.5 h-3.5" />}
+                  className="font-bold text-xs"
                 >
-                  <Download className="w-3.5 h-3.5" />
                   {lang === "en" ? "Download Tax Certificate" : "ট্যাক্স সনদপত্র"}
                 </Button>
               </div>
@@ -240,7 +280,14 @@ export default function MemberConciergePage() {
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs py-2.5">
+              <Button
+                type="submit"
+                variant="gold"
+                shimmer
+                loading={isSavingChamber}
+                loadingText="Synchronizing..."
+                className="w-full font-bold text-xs py-2.5"
+              >
                 {chamberSaved ? "Saved Successfully! (সংরক্ষিত)" : "Update Chamber Directory"}
               </Button>
             </form>
@@ -261,8 +308,11 @@ export default function MemberConciergePage() {
             </div>
 
             <div className="bg-slate-950 border border-white/10 rounded-2xl p-6 text-xs space-y-3 font-sans">
-              <div className="flex justify-between border-b border-white/10 pb-2 font-mono text-[11px]">
-                <span className="text-slate-400">CERT NO: CERT-GS-2026-08821</span>
+              <div className="flex justify-between items-center border-b border-white/10 pb-2 font-mono text-[11px]">
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-400">CERT NO: CERT-GS-2026-08821</span>
+                  <CopyButton text="CERT-GS-2026-08821" label="Copy" />
+                </div>
                 <span className="text-amber-400 font-bold">VALID: 1 YEAR</span>
               </div>
 
@@ -296,7 +346,8 @@ export default function MemberConciergePage() {
               </Button>
               <Button
                 onClick={() => setShowGoodStandingModal(false)}
-                className="flex-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs"
+                variant="gold"
+                className="flex-1 font-bold text-xs"
               >
                 Done
               </Button>
@@ -318,9 +369,12 @@ export default function MemberConciergePage() {
             </div>
 
             <div className="bg-slate-950 border border-white/10 rounded-2xl p-6 text-xs space-y-3 font-mono">
-              <div className="flex justify-between border-b border-white/10 pb-2">
+              <div className="flex justify-between items-center border-b border-white/10 pb-2">
                 <span className="text-slate-400">MEMBER ID: BMA-DHK-1004</span>
-                <span className="text-emerald-400 font-bold">TAX REF: NBR-BMA-8821</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-emerald-400 font-bold">TAX REF: NBR-BMA-8821</span>
+                  <CopyButton text="NBR-BMA-8821" label="Copy" />
+                </div>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Annual Subscriptions:</span>

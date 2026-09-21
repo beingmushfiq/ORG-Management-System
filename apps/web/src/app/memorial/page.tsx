@@ -151,7 +151,9 @@ export default function MemorialHallPage() {
           return (
             <Card
               key={person.id}
-              className="bg-slate-900/60 border border-white/10 hover:border-amber-500/30 transition-all rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-10"
+              interactive
+              accent="gold"
+              className="bg-slate-900/60 border border-white/10 overflow-hidden shadow-xl p-6 sm:p-10"
             >
               <CardContent className="p-0 flex flex-col md:flex-row items-start gap-8">
                 {/* Memorial Photo Frame Accent */}
@@ -195,10 +197,20 @@ export default function MemorialHallPage() {
                     <Button
                       onClick={() => handleOfferFlower(person.id, person.name)}
                       disabled={isOffered}
-                      className={`gap-2 text-xs font-bold transition-all ${
+                      variant={isOffered ? "emerald" : "destructive"}
+                      size="sm"
+                      shimmer={!isOffered}
+                      leftIcon={
+                        isOffered ? (
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
+                        ) : (
+                          <Flower2 className="w-3.5 h-3.5 text-rose-300 animate-pulse" />
+                        )
+                      }
+                      className={`text-xs font-bold transition-all shadow-md ${
                         isOffered
-                          ? "bg-emerald-600/30 text-emerald-300 border border-emerald-500/30"
-                          : "bg-rose-950 hover:bg-rose-900 text-rose-200 border border-rose-800"
+                          ? "bg-emerald-900/60 text-emerald-300 border border-emerald-500/40"
+                          : "bg-gradient-to-r from-rose-950 via-rose-900 to-rose-950 hover:from-rose-900 hover:to-rose-800 text-rose-100 border border-rose-600/50 shadow-rose-950/50"
                       }`}
                     >
                       {isOffered ? (

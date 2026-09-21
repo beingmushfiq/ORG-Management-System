@@ -10,7 +10,7 @@ import {
   ArrowLeft,
   Activity,
 } from "lucide-react";
-import { Button, Badge, Card, CardContent } from "@org/ui";
+import { Button, Badge, Card, CardContent, CopyButton } from "@org/ui";
 import Link from "next/link";
 
 type BloodGroup = "A+" | "A-" | "B+" | "B-" | "AB+" | "AB-" | "O+" | "O-";
@@ -247,6 +247,8 @@ export default function BloodBankPortalPage() {
             return (
               <Card
                 key={donor.id}
+                interactive
+                accent={donor.status === "AVAILABLE" ? "emerald" : "none"}
                 className="bg-slate-900/60 border border-white/10 hover:border-red-500/40 transition-all rounded-2xl overflow-hidden shadow-xl"
               >
                 <CardContent className="p-6 space-y-4">
@@ -264,11 +266,10 @@ export default function BloodBankPortalPage() {
                     </div>
 
                     <Badge
-                      className={`text-[10px] font-semibold ${
-                        donor.status === "AVAILABLE"
-                          ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                          : "bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                      }`}
+                      variant={donor.status === "AVAILABLE" ? "success" : "warning"}
+                      dot={donor.status === "AVAILABLE"}
+                      pulse={donor.status === "AVAILABLE"}
+                      size="sm"
                     >
                       {donor.status === "AVAILABLE"
                         ? lang === "en"
@@ -282,7 +283,7 @@ export default function BloodBankPortalPage() {
 
                   <div className="bg-slate-950 p-3 rounded-xl border border-white/5 space-y-1.5 text-xs text-slate-400">
                     <div className="flex justify-between">
-                      <span>{lang === "en" ? "Branch Unit:" : "শাখা ইউনিট:"}</span>
+                      <span>{lang === "en" ? "Branch Unit:" : " শাখা ইউনিট:"}</span>
                       <span className="text-slate-200 font-medium">{donor.branch}</span>
                     </div>
                     <div className="flex justify-between">
@@ -304,19 +305,24 @@ export default function BloodBankPortalPage() {
                   <div className="pt-2">
                     {donor.status === "AVAILABLE" ? (
                       isPhoneRevealed ? (
-                        <a
-                          href={`tel:${donor.phone}`}
-                          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-colors shadow-lg shadow-emerald-950"
-                        >
-                          <PhoneCall className="w-3.5 h-3.5" />
-                          <span>{donor.phone} ({lang === "en" ? "Call Now" : "কল করুন"})</span>
-                        </a>
+                        <div className="flex items-center gap-2">
+                          <a
+                            href={`tel:${donor.phone}`}
+                            className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-colors shadow-lg shadow-emerald-950"
+                          >
+                            <PhoneCall className="w-3.5 h-3.5" />
+                            <span>{donor.phone} ({lang === "en" ? "Call" : "কল"})</span>
+                          </a>
+                          <CopyButton text={donor.phone} label="Copy" />
+                        </div>
                       ) : (
                         <Button
                           onClick={() => handleRevealPhone(donor.id)}
-                          className="w-full bg-slate-800 hover:bg-slate-700 text-white border border-white/10 gap-2 text-xs"
+                          variant="outline"
+                          size="sm"
+                          leftIcon={<ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />}
+                          className="w-full text-xs"
                         >
-                          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                           {lang === "en" ? "Verify & View Contact" : "নম্বর দেখতে ক্লিক করুন"}
                         </Button>
                       )
