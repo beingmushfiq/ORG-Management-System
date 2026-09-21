@@ -32,9 +32,11 @@ import {
   useToast,
 } from "@org/ui";
 import Link from "next/link";
+import { useTheme } from "@/components/providers/theme-provider";
 
 export default function TenantCmsStudioPage() {
   const { success, info } = useToast();
+  const { setBrandColors } = useTheme();
   const [activeTab, setActiveTab] = useState<"PORTFOLIO" | "OPERATIONS" | "PREVIEW">("PORTFOLIO");
   const [portfolioSection, setPortfolioSection] = useState<
     "HERO" | "BRAND" | "NOTICES" | "EVENTS" | "GALLERY" | "CAUSES" | "MEMORIAL"
@@ -44,20 +46,20 @@ export default function TenantCmsStudioPage() {
 
   // 1. Organization Identity State
   const [orgData, setOrgData] = useState({
-    name: "Bangladesh Medical Association — Chattogram",
-    nameBn: "বাংলাদেশ মেডিকেল এসোসিয়েশন — চট্টগ্রাম",
-    slug: "bma-ctg",
-    customDomain: "ctg.bma.org.bd",
-    tagline: "Uniting Physicians, Advancing Healthcare & Championing Medical Ethics Since 1952",
-    taglineBn: "চিকিৎসক ঐক্য, চিকিৎসা সেবার মানোন্নয়ন ও মানবিক সেবায় নিবেদিত",
-    motto: "Humanity, Science, Fraternity",
-    mottoBn: "মানবতা, বিজ্ঞান, সৌভ্রাতৃত্ব",
-    heroBgUrl: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1600",
-    primaryColorHsl: "221 83% 53%",
-    accentColorHsl: "38 92% 50%",
-    contactEmail: "sec.chattogram@bma.org.bd",
-    contactPhone: "+880 1819 314422",
-    headOfficeAddress: "BMA Bhaban, 15 K.C. Dey Road, Chattogram-4000",
+    name: "Road Safety Movement",
+    nameBn: "নিরাপদ সড়ক আন্দোলন",
+    slug: "rsm-bd",
+    customDomain: "roadsafetymovement.org",
+    tagline: "Building a Safe, Sustainable, and Humane Road Transport System for All",
+    taglineBn: "একটি নিরাপদ, টেকসই ও মানবিক সড়ক যোগাযোগ ব্যবস্থা গড়ে তোলার প্রত্যয়ে",
+    motto: "Safe Roads, Humane Transit, Zero Crashes",
+    mottoBn: "নিরাপদ সড়ক, মানবিক পরিবহন, শূন্য ক্র্যাশ",
+    heroBgUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1600",
+    primaryColorHsl: "38 92% 50%",
+    accentColorHsl: "160 84% 39%",
+    contactEmail: "contact@roadsafetymovement.org",
+    contactPhone: "+880 1819 778899",
+    headOfficeAddress: "Dhaka, Bangladesh",
   });
 
   // 2. Notices State
@@ -440,21 +442,29 @@ export default function TenantCmsStudioPage() {
                           <input
                             type="text"
                             value={orgData.primaryColorHsl}
-                            onChange={(e) => setOrgData({ ...orgData, primaryColorHsl: e.target.value })}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setOrgData({ ...orgData, primaryColorHsl: val });
+                              setBrandColors({ primaryHsl: val });
+                            }}
                             className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-amber-500"
                           />
                         </div>
-                        <div className="flex gap-2 pt-1">
+                        <div className="flex gap-2 pt-1 flex-wrap">
                           {[
+                            { name: "Safety Amber (RSM)", hsl: "38 92% 50%" },
+                            { name: "Signal Emerald", hsl: "160 84% 39%" },
+                            { name: "Highway Asphalt", hsl: "222 47% 11%" },
+                            { name: "Traffic Ruby", hsl: "0 84% 58%" },
                             { name: "Navy Blue", hsl: "221 83% 53%" },
-                            { name: "Emerald Civic", hsl: "160 84% 39%" },
-                            { name: "Royal Purple", hsl: "262 83% 58%" },
-                            { name: "Crimson Honor", hsl: "348 83% 47%" },
                           ].map((preset) => (
                             <button
                               key={preset.name}
                               type="button"
-                              onClick={() => setOrgData({ ...orgData, primaryColorHsl: preset.hsl })}
+                              onClick={() => {
+                                setOrgData({ ...orgData, primaryColorHsl: preset.hsl });
+                                setBrandColors({ primaryHsl: preset.hsl });
+                              }}
                               className="px-2.5 py-1 rounded-lg border border-slate-800 bg-slate-950 text-[11px] font-mono text-slate-300 hover:text-white hover:border-amber-500/50"
                             >
                               {preset.name}
@@ -465,7 +475,7 @@ export default function TenantCmsStudioPage() {
 
                       <div className="space-y-2">
                         <label className="text-xs font-mono uppercase text-slate-300 flex items-center justify-between">
-                          <span>Accent Gold / Warm Amber (Crest Rings & Emblems)</span>
+                          <span>Accent Color (Safety Gold / Signal Emerald)</span>
                           <span className="text-amber-400 font-mono">{orgData.accentColorHsl}</span>
                         </label>
                         <div className="flex items-center gap-3">
@@ -476,7 +486,11 @@ export default function TenantCmsStudioPage() {
                           <input
                             type="text"
                             value={orgData.accentColorHsl}
-                            onChange={(e) => setOrgData({ ...orgData, accentColorHsl: e.target.value })}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setOrgData({ ...orgData, accentColorHsl: val });
+                              setBrandColors({ accentHsl: val });
+                            }}
                             className="w-full rounded-xl border border-slate-800 bg-slate-950 px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-amber-500"
                           />
                         </div>

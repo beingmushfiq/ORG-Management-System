@@ -7,14 +7,14 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { Badge } from "@org/ui";
+import { soundEffects } from "@/lib/audio-effects";
 
 interface HeritageMilestone {
   year: string;
-  title: string;
-  titleBn: string;
   period: string;
   periodBn: string;
+  title: string;
+  titleBn: string;
   narrative: string;
   narrativeBn: string;
   historicalSignificance: string;
@@ -24,180 +24,234 @@ interface HeritageMilestone {
 
 const MILESTONES: HeritageMilestone[] = [
   {
-    year: "1952",
-    period: "Language Movement & Foundation",
-    periodBn: "ভাষা আন্দোলন ও প্রতিষ্ঠা লগ্ন",
-    title: "Birth of the Medical Association & Martyr Physicians' Legacy",
-    titleBn: "মেডিকেল এসোসিয়েশনের সূচনা ও ভাষা শহীদ চিকিৎসকদের আত্মত্যাগ",
+    year: "2018 (July)",
+    period: "The Historic Student Uprising",
+    periodBn: "ঐতিহাসিক নিরাপদ সড়ক আন্দোলন ২০১৮",
+    title: "Birth of the Movement: Students Take to the Streets",
+    titleBn: "শিক্ষার্থীদের স্বতঃস্ফূর্ত জাগরণ ও ৯ দফা গণদাবি",
     narrative:
-      "Formed by patriotic physicians during the historic 1952 Language Movement in Dhaka. Doctors opened emergency casualty wards at Dhaka Medical College to treat wounded student demonstrators, forever embedding humanitarian courage into our charter.",
+      "Following the tragic loss of students Diya and Rajib on Airport Road in Dhaka, school and college students took to the streets in an unprecedented peaceful movement. Students checked driving licenses, enforced designated emergency lanes, and united the nation around a singular call: 'We Want Justice, We Want Safe Roads'.",
     narrativeBn:
-      "১৯৫২ সালের ঐতিহাসিক ভাষা আন্দোলনের উত্তাল দিনগুলোতে দেশপ্রেমিক চিকিৎসকদের উদ্যোগে সংগঠনের সূচনা। ঢাকা মেডিকেল কলেজে আহত ভাষাসৈনিকদের জরুরি চিকিৎসাসেবা প্রদানের মধ্য দিয়ে মানবতার সেবায় আত্মোৎসর্গের যে শপথ গৃহীত হয়, তা আজও আমাদের মূল চালিকাশক্তি।",
-    historicalSignificance: "Official Charter inscribed with permanent commitment to free healthcare in national crises.",
-    significanceBn: "জাতীয় দুর্যোগ ও সংকটে বিনামূল্যে জরুরি চিকিৎসাসেবা প্রদানের সাংবিধানিক অঙ্গীকার।",
-    accentColor: "from-red-900 to-amber-900",
+      "২০১৮ সালের জুলাই মাসে বিমানবন্দর সড়কে দুই শিক্ষার্থীর মর্মান্তিক মৃত্যুর পর স্কুল-কলেজের সাধারণ শিক্ষার্থীরা রাস্তায় নেমে আসে। সুশৃঙ্খল ট্রাফিক নিয়ন্ত্রণ, জরুরি লেন তৈরি এবং 'উই ওয়ান্ট জাস্টিস' স্লোগানে পুরো জাতিকে পথ দেখায় তরুণ প্রজন্ম।",
+    historicalSignificance: "Formation of the core student volunteer brigades that evolved into the Road Safety Movement.",
+    significanceBn: "শিক্ষার্থী আন্দোলনের ভিত্তি থেকে একটি প্রাতিষ্ঠানিক নাগরিক প্ল্যাটফর্মের রূপলাভ।",
+    accentColor: "from-amber-600 to-red-600",
   },
   {
-    year: "1971",
-    period: "War of Liberation",
-    periodBn: "মহান মুক্তিযুদ্ধ",
-    title: "Valiant Physicians of Sector 2 & Field Hospitals",
-    titleBn: "মুক্তিযুদ্ধের রণাঙ্গন ও বাংলাদেশ ফিল্ড হাসপাতাল",
+    year: "2018 (Sept)",
+    period: "Legislative Reform",
+    periodBn: "আইন প্রণয়ন ও সাংবিধানিক দাবি",
+    title: "Enactment of the Road Transport Act 2018",
+    titleBn: "সড়ক পরিবহন আইন ২০১৮ প্রণয়ন ও ৯ দফা সনদ",
     narrative:
-      "During the 1971 Liberation War, member surgeons, nurses, and medical students established the historic 'Bangladesh Field Hospital' in Agartala under Sector 2, performing over 3,000 surgical procedures on wounded Freedom Fighters.",
+      "In response to the youth mobilization, the national parliament passed the long-awaited Road Transport Act 2018 with elevated penalties for reckless driving, stringent vehicle fitness mandates, and institutional oversight.",
     narrativeBn:
-      "১৯৭১ সালের মহান মুক্তিযুদ্ধে সংগঠনের চিকিৎসকবৃন্দ ২ নম্বর সেক্টরের অধীনে আগরতলার মেলাঘরে ঐতিহাসিক 'বাংলাদেশ ফিল্ড হাসপাতাল' গড়ে তোলেন এবং সহস্রাধিক যুদ্ধাহত বীর মুক্তিযোদ্ধাদের জীবন রক্ষা করেন।",
-    historicalSignificance: "Conferment of National Independence Award in recognition of supreme wartime medical valor.",
-    significanceBn: "স্বাধীনতা যুদ্ধে অবিস্মরণীয় অবদান ও আত্মত্যাগের স্বীকৃতি।",
-    accentColor: "from-emerald-950 to-teal-900",
+      "শিক্ষার্থী ও নাগরিক সমাজের সম্মিলিত দাবির মুখে মহান জাতীয় সংসদে বহু প্রতীক্ষিত 'সড়ক পরিবহন আইন ২০১৮' পাস হয়, যা চালকের যোগ্যতা ও ফিটনেস সংক্রান্ত কড়াকড়ি নিশ্চিত করে।",
+    historicalSignificance: "Official statutory baseline anchoring road accountability in Bangladesh transport law.",
+    significanceBn: "সড়কে নাগরিক অধিকারের প্রথম সমন্বিত আইনি স্বীকৃতি।",
+    accentColor: "from-blue-600 to-indigo-600",
   },
   {
-    year: "1982",
-    period: "National Health Reform",
-    periodBn: "জাতীয় ওষুধ নীতি প্রণয়ন",
-    title: "Pioneering the National Drug Policy & Essential Medicines Roster",
-    titleBn: "জাতীয় ওষুধ নীতি প্রণয়নে ঐতিহাসিক ভূমিকা",
+    year: "2020",
+    period: "Scientific Blackspot Audit",
+    periodBn: "কালো স্থান ম্যাপিং ও গবেষণা কার্যক্রম",
+    title: "Nationwide Highway Crash Registry & 420+ Blackspot Demarcation",
+    titleBn: "জাতীয় হাইওয়ে ক্র্যাশ রেজিস্ট্রি ও ৪২০টি ব্ল্যাকস্পট চিহ্নিতকরণ",
     narrative:
-      "Spearheaded the formulation of Bangladesh's historic 1982 National Drug Policy, restricting multinational monopolistic imports and nurturing the domestic pharmaceutical industry into an affordable lifeline for millions.",
+      "Transitioning from protest to evidence-based science, the movement partnered with transport engineering researchers to survey national highways, pinpointing 420+ deadly blackspots with blind corners, absence of speed tables, and missing pedestrian footbridges.",
     narrativeBn:
-      "১৯৮২ সালের ঐতিহাসিক জাতীয় ওষুধ নীতি প্রণয়নে অগ্রণী ভূমিকা পালন, যার মাধ্যমে অপ্রয়োজনীয় বিদেশি ওষুধের আমদানি রোধ করে দেশীয় ওষুধ শিল্প ও সুলভ মূল্যে অত্যাবশ্যকীয় ওষুধপ্রাপ্তি নিশ্চিত হয়।",
-    historicalSignificance: "WHO praised Bangladesh's policy as a global model for developing countries.",
-    significanceBn: "বিশ্ব স্বাস্থ্য সংস্থা কর্তৃক উন্নয়নশীল বিশ্বের জন্য একটি আদর্শ মডেল হিসেবে স্বীকৃতি।",
-    accentColor: "from-blue-950 to-indigo-900",
+      "প্রকৌশলী ও বিশেষজ্ঞদের সাথে যৌথ গবেষণায় দেশের জাতীয় মহাসড়কগুলোতে ৪২০টিরও বেশি ঝুঁকিপূর্ণ 'কালো স্থান' চিহ্নিত করে বৈজ্ঞানিক সমাধানের প্রস্তাবনা উপস্থাপন।",
+    historicalSignificance: "Launch of Bangladesh's first civic-led open crash data repository.",
+    significanceBn: "নাগরিক উদ্যোগে প্রথম উন্মুক্ত রোড ক্র্যাশ ডেটাবেজ প্রতিষ্ঠা।",
+    accentColor: "from-emerald-600 to-teal-600",
   },
   {
-    year: "2002",
-    period: "Golden Jubilee",
-    periodBn: "সুবর্ণ জয়ন্তী সমাবর্তন",
-    title: "Golden Jubilee Grand Convocation & Fellowship Consecration",
-    titleBn: "সুবর্ণ জয়ন্তী মহাসমাবেশ ও আজীবন সম্মাননা",
+    year: "2022",
+    period: "National Safety Campaigns",
+    periodBn: "সারাদেশে গণসচেতনতা কর্মসূচি",
+    title: "National Helmet Enforcement, Speed Checks & Campus Desks",
+    titleBn: "সার্বজনীন হেলমেট ব্যবহার ও স্কুল জোন নিরাপত্তা ক্যাম্পেইন",
     narrative:
-      "Celebrated 50 years of uninterrupted institutional service at the National Parliament concourse, conferring Lifetime Fellowships to pioneer professors of medicine, surgery, and public health epidemiology.",
+      "Mobilized across 40+ districts with intensive campaigns targeting two-wheeler helmet compliance, pedestrian zebra crossing repainting, and establishment of dedicated road safety desks in schools and colleges.",
     narrativeBn:
-      "জাতীয় সংসদের সম্মুখে অনুষ্ঠিত সুবর্ণ জয়ন্তী মহাসমাবেশে ৫০ বছরের ঐতিহ্য উদযাপন এবং দেশের প্রথিতযশা পথিকৃৎ চিকিৎসাবিজ্ঞানীদের সম্মানসূচক ফেলোশিপ প্রদান।",
-    historicalSignificance: "Permanent establishment of the BMA Benevolent Trust for deceased physicians' families.",
-    significanceBn: "প্রয়াত চিকিৎসকদের পরিবার ও সন্তানদের স্থায়ী সহায়তায় কল্যাণ ট্রাস্ট প্রতিষ্ঠা।",
-    accentColor: "from-amber-950 to-yellow-900",
+      "মোটরসাইকেল আরোহীদের শতভাগ হেলমেট ব্যবহার, স্কুলের সামনে নিরাপদ স্পিড টেবিল স্থাপন এবং জেব্রা ক্রসিং সংস্কারে দেশব্যাপী প্রত্যক্ষ নাগরিক কর্মসূচি।",
+    historicalSignificance: "Over 25,000 citizens directly trained in pedestrian safety and defensive habits.",
+    significanceBn: "২৫,০০০-এর বেশি নাগরিক ও শিক্ষার্থীকে সরাসরি প্রশিক্ষণ প্রদান।",
+    accentColor: "from-purple-600 to-pink-600",
+  },
+  {
+    year: "2024",
+    period: "Paradigm Shift Advocacy",
+    periodBn: "'দুর্ঘটনা' নয়, 'রোড ক্র্যাশ' আন্দোলন",
+    title: "Call for Terminology Shift: 'Road Crash' Not 'Accident'",
+    titleBn: "সড়ক নিরাপত্তা নিশ্চিতকরণে 'দুর্ঘটনা' নয়, 'রোড ক্র্যাশ' শব্দ ব্যবহারের ডাক",
+    narrative:
+      "Launched the nationwide media and policy campaign establishing that crashes caused by negligence, overspeeding, or defective brakes are preventable crimes of neglect—not unavoidable 'accidents' (দৈব দুর্ঘটনা). This historic paradigm shift was embraced across national press councils.",
+    narrativeBn:
+      "বেপরোয়া গতি, ত্রুটিপূর্ণ যানবাহন ও ওভারটেকিং দৈব দুর্ঘটনা নয়—এটি প্রতিরোধযোগ্য মানবসৃষ্ট রোড ক্র্যাশ। দায়মুক্তির সংস্কৃতি দূর করতে গণমাধ্যম ও নীতিমালায় শব্দ পরিবর্তনের জোরালো আহ্বান।",
+    historicalSignificance: "Adopted by leading media outlets, setting legal precedents for accountability.",
+    significanceBn: "জাতীয় গণমাধ্যম ও আইনি সংস্কৃতিতে দায়বদ্ধতার স্থায়ী পরিবর্তন।",
+    accentColor: "from-amber-600 to-emerald-600",
   },
   {
     year: "2026",
-    period: "Digital Cloud Governance",
-    periodBn: "ডিজিটাল ক্লাউড রূপান্তর",
-    title: "Centennial-Ready SaaS Infrastructure & Societies Act XXI Compliance",
-    titleBn: "১৮৬০ সালের আইন অনুযায়ী শতভাগ স্বচ্ছ ডিজিটাল প্রশাসনিক রূপান্তর",
+    period: "Digital Movement OS Era",
+    periodBn: "ডিজিটাল প্ল্যাটফর্ম ও স্থায়ী ভিকটিম তহবিল",
+    title: "9,010+ Volunteers, 82 Committees & Digital Movement OS",
+    titleBn: "৮২টি কমিটি, ৯,০১০+ স্বেচ্ছাসেবী এবং ডিজিটাল অর্গানাইজেশন প্ল্যাটফর্ম",
     narrative:
-      "Complete transformation of all 64 district branches onto an institutional multi-tenant cloud platform featuring zero-float integer paisa ledgers, holographic digital passes, and instant statutory government register generation.",
+      "Today, Road Safety Movement operates as Bangladesh's largest structured road advocacy body, uniting 9,010+ registered youth volunteers, 82 active regional/campus committees, and a 24/7 crash victim legal relief and emergency fund.",
     narrativeBn:
-      "১৮৬০ সালের সোসাইটিজ অ্যাক্ট অনুযায়ী ৬৪ জেলা শাখার সম্পূর্ণ স্বচ্ছ ও ডিজিটাল রূপান্তর, হলোগ্রাফিক স্মার্ট সদস্য কার্ড, এবং তাৎক্ষণিক অডিট রেজিস্টার প্রস্তুতকরণ।",
-    historicalSignificance: "First institutional body in South Asia to implement cryptographic tamper-evident governance.",
-    significanceBn: "দক্ষিণ এশিয়ার প্রথম পূর্ণাঙ্গ ক্রিপ্টোগ্রাফিক ও পেসা লেজার ভিত্তিক প্রাতিষ্ঠানিক ডিজিটাল গভর্ন্যান্স।",
-    accentColor: "from-slate-900 to-amber-950",
+      "একটি সংগঠিত পেশাদার ও স্বেচ্ছাসেবী প্রতিষ্ঠান হিসেবে বর্তমানে দেশের ৬৪ জেলায় ৮২টি কমিটি, ৯,০১০+ সক্রিয় তরুণ নেতৃত্ব এবং ক্র্যাশ ভিকটিমদের জন্য জরুরি আইনি ও পুনর্বাসন সহায়তা কার্যক্রম চলমান।",
+    historicalSignificance: "A self-sustaining, youth-driven institutional force for human dignity and safe transit.",
+    significanceBn: "নিরাপদ, টেকসই ও মানবিক সড়ক যোগাযোগ ব্যবস্থার টেকসই আন্দোলন।",
+    accentColor: "from-emerald-600 to-sky-600",
   },
 ];
 
 export function HeritageChronicleTimeline() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const activeMilestone = MILESTONES[currentIndex]!;
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const activeMilestone: HeritageMilestone = MILESTONES[activeIndex] ?? MILESTONES[0]!;
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : MILESTONES.length - 1));
+    soundEffects.playClick(520);
+    setActiveIndex((prev) => (prev > 0 ? prev - 1 : MILESTONES.length - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev < MILESTONES.length - 1 ? prev + 1 : 0));
+    soundEffects.playClick(680);
+    setActiveIndex((prev) => (prev < MILESTONES.length - 1 ? prev + 1 : 0));
+  };
+
+  const handleSelect = (idx: number) => {
+    soundEffects.playClick(600 + idx * 50);
+    setActiveIndex(idx);
   };
 
   return (
-    <div className="w-full bg-slate-950/80 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl overflow-hidden relative">
-      <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-8">
+    <div className="w-full space-y-8" id="heritage">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 pb-4 border-b border-border">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">
             <Clock className="w-3.5 h-3.5" />
-            Heritage & Living Legacy (1952–2026)
+            Movement Chronicle · 2018 to 2026
           </div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold font-serif text-white tracking-tight">
-            Chronicle of Service, Sacrifice & Leadership
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
-            From the blood-soaked corridors of 1952 to the frontlines of 1971 and modern digital cloud governance, explore our defining historic moments.
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Heritage of the Safe Road Movement
+          </h2>
+          <p className="text-sm text-slate-600 dark:text-slate-300 font-bangla mt-1">
+            ২০১৮ সালের শিক্ষার্থীদের নিরাপদ সড়ক আন্দোলন থেকে ২০২৬ সালের ডিজিটাল প্ল্যাটফর্ম পর্যন্ত ঐতিহাসিক রূপরেখা
           </p>
         </div>
 
-        {/* Navigation Arrows */}
+        {/* Carousel Prev/Next Buttons */}
         <div className="flex items-center gap-2">
           <button
+            type="button"
             onClick={handlePrev}
-            className="w-10 h-10 rounded-xl bg-slate-900 border border-white/10 text-slate-300 hover:text-white hover:border-amber-400 flex items-center justify-center transition-colors"
-            title="Previous Milestone"
+            className="w-9 h-9 rounded-full border border-border bg-card hover:bg-muted flex items-center justify-center text-slate-700 dark:text-slate-300 transition-colors shadow-sm"
+            aria-label="Previous Milestone"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4" />
           </button>
           <button
+            type="button"
             onClick={handleNext}
-            className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 flex items-center justify-center transition-colors shadow-lg shadow-amber-500/20"
-            title="Next Milestone"
+            className="w-9 h-9 rounded-full border border-border bg-card hover:bg-muted flex items-center justify-center text-slate-700 dark:text-slate-300 transition-colors shadow-sm"
+            aria-label="Next Milestone"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Scrubber Timeline Bar */}
-      <div className="grid grid-cols-5 gap-2 mb-8">
-        {MILESTONES.map((m, idx) => (
-          <button
-            key={m.year}
-            onClick={() => setCurrentIndex(idx)}
-            className={`py-3 px-2 rounded-xl text-center border transition-all ${
-              idx === currentIndex
-                ? "bg-amber-500 text-slate-950 font-bold border-amber-400 shadow-lg shadow-amber-500/20"
-                : "bg-slate-900/60 border-white/10 text-slate-400 hover:text-white hover:border-white/20"
-            }`}
-          >
-            <div className="text-sm sm:text-base font-serif font-black">{m.year}</div>
-            <div className="text-[10px] truncate hidden sm:block opacity-90">{m.period}</div>
-          </button>
-        ))}
+      {/* Horizontal Milestone Tracker Tabs */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+        {MILESTONES.map((m, idx) => {
+          const isActive = idx === activeIndex;
+          return (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => handleSelect(idx)}
+              className={`p-3 rounded-xl border text-left transition-all ${
+                isActive
+                  ? "bg-slate-900 dark:bg-white text-white dark:text-slate-950 border-amber-500 shadow-md ring-2 ring-amber-500/20"
+                  : "bg-card border-border hover:border-slate-400 text-slate-600 dark:text-slate-300"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className={`text-xs font-extrabold font-mono ${isActive ? "text-amber-400 dark:text-amber-600" : "text-amber-600 dark:text-amber-400"}`}>
+                  {m.year}
+                </span>
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />}
+              </div>
+              <div className={`text-xs font-bold truncate mt-1 ${isActive ? "text-white dark:text-slate-900" : "text-slate-800 dark:text-slate-200"}`}>
+                {m.period}
+              </div>
+            </button>
+          );
+        })}
       </div>
 
-      {/* Featured Milestone Card */}
-      <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-        <div
-          className={`bg-gradient-to-r ${activeMilestone.accentColor} p-8 sm:p-12 transition-all duration-500 relative`}
-        >
-          <div className="relative z-10 max-w-4xl space-y-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <Badge className="bg-black/50 text-amber-300 border border-amber-500/30 text-xs font-bold backdrop-blur-md">
-                {activeMilestone.period} • {activeMilestone.year}
-              </Badge>
-              <span className="text-xs text-slate-300 font-bangla">{activeMilestone.periodBn}</span>
+      {/* Active Milestone Spotlight Card */}
+      <div className="bg-card rounded-2xl border-2 border-border p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        {/* Ambient Top Glow Line */}
+        <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${activeMilestone.accentColor}`} />
+
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          <div className="flex-1 space-y-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="px-3 py-1 rounded-md text-xs font-black font-mono bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                {activeMilestone.year}
+              </span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                {activeMilestone.period}
+              </span>
             </div>
 
-            <h4 className="text-2xl sm:text-4xl font-extrabold font-serif text-white leading-tight">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               {activeMilestone.title}
-            </h4>
-            <div className="text-sm sm:text-base font-bangla text-amber-200/90 font-medium">
+            </h3>
+            <h4 className="text-lg font-bold text-emerald-600 dark:text-emerald-400 font-bangla">
               {activeMilestone.titleBn}
-            </div>
+            </h4>
 
-            <p className="text-sm sm:text-base text-slate-200 leading-relaxed pt-2">
+            <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
               {activeMilestone.narrative}
             </p>
-            <p className="text-xs sm:text-sm font-bangla text-slate-300 leading-relaxed">
+
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-bangla leading-relaxed p-4 rounded-xl bg-muted/60 border border-border">
               {activeMilestone.narrativeBn}
             </p>
+          </div>
 
-            <div className="pt-4 border-t border-white/10 flex items-start gap-2.5 text-xs text-amber-300 font-medium">
-              <Award className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <span>
-                <strong>Historical Impact: </strong>
+          <div className="lg:w-80 w-full space-y-4">
+            {/* Historical Significance Box */}
+            <div className="p-5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-border space-y-2">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-amber-600 dark:text-amber-400">
+                <Award className="w-4 h-4" />
+                Historical Significance
+              </div>
+              <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">
                 {activeMilestone.historicalSignificance}
+              </p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 font-bangla pt-2 border-t border-border/60">
+                {activeMilestone.significanceBn}
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl border border-dashed border-amber-500/40 bg-amber-500/5 text-center">
+              <span className="text-[11px] font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider block">
+                Archival Record Verified
+              </span>
+              <span className="text-xs text-slate-600 dark:text-slate-300 font-mono mt-0.5 block">
+                RSM-CHRONICLE-{activeMilestone.year.slice(0, 4)}
               </span>
             </div>
           </div>
-
-          {/* Archival Parchment Texture Pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none opacity-40" />
         </div>
       </div>
     </div>

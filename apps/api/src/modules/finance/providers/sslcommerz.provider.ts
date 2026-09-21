@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger, Optional } from "@nestjs/common";
 import {
   IPaymentProvider,
   CreatePaymentSessionParams,
@@ -22,6 +22,7 @@ export class SslCommerzPaymentProvider implements IPaymentProvider {
   private readonly logger = new Logger(SslCommerzPaymentProvider.name);
 
   constructor(
+    @Optional()
     private readonly config: SslCommerzConfig = {
       storeId: process.env["SSLCOMMERZ_STORE_ID"] ?? "testbox_org",
       storePass: process.env["SSLCOMMERZ_STORE_PASS"] ?? "testbox_org@ssl",

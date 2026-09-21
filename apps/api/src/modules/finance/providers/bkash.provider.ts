@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger, Optional } from "@nestjs/common";
 import {
   IPaymentProvider,
   CreatePaymentSessionParams,
@@ -23,6 +23,7 @@ export class BkashPaymentProvider implements IPaymentProvider {
   private readonly logger = new Logger(BkashPaymentProvider.name);
 
   constructor(
+    @Optional()
     private readonly config: BkashConfig = {
       appKey: process.env["BKASH_APP_KEY"] ?? "bkash_sandbox_app_key",
       appSecret: process.env["BKASH_APP_SECRET"] ?? "bkash_sandbox_app_secret",

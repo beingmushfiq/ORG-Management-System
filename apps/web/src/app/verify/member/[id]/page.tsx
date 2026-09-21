@@ -31,31 +31,31 @@ interface VerificationRecord {
 }
 
 const MOCK_REGISTRY: Record<string, VerificationRecord> = {
-  "BMA-LIFE-0001": {
-    memberId: "BMA-LIFE-0001",
-    fullName: "Prof. Dr. Mujibul Haque",
-    fullNameBn: "অধ্যাপক ডাঃ মুজিবুল হক",
+  "RSM-VOL-2018-001": {
+    memberId: "RSM-VOL-2018-001",
+    fullName: "Engr. Tanvir Ahmed",
+    fullNameBn: "প্রকৌশলী তানভীর আহমেদ",
     tier: "LIFE",
     status: "ACTIVE",
-    branchName: "Central Executive Secretariat",
-    joinedDate: "January 15, 1998",
-    validThrough: "Lifetime Member (Honorary Standing)",
+    branchName: "National Executive Secretariat",
+    joinedDate: "July 29, 2018",
+    validThrough: "Founding Organizer (Honorary Fellow)",
     securityHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    issuerOrg: "Bangladesh Medical Association — Chattogram",
-    issuerOrgBn: "বাংলাদেশ মেডিকেল এসোসিয়েশন — চট্টগ্রাম",
+    issuerOrg: "Road Safety Movement",
+    issuerOrgBn: "নিরাপদ সড়ক আন্দোলন",
   },
-  "BMA-GEN-0142": {
-    memberId: "BMA-GEN-0142",
-    fullName: "Dr. Salma Begum",
-    fullNameBn: "ডাঃ সালমা বেগম",
+  "RSM-DU-2024-082": {
+    memberId: "RSM-DU-2024-082",
+    fullName: "Nafisa Rahman",
+    fullNameBn: "নাফিসা রহমান",
     tier: "GENERAL",
     status: "ACTIVE",
-    branchName: "Kotwali Central Hospital Unit",
-    joinedDate: "March 10, 2022",
+    branchName: "Dhaka University Central Chapter",
+    joinedDate: "February 10, 2024",
     validThrough: "December 31, 2026",
     securityHash: "7d1a54127b222502f5b79b5fb0803061152a44f92b37e23c65dd0f329d1b41ca",
-    issuerOrg: "Bangladesh Medical Association — Chattogram",
-    issuerOrgBn: "বাংলাদেশ মেডিকেল এসোসিয়েশন — চট্টগ্রাম",
+    issuerOrg: "Road Safety Movement",
+    issuerOrgBn: "নিরাপদ সড়ক আন্দোলন",
   },
 };
 

@@ -1,352 +1,435 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Radio,
   Send,
-  Building,
   CheckCircle2,
-  ArrowLeft,
-  Smartphone,
+  AlertCircle,
+  FileText,
+  Plus,
+  RefreshCw,
+  Pin,
 } from "lucide-react";
-import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent } from "@org/ui";
-import Link from "next/link";
+import {
+  Button,
+  Badge,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  PageHeader,
+  EmptyState,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@org/ui";
+import { apiClient } from "@/lib/api-client";
 
-interface BranchOption {
-  id: string;
-  path: string;
-  name: string;
-  memberCount: number;
-}
+export default function CommunicationsPage() {
+  const [notices, setNotices] = useState<any[]>([]);
+  const [branches, setBranches] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-const BRANCHES: BranchOption[] = [
-  { id: "all", path: "/", name: "Entire Organization (All Branches)", memberCount: 1420 },
-  { id: "b-1", path: "/1", name: "Central Executive Secretariat", memberCount: 48 },
-  { id: "b-2", path: "/1/2", name: "Chattogram Division Secretariat", memberCount: 850 },
-  { id: "b-3", path: "/1/2/4", name: "Kotwali Central Hospital Unit", memberCount: 320 },
-  { id: "b-4", path: "/1/2/5", name: "Panchlaish Clinic Circle", memberCount: 185 },
-];
-
-export default function CommunicationsPortal() {
-  const [selectedBranch, setSelectedBranch] = useState<BranchOption>(BRANCHES[0]!);
-  const [activeProvider, setActiveProvider] = useState<"SSL_WIRELESS" | "ALPHA_SMS" | "GREENWEB">("SSL_WIRELESS");
-  const [senderId] = useState("BMA-CTG");
-  const [messageText, setMessageText] = useState(
-    "জরুরী বিজ্ঞপ্তি: বাংলাদেশ মেডিকেল এসোসিয়েশন (BMA) এর জরুরী কাউন্সিল অধিবেশন আজ সন্ধ্যা ৬টায় অনুষ্ঠিত হবে।"
+  // Broadcast Form State
+  const [targetBranchPath, setTargetBranchPath] = useState("1");
+  const [messageBn, setMessageBn] = useState(
+    "জরুরী বিজ্ঞপ্তি: বাংলাদেশ মেডিকেল এসোসিয়েশন এর বিশেষ কার্যনির্বাহী অধিবেশন আহ্বান করা হয়েছে।"
   );
-  const [dispatched, setDispatched] = useState(false);
+  const [messageEn, setMessageEn] = useState("");
+  const [broadcastLoading, setBroadcastLoading] = useState(false);
 
-  const isUnicode = /[\u0980-\u09FF]/.test(messageText);
-  const charLength = messageText.length;
+  // New Notice Modal State
+  const [noticeModalOpen, setNoticeModalOpen] = useState(false);
+  const [noticeTitle, setNoticeTitle] = useState("");
+  const [noticeTitleBn, setNoticeTitleBn] = useState("");
+  const [noticeContentHtml, setNoticeContentHtml] = useState("");
+  const [noticeContentHtmlBn, setNoticeContentHtmlBn] = useState("");
+  const [isPublic, setIsPublic] = useState(true);
+  const [isPinned, setIsPinned] = useState(false);
+  const [noticeLoading, setNoticeLoading] = useState(false);
+
+  const [feedback, setFeedback] = useState<{ type: "success" | "error"; msg: string } | null>(null);
+
+  const loadData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const [noticesRes, branchesRes] = await Promise.allSettled([
+        apiClient.communications.listNotices(),
+        apiClient.hierarchy.list(),
+      ]);
+
+      if (noticesRes.status === "fulfilled") setNotices(noticesRes.value || []);
+      if (branchesRes.status === "fulfilled") setBranches(branchesRes.value || []);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  // UCS-2 / GSM-7 SMS Segment Counter
+  const isUnicode = /[\u0980-\u09FF]/.test(messageBn);
+  const charLength = messageBn.length;
   const segments = isUnicode
-    ? charLength <= 70 ? 1 : Math.ceil(charLength / 67)
-    : charLength <= 160 ? 1 : Math.ceil(charLength / 153);
-  const maxPartChars = isUnicode
-    ? (segments === 1 ? 70 : segments * 67)
-    : (segments === 1 ? 160 : segments * 153);
+    ? charLength <= 70
+      ? 1
+      : Math.ceil(charLength / 67)
+    : charLength <= 160
+    ? 1
+    : Math.ceil(charLength / 153);
 
-  const handleDispatch = () => {
-    setDispatched(true);
-    setTimeout(() => {
-      setDispatched(false);
-    }, 4000);
+  const handleBroadcast = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBroadcastLoading(true);
+    setFeedback(null);
+
+    try {
+      const res = await apiClient.communications.broadcast({
+        messageBn,
+        messageEn: messageEn || undefined,
+        targetBranchPath,
+      });
+
+      setFeedback({
+        type: "success",
+        msg: `Broadcast dispatched! Total sent: ${res.totalSent} messages via ${res.provider}.`,
+      });
+    } catch (err: any) {
+      setFeedback({
+        type: "error",
+        msg: err.message || "Failed to dispatch broadcast.",
+      });
+    } finally {
+      setBroadcastLoading(false);
+    }
+  };
+
+  const handleCreateNotice = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setNoticeLoading(true);
+    setFeedback(null);
+
+    try {
+      await apiClient.communications.createNotice({
+        title: noticeTitle.trim(),
+        titleBn: noticeTitleBn.trim() || undefined,
+        contentHtml: noticeContentHtml.trim(),
+        contentHtmlBn: noticeContentHtmlBn.trim() || undefined,
+        isPublic,
+        isPinned,
+      });
+
+      setFeedback({ type: "success", msg: "Official notice published successfully." });
+      setNoticeModalOpen(false);
+      setNoticeTitle("");
+      setNoticeTitleBn("");
+      setNoticeContentHtml("");
+      setNoticeContentHtmlBn("");
+      await loadData();
+    } catch (err: any) {
+      setFeedback({ type: "error", msg: err.message || "Failed to publish notice." });
+    } finally {
+      setNoticeLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-amber-500/20 selection:text-amber-300">
-      {/* Top Header */}
-      <header className="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-xl px-6 py-4 flex items-center justify-between sticky top-0 z-40">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/portal/members"
-            className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-mono tracking-wider uppercase"
-          >
-            <ArrowLeft className="w-4 h-4" /> Portal
-          </Link>
-          <span className="text-slate-700 font-mono">|</span>
-          <div className="flex items-center gap-2">
-            <Radio className="w-5 h-5 text-rose-500 animate-pulse" />
-            <span className="text-sm font-semibold tracking-wide uppercase text-slate-300">
-              Multi-Vendor Communications & Priority Broadcast
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Badge variant="outline" className="border-emerald-500/40 text-emerald-400 bg-emerald-500/10 font-mono text-xs">
-            Approved Masking SID: {senderId}
+    <div className="space-y-6">
+      <PageHeader
+        title="Communications & Directives Desk"
+        titleBn="যোগাযোগ ও আনুষ্ঠানিক বিজ্ঞপ্তি"
+        description="Statutory notice publication, official circulars register, and prioritized multi-vendor SMS emergency broadcasting."
+        badge={
+          <Badge variant="outline" className="font-mono">
+            Directives Channel
           </Badge>
+        }
+        actions={
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={loadData}
+              leftIcon={<RefreshCw className="h-3.5 w-3.5" />}
+            >
+              Refresh
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => setNoticeModalOpen(true)}
+              leftIcon={<Plus className="h-3.5 w-3.5" />}
+            >
+              Publish Notice
+            </Button>
+          </div>
+        }
+      />
+
+      {feedback && (
+        <div
+          className={`p-3 rounded-md text-xs flex items-center gap-2 ${
+            feedback.type === "success"
+              ? "bg-emerald-950/40 border border-emerald-800 text-emerald-300"
+              : "bg-red-950/40 border border-red-800 text-red-300"
+          }`}
+        >
+          {feedback.type === "success" ? (
+            <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+          ) : (
+            <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
+          )}
+          <span>{feedback.msg}</span>
         </div>
-      </header>
+      )}
 
-      {/* Main Content */}
-      <main className="max-w-7xl w-full mx-auto px-6 py-8 space-y-8">
-        {/* Gateway Telemetry Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Card
-            className={`border cursor-pointer transition-all ${
-              activeProvider === "SSL_WIRELESS"
-                ? "border-amber-500/80 bg-amber-950/20 shadow-lg shadow-amber-500/10"
-                : "border-slate-800 bg-slate-900/40"
-            }`}
-            onClick={() => setActiveProvider("SSL_WIRELESS")}
-          >
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-bold text-white">SSL Wireless CSMS</CardTitle>
-                <Badge variant="outline" className="border-emerald-500/40 text-emerald-400 text-[10px]">
-                  Primary
-                </Badge>
+      {/* Two Column Layout: SMS Dispatch & Published Notices */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Module 1: Priority SMS Broadcast */}
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base flex items-center gap-2">
+              <Radio className="h-4 w-4 text-primary" />
+              Priority SMS Broadcast Dispatcher
+            </CardTitle>
+            <p className="text-xs text-muted-foreground mt-0.5 font-bangla">
+              শাখা ও হাসপাতাল ইউনিটে জরুরি এসএমএস বার্তা প্রেরণ
+            </p>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <form onSubmit={handleBroadcast} className="space-y-4 text-xs">
+              <div className="space-y-1">
+                <label className="font-semibold text-foreground">
+                  Target Branch Subtree
+                </label>
+                <select
+                  value={targetBranchPath}
+                  onChange={(e) => setTargetBranchPath(e.target.value)}
+                  className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground font-mono"
+                >
+                  <option value="1">Entire Organization (HQ & All Branches)</option>
+                  {branches.map((b) => (
+                    <option key={b.id} value={b.materializedPath}>
+                      {b.name} (Path: {b.materializedPath})
+                    </option>
+                  ))}
+                </select>
+                <p className="text-[10px] text-muted-foreground">
+                  Broadcast automatically filters to all recipients whose branch path begins with this prefix.
+                </p>
               </div>
-              <CardDescription className="text-xs text-slate-400 font-mono">
-                Masking SID: {senderId}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-baseline justify-between font-mono text-xs">
-                <span className="text-slate-500">Credit Balance:</span>
-                <span className="text-amber-400 font-bold text-base">4,250 SMS</span>
-              </div>
-            </CardContent>
-          </Card>
 
-          <Card
-            className={`border cursor-pointer transition-all ${
-              activeProvider === "ALPHA_SMS"
-                ? "border-amber-500/80 bg-amber-950/20 shadow-lg shadow-amber-500/10"
-                : "border-slate-800 bg-slate-900/40"
-            }`}
-            onClick={() => setActiveProvider("ALPHA_SMS")}
-          >
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-bold text-white">Alpha Net SMS</CardTitle>
-                <Badge variant="outline" className="border-slate-700 text-slate-400 text-[10px]">
-                  Failover 1
-                </Badge>
-              </div>
-              <CardDescription className="text-xs text-slate-400 font-mono">
-                Masking SID: {senderId}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-baseline justify-between font-mono text-xs">
-                <span className="text-slate-500">Credit Balance:</span>
-                <span className="text-white font-bold text-base">1,800 BDT</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card
-            className={`border cursor-pointer transition-all ${
-              activeProvider === "GREENWEB"
-                ? "border-amber-500/80 bg-amber-950/20 shadow-lg shadow-amber-500/10"
-                : "border-slate-800 bg-slate-900/40"
-            }`}
-            onClick={() => setActiveProvider("GREENWEB")}
-          >
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-bold text-white">Greenweb Gateway</CardTitle>
-                <Badge variant="outline" className="border-slate-700 text-slate-400 text-[10px]">
-                  Failover 2
-                </Badge>
-              </div>
-              <CardDescription className="text-xs text-slate-400 font-mono">
-                Masking SID: {senderId}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-baseline justify-between font-mono text-xs">
-                <span className="text-slate-500">Credit Balance:</span>
-                <span className="text-white font-bold text-base">9,500 SMS</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Composer & Mobile Preview Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left 2 Cols: Message Composer & Targeting */}
-          <div className="lg:col-span-2 space-y-6">
-            <Card className="border-slate-800 bg-slate-900/50 backdrop-blur-xl">
-              <CardHeader className="border-b border-slate-800/80 pb-4">
-                <CardTitle className="text-base font-bold text-white flex items-center gap-2">
-                  <Radio className="w-4 h-4 text-rose-500" /> Broadcast Scope & Branch Target
-                </CardTitle>
-                <CardDescription className="text-xs text-slate-400">
-                  Select whether to dispatch across all institutional units or narrow down to a specific branch tree
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-4 space-y-4">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-mono uppercase text-slate-400 tracking-wider">
-                    Target Branch Node (Materialized Path)
+              <div className="space-y-1">
+                <div className="flex justify-between items-center">
+                  <label className="font-semibold text-foreground">
+                    Message Body (বাংলা / English)
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {BRANCHES.map((b) => (
-                      <button
-                        key={b.id}
-                        type="button"
-                        onClick={() => setSelectedBranch(b)}
-                        className={`p-3 rounded-xl text-left border transition-all text-xs ${
-                          selectedBranch.id === b.id
-                            ? "border-amber-500 bg-amber-500/10 text-white font-semibold"
-                            : "border-slate-800 bg-slate-950/40 text-slate-400 hover:text-white"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="flex items-center gap-1.5 truncate">
-                            <Building className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                            {b.name}
-                          </span>
-                        </div>
-                        <div className="text-[10px] font-mono text-slate-500 mt-1 flex justify-between">
-                          <span>{b.path}</span>
-                          <span className="text-amber-400 font-bold">{b.memberCount} members</span>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+                  <span className="font-mono text-[10px] text-muted-foreground">
+                    {charLength} chars · {segments} SMS ({isUnicode ? "Unicode UCS-2" : "GSM-7"})
+                  </span>
                 </div>
+                <textarea
+                  rows={4}
+                  required
+                  value={messageBn}
+                  onChange={(e) => setMessageBn(e.target.value)}
+                  className="w-full px-3 py-2 rounded-md border border-input bg-background font-bangla"
+                />
+              </div>
 
-                {/* Message Body */}
-                <div className="space-y-2 pt-2">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-mono uppercase text-slate-400 tracking-wider">
-                      Message Content (Bilingual SMS)
-                    </label>
-                    <div className="flex items-center gap-2 text-xs font-mono">
-                      <span className={isUnicode ? "text-amber-400" : "text-blue-400"}>
-                        {isUnicode ? "UCS-2 Unicode (Bangla)" : "GSM 7-bit (English)"}
-                      </span>
-                      <span className="text-slate-600">|</span>
-                      <span className="text-slate-300">
-                        {charLength} / {maxPartChars} chars ({segments} part{segments > 1 ? "s" : ""})
-                      </span>
+              <div className="space-y-1">
+                <label className="font-semibold text-foreground">
+                  English Reference (Optional)
+                </label>
+                <input
+                  type="text"
+                  value={messageEn}
+                  onChange={(e) => setMessageEn(e.target.value)}
+                  placeholder="Official executive notice reference..."
+                  className="w-full px-3 py-2 rounded-md border border-input bg-background"
+                />
+              </div>
+
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="sm"
+                  loading={broadcastLoading}
+                  leftIcon={<Send className="h-3.5 w-3.5" />}
+                  className="w-full"
+                >
+                  Dispatch Priority Broadcast
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+
+        {/* Module 2: Published Notices Register */}
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-3">
+            <div>
+              <CardTitle className="text-base flex items-center gap-2">
+                <FileText className="h-4 w-4 text-primary" />
+                Statutory Circulars & Notices
+              </CardTitle>
+              <p className="text-xs text-muted-foreground mt-0.5 font-bangla">
+                প্রকাশিত সরকারি ও প্রাতিষ্ঠানিক প্রজ্ঞাপন
+              </p>
+            </div>
+            <Badge variant="outline">{notices.length} Published</Badge>
+          </CardHeader>
+          <CardContent className="pt-0">
+            {loading ? (
+              <div className="p-8 text-center text-xs text-muted-foreground animate-pulse">
+                Querying official circulars...
+              </div>
+            ) : notices.length === 0 ? (
+              <EmptyState
+                title="No Notices Published"
+                titleBn="কোনো প্রজ্ঞাপন প্রকাশিত হয়নি"
+                description="Publish an official directive or notice using the button above."
+              />
+            ) : (
+              <div className="divide-y divide-border max-h-[500px] overflow-y-auto">
+                {notices.map((n) => (
+                  <div key={n.id} className="py-3 space-y-1 text-xs">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="font-semibold text-foreground text-sm flex items-center gap-1.5">
+                        {n.isPinned && <Pin className="h-3.5 w-3.5 text-amber-500 shrink-0" />}
+                        {n.title}
+                      </p>
+                      <Badge variant={n.isPublic ? "success" : "outline"} size="sm">
+                        {n.isPublic ? "Public" : "Members Only"}
+                      </Badge>
                     </div>
-                  </div>
 
-                  <textarea
-                    rows={4}
-                    value={messageText}
-                    onChange={(e) => setMessageText(e.target.value)}
-                    className="w-full rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 font-bangla leading-relaxed"
-                    placeholder="Type broadcast message in English or বাংলা..."
+                    {n.titleBn && (
+                      <p className="text-xs text-muted-foreground font-bangla">
+                        {n.titleBn}
+                      </p>
+                    )}
+
+                    <p className="text-muted-foreground text-xs line-clamp-2 pt-0.5">
+                      {n.contentHtml}
+                    </p>
+
+                    <p className="text-[10px] text-muted-foreground font-mono pt-1">
+                      Published: {new Date(n.publishedAt || n.createdAt).toLocaleDateString("en-BD", { dateStyle: "medium" })}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Modal: Publish Notice */}
+      {noticeModalOpen && (
+        <Dialog open={noticeModalOpen} onOpenChange={setNoticeModalOpen}>
+          <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Publish Official Notice / Circular</DialogTitle>
+            </DialogHeader>
+
+            <form onSubmit={handleCreateNotice} className="space-y-4 text-xs">
+              <div className="space-y-1">
+                <label className="font-semibold text-foreground">Notice Title (English)</label>
+                <input
+                  type="text"
+                  required
+                  value={noticeTitle}
+                  onChange={(e) => setNoticeTitle(e.target.value)}
+                  placeholder="e.g. Schedule for Annual General Meeting 2026"
+                  className="w-full px-3 py-2 rounded-md border border-input bg-background"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-semibold text-foreground">বিজ্ঞপ্তির শিরোনাম (বাংলা)</label>
+                <input
+                  type="text"
+                  value={noticeTitleBn}
+                  onChange={(e) => setNoticeTitleBn(e.target.value)}
+                  placeholder="e.g. বার্ষিক সাধারণ সভা ২০২৬ এর বিজ্ঞপ্তি"
+                  className="w-full px-3 py-2 rounded-md border border-input bg-background font-bangla"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-semibold text-foreground">Notice Content (English)</label>
+                <textarea
+                  rows={4}
+                  required
+                  value={noticeContentHtml}
+                  onChange={(e) => setNoticeContentHtml(e.target.value)}
+                  placeholder="Full text of notice..."
+                  className="w-full px-3 py-2 rounded-md border border-input bg-background"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-semibold text-foreground">বিজ্ঞপ্তির বিবরণ (বাংলা)</label>
+                <textarea
+                  rows={4}
+                  value={noticeContentHtmlBn}
+                  onChange={(e) => setNoticeContentHtmlBn(e.target.value)}
+                  placeholder="বিজ্ঞপ্তির বিস্তারিত বিবরণ..."
+                  className="w-full px-3 py-2 rounded-md border border-input bg-background font-bangla"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 pt-1">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="isPublicCheck"
+                    checked={isPublic}
+                    onChange={(e) => setIsPublic(e.target.checked)}
+                    className="h-4 w-4 rounded border-border"
                   />
-
-                  {/* Template Quick Insert Pills */}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setMessageText(
-                          "জরুরী বিজ্ঞপ্তি: বাংলাদেশ মেডিকেল এসোসিয়েশন (BMA) এর জরুরী কাউন্সিল অধিবেশন আজ সন্ধ্যা ৬টায় অনুষ্ঠিত হবে।"
-                        )
-                      }
-                      className="px-2.5 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-800 text-[11px] text-slate-300 font-mono transition-colors"
-                    >
-                      + Council Emergency
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setMessageText(
-                          "Dear Member, Annual General Meeting (AGM 2026) is scheduled for October 15 at Central Auditorium. Please verify your attendance."
-                        )
-                      }
-                      className="px-2.5 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-800 text-[11px] text-slate-300 font-mono transition-colors"
-                    >
-                      + AGM Notice
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setMessageText(
-                          "শ্রদ্ধেয় সদস্য, আপনার মেম্বারশিপ ফি বকেয়া রয়েছে। ঝামেলাহীন সেবা বজায় রাখতে অনুগ্রহ করে পোর্টাল থেকে পরিশোধ করুন।"
-                        )
-                      }
-                      className="px-2.5 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-800 text-[11px] text-slate-300 font-mono transition-colors"
-                    >
-                      + Dues Alert (বাংলা)
-                    </button>
-                  </div>
+                  <label htmlFor="isPublicCheck" className="text-foreground">
+                    Public Notice Board
+                  </label>
                 </div>
 
-                {/* Dispatch Button & Summary */}
-                <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="text-xs font-mono text-slate-400 space-y-0.5">
-                    <div>
-                      Target Audience: <strong className="text-white">{selectedBranch.memberCount} Recipients</strong>
-                    </div>
-                    <div>
-                      Estimated Consumption:{" "}
-                      <strong className="text-amber-400">
-                        {selectedBranch.memberCount * segments} SMS Units
-                      </strong>
-                    </div>
-                  </div>
-
-                  <Button
-                    className="w-full sm:w-auto bg-rose-600 hover:bg-rose-500 text-white font-bold"
-                    onClick={handleDispatch}
-                    disabled={dispatched}
-                  >
-                    <Send className="w-4 h-4 mr-2" />
-                    {dispatched ? "Broadcasting to Mobile Network..." : "Transmit Emergency Broadcast"}
-                  </Button>
-                </div>
-
-                {dispatched && (
-                  <div className="p-4 rounded-xl border border-emerald-500/40 bg-emerald-950/30 text-emerald-300 text-xs font-mono flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    Broadcast transmitted to {selectedBranch.memberCount} recipients via {activeProvider}. DLR webhooks listening.
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Right Col: Mobile Handset Simulator */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wider font-mono flex items-center gap-2">
-              <Smartphone className="w-4 h-4 text-amber-400" />
-              Recipient Viewport Simulator
-            </h3>
-
-            {/* Simulated Smartphone Shell */}
-            <div className="mx-auto max-w-[280px] rounded-[36px] border-4 border-slate-700 bg-slate-900 p-3 shadow-2xl relative">
-              {/* Speaker notch */}
-              <div className="w-20 h-4 bg-slate-800 rounded-full mx-auto mb-3" />
-
-              {/* Screen Area */}
-              <div className="rounded-[24px] bg-slate-950 p-4 border border-slate-800 min-h-[380px] flex flex-col justify-between">
-                <div>
-                  {/* SMS Header */}
-                  <div className="text-center pb-3 border-b border-slate-800/60">
-                    <p className="text-[10px] text-slate-500 uppercase font-mono">Verified Sender</p>
-                    <p className="text-xs font-bold text-amber-400 font-mono tracking-wider">{senderId}</p>
-                    <p className="text-[9px] text-slate-500">via Bangladesh Telecom</p>
-                  </div>
-
-                  {/* SMS Bubble */}
-                  <div className="mt-4 p-3 rounded-2xl rounded-tl-sm bg-slate-800/80 border border-white/5 text-xs text-white font-bangla leading-relaxed shadow-sm">
-                    {messageText || "No message entered"}
-                    <span className="block text-[9px] text-slate-400 font-mono text-right mt-1.5">
-                      Now · {isUnicode ? "Unicode" : "GSM"}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Footer seal */}
-                <div className="pt-2 text-center text-[9px] font-mono text-slate-600">
-                  Encrypted DLR Monitored
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="isPinnedCheck"
+                    checked={isPinned}
+                    onChange={(e) => setIsPinned(e.target.checked)}
+                    className="h-4 w-4 rounded border-border"
+                  />
+                  <label htmlFor="isPinnedCheck" className="text-foreground">
+                    Pin to Top
+                  </label>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </main>
+
+              <div className="flex justify-end gap-2 pt-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setNoticeModalOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" variant="primary" size="sm" loading={noticeLoading}>
+                  Publish Directive
+                </Button>
+              </div>
+            </form>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }

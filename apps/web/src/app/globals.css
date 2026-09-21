@@ -4,6 +4,42 @@
 
 @layer base {
   :root {
+    /* High-Visibility Light Theme (Default) */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Road Safety Amber & Safety Gold */
+    --primary: 38 92% 50%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 30% 92%;
+    --muted-foreground: 215 25% 35%; /* WCAG AAA high-contrast dark slate text */
+
+    /* Signal Emerald for Road Safety Impact */
+    --accent: 160 84% 39%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 85%;
+    --input: 214 32% 85%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Sleek Deep Asphalt / Midnight Highway Dark Theme */
     --background: 222 47% 7%;
     --foreground: 210 40% 98%;
 
@@ -13,89 +49,74 @@
     --popover: 222 47% 10%;
     --popover-foreground: 210 40% 98%;
 
-    /* Dynamic Tenant Colors: Injected per organization */
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
+    /* Luminous Safety Amber */
+    --primary: 38 92% 50%;
+    --primary-foreground: 222 47% 11%;
 
     --secondary: 217 32% 17%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 217 32% 16%;
+    --muted-foreground: 215 20% 75%; /* High-contrast silver white, never muddy */
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 222 47% 11%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 32% 20%;
-    --input: 217 32% 20%;
-    --ring: 221 83% 53%;
-
-    --radius: 0.75rem;
-  }
-
-  .light {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
-
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-
-    --accent: 38 92% 50%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 160 84% 45%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+    --border: 217 32% 22%;
+    --input: 217 32% 22%;
+    --ring: 38 92% 50%;
   }
 }
 
 @layer utilities {
-  /* Ultra-smooth Frosted Glassmorphism */
-  .glass-card {
-    background: rgba(15, 23, 42, 0.65);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Iridescent Rainbow Foil Sheen for 3D Member Cards */
-  .iridescent-foil {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.15) 0%,
-      rgba(255, 182, 193, 0.25) 25%,
-      rgba(173, 216, 230, 0.3) 50%,
-      rgba(255, 215, 0, 0.25) 75%,
-      rgba(255, 255, 255, 0.15) 100%
+  /* Road Zebra Stripe Decorative Accents */
+  .road-zebra-pattern {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(245, 158, 11, 0.08),
+      rgba(245, 158, 11, 0.08) 12px,
+      transparent 12px,
+      transparent 24px
     );
-    background-size: 200% 200%;
   }
 
-  /* SVG Ambient Grain Overlay */
-  .grain-overlay {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  .dark .road-zebra-pattern {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(245, 158, 11, 0.15),
+      rgba(245, 158, 11, 0.15) 12px,
+      transparent 12px,
+      transparent 24px
+    );
   }
 
-  /* Indeterminate Progress Bar Animation */
+  /* Safe Road Institutional Card */
+  .institutional-card {
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .dark .institutional-card {
+    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Safety Amber Beacon Glow */
+  .safety-glow {
+    box-shadow: 0 0 25px -4px rgba(245, 158, 11, 0.35);
+  }
+
+  .emerald-glow {
+    box-shadow: 0 0 25px -4px rgba(16, 185, 129, 0.35);
+  }
+
+  /* Indeterminate Progress Bar */
   @keyframes indeterminate-bar {
     0% {
       transform: translateX(-100%) scaleX(0.2);
@@ -112,51 +133,39 @@
     animation: indeterminate-bar 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
     transform-origin: left;
   }
-
-  /* Shimmer sweep animation */
-  @keyframes button-shimmer {
-    from {
-      transform: translateX(-100%);
-    }
-    to {
-      transform: translateX(100%);
-    }
-  }
-
-  .animate-shimmer {
-    animation: button-shimmer 2.5s ease-in-out infinite;
-  }
-
-  /* Pulse Glow Animation */
-  @keyframes pulse-glow {
-    0%, 100% {
-      opacity: 0.4;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
-  }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 3s ease-in-out infinite;
-  }
 }
 
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  overflow-x: hidden;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Reduced Motion Override */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Accessible High Contrast Override */
+.contrast-high {
+  --background: 0 0% 100% !important;
+  --foreground: 0 0% 0% !important;
+  --card: 0 0% 100% !important;
+  --card-foreground: 0 0% 0% !important;
+  --border: 0 0% 0% !important;
+  --muted-foreground: 0 0% 20% !important;
+}
+
+.dark.contrast-high {
+  --background: 0 0% 0% !important;
+  --foreground: 0 0% 100% !important;
+  --card: 0 0% 5% !important;
+  --card-foreground: 0 0% 100% !important;
+  --border: 0 0% 40% !important;
+  --muted-foreground: 0 0% 90% !important;
+}
+
+/* Senior Reading Override */
+.text-lg-override {
+  font-size: 112% !important;
+}
+
+.text-lg-override h1 {
+  font-size: 118% !important;
 }

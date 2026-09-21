@@ -11,105 +11,143 @@ import {
   ArrowLeft,
   KeyRound,
   RotateCw,
+  AlertCircle,
 } from "lucide-react";
 import { Button } from "@org/ui";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { OrgLogo } from "@/components/brand/org-logo";
+import { apiClient } from "@/lib/api-client";
 
 export default function MemberLoginPage() {
   const router = useRouter();
   const [loginMethod, setLoginMethod] = useState<"PHONE_OTP" | "EMAIL_PASSWORD">("PHONE_OTP");
 
-  // Phone OTP State
-  const [phoneNumber, setPhoneNumber] = useState("01712345678");
+  // Form State
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otpCode, setOtpCode] = useState("");
   const [loading, setLoading] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  // Email Password State
+  // Email/Password State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSendOtp = (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!phoneNumber) return;
     setLoading(true);
+    setErrorMessage(null);
 
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const res = await apiClient.auth.sendOtp(phoneNumber.trim());
       setOtpSent(true);
-      setOtpCode("482910"); // Pre-fill mock for effortless demonstration
-    }, 800);
+      setSuccessMessage(res.message || "OTP verification challenge dispatched.");
+    } catch (err: any) {
+      setErrorMessage(err.message || "Failed to dispatch verification code. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleVerifyOtp = (e: React.FormEvent) => {
+  const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!otpCode) return;
     setLoading(true);
+    setErrorMessage(null);
 
-    setTimeout(() => {
-      setLoading(false);
-      setLoginSuccess(true);
+    try {
+      await apiClient.auth.verifyOtp(phoneNumber.trim(), otpCode.trim());
+      setSuccessMessage("Authentication verified. Redirecting to workspace...");
       setTimeout(() => {
-        router.push("/portal/members");
-      }, 1000);
-    }, 800);
+        router.push("/portal");
+      }, 400);
+    } catch (err: any) {
+      setErrorMessage(err.message || "Invalid or expired OTP code.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleEmailLogin = (e: React.FormEvent) => {
+  const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email || !password) return;
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setLoginSuccess(true);
+    setErrorMessage(null);
+
+    try {
+      await apiClient.auth.login(email.trim(), password);
+      setSuccessMessage("Credentials confirmed. Redirecting to workspace...");
       setTimeout(() => {
-        router.push("/portal/members");
-      }, 1000);
-    }, 800);
+        router.push("/portal");
+      }, 400);
+    } catch (err: any) {
+      setErrorMessage(err.message || "Invalid email or password.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-amber-500/20 selection:text-amber-300">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-primary/30">
       {/* Top Bar */}
-      <header className="px-6 py-4 border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-xl flex items-center justify-between">
+      <header className="px-6 py-4 border-b border-slate-800 bg-slate-900/60 flex items-center justify-between">
         <Link
           href="/"
           className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-mono tracking-wider uppercase"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to Official Portfolio
+          <ArrowLeft className="w-4 h-4" /> Back to Official Portal
         </Link>
         <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-amber-400" />
-          <span className="text-xs font-mono text-slate-300">Official Institutional Access</span>
+          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <span className="text-xs font-mono text-slate-300">Institutional Security</span>
         </div>
       </header>
 
       {/* Main Login Card */}
       <main className="max-w-md w-full mx-auto px-6 py-12 flex-1 flex flex-col justify-center">
-        <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8 shadow-2xl backdrop-blur-2xl space-y-6">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-8 shadow-2xl space-y-6">
           {/* Header & Crest */}
-          <div className="text-center space-y-3">
+          <div className="text-center space-y-2">
             <OrgLogo variant="mark" size="lg" className="mx-auto justify-center" />
-            <h1 className="text-2xl font-display font-bold text-white tracking-tight">
+            <h1 className="text-xl font-bold text-white tracking-tight">
               Member & Council Sign In
             </h1>
             <p className="text-xs text-slate-400 font-bangla">
-              বাংলাদেশ মেডিকেল এসোসিয়েশন — চট্টগ্রাম পোর্টাল
+              বাংলাদেশ মেডিকেল এসোসিয়েশন — প্রাতিষ্ঠানিক একাউন্ট
             </p>
           </div>
 
+          {/* Error Banner */}
+          {errorMessage && (
+            <div className="p-3 rounded-lg bg-red-950/50 border border-red-800/80 text-red-200 text-xs flex items-start gap-2">
+              <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
+          {/* Success Banner */}
+          {successMessage && (
+            <div className="p-3 rounded-lg bg-emerald-950/50 border border-emerald-800/80 text-emerald-200 text-xs flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>{successMessage}</span>
+            </div>
+          )}
+
           {/* Login Method Toggle */}
-          <div className="grid grid-cols-2 p-1 rounded-xl bg-slate-950 border border-slate-800 text-xs font-medium">
+          <div className="grid grid-cols-2 p-1 rounded-lg bg-slate-950 border border-slate-800 text-xs font-medium">
             <button
               type="button"
               onClick={() => {
                 setLoginMethod("PHONE_OTP");
                 setOtpSent(false);
+                setErrorMessage(null);
               }}
-              className={`py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+              className={`py-2 rounded transition-colors flex items-center justify-center gap-1.5 ${
                 loginMethod === "PHONE_OTP"
-                  ? "bg-amber-500 text-slate-950 font-bold shadow-md"
+                  ? "bg-primary text-white font-semibold shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -117,10 +155,13 @@ export default function MemberLoginPage() {
             </button>
             <button
               type="button"
-              onClick={() => setLoginMethod("EMAIL_PASSWORD")}
-              className={`py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+              onClick={() => {
+                setLoginMethod("EMAIL_PASSWORD");
+                setErrorMessage(null);
+              }}
+              className={`py-2 rounded transition-colors flex items-center justify-center gap-1.5 ${
                 loginMethod === "EMAIL_PASSWORD"
-                  ? "bg-amber-500 text-slate-950 font-bold shadow-md"
+                  ? "bg-primary text-white font-semibold shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -146,31 +187,36 @@ export default function MemberLoginPage() {
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
                       placeholder="017XXXXXXXX"
-                      className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-amber-500 font-mono"
+                      className="w-full pl-12 pr-4 py-2 rounded-lg border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-primary font-mono"
                     />
                   </div>
                   <p className="text-[11px] text-slate-500 font-bangla">
-                    আপনার নিবন্ধিত মোবাইল নাম্বারে একটি ৬-সংখ্যার ওটিপি কোড পাঠানো হবে।
+                    আপনার নিবন্ধিত মোবাইল নাম্বারে একটি ৬-সংখ্যার ওটিপি পাঠানো হবে।
                   </p>
                 </div>
 
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold"
+                  loading={loading}
+                  variant="primary"
+                  className="w-full"
                 >
-                  {loading ? "Sending SMS Code..." : "Send Verification Code"}
+                  Send Verification Code
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </form>
             ) : (
               <form onSubmit={handleVerifyOtp} className="space-y-4">
-                <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 font-mono flex items-center justify-between">
+                <div className="p-3 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 font-mono flex items-center justify-between">
                   <span>Code sent to: {phoneNumber}</span>
                   <button
                     type="button"
-                    onClick={() => setOtpSent(false)}
-                    className="text-white hover:underline text-[11px]"
+                    onClick={() => {
+                      setOtpSent(false);
+                      setOtpCode("");
+                    }}
+                    className="text-primary hover:underline text-[11px]"
                   >
                     Change
                   </button>
@@ -186,15 +232,15 @@ export default function MemberLoginPage() {
                     maxLength={6}
                     value={otpCode}
                     onChange={(e) => setOtpCode(e.target.value)}
-                    placeholder="482910"
-                    className="w-full text-center tracking-widest text-xl py-3 rounded-xl border border-slate-800 bg-slate-950 text-amber-400 font-mono focus:outline-none focus:border-amber-500"
+                    placeholder="Enter 6-digit code"
+                    className="w-full text-center tracking-widest text-xl py-2.5 rounded-lg border border-slate-800 bg-slate-950 text-white font-mono focus:outline-none focus:border-primary"
                   />
                   <div className="flex justify-between items-center text-[11px] text-slate-500 pt-1 font-mono">
-                    <span>Valid for 3:00 minutes</span>
+                    <span>Valid for 5 minutes</span>
                     <button
                       type="button"
                       onClick={handleSendOtp}
-                      className="text-amber-400 hover:underline flex items-center gap-1"
+                      className="text-primary hover:underline flex items-center gap-1"
                     >
                       <RotateCw className="w-3 h-3" /> Resend Code
                     </button>
@@ -204,9 +250,11 @@ export default function MemberLoginPage() {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold"
+                  loading={loading}
+                  variant="primary"
+                  className="w-full"
                 >
-                  {loading ? "Verifying..." : "Verify & Sign In"}
+                  Verify & Sign In
                   <CheckCircle2 className="w-4 h-4 ml-2" />
                 </Button>
               </form>
@@ -223,7 +271,7 @@ export default function MemberLoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="doctor@bma-ctg.org"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -238,7 +286,7 @@ export default function MemberLoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-amber-500"
+                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-800 bg-slate-950 text-sm text-white focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -246,25 +294,20 @@ export default function MemberLoginPage() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold"
+                loading={loading}
+                variant="primary"
+                className="w-full"
               >
-                {loading ? "Signing in..." : "Sign In with Password"}
+                Sign In with Password
                 <KeyRound className="w-4 h-4 ml-2" />
               </Button>
             </form>
           )}
 
-          {loginSuccess && (
-            <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs font-mono flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 shrink-0" />
-              Authenticated successfully. Opening your portal dashboard...
-            </div>
-          )}
-
           {/* New Member Prompt */}
-          <div className="pt-4 border-t border-slate-800/80 text-center text-xs text-slate-400">
+          <div className="pt-4 border-t border-slate-800 text-center text-xs text-slate-400">
             <span>Not a member yet? </span>
-            <Link href="/apply" className="text-amber-400 hover:underline font-semibold">
+            <Link href="/apply" className="text-primary hover:underline font-medium">
               Apply for Membership
             </Link>
           </div>
@@ -273,7 +316,7 @@ export default function MemberLoginPage() {
 
       {/* Footer */}
       <footer className="py-4 text-center text-xs text-slate-500 font-mono">
-        Secured with Multi-Layer Tenant Isolation · Bangladesh Medical Association
+        Secured with Strict Tenant Isolation & Encrypted Session Cookies · BMA
       </footer>
     </div>
   );

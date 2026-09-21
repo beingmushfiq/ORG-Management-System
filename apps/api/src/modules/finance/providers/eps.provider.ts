@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger, Optional } from "@nestjs/common";
 import {
   IPaymentProvider,
   CreatePaymentSessionParams,
@@ -23,6 +23,7 @@ export class EpsPaymentProvider implements IPaymentProvider {
   private readonly logger = new Logger(EpsPaymentProvider.name);
 
   constructor(
+    @Optional()
     private readonly config: EpsConfig = {
       merchantId: process.env["EPS_MERCHANT_ID"] ?? "EPS_SANDBOX_MERCHANT",
       storeId: process.env["EPS_STORE_ID"] ?? "EPS_SANDBOX_STORE",

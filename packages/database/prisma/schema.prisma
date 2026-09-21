@@ -118,6 +118,11 @@ model Organization {
   donationCauses        DonationCause[]
   elections             Election[]
   auditLogs             AuditLog[]
+  meetings              Meeting[]
+  resolutions           MeetingResolution[]
+  authOtps              AuthOtp[]
+  userSessions          UserSession[]
+  impersonationLogs     ImpersonationLog[]
 
   @@index([status])
 }
@@ -145,6 +150,7 @@ model BranchNode {
 
   userPositions    UserPosition[]
   events           Event[]
+  meetings         Meeting[]
   
   @@index([organizationId, materializedPath(191)])
   @@index([organizationId, parentId])
@@ -181,6 +187,7 @@ model User {
   attendanceLogs      AttendanceLog[]
   invoices            Invoice[]
   ballots             Ballot[]
+  userSessions        UserSession[]
   
   createdAt           DateTime        @default(now())
   updatedAt           DateTime        @updatedAt
@@ -487,3 +494,121 @@ model AuditLog {
   @@index([organizationId, timestamp])
   @@index([organizationId, actorId])
 }
+
+// -----------------------------------------------------------------------------
+// 11. AUTHENTICATION OTP & SESSION MANAGEMENT
+// -----------------------------------------------------------------------------
+model AuthOtp {
+  id             String        @id @default(uuid())
+  organizationId String
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  phone          String        @db.VarChar(32)
+  codeHash       String        @db.VarChar(255)
+  attempts       Int           @default(0)
+  maxAttempts    Int           @default(3)
+  expiresAt      DateTime
+  consumedAt     DateTime?
+  createdAt      DateTime      @default(now())
+
+  @@index([organizationId, phone, expiresAt])
+}
+
+model UserSession {
+  id               String        @id @default(uuid())
+  userId           String
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId   String
+  organization     Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  refreshTokenHash String        @db.VarChar(255)
+  ipAddress        String?       @db.VarChar(45)
+  userAgent        String?       @db.VarChar(255)
+  isRevoked        Boolean       @default(false)
+  expiresAt        DateTime
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([userId, organizationId, isRevoked])
+  @@index([refreshTokenHash])
+}
+
+// -----------------------------------------------------------------------------
+// 12. GOVERNANCE MEETINGS & NUMBERED RESOLUTIONS
+// -----------------------------------------------------------------------------
+enum MeetingStatus {
+  DRAFT
+  SCHEDULED
+  AGENDA_FINALIZED
+  HELD
+  MINUTES_DRAFT
+  MINUTES_APPROVED
+  ARCHIVED
+}
+
+model Meeting {
+  id                 String              @id @default(uuid())
+  organizationId     String
+  organization       Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchNodeId       String?
+  branchNode         BranchNode?         @relation(fields: [branchNodeId], references: [id])
+  title              String              @db.VarChar(255)
+  titleBn            String?             @db.VarChar(255)
+  category           String              @db.VarChar(64)
+  status             MeetingStatus       @default(DRAFT)
+  scheduledAt        DateTime
+  venue              String              @db.VarChar(255)
+  venueBn            String?             @db.VarChar(255)
+  presidedById       String?             @db.VarChar(64)
+  recordedById       String?             @db.VarChar(64)
+  agendaJson         Json?
+  quorumCount        Int                 @default(0)
+  totalEligibleCount Int                 @default(0)
+  minutesHtml        String?             @db.Text
+  minutesHtmlBn      String?             @db.Text
+  approvedAt         DateTime?
+  approvedById       String?             @db.VarChar(64)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  resolutions        MeetingResolution[]
+
+  @@index([organizationId, status, scheduledAt])
+}
+
+model MeetingResolution {
+  id               String        @id @default(uuid())
+  organizationId   String
+  organization     Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  meetingId        String
+  meeting          Meeting       @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  resolutionNumber String        @db.VarChar(64)
+  agendaTitle      String        @db.VarChar(255)
+  decisionText     String        @db.Text
+  decisionTextBn   String?       @db.Text
+  isUnanimous      Boolean       @default(true)
+  votingRecordJson Json?
+  status           String        @default("ADOPTED")
+  createdAt        DateTime      @default(now())
+
+  @@unique([organizationId, resolutionNumber])
+  @@index([organizationId, meetingId])
+}
+
+// -----------------------------------------------------------------------------
+// 13. AUDITED SUPPORT IMPERSONATION
+// -----------------------------------------------------------------------------
+model ImpersonationLog {
+  id                   String        @id @default(uuid())
+  actorId              String        @db.VarChar(64)
+  targetOrganizationId String
+  targetOrganization   Organization  @relation(fields: [targetOrganizationId], references: [id], onDelete: Cascade)
+  targetUserId         String        @db.VarChar(64)
+  reason               String        @db.VarChar(255)
+  startedAt            DateTime      @default(now())
+  endedAt              DateTime?
+  actionsJson          Json?
+  ipAddress            String?       @db.VarChar(45)
+
+  @@index([targetOrganizationId, startedAt])
+  @@index([actorId])
+}
+

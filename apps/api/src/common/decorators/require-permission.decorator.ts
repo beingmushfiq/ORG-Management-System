@@ -12,7 +12,13 @@ export type PermissionAction =
   | "REJECT"
   | "EXPORT"
   | "ASSIGN"
-  | "SIGN";
+  | "SIGN"
+  | "MANAGE"
+  | "ENDORSE"
+  | "SUSPEND"
+  | "BROADCAST"
+  | "SMS_SEND"
+  | "VERIFY";
 
 export const RequirePermission = (resource: string, action: PermissionAction) => {
   return applyDecorators(
