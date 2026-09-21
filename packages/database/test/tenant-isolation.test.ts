@@ -114,7 +114,7 @@ describe("Layer 3: MySQL 8.0 Tenant Isolation Extension", () => {
       data: {
         name: "Sylhet Upazila Unit",
         materializedPath: "1/5/20",
-      },
+      } as any,
     });
 
     expect(capturedArgs).toBeDefined();
