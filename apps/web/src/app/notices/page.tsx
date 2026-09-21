@@ -13,13 +13,14 @@ import {
 } from "lucide-react";
 import { Button, Badge, Card, CardContent } from "@org/ui";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface NoticeItem {
   id: string;
   memoNo: string;
   title: string;
   titleBn: string;
-  category: "DIRECTIVE" | "GAZETTE" | "ELECTION" | "CIRCULAR" | "PRESS_RELEASE";
+  category: "DIRECTIVE" | "GAZETTE" | "POLICY" | "CIRCULAR" | "PRESS_RELEASE";
   categoryLabel: string;
   categoryLabelBn: string;
   publishedAt: string;
@@ -33,73 +34,73 @@ interface NoticeItem {
 
 const NOTICES_DATA: NoticeItem[] = [
   {
-    id: "not-2026-004",
-    memoNo: "BMA/CENTRAL/2026/SEC-DIR-088",
-    title: "Official Gazette: Schedule and Delegate Nomination for 74th Annual General Meeting (AGM)",
-    titleBn: "সরকারী গেজেট: ৭৪তম বার্ষিক সাধারণ সভার (এজিএম) সময়সূচী ও প্রতিনিধি মনোনয়ন বিজ্ঞপ্তি",
-    category: "GAZETTE",
-    categoryLabel: "Official Gazette",
-    categoryLabelBn: "অফিসিয়াল গেজেট",
+    id: "not-2026-001",
+    memoNo: "RSM/POLICY/2026/DIR-001",
+    title: "Official Directive: Mandatory Institutional Paradigm Shift from 'Road Accident' to 'Road Crash'",
+    titleBn: "সরকারী নির্দেশনা: 'সড়ক দুর্ঘটনা'র পরিবর্তে 'সড়ক ক্র্যাশ' পরিভাষা ব্যবহারের প্রাতিষ্ঠানিক দাবি ও নির্দেশনা",
+    category: "DIRECTIVE",
+    categoryLabel: "National Directive",
+    categoryLabelBn: "জাতীয় নির্দেশনা",
     publishedAt: "September 18, 2026",
     publishedAtBn: "৩ আশ্বিন ১৪৩৩",
-    signatory: "Dr. Kazi Mostafa",
-    signatoryDesignation: "Honorary General Secretary",
+    signatory: "Tanvir Ahmed",
+    signatoryDesignation: "Chief National Coordinator",
     summary:
-      "Under Section 14 of the Constitution, the Central Executive Council hereby announces the 74th National AGM to be convened at Bangabandhu International Conference Centre (BICC). All constituent branch councils must submit verified voter rosters before October 15, 2026.",
+      "Pursuant to the Safe Systems Approach, the National Executive Council mandates all affiliate chapters, legal aid panels, and media partners to eradicate the misleading term 'accident' from official documentation. Crashes are preventable systemic failures of road geometry, vehicle fitness, and regulatory governance.",
     summaryBn:
-      "সংবিধানের ১৪ নং ধারা মোতাবেক কেন্দ্রীয় নির্বাহী পরিষদ আগামী ৭৪তম জাতীয় সাধারণ সভার তারিখ ঘোষণা করছে। সকল অধিভুক্ত শাখা পরিষদকে আগামী ১৫ অক্টোবরের মধ্যে অনুমোদিত ভোটার তালিকা জমা দেওয়ার অনুরোধ করা হলো।",
+      "নিরাপদ সড়ক আন্দোলনের নির্বাহী পরিষদের সিদ্ধান্ত অনুযায়ী সকল আঞ্চলিক শাখা ও আইনি সহায়তা প্যানেলে 'দুর্ঘটনা' পরিভাষার পরিবর্তে 'ক্র্যাশ' ব্যবহার বাধ্যতামূলক করা হলো। ক্র্যাশ কোনো নিয়তি বা আকস্মিক ঘটনা নয়, এটি অবকাঠামো ও আইন প্রয়োগের ব্যর্থতা।",
     isUrgent: true,
   },
   {
-    id: "not-2026-003",
-    memoNo: "BMA/ELEC/2026/CIRC-02",
-    title: "Election Commission Notification: Preliminary Voter List Publication for Biennial Election 2026-2028",
-    titleBn: "নির্বাচন কমিশন বিজ্ঞপ্তি: দ্বি-বার্ষিক নির্বাচন ২০২৬-২০২৮ এর প্রাথমিক ভোটার তালিকা প্রকাশ",
-    category: "ELECTION",
-    categoryLabel: "Election Commission",
-    categoryLabelBn: "নির্বাচন কমিশন",
-    publishedAt: "September 10, 2026",
-    publishedAtBn: "২৫ ভাদ্র ১৪৩৩",
-    signatory: "Prof. Dr. M. A. Jalil",
-    signatoryDesignation: "Chief Election Commissioner",
-    summary:
-      "The Election Commission publishes the preliminary voter roll for general and life members across 64 districts. Claims and objections must be lodged through the digital portal or in person with prescribed fee by September 28, 2026.",
-    summaryBn:
-      "৬৪ জেলার সকল সাধারণ ও আজীবন সদস্যদের প্রাথমিক ভোটার তালিকা প্রকাশ করা হলো। কোনো দাবি বা আপত্তি থাকলে আগামী ২৮ সেপ্টেম্বরের মধ্যে ডিজিটাল পোর্টাল বা স্বশরীরে আবেদন করতে হবে।",
-  },
-  {
     id: "not-2026-002",
-    memoNo: "BMA/WELFARE/2026/CIR-19",
-    title: "Executive Circular: Benevolent Fund Grant Disbursement for Monsoon Flood Relief (Feni & Noakhali)",
-    titleBn: "নির্বাহী পরিপত্র: ফেনী ও নোয়াখালীতে বন্যা দুর্গতদের স্বাস্থ্যসেবা ও কল্যাণ তহবিল অনুদান বণ্টন",
-    category: "DIRECTIVE",
-    categoryLabel: "Executive Directive",
-    categoryLabelBn: "নির্বাহী আদেশ",
-    publishedAt: "August 24, 2026",
-    publishedAtBn: "৯ ভাদ্র ১৪৩৩",
-    signatory: "Dr. Shahina Sultana",
-    signatoryDesignation: "Secretary of Social Welfare",
+    memoNo: "RSM/RESEARCH/2026/REP-042",
+    title: "National Hazard Index: 420 High-Risk Highway Blackspots Engineering Audit & Blackspot Rectification Charter",
+    titleBn: "জাতীয় মহাসড়কের ৪২০টি ঝুঁকিপূর্ণ ব্ল্যাকস্পট জরিপ ও জ্যামিতিক নকশা সংশোধন সংক্রান্ত অডিট রিপোর্ট প্রকাশ",
+    category: "GAZETTE",
+    categoryLabel: "Official Gazette",
+    categoryLabelBn: "অফিসিয়াল গেজেট",
+    publishedAt: "September 12, 2026",
+    publishedAtBn: "২৭ ভাদ্র ১৪৩৩",
+    signatory: "Dr. Kazi Mostafa & BUET Transport Cell",
+    signatoryDesignation: "Research Director",
     summary:
-      "Mobilization of emergency medical supplies, water purification tablets, and member humanitarian assistance. Direct subsidy of BDT 15,00,000 sanctioned for mobile clinics in devastated sub-districts.",
+      "Comprehensive GIS geospatial audit detailing 420 hazardous collision zones across Dhaka-Chattogram, Dhaka-Sylhet, and N2 Highway corridors. Demanding prompt median installations, rumble strips, and pedestrian overpasses before upcoming national holiday travel seasons.",
     summaryBn:
-      "বন্যা কবলিত এলাকায় জরুরি ওষুধ, পানি বিশুদ্ধকরণ ট্যাবলেট এবং সদস্য মানবিক সহায়তা বিতরণের লক্ষ্যে ১৫,০০,০০০ টাকার জরুরি ত্রাণ তহবিল অনুমোদন করা হয়েছে।",
+      "বুয়েট ও ঢাকা বিশ্ববিদ্যালয় রিসার্চ সেলের যৌথ উদ্যোগে ঢাকা-চট্টগ্রাম ও ঢাকা-সিলেট মহাসড়কের ৪২০টি ব্ল্যাকস্পটের ভৌগোলিক সমীক্ষা ও প্রযুক্তিগত প্রতিকার প্রতিবেদন গেজেট আকারে উন্মুক্ত করা হলো।",
   },
   {
-    id: "not-2026-001",
-    memoNo: "BMA/FIN/2026/ANN-01",
-    title: "Annual Membership Subscription Renewal and Grace Period Notice for FY 2026-2027",
-    titleBn: "২০২৬-২০২৭ অর্থ বছরের বার্ষিক সদস্যপদ নবায়ন ফি এবং গ্রেস পিরিয়ড সংক্রান্ত বিজ্ঞপ্তি",
+    id: "not-2026-003",
+    memoNo: "RSM/LEGAL/2026/CIRC-19",
+    title: "Executive Circular: Free Legal Aid & Compensation Litigation Panel for Road Crash Bereaved Families",
+    titleBn: "নির্বাহী পরিপত্র: সড়ক দুর্ঘটনায় হতাহত ও শহীদ পরিবারগুলোর জন্য বিনামূল্যে লিগ্যাল এইড ও ক্ষতিপূরণ মামলা সেল",
     category: "CIRCULAR",
-    categoryLabel: "Secretariat Circular",
-    categoryLabelBn: "সচিবালয় বিজ্ঞপ্তি",
-    publishedAt: "July 01, 2026",
-    publishedAtBn: "১৭ আষাঢ় ১৪৩৩",
-    signatory: "Dr. Ahmed Reza",
-    signatoryDesignation: "Treasurer",
+    categoryLabel: "Welfare Circular",
+    categoryLabelBn: "আইনি সহায়তা পরিপত্র",
+    publishedAt: "August 28, 2026",
+    publishedAtBn: "১২ ভাদ্র ১৪৩৩",
+    signatory: "Barrister Rafiqul Islam",
+    signatoryDesignation: "Head of Legal Affairs",
     summary:
-      "All active and associate members are notified to clear their annual subscriptions via digital payment (EPS, bKash, Nagad) before the 60-day grace period expires to preserve voting eligibility in upcoming regional ballots.",
+      "Mobilization of the Section 53 Financial Assistance Fund under Road Transport Act 2018. The Central Secretariat establishes rapid-response legal teams in all 8 administrative divisions to assist crash victims in securing statutory restitution from transport insurers.",
     summaryBn:
-      "সকল সক্রিয় ও সহযোগী সদস্যদের জানানো যাচ্ছে যে, ডিজিটাল গেটওয়ে (ইপিএস, বিকাশ, নগদ) মারফত বার্ষিক নবায়ন ফি জমা দিয়ে ভোটাধিকার সুরক্ষিত রাখুন।",
+      "সড়ক পরিবহন আইন ২০১৮ এর ৫৩ ধারা অনুযায়ী গঠিত ট্রাস্টি বোর্ডের আর্থিক সহায়তা দ্রুততম সময়ে ক্ষতিগ্রস্থ পরিবারের নিকট পৌঁছে দিতে ৮টি বিভাগীয় লিগ্যাল এইড ডেস্ক চালু করা হয়েছে।",
+  },
+  {
+    id: "not-2026-004",
+    memoNo: "RSM/VOL/2026/ACT-088",
+    title: "Student Safety Brigades Mobilization for Nationwide School-Zone Zebra Crossing Re-Marking Campaign",
+    titleBn: "সারাদেশের শিক্ষা প্রতিষ্ঠানের সামনে ছাত্র ট্রাফিক ব্রিগেড গঠন ও জেব্রা ক্রসিং অঙ্কন কর্মসূচি",
+    category: "PRESS_RELEASE",
+    categoryLabel: "Youth Action",
+    categoryLabelBn: "ছাত্র কর্মসূচি",
+    publishedAt: "August 10, 2026",
+    publishedAtBn: "২৫ শ্রাবণ ১৪৩৩",
+    signatory: "Sadia Rahman",
+    signatoryDesignation: "Youth Chapter Coordinator",
+    summary:
+      "Deployment of 9,000+ student volunteers across 82 campus and district chapters to paint reflective high-visibility zebra stripes and conduct pedestrian speed-limit awareness drives in front of 500+ primary schools and colleges.",
+    summaryBn:
+      "দেশের ৮২টি ক্যাম্পাস ও জেলা ইউনিটের ৯,০০০+ স্বেচ্ছাসেবীর মাধ্যমে ৫ শতাধিক শিক্ষা প্রতিষ্ঠানের সামনে আধুনিক থার্মোপ্লাস্টিক জেব্রা ক্রসিং তৈরি ও ট্রাফিক সচেতনতা ক্যাম্পেইনের সময়সূচী।",
   },
 ];
 
@@ -120,34 +121,38 @@ export default function NoticeBoardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-amber-500/20">
+    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-amber-500/20 transition-colors">
       {/* Top Bar Header */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/85 backdrop-blur-2xl">
+      <header className="sticky top-0 z-40 w-full border-b border-border bg-card/80 backdrop-blur-2xl transition-colors">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/" className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg">
-              BMA
+            <Link
+              href="/"
+              className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center font-black text-slate-950 text-base shadow-md shrink-0"
+            >
+              RSM
             </Link>
             <div>
-              <Link href="/" className="font-bold text-base tracking-tight text-white hover:text-amber-400 transition-colors">
-                {lang === "en" ? "Official Notice Board & Gazettes" : "অফিসিয়াল নোটিশ বোর্ড ও গেজেট"}
+              <Link href="/" className="font-bold text-base tracking-tight text-foreground hover:text-amber-500 transition-colors">
+                {lang === "en" ? "Official Gazettes & Notice Board" : "অফিসিয়াল গেজেট ও নোটিশ বোর্ড"}
               </Link>
-              <div className="text-xs text-slate-400 font-bangla">
-                {lang === "en" ? "Bangladesh Medical Association • Secretariat Archive" : "বাংলাদেশ মেডিকেল এসোসিয়েশন • কেন্দ্রীয় সচিবালয় নথিপত্র"}
+              <div className="text-xs text-muted-foreground font-bangla">
+                {lang === "en" ? "Road Safety Movement • National Secretariat Archive" : "নিরাপদ সড়ক আন্দোলন • কেন্দ্রীয় সচিবালয় ও নথিপত্র"}
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <ThemeToggle variant="pill" />
             <button
               onClick={() => setLang(lang === "en" ? "bn" : "en")}
-              className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-semibold hover:border-amber-400/50 transition-colors"
+              className="px-3 py-1.5 rounded-lg border border-border bg-card text-xs font-semibold text-foreground hover:border-amber-500/50 transition-colors"
             >
               {lang === "en" ? "বাংলা সংস্করণ" : "English Version"}
             </button>
             <Link href="/portal">
-              <Button size="sm" variant="outline" className="border-amber-500/30 text-amber-300 hover:bg-amber-500/10 text-xs">
-                {lang === "en" ? "Member Portal" : "সদস্য পোর্টাল"}
+              <Button size="sm" variant="outline" className="border-amber-500/40 text-foreground hover:bg-amber-500/10 text-xs">
+                {lang === "en" ? "Portal Login" : "লগইন"}
               </Button>
             </Link>
           </div>
@@ -155,39 +160,39 @@ export default function NoticeBoardPage() {
       </header>
 
       {/* Hero Banner with Official Seal Accent */}
-      <section className="relative border-b border-white/10 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 py-16 px-6">
+      <section className="relative border-b border-border bg-muted/20 py-12 sm:py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-semibold mb-3">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 {lang === "en" ? "Officially Authenticated Digital Gazettes" : "ডিজিটালভাবে সত্যায়িত সরকারী নোটিশ ও গেজেট"}
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white font-serif">
-                {lang === "en" ? "Secretariat Circulars & Notifications" : "সচিবালয় বিজ্ঞপ্তি ও সাধারণ গেজেট সমূহ"}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+                {lang === "en" ? "Secretariat Circulars & Directives" : "সচিবালয় বিজ্ঞপ্তি, পরিপত্র ও নীতি গেজেট"}
               </h1>
-              <p className="mt-3 text-slate-400 max-w-2xl text-sm sm:text-base leading-relaxed">
+              <p className="mt-3 text-muted-foreground max-w-2xl text-sm sm:text-base leading-relaxed">
                 {lang === "en"
-                  ? "Access authoritative directives, AGM schedules, voter gazettes, and executive resolutions issued under the seal of the Central Executive Council."
-                  : "কেন্দ্রীয় নির্বাহী পরিষদ ও নির্বাচন কমিশন কর্তৃক ঘোষিত সকল প্রশাসনিক সিদ্ধান্ত, ভোটার তালিকা, বার্ষিক সাধারণ সভার গেজেট এবং নোটিশের প্রামাণিক সংগ্রহশালা।"}
+                  ? "Access authoritative directives, crash audit reports, legislative submissions, and public policy gazettes issued under the seal of the National Executive Council."
+                  : "জাতীয় নির্বাহী পরিষদ কর্তৃক ঘোষিত সকল প্রশাসনিক সিদ্ধান্ত, ব্ল্যাকস্পট অডিট রিপোর্ট, সড়ক আইন বাস্তবায়ন নোটিশ এবং নীতি গেজেটের প্রামাণিক ডিজিটাল সংগ্রহশালা।"}
               </p>
             </div>
 
-            {/* Quick Action Button for Gazette Subscription */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            {/* Quick Action Button */}
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
               <Link href="/portal/communications">
-                <Button className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold gap-2 text-xs">
+                <Button className="font-bold gap-2 text-xs shadow-md">
                   <Sparkles className="w-3.5 h-3.5" />
-                  {lang === "en" ? "Subscribe via SMS / Email" : "এসএমএস বা ইমেইলে নোটিশ পান"}
+                  {lang === "en" ? "Subscribe for Alerts" : "বিজ্ঞপ্তির অ্যালার্ট চালু করুন"}
                 </Button>
               </Link>
             </div>
           </div>
 
           {/* Search & Category Filter Bar */}
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-4">
             <div className="lg:col-span-7 relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
                 placeholder={
@@ -197,25 +202,25 @@ export default function NoticeBoardPage() {
                 }
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-amber-400 transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-card border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-amber-500 transition-colors shadow-sm"
               />
             </div>
 
             <div className="lg:col-span-5 flex flex-wrap gap-2 items-center">
               {[
                 { key: "ALL", labelEn: "All Notices", labelBn: "সকল" },
+                { key: "DIRECTIVE", labelEn: "Directives", labelBn: "নির্দেশনা" },
                 { key: "GAZETTE", labelEn: "Gazettes", labelBn: "গেজেট" },
-                { key: "ELECTION", labelEn: "Elections", labelBn: "নির্বাচন" },
-                { key: "DIRECTIVE", labelEn: "Directives", labelBn: "আদেশ" },
                 { key: "CIRCULAR", labelEn: "Circulars", labelBn: "পরিপত্র" },
+                { key: "PRESS_RELEASE", labelEn: "Youth Action", labelBn: "ছাত্র কর্মসূচি" },
               ].map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setSelectedCategory(tab.key)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     selectedCategory === tab.key
-                      ? "bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20"
-                      : "bg-slate-900 border border-white/10 text-slate-400 hover:text-white"
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "bg-card border border-border text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {lang === "en" ? tab.labelEn : tab.labelBn}
@@ -227,58 +232,58 @@ export default function NoticeBoardPage() {
       </section>
 
       {/* Notices Feed */}
-      <main className="max-w-7xl mx-auto px-6 py-12 flex-1 w-full">
+      <main className="max-w-7xl mx-auto px-6 py-10 flex-1 w-full">
         {filteredNotices.length === 0 ? (
-          <div className="text-center py-20 bg-slate-900/40 rounded-2xl border border-white/5">
-            <FileText className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <div className="text-lg font-bold text-slate-300">
+          <div className="text-center py-20 bg-card rounded-2xl border border-border">
+            <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+            <div className="text-lg font-bold text-foreground">
               {lang === "en" ? "No notices found matching your criteria" : "আপনার অনুসন্ধানের সাথে মিলিয়ে কোনো নোটিশ পাওয়া যায়নি"}
             </div>
-            <p className="text-slate-500 text-xs mt-1">
+            <p className="text-muted-foreground text-xs mt-1">
               {lang === "en" ? "Try clearing search filters or search for another term." : "অনুসন্ধানের শব্দ পরিবর্তন করে পুনরায় চেষ্টা করুন।"}
             </p>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {filteredNotices.map((notice) => (
               <Card
                 key={notice.id}
-                className="bg-slate-900/60 border border-white/10 hover:border-amber-500/40 transition-all duration-300 rounded-2xl overflow-hidden group shadow-lg"
+                className="bg-card border border-border hover:border-amber-500/40 transition-all duration-300 rounded-2xl overflow-hidden group shadow-md"
               >
-                <CardContent className="p-6 sm:p-8">
+                <CardContent className="p-6 sm:p-7">
                   <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
-                    <div className="flex-1 space-y-3">
+                    <div className="flex-1 space-y-2.5">
                       <div className="flex flex-wrap items-center gap-2.5">
-                        <Badge className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-semibold">
+                        <Badge className="bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30 text-[11px] font-semibold">
                           {lang === "en" ? notice.categoryLabel : notice.categoryLabelBn}
                         </Badge>
                         {notice.isUrgent && (
-                          <Badge className="bg-red-500/20 text-red-300 border border-red-500/30 text-[11px] font-bold animate-pulse">
+                          <Badge className="bg-red-500/15 text-red-700 dark:text-red-400 border border-red-500/30 text-[11px] font-bold animate-pulse">
                             {lang === "en" ? "URGENT ACTION" : "জরুরি করণীয়"}
                           </Badge>
                         )}
-                        <span className="text-xs font-mono text-slate-400 bg-slate-950 px-2.5 py-1 rounded-md border border-white/5">
+                        <span className="text-xs font-mono text-muted-foreground bg-muted px-2.5 py-0.5 rounded-md border border-border">
                           {notice.memoNo}
                         </span>
                       </div>
 
-                      <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-amber-400 transition-colors font-serif leading-snug">
+                      <h2 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-amber-500 transition-colors leading-snug">
                         <Link href={`/notices/${notice.id}`}>
                           {lang === "en" ? notice.title : notice.titleBn}
                         </Link>
                       </h2>
 
-                      <p className="text-slate-300 text-sm leading-relaxed">
+                      <p className="text-muted-foreground text-sm leading-relaxed">
                         {lang === "en" ? notice.summary : notice.summaryBn}
                       </p>
 
-                      <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400 pt-2 border-t border-white/5">
+                      <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground pt-2 border-t border-border">
                         <div className="flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                          <Calendar className="w-3.5 h-3.5 text-amber-500" />
                           <span>{lang === "en" ? notice.publishedAt : notice.publishedAtBn}</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <Building className="w-3.5 h-3.5 text-slate-400" />
+                          <Building className="w-3.5 h-3.5 text-muted-foreground" />
                           <span>
                             {notice.signatory} ({notice.signatoryDesignation})
                           </span>
@@ -286,16 +291,16 @@ export default function NoticeBoardPage() {
                       </div>
                     </div>
 
-                    <div className="flex lg:flex-col items-center sm:items-end justify-end gap-3 pt-4 lg:pt-0">
+                    <div className="flex lg:flex-col items-center sm:items-end justify-end gap-3 pt-4 lg:pt-0 shrink-0">
                       <Link href={`/notices/${notice.id}`} className="w-full sm:w-auto">
-                        <Button className="w-full bg-slate-800 hover:bg-slate-700 text-white border border-white/10 gap-2 text-xs font-medium">
-                          {lang === "en" ? "Read Notice" : "সম্পূর্ণ পড়ুন"}
+                        <Button className="w-full gap-2 text-xs font-semibold">
+                          {lang === "en" ? "Read Gazette" : "সম্পূর্ণ পড়ুন"}
                           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                         </Button>
                       </Link>
                       <button
                         onClick={() => window.print()}
-                        className="px-3 py-2 rounded-lg bg-slate-950 border border-white/10 text-slate-300 hover:text-white hover:border-white/20 transition-colors text-xs flex items-center gap-1.5"
+                        className="px-3 py-2 rounded-lg bg-muted border border-border text-muted-foreground hover:text-foreground hover:border-amber-500/40 transition-colors text-xs flex items-center gap-1.5"
                         title={lang === "en" ? "Print Gazette" : "প্রিন্ট করুন"}
                       >
                         <Printer className="w-3.5 h-3.5" />
@@ -311,23 +316,23 @@ export default function NoticeBoardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-slate-950 py-10 px-6 text-center text-xs text-slate-500">
+      <footer className="border-t border-border bg-card py-8 px-6 text-center text-xs text-muted-foreground">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            © 2026 Bangladesh Medical Association. Official Publication under Societies Registration Act XXI of 1860.
+            © 2026 Road Safety Movement (নিরাপদ সড়ক আন্দোলন). Official Publication under Societies Registration Act XXI of 1860.
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/" className="hover:text-slate-300 transition-colors">
+            <Link href="/" className="hover:text-foreground transition-colors">
               {lang === "en" ? "Home" : "মূলপাতা"}
             </Link>
-            <Link href="/events" className="hover:text-slate-300 transition-colors">
-              {lang === "en" ? "Conferences" : "সম্মেলন"}
+            <Link href="/events" className="hover:text-foreground transition-colors">
+              {lang === "en" ? "Campaigns" : "ক্যাম্পেইন"}
             </Link>
-            <Link href="/causes" className="hover:text-slate-300 transition-colors">
-              {lang === "en" ? "Humanitarian Causes" : "মানবিক তহবিল"}
+            <Link href="/causes" className="hover:text-foreground transition-colors">
+              {lang === "en" ? "Victim Relief" : "মানবিক তহবিল"}
             </Link>
-            <Link href="/gallery" className="hover:text-slate-300 transition-colors">
-              {lang === "en" ? "Photo Archive" : "ফটো গ্যালারি"}
+            <Link href="/gallery" className="hover:text-foreground transition-colors">
+              {lang === "en" ? "Historical Archive" : "আর্কাইভ"}
             </Link>
           </div>
         </div>

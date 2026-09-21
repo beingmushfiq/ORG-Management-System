@@ -166,7 +166,7 @@ export default function MembersDirectoryPage() {
                   setSearch(e.target.value);
                   setPage(1);
                 }}
-                placeholder="Search by name, BMDC, mobile, or ID..."
+                placeholder="Search by name, NID, mobile, or ID..."
                 className="w-full pl-9 pr-4 py-2 text-xs rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
@@ -409,7 +409,7 @@ export default function MembersDirectoryPage() {
                   National ID (NID)
                 </span>
                 <span className="font-mono text-foreground">
-                  {selectedMember.user?.nidNumber || "Verified via BMDC"}
+                  {selectedMember.user?.nidNumber || "Verified via NID / Student Pass"}
                 </span>
               </div>
 
@@ -449,7 +449,7 @@ export default function MembersDirectoryPage() {
                     Step 1: Branch Secretariat Endorsement
                   </p>
                   <p className="text-[11px] text-muted-foreground">
-                    Certify that this applicant's BMDC registration and branch residency have been verified.
+                    Certify that this applicant's chapter credentials and active volunteer status have been verified.
                   </p>
                   <input
                     type="text"

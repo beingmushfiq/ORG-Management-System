@@ -14,6 +14,7 @@ import { CommunicationsModule } from "./modules/communications/communications.mo
 import { PublicModule } from "./modules/public/public.module";
 import { AuditModule } from "./modules/audit/audit.module";
 import { SuperadminModule } from "./modules/superadmin/superadmin.module";
+import { AppController } from "./app.controller";
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { SuperadminModule } from "./modules/superadmin/superadmin.module";
     AuditModule,
     SuperadminModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_INTERCEPTOR,

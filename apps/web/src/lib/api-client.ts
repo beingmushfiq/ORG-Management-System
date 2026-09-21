@@ -83,13 +83,16 @@ export const apiClient = {
 
   // ================= AUTHENTICATION APIS =================
   auth: {
-    sendOtp: (phoneOrEmail: string) =>
+    sendOtp: (phoneOrEmail: string, organizationSlug = "rsm-bd") =>
       request<{ success: boolean; message: string; challengeExpiresAt: string }>(
         "/auth/send-otp",
-        { method: "POST", body: JSON.stringify({ phoneOrEmail }) }
+        {
+          method: "POST",
+          body: JSON.stringify({ phoneOrEmail, phone: phoneOrEmail, organizationSlug }),
+        }
       ),
 
-    verifyOtp: (phoneOrEmail: string, code: string) =>
+    verifyOtp: (phoneOrEmail: string, code: string, organizationSlug = "rsm-bd") =>
       request<{
         success: boolean;
         accessToken: string;
@@ -97,10 +100,10 @@ export const apiClient = {
         activePosition: any;
       }>("/auth/verify-otp", {
         method: "POST",
-        body: JSON.stringify({ phoneOrEmail, code }),
+        body: JSON.stringify({ phoneOrEmail, phone: phoneOrEmail, code, organizationSlug }),
       }),
 
-    login: (phoneOrEmail: string, password: string) =>
+    login: (phoneOrEmail: string, password: string, organizationSlug = "rsm-bd") =>
       request<{
         success: boolean;
         accessToken: string;
@@ -108,7 +111,7 @@ export const apiClient = {
         activePosition: any;
       }>("/auth/login", {
         method: "POST",
-        body: JSON.stringify({ phoneOrEmail, password }),
+        body: JSON.stringify({ phoneOrEmail, email: phoneOrEmail, password, organizationSlug }),
       }),
 
     getMe: () =>
@@ -119,27 +122,39 @@ export const apiClient = {
     switchPosition: (userPositionId: string) =>
       request<{ success: boolean; activePosition: any }>("/auth/switch-position", {
         method: "POST",
-        body: JSON.stringify({ userPositionId }),
+        body: JSON.stringify({ userPositionId, targetPositionId: userPositionId }),
       }),
 
-    logout: () =>
-      request<{ success: boolean; message: string }>("/auth/logout", {
-        method: "POST",
-      }),
+    logout: async () => {
+      try {
+        return await request<{ success: boolean; message: string }>("/auth/logout", {
+          method: "POST",
+        });
+      } catch {
+        return { success: true, message: "Logged out locally." };
+      }
+    },
   },
 
   // ================= MEMBERSHIP APIS =================
   membership: {
-    list: (params?: { page?: number | undefined; limit?: number | undefined; status?: string | undefined; tier?: string | undefined; search?: string | undefined } | undefined) => {
+    list: async (params?: { page?: number | undefined; limit?: number | undefined; status?: string | undefined; tier?: string | undefined; search?: string | undefined } | undefined) => {
       const query = new URLSearchParams();
       if (params?.page) query.set("page", params.page.toString());
       if (params?.limit) query.set("limit", params.limit.toString());
       if (params?.status) query.set("status", params.status);
       if (params?.tier) query.set("tier", params.tier);
       if (params?.search) query.set("search", params.search);
-      return request<{ total: number; page: number; limit: number; items: any[] }>(
-        `/members?${query.toString()}`
-      );
+      const res = await request<any>(`/members?${query.toString()}`);
+      const items = res?.data || res?.items || (Array.isArray(res) ? res : []);
+      const total = res?.meta?.total ?? res?.total ?? items.length;
+      return {
+        total,
+        page: res?.meta?.page ?? res?.page ?? 1,
+        limit: res?.meta?.limit ?? res?.limit ?? 20,
+        items,
+        data: items,
+      };
     },
 
     getById: (id: string) => request<any>(`/members/${id}`),
@@ -165,7 +180,7 @@ export const apiClient = {
     apply: (data: any) =>
       request<any>("/public/apply", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify({ organizationSlug: "rsm-bd", ...data }),
       }),
   },
 
@@ -242,14 +257,21 @@ export const apiClient = {
 
   // ================= FINANCE & TREASURY APIS =================
   finance: {
-    listInvoices: (params?: { status?: string | undefined; page?: number | undefined; limit?: number | undefined } | undefined) => {
+    listInvoices: async (params?: { status?: string | undefined; page?: number | undefined; limit?: number | undefined } | undefined) => {
       const q = new URLSearchParams();
       if (params?.status) q.set("status", params.status);
       if (params?.page) q.set("page", params.page.toString());
       if (params?.limit) q.set("limit", params.limit.toString());
-      return request<{ total: number; page: number; limit: number; items: any[] }>(
-        `/finance/invoices?${q.toString()}`
-      );
+      const res = await request<any>(`/finance/invoices?${q.toString()}`);
+      const items = res?.data || res?.items || (Array.isArray(res) ? res : []);
+      const total = res?.meta?.total ?? res?.total ?? items.length;
+      return {
+        total,
+        page: res?.meta?.page ?? res?.page ?? 1,
+        limit: res?.meta?.limit ?? res?.limit ?? 20,
+        items,
+        data: items,
+      };
     },
 
     getStats: () => request<any>("/finance/stats"),
@@ -330,10 +352,19 @@ export const apiClient = {
         method: "POST",
         body: JSON.stringify(data),
       }),
-    impersonate: (data: { targetUserId: string; justification: string }) =>
+    impersonate: (data: {
+      targetUserId: string;
+      justification?: string | undefined;
+      reason?: string | undefined;
+      targetOrganizationId?: string | undefined;
+    }) =>
       request<any>("/superadmin/impersonate", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          reason: data.reason || data.justification,
+          justification: data.justification || data.reason,
+        }),
       }),
     exitImpersonate: (impersonationLogId?: string | undefined) =>
       request<any>("/superadmin/exit-impersonate", {

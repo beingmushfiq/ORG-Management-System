@@ -162,3 +162,84 @@ pnpm build
 # Seed database with Road Safety Movement dataset
 pnpm --filter @org/database db:seed
 ```
+
+---
+
+## 7. Complete API Route & Controller Catalog
+
+The NestJS backend (`apps/api`) serves under the global prefix `/api` (port 4000) and is seamlessly proxied by Next.js (`apps/web` on port 3000) via rewrites (`/api/:path*` $\to$ `http://localhost:4000/api/:path*`).
+
+### Root & System Health
+- `GET /api` (`AppController.getRoot`): API status and full dynamic endpoint catalog.
+- `GET /api/health` (`AppController.getHealth`): General health check ping.
+- `GET /api/public/health` (`PublicController.getHealth`): Public service status probe.
+
+### Public & Onboarding
+- `GET /api/public/org/:slug` (`PublicController.getOrganizationPublicProfile`): Returns public tenant profile, branch hierarchy, and central leadership positions.
+- `POST /api/public/apply` (`PublicController.apply`): Public member application onboarding (defaults to `rsm-bd`).
+- `GET /api/public/notices/:slug` (`PublicController.getPublicNotices`): Public pinned and recent notices.
+- `GET /api/public/events/:slug` (`PublicController.getPublicEvents`): Public event schedule.
+- `GET /api/public/verify/member/:param` (`PublicController.verifyMember`): Member card cryptographic verification.
+
+### Authentication (`AuthController` at `/api/auth`)
+- `POST /api/auth/send-otp` & `/api/auth/otp/send`: Generates 6-digit SMS OTP challenge (accepts `phone` or `phoneOrEmail`).
+- `POST /api/auth/verify-otp` & `/api/auth/otp/verify`: Verifies code, issues JWT `access_token` and `refresh_token`.
+- `POST /api/auth/login`: Authenticates with email or mobile phone and password.
+- `GET /api/auth/me`: Fetches profile and active position for current session.
+- `POST /api/auth/switch-position`: Switches active operational position (accepts `targetPositionId` or `userPositionId`).
+- `POST /api/auth/logout`: Revokes active session and clears cookies.
+
+### Membership (`MembersController` at `/api/members`)
+- `GET /api/members`: Scoped member listing with 3-tier privacy masking and query filters.
+- `GET /api/members/:id`: Member details by UUID.
+- `POST /api/members/apply`: Direct member application onboarding.
+- `POST` & `PATCH /api/members/:id/endorse`: Branch committee endorsement.
+- `POST` & `PATCH /api/members/:id/approve`: Central committee final approval and tier assignment.
+- `POST` & `PATCH /api/members/:id/suspend`: Member suspension with recorded reason.
+
+### Hierarchy & Branches (`BranchesController` at `/api/branches`)
+- `GET /api/branches`: Flat list of active branch nodes.
+- `GET /api/branches/tree`: Hierarchical nested branch tree.
+- `POST /api/branches`: Create a branch node under parent node.
+- `POST /api/branches/:id/move`: Atomically move branch subtree updating materialized paths.
+
+### Finance & Treasury (`FinanceController` at `/api/finance`)
+- `GET /api/finance/stats`: Aggregated billing, collection, and pending verification counts.
+- `GET /api/finance/invoices`: Paginated invoice listing with BigInt paisa conversion.
+- `POST /api/finance/invoices`: Create member invoice.
+- `POST /api/finance/initiate-online-payment`: Initiate gateway session (EPS, bKash, Nagad, SSLCommerz).
+- `POST /api/finance/submit-slip`: Submit offline bank deposit slip for review.
+- `POST /api/finance/verify-slip`: Treasurer approval or rejection of deposit slip.
+- `GET /api/finance/receipt/:invoiceId`: Tamper-proof digital money receipt with SHA-256 seal.
+
+### Governance (`GovernanceController` at `/api/governance`)
+- `GET /api/governance/meetings`: Meeting listing filtered by status.
+- `GET /api/governance/meetings/:id`: Meeting details, agenda, and minutes.
+- `POST /api/governance/meetings`: Draft new statutory meeting.
+- `POST` & `PATCH /api/governance/meetings/:id/schedule`: Transition meeting to SCHEDULED status.
+- `POST` & `PATCH /api/governance/meetings/:id/minutes`: Record minutes and resolutions.
+- `POST` & `PATCH /api/governance/meetings/:id/approve`: Approve ratified minutes.
+- `GET /api/governance/resolutions`: Searchable numbered resolution registry.
+- `POST /api/governance/quorum-check`: Quorum calculation utility.
+
+### Communications (`CommunicationsController` at `/api/communications`)
+- `GET /api/communications/notices`: Internal circulars and announcements.
+- `POST /api/communications/notices`: Publish circular/notice.
+- `POST /api/communications/broadcast`: Send emergency multi-branch SMS broadcast.
+
+### Events (`EventsController` at `/api/events`)
+- `GET /api/events`: List scheduled and past events.
+- `GET /api/events/:id`: Event details with attendance logs.
+- `POST /api/events`: Create an event.
+- `POST /api/events/:id/checkin`: Fast gate steward attendance QR verification.
+
+### Audit (`AuditController` at `/api/audit`)
+- `GET /api/audit/logs`: Immutable audit trail with pagination and action filters.
+
+### Superadmin (`SuperadminController` at `/api/superadmin`)
+- `GET /api/superadmin/overview`: Platform metrics (organizations, users, sessions, impersonation logs).
+- `GET /api/superadmin/tenants`: List all provisioned organizations.
+- `POST /api/superadmin/tenants`: Provision new tenant with HQ branch and central roles.
+- `PATCH /api/superadmin/tenants/:id/status`: Update tenant subscription status.
+- `POST /api/superadmin/impersonate`: Audited support impersonation session.
+- `POST /api/superadmin/exit-impersonate`: Conclude impersonation session.

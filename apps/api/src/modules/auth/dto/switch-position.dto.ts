@@ -1,7 +1,11 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 
 export class SwitchPositionDto {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  targetPositionId!: string;
+  targetPositionId?: string;
+
+  @IsOptional()
+  @IsString()
+  userPositionId?: string;
 }

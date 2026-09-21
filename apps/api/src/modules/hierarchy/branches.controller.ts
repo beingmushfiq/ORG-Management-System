@@ -18,6 +18,12 @@ import { RequirePermission } from "../../common/decorators/require-permission.de
 export class BranchesController {
   constructor(private readonly hierarchyService: HierarchyService) {}
 
+  @Get()
+  @RequirePermission("BRANCHES", "VIEW")
+  async listBranches(@Req() req: any) {
+    return this.hierarchyService.listBranches(req.organizationId);
+  }
+
   @Get("tree")
   @RequirePermission("BRANCHES", "VIEW")
   async getTree(@Req() req: any) {

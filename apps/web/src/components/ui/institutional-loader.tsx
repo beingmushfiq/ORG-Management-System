@@ -77,16 +77,16 @@ export function InstitutionalLoader({
       </div>
 
       {/* Institutional Security Pill */}
-      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 font-mono">
-        <ShieldCheck className="w-3 h-3 text-emerald-400" />
-        <span>BMA Autonomous Governance System</span>
+      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-muted/60 border border-border text-[10px] text-muted-foreground font-mono">
+        <ShieldCheck className="w-3 h-3 text-emerald-500" />
+        <span>RSM Autonomous Governance System</span>
       </div>
     </div>
   );
 
   if (fullscreen) {
     return (
-      <div className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xl flex items-center justify-center">
+      <div className="fixed inset-0 z-50 bg-background/85 backdrop-blur-xl flex items-center justify-center">
         {content}
       </div>
     );

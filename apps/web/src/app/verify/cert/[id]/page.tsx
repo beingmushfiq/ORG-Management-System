@@ -43,40 +43,40 @@ interface CertificateRecord {
 const MOCK_CERT_REGISTRY: Record<string, CertificateRecord> = {
   "CERT-2026-001": {
     certId: "CERT-2026-001",
-    title: "Fellow of Life Membership Conferral",
-    titleBn: "আজীবন সদস্যপদ সনদপত্র",
+    title: "Fellow of Permanent Activist Council Conferral",
+    titleBn: "স্থায়ী সংগঠক পরিষদ সনদপত্র",
     category: "LIFE_MEMBERSHIP",
-    recipientName: "Prof. Dr. Mujibul Haque",
-    recipientNameBn: "অধ্যাপক ডাঃ মুজিবুল হক",
-    membershipId: "BMA-LIFE-0001",
+    recipientName: "Engr. Tanvir Ahmed",
+    recipientNameBn: "প্রকৌশলী তানভীর আহমেদ",
+    membershipId: "RSM-VOL-2018-001",
     issueDate: "February 20, 2026",
     validThrough: "Perpetual / Lifetime Standing",
     signatories: [
-      { name: "Dr. A. K. M. Sharif", designation: "President", designationBn: "সভাপতি" },
-      { name: "Dr. Md. Rafiqul Islam", designation: "General Secretary", designationBn: "সাধারণ সম্পাদক" },
+      { name: "Advocate Shafiul Alam", designation: "Chief Coordinator", designationBn: "প্রধান সমন্বয়ক" },
+      { name: "Nusrat Jahan", designation: "General Secretary", designationBn: "সাধারণ সম্পাদক" },
     ],
     securityHash: "9f83c6b749d62d26f63beec29124be70df0498b8c9b91eb9725f57a94ee2e185",
-    issuerOrg: "Bangladesh Medical Association — Chattogram",
-    issuerOrgBn: "বাংলাদেশ মেডিকেল এসোসিয়েশন — চট্টগ্রাম",
+    issuerOrg: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
+    issuerOrgBn: "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়",
     isRevoked: false,
   },
   "CERT-2026-042": {
     certId: "CERT-2026-042",
-    title: "Clinical Leadership & Bioethics Accreditation",
-    titleBn: "ক্লিনিক্যাল লিডারশিপ ও বায়োএথিক্স স্বীকৃতি",
+    title: "Road Safety & First-Response Emergency Accreditation",
+    titleBn: "সড়ক নিরাপত্তা ও জরুরি উদ্ধার ব্যবস্থাপনা স্বীকৃতি",
     category: "TRAINING_ACCREDITATION",
-    recipientName: "Dr. Salma Begum",
-    recipientNameBn: "ডাঃ সালমা বেগম",
-    membershipId: "BMA-GEN-0142",
+    recipientName: "Nusrat Jahan",
+    recipientNameBn: "নুসরাত জাহান",
+    membershipId: "RSM-ACT-2019-042",
     issueDate: "June 12, 2025",
     validThrough: "June 11, 2028",
     signatories: [
-      { name: "Prof. Dr. Anisur Rahman", designation: "Academic Convener", designationBn: "একাডেমিক আহ্বায়ক" },
-      { name: "Dr. Md. Rafiqul Islam", designation: "General Secretary", designationBn: "সাধারণ সম্পাদক" },
+      { name: "Engr. Tanvir Ahmed", designation: "Academic Convener", designationBn: "একাডেমিক আহ্বায়ক" },
+      { name: "Advocate Shafiul Alam", designation: "Secretary General", designationBn: "মহাসচিব" },
     ],
     securityHash: "3cb3416e788e04b4d7f57cb8f076b3f71c4c81a5336bf729524024316d3f2fc6",
-    issuerOrg: "Bangladesh Medical Association — Chattogram",
-    issuerOrgBn: "বাংলাদেশ মেডিকেল এসোসিয়েশন — চট্টগ্রাম",
+    issuerOrg: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
+    issuerOrgBn: "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়",
     isRevoked: false,
   },
 };
@@ -97,17 +97,17 @@ export default function CertificateVerificationPage() {
         title: "Official Institutional Credential",
         titleBn: "প্রাতিষ্ঠানিক অফিসিয়াল সনদপত্র",
         category: "LIFE_MEMBERSHIP" as const,
-        recipientName: "Dr. Verified Member",
-        recipientNameBn: "ডাঃ ভেরিফাইড মেম্বার",
-        membershipId: "BMA-GEN-AUTO",
+        recipientName: "Verified Activist",
+        recipientNameBn: "যাচাইকৃত সক্রিয় সংগঠক",
+        membershipId: "RSM-VOL-AUTO",
         issueDate: "January 1, 2026",
         validThrough: "December 31, 2028",
         signatories: [
-          { name: "President", designation: "Central Executive", designationBn: "কেন্দ্রীয় নির্বাহী" },
+          { name: "Chief Coordinator", designation: "Central Executive", designationBn: "কেন্দ্রীয় নির্বাহী" },
         ],
         securityHash: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-        issuerOrg: "Bangladesh Medical Association — Chattogram",
-        issuerOrgBn: "বাংলাদেশ মেডিকেল এসোসিয়েশন — চট্টগ্রাম",
+        issuerOrg: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
+        issuerOrgBn: "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়",
         isRevoked: false,
       };
       setRecord(match);
@@ -336,8 +336,8 @@ export default function CertificateVerificationPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 py-6 px-6 text-center text-xs text-slate-500 font-mono">
-        Official Verification Engine · Secured with SHA-256 Ledger · Bangladesh Medical Association
+      <footer className="border-t border-border py-6 px-6 text-center text-xs text-muted-foreground font-mono">
+        Official Verification Engine · Secured with SHA-256 Ledger · Road Safety Movement
       </footer>
     </div>
   );

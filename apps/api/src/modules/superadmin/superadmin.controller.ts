@@ -20,6 +20,24 @@ import { prisma, TenantStatus } from "@org/database";
 export class SuperadminController {
   constructor(private readonly jwtService: JwtService) {}
 
+  @Get("overview")
+  async getOverview() {
+    const [organizationsCount, usersCount, activeSessionsCount, impersonationLogsCount] =
+      await Promise.all([
+        prisma.organization.count(),
+        prisma.user.count(),
+        prisma.userSession.count({ where: { isRevoked: false } }),
+        prisma.impersonationLog.count(),
+      ]);
+
+    return {
+      organizationsCount,
+      usersCount,
+      activeSessionsCount,
+      impersonationLogsCount,
+    };
+  }
+
   @Get("tenants")
   async listTenants() {
     return prisma.organization.findMany({
@@ -149,22 +167,26 @@ export class SuperadminController {
     @Res({ passthrough: true }) res: Response,
     @Body()
     body: {
-      targetOrganizationId: string;
+      targetOrganizationId?: string;
       targetUserId: string;
-      reason: string;
+      reason?: string;
+      justification?: string;
     }
   ) {
-    if (!body.reason || body.reason.trim().length < 10) {
+    const reasonText = (body.reason || body.justification || "").trim();
+    if (reasonText.length < 5) {
       throw new BadRequestException(
-        "A detailed operational reason (minimum 10 characters) is required for support impersonation."
+        "A detailed operational justification (minimum 5 characters) is required for support impersonation."
       );
     }
 
+    const where: any = { id: body.targetUserId };
+    if (body.targetOrganizationId) {
+      where.organizationId = body.targetOrganizationId;
+    }
+
     const targetUser = await prisma.user.findFirst({
-      where: {
-        id: body.targetUserId,
-        organizationId: body.targetOrganizationId,
-      },
+      where,
       include: {
         organization: true,
         userPositions: {
@@ -175,16 +197,18 @@ export class SuperadminController {
     });
 
     if (!targetUser) {
-      throw new BadRequestException("Target user not found in the specified organization.");
+      throw new BadRequestException("Target user not found.");
     }
+
+    const targetOrgId = targetUser.organizationId;
 
     // Write immutable ImpersonationLog
     const log = await prisma.impersonationLog.create({
       data: {
         actorId: req.user.id,
-        targetOrganizationId: body.targetOrganizationId,
+        targetOrganizationId: targetOrgId,
         targetUserId: body.targetUserId,
-        reason: body.reason,
+        reason: reasonText,
         ipAddress: req.ip || null,
         startedAt: new Date(),
       },
@@ -194,7 +218,7 @@ export class SuperadminController {
     const token = this.jwtService.sign(
       {
         sub: targetUser.id,
-        organizationId: body.targetOrganizationId,
+        organizationId: targetOrgId,
         isImpersonated: true,
         impersonationLogId: log.id,
         originalActorId: req.user.id,

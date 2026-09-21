@@ -1,9 +1,9 @@
 import { IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateMemberApplicationDto {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  organizationSlug!: string;
+  organizationSlug?: string;
 
   @IsNotEmpty()
   @IsString()
@@ -40,4 +40,12 @@ export class CreateMemberApplicationDto {
   @IsOptional()
   @IsString()
   branchNodeId?: string;
+
+  @IsOptional()
+  @IsString()
+  branchId?: string;
+
+  @IsOptional()
+  @IsString()
+  paymentMethod?: string;
 }

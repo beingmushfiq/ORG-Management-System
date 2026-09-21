@@ -36,8 +36,12 @@ export class PermissionGuard implements CanActivate {
       return true;
     }
 
-    const tenantId = this.cls.get<string>(CLS_TENANT_KEY);
-    const userId = this.cls.get<string>(CLS_USER_KEY);
+    const request = context.switchToHttp().getRequest();
+    const tenantId =
+      this.cls.get<string>(CLS_TENANT_KEY) ||
+      request.user?.organizationId ||
+      request.organizationId;
+    const userId = this.cls.get<string>(CLS_USER_KEY) || request.user?.id;
 
     if (!userId || !tenantId) {
       throw new ForbiddenException("[PERMISSION_DENIED] Unauthenticated request.");
