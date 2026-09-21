@@ -1,0 +1,489 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// -----------------------------------------------------------------------------
+// ENUMS
+// -----------------------------------------------------------------------------
+enum TenantStatus {
+  ACTIVE
+  SUSPENDED
+  TRIAL
+  ARCHIVED
+}
+
+enum MembershipTier {
+  ASSOCIATE
+  GENERAL
+  LIFE
+  HONORARY
+}
+
+enum MemberStatus {
+  PENDING_KYC
+  UNDER_REVIEW
+  BRANCH_ENDORSED
+  ACTIVE
+  SUSPENDED
+  RESIGNED
+  EXPELLED
+  DECEASED
+}
+
+enum ActivityType {
+  EVENT_ATTENDANCE
+  TRAINING_COMPLETED
+  DUES_PAID
+  VOLUNTEER_WORK
+  MEETING_ATTENDED
+  TASK_COMPLETED
+  SPECIAL_CONTRIBUTION
+}
+
+enum InvoiceStatus {
+  UNPAID
+  PAID
+  PARTIALLY_PAID
+  UNDER_VERIFICATION
+  WAIVED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  EPS
+  BKASH
+  NAGAD
+  SSLCOMMERZ
+  BANK_TRANSFER
+  CASH
+}
+
+enum PrivacyLevel {
+  PUBLIC
+  MEMBERS_ONLY
+  EXECUTIVE_ONLY
+}
+
+// -----------------------------------------------------------------------------
+// 1. TENANT & PUBLIC PORTFOLIO
+// -----------------------------------------------------------------------------
+model Organization {
+  id                    String        @id @default(uuid())
+  name                  String        @db.VarChar(191)
+  nameBn                String?       @db.VarChar(191)
+  slug                  String        @unique @db.VarChar(64) // Subdomain: orgslug.platform.com
+  customDomain          String?       @unique @db.VarChar(191)
+  status                TenantStatus  @default(ACTIVE)
+  planId                String        @default("starter") @db.VarChar(64)
+  
+  // Public Portfolio & Branding Tokens
+  tagline               String?       @db.VarChar(255)
+  taglineBn             String?       @db.VarChar(255)
+  aboutHtml             String?       @db.Text
+  aboutHtmlBn           String?       @db.Text
+  missionHtml           String?       @db.Text
+  missionHtmlBn         String?       @db.Text
+  logoUrl               String?       @db.VarChar(500)
+  faviconUrl            String?       @db.VarChar(500)
+  heroImageUrl          String?       @db.VarChar(500)
+  primaryColorHsl       String        @default("221 83% 53%") @db.VarChar(32) // HSL for dynamic CSS variables
+  accentColorHsl        String        @default("38 92% 50%") @db.VarChar(32)
+  contactEmail          String?       @db.VarChar(191)
+  contactPhone          String?       @db.VarChar(64)
+  headOfficeAddress     String?       @db.VarChar(255)
+  headOfficeAddressBn   String?       @db.VarChar(255)
+  socialLinksJson       Json?         // { facebook, twitter, linkedin, youtube }
+  bylawsPdfUrl          String?       @db.VarChar(500)
+  
+  // Dynamic JSON Rules & Gateways
+  eligibilityRuleJson   Json?         // Custom per-tenant progression rules
+  smsGatewayConfigJson  Json?         // Per-tenant SMS API keys & sender ID
+
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  branches              BranchNode[]
+  users                 User[]
+  memberships           Membership[]
+  positions             Position[]
+  invoices              Invoice[]
+  events                Event[]
+  notices               Notice[]
+  galleryAlbums         GalleryAlbum[]
+  donationCauses        DonationCause[]
+  elections             Election[]
+  auditLogs             AuditLog[]
+
+  @@index([status])
+}
+
+// -----------------------------------------------------------------------------
+// 2. UNLIMITED BRANCH HIERARCHY (Materialized Path + Adjacency List)
+// -----------------------------------------------------------------------------
+model BranchNode {
+  id               String         @id @default(uuid())
+  organizationId   String
+  organization     Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parentId         String?
+  parent           BranchNode?    @relation("BranchHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children         BranchNode[]   @relation("BranchHierarchy")
+  
+  name             String         @db.VarChar(191)
+  nameBn           String?        @db.VarChar(191)
+  code             String?        @db.VarChar(32) // e.g. "CTG-NORTH"
+  levelLabel       String         @default("Branch") @db.VarChar(64) // Division, District, Upazila, Unit
+  depth            Int            @default(0)     // Visual depth ordering
+  materializedPath String         @db.VarChar(500) // "1/4/12"
+  address          String?        @db.VarChar(255)
+  contactPhone     String?        @db.VarChar(64)
+  isActive         Boolean        @default(true)
+
+  userPositions    UserPosition[]
+  events           Event[]
+  
+  @@index([organizationId, materializedPath(191)])
+  @@index([organizationId, parentId])
+}
+
+// -----------------------------------------------------------------------------
+// 3. USER, IDENTITY & PROFILE
+// -----------------------------------------------------------------------------
+model User {
+  id                  String          @id @default(uuid())
+  organizationId      String
+  organization        Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  
+  email               String          @db.VarChar(191)
+  phone               String          @db.VarChar(32)
+  passwordHash        String          @db.VarChar(255)
+  fullName            String          @db.VarChar(191)
+  fullNameBn          String?         @db.VarChar(191)
+  avatarUrl           String?         @db.VarChar(500)
+  nidNumber           String?         @db.VarChar(64)
+  passportNumber      String?         @db.VarChar(64)
+  bloodGroup          String?         @db.VarChar(8)
+  occupation          String?         @db.VarChar(128)
+  bio                 String?         @db.VarChar(500)
+  
+  // Three-Tier Privacy Controls
+  phonePrivacy        PrivacyLevel    @default(MEMBERS_ONLY)
+  emailPrivacy        PrivacyLevel    @default(MEMBERS_ONLY)
+  addressPrivacy      PrivacyLevel    @default(EXECUTIVE_ONLY)
+  
+  memberships         Membership[]
+  userPositions       UserPosition[]
+  activityLogs        ActivityLog[]
+  attendanceLogs      AttendanceLog[]
+  invoices            Invoice[]
+  ballots             Ballot[]
+  
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  @@unique([organizationId, email])
+  @@unique([organizationId, phone])
+  @@index([organizationId, fullName])
+}
+
+// -----------------------------------------------------------------------------
+// 4. MEMBERSHIP LIFECYCLE & ELIGIBILITY
+// -----------------------------------------------------------------------------
+model Membership {
+  id                  String           @id @default(uuid())
+  userId              String
+  user                User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId      String
+  organization        Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  
+  tier                MembershipTier   @default(ASSOCIATE)
+  status              MemberStatus     @default(PENDING_KYC)
+  membershipNumber    String           @db.VarChar(64) // e.g. "BMA-2026-0038"
+  joinedDate          DateTime         @default(now())
+  
+  // Computed Eligibility Snapshot (BullMQ Nightly Worker)
+  tierUpgradeEligible Boolean          @default(false)
+  eligibilityScore    Int              @default(0)
+  continuousActiveDays Int             @default(0)
+  lastCalculatedAt    DateTime?
+  suspensionReason    String?          @db.VarChar(255)
+  
+  // Digital ID Card & Tamper Proof Cryptography
+  qrCodeUrl           String?          @db.VarChar(500)
+  securityHash        String?          @db.VarChar(128) // SHA256 validation seal
+  digitalCardIssuedAt DateTime?
+
+  history             MembershipHistory[]
+
+  @@unique([organizationId, membershipNumber])
+  @@index([organizationId, status, tier])
+}
+
+model MembershipHistory {
+  id             String         @id @default(uuid())
+  organizationId String
+  membershipId   String
+  membership     Membership     @relation(fields: [membershipId], references: [id], onDelete: Cascade)
+  previousTier   MembershipTier
+  newTier        MembershipTier
+  previousStatus MemberStatus
+  newStatus      MemberStatus
+  reason         String         @db.VarChar(255)
+  actorId        String         @db.VarChar(64)
+  createdAt      DateTime       @default(now())
+
+  @@index([organizationId, membershipId])
+}
+
+// -----------------------------------------------------------------------------
+// 5. GOVERNANCE POSITIONS & DUAL-TRACK SCOPES
+// -----------------------------------------------------------------------------
+model Position {
+  id                 String         @id @default(uuid())
+  organizationId     String
+  organization       Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  title              String         @db.VarChar(128) // President, General Secretary, Treasurer, etc.
+  titleBn            String?        @db.VarChar(128)
+  rankOrder          Int            @default(99)
+  defaultPermissions Json           // ["MEMBERS:VIEW", "MEMBERS:APPROVE", "FINANCE:VIEW"]
+  isCentralRole      Boolean        @default(false)
+
+  userPositions      UserPosition[]
+  
+  @@index([organizationId, rankOrder])
+}
+
+model UserPosition {
+  id                String         @id @default(uuid())
+  organizationId    String
+  userId            String
+  user              User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  positionId        String
+  position          Position       @relation(fields: [positionId], references: [id])
+  branchNodeId      String         // Scoped power to this branch node & its entire subtree
+  branchNode        BranchNode     @relation(fields: [branchNodeId], references: [id])
+  
+  committeeTermName String?        @db.VarChar(128) // e.g. "Executive Council 2026-2028"
+  termStartDate     DateTime
+  termEndDate       DateTime?
+  isActive          Boolean        @default(true)
+  customPermissions Json?          // Granular per-user overrides
+
+  @@index([organizationId, userId, isActive])
+  @@index([organizationId, branchNodeId, isActive])
+}
+
+// -----------------------------------------------------------------------------
+// 6. FINANCIAL INVOICING & PAISA-PRECISION LEDGER
+// -----------------------------------------------------------------------------
+model Invoice {
+  id              String         @id @default(uuid())
+  organizationId  String
+  organization    Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId          String
+  user            User           @relation(fields: [userId], references: [id])
+  
+  invoiceNumber   String         @db.VarChar(64) // e.g. "INV-2026-0819"
+  description     String         @db.VarChar(255)
+  amountPaisa     BigInt         // Integer paisa: ৳500.00 = 50000
+  paidPaisa       BigInt         @default(0)
+  status          InvoiceStatus  @default(UNPAID)
+  dueDate         DateTime
+  paidAt          DateTime?
+  
+  // Payment Proof & Idempotency
+  idempotencyKey  String?        @unique @db.VarChar(128)
+  paymentMethod   PaymentMethod?
+  transactionRef  String?        @db.VarChar(128)
+  slipReceiptUrl  String?        @db.VarChar(500)
+  verifiedById    String?        @db.VarChar(64)
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  payments        PaymentRecord[]
+
+  @@unique([organizationId, invoiceNumber])
+  @@index([organizationId, status])
+  @@index([organizationId, userId, status])
+}
+
+model PaymentRecord {
+  id              String         @id @default(uuid())
+  organizationId  String
+  invoiceId       String
+  invoice         Invoice        @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  amountPaisa     BigInt
+  paymentMethod   PaymentMethod
+  gatewayProvider String?        @db.VarChar(32) // "EPS", "BKASH", "NAGAD", "SSLCOMMERZ"
+  transactionRef  String         @db.VarChar(128)
+  gatewayPayload  Json?
+  idempotencyKey  String         @unique @db.VarChar(128)
+  recordedAt      DateTime       @default(now())
+
+  @@index([organizationId, invoiceId])
+  @@index([organizationId, transactionRef])
+}
+
+// -----------------------------------------------------------------------------
+// 7. EVENTS, MEETINGS & QR ATTENDANCE
+// -----------------------------------------------------------------------------
+model Event {
+  id             String          @id @default(uuid())
+  organizationId String
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchNodeId   String?
+  branchNode     BranchNode?     @relation(fields: [branchNodeId], references: [id])
+  
+  title          String          @db.VarChar(255)
+  titleBn        String?         @db.VarChar(255)
+  description    String?         @db.Text
+  bannerUrl      String?         @db.VarChar(500)
+  venue          String          @db.VarChar(255)
+  venueBn        String?         @db.VarChar(255)
+  startTime      DateTime
+  endTime        DateTime
+  isPublic       Boolean         @default(true) // Visible on public portfolio website
+  ticketFeePaisa BigInt          @default(0)
+  pointsAwarded  Int             @default(10)   // Activity points credited towards eligibility
+
+  attendanceLogs AttendanceLog[]
+
+  @@index([organizationId, isPublic, startTime])
+  @@index([organizationId, branchNodeId])
+}
+
+model AttendanceLog {
+  id             String        @id @default(uuid())
+  organizationId String
+  eventId        String
+  event          Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scannedAt      DateTime      @default(now())
+  verifiedById   String?       @db.VarChar(64)
+
+  @@unique([organizationId, eventId, userId])
+  @@index([organizationId, userId])
+}
+
+// -----------------------------------------------------------------------------
+// 8. PUBLIC PORTFOLIO MODULES (Notices, Gallery, Causes)
+// -----------------------------------------------------------------------------
+model Notice {
+  id             String        @id @default(uuid())
+  organizationId String
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  title          String        @db.VarChar(255)
+  titleBn        String?       @db.VarChar(255)
+  contentHtml    String        @db.Text
+  contentHtmlBn  String?       @db.Text
+  attachmentPdf  String?       @db.VarChar(500)
+  isPublic       Boolean       @default(true) // Public website vs member-only circular
+  isPinned       Boolean       @default(false)
+  publishedAt    DateTime      @default(now())
+
+  @@index([organizationId, isPublic, publishedAt])
+}
+
+model GalleryAlbum {
+  id             String        @id @default(uuid())
+  organizationId String
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  title          String        @db.VarChar(191)
+  titleBn        String?       @db.VarChar(191)
+  description    String?       @db.VarChar(500)
+  coverImageUrl  String        @db.VarChar(500)
+  imagesJson     Json          // Array of { url, caption, captionBn }
+  isPublic       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+
+  @@index([organizationId, isPublic])
+}
+
+model DonationCause {
+  id                String        @id @default(uuid())
+  organizationId    String
+  organization      Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  title             String        @db.VarChar(191)
+  titleBn           String?       @db.VarChar(191)
+  description       String        @db.Text
+  targetAmountPaisa BigInt?
+  raisedAmountPaisa BigInt        @default(0)
+  isActive          Boolean       @default(true)
+  imageUrl          String?       @db.VarChar(500)
+  createdAt         DateTime      @default(now())
+
+  @@index([organizationId, isActive])
+}
+
+// -----------------------------------------------------------------------------
+// 9. HYBRID ELECTIONS & GOVERNANCE
+// -----------------------------------------------------------------------------
+model Election {
+  id               String        @id @default(uuid())
+  organizationId   String
+  organization     Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  title            String        @db.VarChar(191)
+  isDigitalBallot  Boolean       @default(false) // Digital secret ballot vs offline gazette
+  gazettePdfUrl    String?       @db.VarChar(500) // For offline election record
+  votingStartDate  DateTime?
+  votingEndDate    DateTime?
+  isCompleted      Boolean       @default(false)
+  
+  ballots          Ballot[]
+  createdAt        DateTime      @default(now())
+
+  @@index([organizationId, isCompleted])
+}
+
+model Ballot {
+  id             String        @id @default(uuid())
+  organizationId String
+  electionId     String
+  election       Election      @relation(fields: [electionId], references: [id], onDelete: Cascade)
+  voterId        String
+  voter          User          @relation(fields: [voterId], references: [id])
+  candidateId    String        @db.VarChar(64)
+  cryptographicSeal String     @db.VarChar(128)
+  castAt         DateTime      @default(now())
+
+  @@unique([organizationId, electionId, voterId])
+}
+
+// -----------------------------------------------------------------------------
+// 10. ACTIVITY LEDGER & IMMUTABLE AUDIT TRAIL
+// -----------------------------------------------------------------------------
+model ActivityLog {
+  id             String        @id @default(uuid())
+  organizationId String
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type           ActivityType
+  pointsAwarded  Int           @default(1)
+  note           String?       @db.VarChar(255)
+  occurredAt     DateTime      @default(now())
+
+  @@index([organizationId, userId, type])
+}
+
+model AuditLog {
+  id             String        @id @default(uuid())
+  organizationId String
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  actorId        String        @db.VarChar(64)
+  actorRole      String?       @db.VarChar(64)
+  action         String        @db.VarChar(128) // "MEMBERSHIP:APPROVE", "FINANCE:WAIVE"
+  targetEntity   String        @db.VarChar(64)
+  targetId       String        @db.VarChar(64)
+  diffJson       Json?
+  ipAddress      String?       @db.VarChar(45)
+  timestamp      DateTime      @default(now())
+
+  @@index([organizationId, timestamp])
+  @@index([organizationId, actorId])
+}

@@ -1,0 +1,465 @@
+"use client";
+
+import React, { useState } from "react";
+import {
+  ShieldCheck,
+  FileText,
+  QrCode,
+  ArrowRight,
+  Globe,
+  Sparkles,
+  ExternalLink,
+  PhoneCall,
+  Mail,
+  MapPin,
+} from "lucide-react";
+import { Button, Badge } from "@org/ui";
+import { BranchGalaxy } from "@/components/3d/branch-galaxy";
+import { HolographicMemberCard } from "@/components/cards/holographic-member-card";
+
+export default function TenantPublicPortfolio() {
+  const [lang, setLang] = useState<"en" | "bn">("en");
+
+  const toggleLang = () => {
+    setLang((prev) => (prev === "en" ? "bn" : "en"));
+  };
+
+  return (
+    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/30">
+      {/* ================= 1. FROSTED GLASS NAVIGATION ================= */}
+      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/75 backdrop-blur-2xl">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-amber-400 flex items-center justify-center font-extrabold text-white text-lg shadow-lg">
+              BMA
+            </div>
+            <div>
+              <div className="font-bold text-base tracking-tight text-white leading-tight">
+                {lang === "en" ? "Bangladesh Medical Association" : "বাংলাদেশ মেডিকেল এসোসিয়েশন"}
+              </div>
+              <div className="text-xs text-muted-foreground font-bangla">
+                {lang === "en" ? "Chattogram Metropolitan Division" : "চট্টগ্রাম মহানগর বিভাগ"}
+              </div>
+            </div>
+          </div>
+
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-muted-foreground">
+            <a href="#about" className="hover:text-white transition-colors">
+              {lang === "en" ? "About" : "পরিচিতি"}
+            </a>
+            <a href="#hierarchy" className="hover:text-white transition-colors">
+              {lang === "en" ? "Branch Network" : "শাখা নেটওয়ার্ক"}
+            </a>
+            <a href="#leadership" className="hover:text-white transition-colors">
+              {lang === "en" ? "Leadership" : "নেতৃত্ব"}
+            </a>
+            <a href="#events" className="hover:text-white transition-colors">
+              {lang === "en" ? "Conferences" : "সম্মেলন"}
+            </a>
+            <a href="#notices" className="hover:text-white transition-colors">
+              {lang === "en" ? "Circulars" : "বিজ্ঞপ্তি"}
+            </a>
+            <a href="#causes" className="hover:text-white transition-colors">
+              {lang === "en" ? "Causes" : "তহবিল"}
+            </a>
+            <a href="#verify" className="hover:text-white transition-colors">
+              {lang === "en" ? "Verify ID" : "যাচাই"}
+            </a>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleLang}
+              className="gap-1.5 text-xs text-muted-foreground hover:text-white border-white/10"
+            >
+              <Globe className="w-3.5 h-3.5 text-amber-400" />
+              {lang === "en" ? "বাংলা" : "English"}
+            </Button>
+
+            {/* Private Portal Gateway */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-xs font-semibold hover:text-white"
+            >
+              {lang === "en" ? "Portal Login" : "লগইন"}
+            </Button>
+
+            {/* Direct Member Onboarding Funnel */}
+            <Button
+              variant="primary"
+              size="sm"
+              className="gap-1.5 text-xs font-semibold shadow-lg shadow-primary/20"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              {lang === "en" ? "Apply for Membership" : "সদস্যপদ আবেদন"}
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* ================= 2. KINETIC HERO SECTION ================= */}
+      <section className="relative pt-24 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+        {/* Ambient Glow */}
+        <div className="absolute top-1/3 -translate-y-1/2 w-[600px] h-[350px] bg-primary/20 rounded-full blur-[140px] pointer-events-none -z-10" />
+
+        {/* Accreditation Pill */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl mb-8">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+          <span className="text-xs font-medium text-slate-300">
+            {lang === "en"
+              ? "Established 1972 · Over 50 Years of Medical Leadership"
+              : "১৯৭২ সালে প্রতিষ্ঠিত · ৫০ বছরেরও বেশি সময় ধরে চিকিৎসা নেতৃত্বের প্রতীক"}
+          </span>
+        </div>
+
+        {/* Display H1 Kinetic Typography */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.08] max-w-5xl">
+          {lang === "en" ? (
+            <>
+              Uniting Physicians, Advancing Science,{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300">
+                Serving Humanity.
+              </span>
+            </>
+          ) : (
+            <>
+              চিকিৎসক ঐক্য, চিকিৎসা বিজ্ঞানের উৎকর্ষ এবং{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300">
+                মানবিক স্বাস্থ্যসেবার শপথ।
+              </span>
+            </>
+          )}
+        </h1>
+
+        <p className="mt-6 text-base sm:text-xl text-muted-foreground max-w-3xl leading-relaxed">
+          {lang === "en"
+            ? "The apex representative statutory body for medical practitioners across Chattogram Division, governing professional ethics, scientific advancement, and community health."
+            : "চট্টগ্রাম বিভাগের চিকিৎসকদের শীর্ষ পেশাজীবী সংগঠন — চিকিৎসা নীতি, উচ্চতর বিজ্ঞান গবেষণা ও সার্বজনীন স্বাস্থ্যসেবা প্রসারে অঙ্গিকারবদ্ধ।"}
+        </p>
+
+        {/* Primary Call-to-Actions */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <Button size="lg" className="gap-2 text-sm font-semibold shadow-xl shadow-primary/25">
+            {lang === "en" ? "Register as Associate Member" : "সহযোগী সদস্যপদ আবেদন"}
+            <ArrowRight className="w-4 h-4" />
+          </Button>
+
+          <Button
+            variant="glass"
+            size="lg"
+            className="gap-2 text-sm font-semibold border-white/15 text-white"
+          >
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            {lang === "en" ? "Verify Member Registry" : "সদস্য রেজিস্ট্রি যাচাই"}
+          </Button>
+        </div>
+
+        {/* ================= 3. STATS TICKER ================= */}
+        <div className="mt-20 w-full grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { label: lang === "en" ? "Registered Physicians" : "নিবন্ধিত চিকিৎসক", value: "3,850+" },
+            { label: lang === "en" ? "Affiliated Hospitals" : "সংযুক্ত হাসপাতাল", value: "48" },
+            { label: lang === "en" ? "Active Local Units" : "সক্রিয় স্থানীয় ইউনিট", value: "14" },
+            { label: lang === "en" ? "Relief Disbursed" : "জরুরি চিকিৎসা সহায়তা", value: "৳1.4 Cr" },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center text-center"
+            >
+              <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                {stat.value}
+              </div>
+              <div className="mt-1 text-xs sm:text-sm text-muted-foreground font-medium">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ================= 4. THREE.JS 3D BRANCH GALAXY ================= */}
+      <section id="hierarchy" className="py-20 px-6 max-w-7xl mx-auto w-full">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-8 gap-4">
+          <div>
+            <Badge variant="warning" className="mb-2">
+              Spatial Architecture
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              {lang === "en" ? "Interactive Branch Network" : "ইন্টারেক্টিভ শাখা নেটওয়ার্ক"}
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1 max-w-xl">
+              {lang === "en"
+                ? "Every branch, hospital unit, and regional committee is interconnected in real-time under our unlimited-depth governance tree."
+                : "আমাদের সীমাহীন শাখা কাঠামোর আওতায় প্রতিটি হাসপাতাল ইউনিট ও আঞ্চলিক কমিটি রিয়েল-টাইমে সংযুক্ত।"}
+            </p>
+          </div>
+          <div className="text-xs text-muted-foreground">
+            {lang === "en" ? "Live WebGL Telemetry" : "লাইভ ওয়েবজিএল টেলিমিতি"}
+          </div>
+        </div>
+
+        {/* 3D WebGL Canvas */}
+        <BranchGalaxy />
+      </section>
+
+      {/* ================= 5. HOLOGRAPHIC 3D MEMBER CARD SHOWCASE ================= */}
+      <section className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <Badge variant="success" className="mb-3">
+              Tamper-Proof Digital Identity
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+              {lang === "en" ? (
+                <>
+                  Holographic Digital Passes for{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-500">
+                    Every Verified Member.
+                  </span>
+                </>
+              ) : (
+                <>
+                  প্রত্যেক যাচাইকৃত সদস্যের জন্য{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-500">
+                    হলোগ্রাফিক ডিজিটাল পাস।
+                  </span>
+                </>
+              )}
+            </h2>
+            <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+              {lang === "en"
+                ? "Gone are paper certificates. Each active member holds a cryptographically sealed digital ID card with real-time QR code verification, 3D gyroscope tilt, and 300 DPI vector printing."
+                : "কাগজের সনদের দিন শেষ। প্রতিটি সক্রিয় সদস্য ক্রিপ্টোগ্রাফিক সুরক্ষা সিল, রিয়েল-টাইম কিউআর যাচাই এবং উচ্চ-মানের প্রিন্টযোগ্য ডিজিটাল আইডি কার্ড উপভোগ করেন।"}
+            </p>
+
+            <ul className="mt-6 space-y-3 text-sm text-slate-300">
+              <li className="flex items-center gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>SHA-256 digital security hash backed by MySQL database.</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <QrCode className="w-4 h-4 text-primary shrink-0" />
+                <span>One-scan instant credential verification at conference venues.</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>Apple Wallet & Google Wallet pass integration.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex justify-center">
+            <HolographicMemberCard />
+          </div>
+        </div>
+      </section>
+
+      {/* ================= 6. EXECUTIVE LEADERSHIP ROSTER ================= */}
+      <section id="leadership" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <Badge variant="default" className="mb-2">
+            Governance Council
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            {lang === "en" ? "Executive Committee (2026–2028)" : "কার্যনির্বাহী পরিষদ (২০২৬–২০২৮)"}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-2">
+            {lang === "en"
+              ? "Elected office-bearers leading policy, academic excellence, and institutional affairs."
+              : "নীতিমালা, শিক্ষা কার্যক্রম ও প্রাতিষ্ঠানিক ব্যবস্থাপনায় নেতৃত্বদানকারী নির্বাচিত নেতৃবৃন্দ।"}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              role: "President",
+              roleBn: "সভাপতি",
+              name: "Prof. Dr. Mujibul Haque",
+              nameBn: "অধ্যাপক ডাঃ মুজিবুল হক",
+              specialty: "FCPS (Medicine), FRCP (Glasg)",
+              tenure: "Term: 2026–2028",
+            },
+            {
+              role: "General Secretary",
+              roleBn: "সাধারণ সম্পাদক",
+              name: "Dr. Faisal Ahmed Chowdhury",
+              nameBn: "ডাঃ ফয়সাল আহমেদ চৌধুরী",
+              specialty: "MS (Ortho), FICS (USA)",
+              tenure: "Term: 2026–2028",
+            },
+            {
+              role: "Treasurer",
+              roleBn: "কোষাধ্যক্ষ",
+              name: "Dr. Nasrin Sultana",
+              nameBn: "ডাঃ নাসরিন সুলতানা",
+              specialty: "FCPS (Paediatrics), MD",
+              tenure: "Term: 2026–2028",
+            },
+          ].map((leader, i) => (
+            <div key={i} className="glass-card rounded-2xl p-6 flex flex-col items-center text-center">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/30 to-amber-500/20 border-2 border-primary/40 flex items-center justify-center font-bold text-2xl text-white shadow-xl mb-4">
+                {leader.name.split(" ")[2]?.[0] || "DR"}
+              </div>
+              <Badge variant="secondary" className="mb-2 text-[10px] uppercase font-bold tracking-wider">
+                {lang === "en" ? leader.role : leader.roleBn}
+              </Badge>
+              <h4 className="text-lg font-bold text-white tracking-tight">{leader.name}</h4>
+              <p className="text-xs text-muted-foreground font-bangla">{leader.nameBn}</p>
+              <p className="text-xs text-slate-400 mt-2 font-medium">{leader.specialty}</p>
+              <div className="mt-4 pt-3 border-t border-white/10 text-[11px] text-amber-400 font-medium">
+                {leader.tenure}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ================= 7. NOTICE VAULT & OFFICIAL CIRCULARS ================= */}
+      <section id="notices" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div className="flex items-center justify-between mb-10">
+          <div>
+            <Badge variant="warning" className="mb-2">Official Circulars</Badge>
+            <h2 className="text-3xl font-extrabold text-white tracking-tight">
+              {lang === "en" ? "Notice Board & Announcements" : "বিজ্ঞপ্তি বোর্ড ও ঘোষণা"}
+            </h2>
+          </div>
+          <Button variant="outline" size="sm" className="text-xs text-muted-foreground hover:text-white">
+            {lang === "en" ? "View Archive" : "আর্কাইভ দেখুন"}
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            {
+              tag: "General Assembly",
+              date: "September 24, 2026",
+              title: "Notice for 52nd Annual General Meeting (AGM) and Academic Session",
+              titleBn: "৫২তম বার্ষিক সাধারণ সভা (এজিএম) ও বৈজ্ঞানিক অধিবেশনের নোটিশ",
+              isPinned: true,
+            },
+            {
+              tag: "Elections",
+              date: "September 18, 2026",
+              title: "Draft Voter List Publication for Central & Branch Executive Election 2026-2028",
+              titleBn: "কার্যনির্বাহী নির্বাচন ২০২৬-২০২৮ এর খসড়া ভোটার তালিকা প্রকাশ",
+              isPinned: false,
+            },
+          ].map((notice, i) => (
+            <div key={i} className="glass-card rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
+                  <span className="font-semibold text-amber-400">{notice.tag}</span>
+                  <span>{notice.date}</span>
+                </div>
+                <h4 className="text-base font-bold text-white leading-snug hover:text-primary transition-colors cursor-pointer">
+                  {lang === "en" ? notice.title : notice.titleBn}
+                </h4>
+              </div>
+              <div className="mt-6 flex items-center justify-between pt-4 border-t border-white/10">
+                <span className="text-xs text-emerald-400 flex items-center gap-1">
+                  <FileText className="w-3.5 h-3.5" /> PDF Signed Circular
+                </span>
+                <Button variant="ghost" size="sm" className="h-8 text-xs gap-1 text-primary">
+                  Download <ExternalLink className="w-3 h-3" />
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ================= 8. PUBLIC VERIFICATION DESK ================= */}
+      <section id="verify" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+        <div className="glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+          <div className="max-w-2xl">
+            <Badge variant="success" className="mb-3">
+              Public Trust Registry
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              {lang === "en"
+                ? "Verify Member Card or Conference Certificate"
+                : "সদস্য কার্ড অথবা সনদপত্র সত্যতা যাচাই করুন"}
+            </h2>
+            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+              {lang === "en"
+                ? "Enter the member registration number (e.g. BMA-LIFE-0001) or scan the QR code to verify standing, executive appointments, and validity status in real time."
+                : "সদস্য নিবন্ধন নম্বর লিখুন অথবা কিউআর কোড স্ক্যান করে তাৎক্ষণিকভাবে বৈধতা ও কার্যনির্বাহী পদবি যাচাই করুন।"}
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                placeholder="e.g. BMA-LIFE-0001"
+                className="h-12 px-5 rounded-xl bg-slate-900/80 border border-white/15 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm flex-1"
+              />
+              <Button size="lg" className="h-12 text-sm font-semibold gap-2 shadow-lg">
+                <ShieldCheck className="w-4 h-4" />
+                {lang === "en" ? "Verify Status" : "যাচাই করুন"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= 9. EDITORIAL FOOTER ================= */}
+      <footer className="mt-auto border-t border-white/10 bg-slate-950 py-16 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="space-y-3 md:col-span-2">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-bold text-white text-sm">
+                BMA
+              </div>
+              <span className="font-bold text-base text-white">
+                Bangladesh Medical Association — Chattogram
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground max-w-md leading-relaxed">
+              Autonomous statutory association governing medical ethics, continuing medical education,
+              and professional welfare across Chattogram Division.
+            </p>
+            <div className="text-xs text-slate-500 pt-2">
+              Powered by Multi-Tenant Organization Operating System · MySQL 8.0 & Next.js 15
+            </div>
+          </div>
+
+          <div>
+            <h5 className="text-xs font-bold uppercase tracking-wider text-white mb-3">
+              Institutional Links
+            </h5>
+            <ul className="space-y-2 text-xs text-muted-foreground">
+              <li><a href="#about" className="hover:text-white">Constitutional Bylaws</a></li>
+              <li><a href="#leadership" className="hover:text-white">Roll of Honor</a></li>
+              <li><a href="#events" className="hover:text-white">Scientific Sessions</a></li>
+              <li><a href="#notices" className="hover:text-white">Gazette Publications</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 className="text-xs font-bold uppercase tracking-wider text-white mb-3">
+              Secretariat Contact
+            </h5>
+            <ul className="space-y-2.5 text-xs text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" />
+                <span>BMA Bhaban, K.B. Fazlul Kader Road, Chattogram, Bangladesh</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <PhoneCall className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>+880 1819 000111</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-primary shrink-0" />
+                <span>secretariat@bma-ctg.org</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
