@@ -5,10 +5,9 @@ import { GreenwebSmsProvider } from "./providers/greenweb.provider";
 import {
   ISmsProvider,
   TenantSmsCredentials,
-  SmsSendResult,
   SmsBalanceResult,
 } from "./interfaces/sms-provider.interface";
-import { TemplateEngine, RenderTemplateOptions } from "./template-engine";
+import { TemplateEngine } from "./template-engine";
 
 export interface EmergencyBroadcastDto {
   organizationId: string;
