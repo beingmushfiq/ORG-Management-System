@@ -18,6 +18,7 @@ import {
   ShieldCheck,
   FileCheck,
   Scale,
+  Palette,
   type LucideIcon,
 } from "lucide-react";
 import { Button, Badge, Card, CardContent } from "@org/ui";
@@ -39,6 +40,16 @@ interface PortalModule {
 }
 
 const MODULES: PortalModule[] = [
+  {
+    title: "Portfolio CMS & Brand Studio",
+    titleBn: "ওয়েবসাইট সিএমএস ও ব্র্যান্ড স্টুডিও",
+    description: "Visual website builder, notice publisher, brand color customizer, and operational rules.",
+    descriptionBn: "ওয়েবসাইটের ব্যানার, বিজ্ঞপ্তি, থিম কালার ও কনফারেন্স তথ্য সরাসরি নিয়ন্ত্রণ।",
+    href: "/portal/cms",
+    icon: Palette,
+    badge: "Visual CMS",
+    accentColor: "from-amber-500 to-rose-500",
+  },
   {
     title: "Official Member Registry",
     titleBn: "সদস্য নিবন্ধন ও তালিকা",

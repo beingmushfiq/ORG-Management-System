@@ -101,7 +101,7 @@ The platform enforces **4-Layer Defense-in-Depth Multi-Tenancy**:
 
 ---
 
-## 5. Complete Frontend Route Catalog (All 29 Routes)
+## 5. Complete Frontend Route Catalog (All 30 Routes)
 
 ### Public & Civic Portfolio
 1. `/` — Institutional Hero, Interactive 3D Branch Galaxy, Holographic Member Card, Bangladesh Atlas, Heritage Chronicle (1952–2026), Central Organogram, DevCenterPoint Branding.
@@ -120,21 +120,22 @@ The platform enforces **4-Layer Defense-in-Depth Multi-Tenancy**:
 14. `/design-system` — Living Design System & Bengali Typographic Conjunct QA Lab.
 
 ### Member & Executive Operational Portal
-15. `/portal` — Central Secretariat Module Hub (Routing to all 11 subsystems).
-16. `/portal/concierge` — Fast-Track Member Concierge Desk (Good Standing, Section 44 Tax, Chamber Directory).
-17. `/portal/members` — Member Directory with live 3-tier privacy enforcement (Public / Member / Executive).
-18. `/portal/branches` — Interactive Visual Branch Tree Explorer with materialized path telemetry.
-19. `/portal/command` — Executive Command War Room with live velocity ticker and Daily Morning Briefing Card.
-20. `/portal/command/resolutions` — Statutory Meeting Minutes & Numbered Resolution Compiler.
-21. `/portal/finance` — Treasurer Financial Command Portal with bank slip verification queue & digital money receipts.
-22. `/portal/eligibility` — Member Eligibility Dashboard & Tier Progression tracker.
-23. `/portal/communications` — Multi-Vendor SMS & Emergency Broadcast Console with handset simulator.
-24. `/portal/blood-bank` — Community Blood Donor Network & Emergency Appeal Dispatcher.
-25. `/portal/events/checkin` — Gate Steward QR Scanner with attendance logging and coupon issuance.
-26. `/portal/lms` — Continuing Medical Education (CME/CPD) courses & digital certificate issuer.
-27. `/portal/reports` — Statutory Government Audit & Societies Registration Act XXI of 1860 export console.
-28. `/portal/superadmin` — Platform Super Admin portal for tenant onboarding and audited impersonation.
-29. `/_not-found` — Branded 404 handler with return navigation.
+15. `/portal` — Central Secretariat Module Hub (Routing to all 12 subsystems).
+16. `/portal/cms` — Visual Portfolio CMS & Brand Studio (WYSIWYG Hero, Palette HSL, Notices, Events, Memorial, Branch Hierarchy, SMS Gateway, Holographic Live Preview).
+17. `/portal/concierge` — Fast-Track Member Concierge Desk (Good Standing, Section 44 Tax, Chamber Directory).
+18. `/portal/members` — Member Directory with live 3-tier privacy enforcement (Public / Member / Executive).
+19. `/portal/branches` — Interactive Visual Branch Tree Explorer with materialized path telemetry.
+20. `/portal/command` — Executive Command War Room with live velocity ticker and Daily Morning Briefing Card.
+21. `/portal/command/resolutions` — Statutory Meeting Minutes & Numbered Resolution Compiler.
+22. `/portal/finance` — Treasurer Financial Command Portal with bank slip verification queue & digital money receipts.
+23. `/portal/eligibility` — Member Eligibility Dashboard & Tier Progression tracker.
+24. `/portal/communications` — Multi-Vendor SMS & Emergency Broadcast Console with handset simulator.
+25. `/portal/blood-bank` — Community Blood Donor Network & Emergency Appeal Dispatcher.
+26. `/portal/events/checkin` — Gate Steward QR Scanner with attendance logging and coupon issuance.
+27. `/portal/lms` — Continuing Medical Education (CME/CPD) courses & digital certificate issuer.
+28. `/portal/reports` — Statutory Government Audit & Societies Registration Act XXI of 1860 export console.
+29. `/portal/superadmin` — SaaS Master Control Panel with white-glove 3-step onboarding wizard, Cloudflare SSL for SaaS, and audited support impersonation.
+30. `/_not-found` — Branded 404 handler with return navigation.
 
 ---
 
