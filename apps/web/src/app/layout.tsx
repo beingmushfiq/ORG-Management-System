@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import { Plus_Jakarta_Sans, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ToastProvider } from "@org/ui";
 import { TopNavLoader } from "@/components/ui/top-nav-loader";
 import { AccessibilityDock } from "@/components/ui/accessibility-dock";
@@ -22,7 +23,7 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: "#f59e0b",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -30,28 +31,28 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Bangladesh Medical Association (BMA) — Institutional Operating System",
-    template: "%s | Bangladesh Medical Association",
+    default: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন) — Institutional Operating System",
+    template: "%s | Road Safety Movement",
   },
   description:
-    "Apex statutory representative body for medical practitioners in Bangladesh. Digital membership registry, peer-reviewed medical journal, 64-district branch atlas, CPD accreditation, and fast-track member concierge desk.",
+    "Bangladesh's largest volunteer organization for road safety, established through the historic 2018 student-led Road Safety Movement. 9,010+ volunteers, 82 committees across 64 districts, crash registry, blackspot audits, and victim support fund.",
   keywords: [
-    "Bangladesh Medical Association",
-    "BMA",
-    "BMDC",
-    "Doctor Registry",
-    "Medical Journal",
-    "Physician Welfare",
-    "Societies Registration Act 1860",
-    "Continuing Medical Education",
-    "Certificate of Good Standing",
+    "Road Safety Movement",
+    "নিরাপদ সড়ক আন্দোলন",
+    "Safe Road Movement 2018",
+    "Road Transport Act 2018",
+    "Road Crash Prevention",
+    "Black Spot Elimination",
+    "Victim Support Fund",
+    "Student Volunteer Brigade",
+    "Highway Safety Bangladesh",
   ],
   authors: [
+    { name: "Road Safety Movement National Secretariat", url: "https://www.roadsafetymovement.org" },
     { name: "DevCenterPoint", url: "https://devcenterpoint.com" },
-    { name: "Central Secretariat, Bangladesh Medical Association" },
   ],
-  creator: "DevCenterPoint (https://devcenterpoint.com)",
-  publisher: "Bangladesh Medical Association & DevCenterPoint",
+  creator: "Road Safety Movement & DevCenterPoint",
+  publisher: "Road Safety Movement",
   manifest: "/manifest.json",
   icons: {
     icon: [
@@ -64,19 +65,19 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Bangladesh Medical Association (BMA) — Institutional Operating System",
+    title: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন) — Institutional Operating System",
     description:
-      "Apex statutory representative body for medical practitioners in Bangladesh. Governance, registry, and physician welfare across 64 districts.",
-    url: "https://bma.org.bd",
-    siteName: "Bangladesh Medical Association",
+      "Transforming road transport into a safe, sustainable, and humane system for all. 9,010+ volunteers across 82 committees.",
+    url: "https://www.roadsafetymovement.org",
+    siteName: "Road Safety Movement",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bangladesh Medical Association (BMA)",
+    title: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
     description:
-      "Apex statutory representative body for medical practitioners in Bangladesh.",
+      "Transforming road transport into a safe, sustainable, and humane system for all.",
   },
 };
 
@@ -86,23 +87,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} ${hindSiliguri.variable} dark`}>
-      <body className="font-sans antialiased min-h-screen relative selection:bg-primary/30 selection:text-white">
-        {/* Subtle Ambient Grain Texture */}
-        <div className="fixed inset-0 pointer-events-none z-50 grain-overlay" />
+    <html lang="en" className={`${plusJakartaSans.variable} ${hindSiliguri.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased min-h-screen relative selection:bg-amber-500/30 selection:text-foreground">
+        <ThemeProvider defaultTheme="light" storageKey="rsm-ui-theme">
+          <ToastProvider>
+            {/* Razor-thin Top Bar Navigation Loader */}
+            <Suspense fallback={null}>
+              <TopNavLoader />
+            </Suspense>
 
-        <ToastProvider>
-          {/* Razor-thin Top Bar Navigation Loader */}
-          <Suspense fallback={null}>
-            <TopNavLoader />
-          </Suspense>
+            {/* Momentum Inertia Smooth Scroll */}
+            <SmoothScrollProvider>{children}</SmoothScrollProvider>
 
-          {/* Momentum Inertia Smooth Scroll */}
-          <SmoothScrollProvider>{children}</SmoothScrollProvider>
-
-          {/* Senior Physician Assistant & Accessibility Dock */}
-          <AccessibilityDock />
-        </ToastProvider>
+            {/* Road Safety Rapid Action & Accessibility Dock */}
+            <AccessibilityDock />
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

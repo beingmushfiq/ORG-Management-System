@@ -16,13 +16,17 @@ import {
 } from "lucide-react";
 import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, Input } from "@org/ui";
 import Link from "next/link";
+import { soundEffects } from "@/lib/audio-effects";
 
 const BRANCH_OPTIONS = [
-  { id: "node-1", name: "Central Executive Secretariat", level: "HQ" },
-  { id: "node-4", name: "Chattogram Metropolitan Division", level: "Division" },
-  { id: "node-12", name: "Panchlaish Medical College Unit", level: "Unit" },
-  { id: "node-14", name: "Kotwali Central Hospital Unit", level: "Unit" },
-  { id: "node-22", name: "Dhanmondi Clinical Unit", level: "Unit" },
+  { id: "node-1", name: "National Executive Secretariat (Dhaka HQ)", level: "Central HQ" },
+  { id: "node-2", name: "Dhaka University Central Campus Chapter (DU)", level: "Campus Unit" },
+  { id: "node-3", name: "BUET Transport Research & Road Safety Cell", level: "Research Lab" },
+  { id: "node-4", name: "Chattogram Metropolitan Division Council", level: "Division" },
+  { id: "node-5", name: "Rajshahi University Youth Action Chapter (RU)", level: "Campus Unit" },
+  { id: "node-6", name: "Jahangirnagar University Chapter (JU)", level: "Campus Unit" },
+  { id: "node-7", name: "Sylhet Highway Crash Response Unit", level: "Regional Unit" },
+  { id: "node-8", name: "Bogura Highway Safety Brigade", level: "District Unit" },
 ];
 
 export default function MembershipApplicationWizardPage() {
@@ -30,47 +34,54 @@ export default function MembershipApplicationWizardPage() {
 
   // Form State
   const [formData, setFormData] = useState({
-    branchId: "node-12",
+    branchId: "node-2",
     fullName: "",
     fullNameBn: "",
     phone: "",
     email: "",
     nidNumber: "",
-    bloodGroup: "B+",
-    occupation: "",
-    paymentMethod: "EPS",
+    bloodGroup: "O+",
+    occupation: "Student / Youth Volunteer",
+    paymentMethod: "BKASH",
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, 4));
-  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
+  const nextStep = () => {
+    soundEffects.playClick(650);
+    setStep((prev) => Math.min(prev + 1, 4));
+  };
+  const prevStep = () => {
+    soundEffects.playClick(480);
+    setStep((prev) => Math.max(prev - 1, 1));
+  };
 
   const handleSubmit = () => {
+    soundEffects.playRatification();
     setIsSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-6 sm:p-12 max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-background text-foreground p-6 sm:p-12 max-w-4xl mx-auto space-y-8 transition-colors">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-6">
+      <div className="flex items-center justify-between border-b border-border pb-6">
         <div>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-white mb-2"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white mb-2"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Public Portfolio
           </Link>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight">
-            Membership Onboarding & KYC Application
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Road Safety Volunteer & Member Application
           </h1>
-          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-            Apply to become an Associate Member of Bangladesh Medical Association (Chattogram Branch).
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 font-bangla">
+            নিরাপদ সড়ক আন্দোলনের ৮২টি জেলা ও ক্যাম্পাস চ্যাপ্টারে সক্রিয় স্বেচ্ছাসেবী হিসেবে রেজিস্ট্রেশন ফরম
           </p>
         </div>
-        <Badge variant="warning" className="text-xs px-3 py-1">
-          Tier: Associate
-        </Badge>
+        <span className="text-xs px-3 py-1 font-bold rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+          Tier: Youth Volunteer
+        </span>
       </div>
 
       {!isSubmitted ? (

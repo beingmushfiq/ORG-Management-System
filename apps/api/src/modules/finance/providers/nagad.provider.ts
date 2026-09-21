@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger, Optional } from "@nestjs/common";
 import {
   IPaymentProvider,
   CreatePaymentSessionParams,
@@ -22,6 +22,7 @@ export class NagadPaymentProvider implements IPaymentProvider {
   private readonly logger = new Logger(NagadPaymentProvider.name);
 
   constructor(
+    @Optional()
     private readonly config: NagadConfig = {
       merchantId: process.env["NAGAD_MERCHANT_ID"] ?? "683002007104225",
       merchantPrivateKey: process.env["NAGAD_MERCHANT_PRIVATE_KEY"] ?? "MOCK_PRIVATE_KEY",

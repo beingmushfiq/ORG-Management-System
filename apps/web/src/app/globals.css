@@ -4,39 +4,7 @@
 
 @layer base {
   :root {
-    --background: 222 47% 7%;
-    --foreground: 210 40% 98%;
-
-    --card: 222 47% 10%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 10%;
-    --popover-foreground: 210 40% 98%;
-
-    /* Institutional Navy Primary */
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217 32% 17%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 38 92% 50%;
-    --accent-foreground: 222 47% 11%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 32% 20%;
-    --input: 217 32% 20%;
-    --ring: 221 83% 53%;
-
-    --radius: 0.5rem;
-  }
-
-  .light {
+    /* High-Visibility Light Theme (Default) */
     --background: 210 40% 98%;
     --foreground: 222 47% 11%;
 
@@ -46,34 +14,106 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 221 83% 45%;
-    --primary-foreground: 210 40% 98%;
+    /* Road Safety Amber & Safety Gold */
+    --primary: 38 92% 50%;
+    --primary-foreground: 222 47% 11%;
 
-    --secondary: 210 40% 96%;
+    --secondary: 210 40% 94%;
     --secondary-foreground: 222 47% 11%;
 
-    --muted: 210 40% 94%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 210 30% 92%;
+    --muted-foreground: 215 25% 35%; /* WCAG AAA high-contrast dark slate text */
 
-    --accent: 38 92% 45%;
-    --accent-foreground: 222 47% 11%;
+    /* Signal Emerald for Road Safety Impact */
+    --accent: 160 84% 39%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 55%;
+    --destructive: 0 84% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 85%;
+    --input: 214 32% 85%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Sleek Deep Asphalt / Midnight Highway Dark Theme */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Luminous Safety Amber */
+    --primary: 38 92% 50%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32% 16%;
+    --muted-foreground: 215 20% 75%; /* High-contrast silver white, never muddy */
+
+    --accent: 160 84% 45%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214 32% 88%;
-    --input: 214 32% 88%;
-    --ring: 221 83% 45%;
+    --border: 217 32% 22%;
+    --input: 217 32% 22%;
+    --ring: 38 92% 50%;
   }
 }
 
 @layer utilities {
-  /* Institutional Container Card */
+  /* Road Zebra Stripe Decorative Accents */
+  .road-zebra-pattern {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(245, 158, 11, 0.08),
+      rgba(245, 158, 11, 0.08) 12px,
+      transparent 12px,
+      transparent 24px
+    );
+  }
+
+  .dark .road-zebra-pattern {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(245, 158, 11, 0.15),
+      rgba(245, 158, 11, 0.15) 12px,
+      transparent 12px,
+      transparent 24px
+    );
+  }
+
+  /* Safe Road Institutional Card */
   .institutional-card {
     background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
     border: 1px solid hsl(var(--border));
     border-radius: var(--radius);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .dark .institutional-card {
+    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Safety Amber Beacon Glow */
+  .safety-glow {
+    box-shadow: 0 0 25px -4px rgba(245, 158, 11, 0.35);
+  }
+
+  .emerald-glow {
+    box-shadow: 0 0 25px -4px rgba(16, 185, 129, 0.35);
   }
 
   /* Indeterminate Progress Bar */
@@ -98,16 +138,34 @@
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  overflow-x: hidden;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Reduced Motion Override */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Accessible High Contrast Override */
+.contrast-high {
+  --background: 0 0% 100% !important;
+  --foreground: 0 0% 0% !important;
+  --card: 0 0% 100% !important;
+  --card-foreground: 0 0% 0% !important;
+  --border: 0 0% 0% !important;
+  --muted-foreground: 0 0% 20% !important;
+}
+
+.dark.contrast-high {
+  --background: 0 0% 0% !important;
+  --foreground: 0 0% 100% !important;
+  --card: 0 0% 5% !important;
+  --card-foreground: 0 0% 100% !important;
+  --border: 0 0% 40% !important;
+  --muted-foreground: 0 0% 90% !important;
+}
+
+/* Senior Reading Override */
+.text-lg-override {
+  font-size: 112% !important;
+}
+
+.text-lg-override h1 {
+  font-size: 118% !important;
 }

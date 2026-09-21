@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShieldCheck, QrCode, Download, Building2, CheckCircle2 } from "lucide-react";
-import { Button, Badge } from "@org/ui";
+import { ShieldCheck, QrCode, Download, CheckCircle2, Heart } from "lucide-react";
+import { Button } from "@org/ui";
+import { soundEffects } from "@/lib/audio-effects";
+import Link from "next/link";
 
 export interface InstitutionalMemberCardProps {
   memberName?: string;
   memberNameBn?: string;
   memberId?: string;
-  tier?: "ASSOCIATE" | "GENERAL" | "LIFE" | "HONORARY";
+  tier?: "VOLUNTEER" | "COORDINATOR" | "EXECUTIVE" | "LEGAL_ADVOCATE";
   organizationName?: string;
   organizationNameBn?: string;
   branchName?: string;
@@ -17,19 +19,21 @@ export interface InstitutionalMemberCardProps {
 }
 
 export function InstitutionalMemberCard({
-  memberName = "Prof. Dr. Mujibul Haque",
-  memberNameBn = "অধ্যাপক ডাঃ মুজিবুল হক",
-  memberId = "BMA-LIFE-0001",
-  tier = "LIFE",
-  organizationName = "Bangladesh Medical Association",
-  organizationNameBn = "বাংলাদেশ মেডিকেল এসোসিয়েশন",
-  branchName = "Central Executive Secretariat",
-  validThrough = "Permanent Active Member",
-  bloodGroup = "B+",
+  memberName = "Engr. Tanvir Ahmed",
+  memberNameBn = "প্রকৌশলী তানভীর আহমেদ",
+  memberId = "RSM-VOL-2018-001",
+  tier = "EXECUTIVE",
+  organizationName = "Road Safety Movement",
+  organizationNameBn = "নিরাপদ সড়ক আন্দোলন",
+  branchName = "Dhaka Central Secretariat",
+  validThrough = "Permanent Active Organizer",
+  bloodGroup = "O+",
 }: InstitutionalMemberCardProps) {
   const [downloading, setDownloading] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const handleDownload = () => {
+    soundEffects.playClick(650);
     setDownloading(true);
     setTimeout(() => {
       window.print();
@@ -37,129 +41,161 @@ export function InstitutionalMemberCard({
     }, 400);
   };
 
-  const tierBadgeVariant = {
-    ASSOCIATE: "secondary" as const,
-    GENERAL: "default" as const,
-    LIFE: "gold" as const,
-    HONORARY: "outline" as const,
-  }[tier] || ("default" as const);
+  const handleCardClick = () => {
+    soundEffects.playClick(isFlipped ? 520 : 780);
+    setIsFlipped(!isFlipped);
+  };
+
+  const tierColors = {
+    VOLUNTEER: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/30",
+    COORDINATOR: "bg-blue-500/15 text-blue-700 dark:text-blue-400 border-blue-500/30",
+    EXECUTIVE: "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30",
+    LEGAL_ADVOCATE: "bg-purple-500/15 text-purple-700 dark:text-purple-400 border-purple-500/30",
+  }[tier] || "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30";
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto">
-      {/* Official Institutional ID Card (Standard CR80 Ratio) */}
-      <div className="w-full rounded-xl border border-slate-700 bg-slate-900 text-slate-100 shadow-xl overflow-hidden p-6 relative">
-        {/* Header Ribbon */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800 text-amber-400 border border-slate-700">
-              <Building2 className="h-5 w-5" />
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                Official Credential
-              </p>
-              <p className="text-sm font-bold text-white leading-tight">
-                {organizationName}
-              </p>
-              {organizationNameBn && (
-                <p className="text-[11px] text-slate-400 leading-tight">
-                  {organizationNameBn}
-                </p>
-              )}
-            </div>
-          </div>
-          <Badge variant={tierBadgeVariant} size="sm">
-            {tier}
-          </Badge>
+    <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto select-none">
+      {/* Official Road Safety Volunteer / Activist ID Card (Standard CR80 Ratio) */}
+      <div
+        onClick={handleCardClick}
+        className="w-full rounded-2xl border-2 border-amber-500/50 bg-gradient-to-br from-slate-900 via-slate-850 to-slate-950 text-white shadow-2xl overflow-hidden p-6 relative cursor-pointer group transition-all duration-300 hover:shadow-amber-500/10 hover:border-amber-400"
+      >
+        {/* Holographic Refractive Foil Ribbon */}
+        <div className="absolute -inset-x-20 top-0 h-1 bg-gradient-to-r from-amber-400 via-emerald-400 to-sky-400 opacity-90 animate-pulse" />
+        
+        {/* Subtle Watermark Badge */}
+        <div className="absolute right-4 bottom-4 opacity-5 pointer-events-none">
+          <ShieldCheck className="w-32 h-32" />
         </div>
 
-        {/* Card Body */}
-        <div className="flex gap-4 items-start">
-          {/* Avatar / Photo placeholder */}
-          <div className="flex-shrink-0 w-20 h-24 rounded-md border border-slate-700 bg-slate-800 flex flex-col items-center justify-center text-slate-500">
-            <ShieldCheck className="h-8 w-8 text-emerald-400 mb-1" />
-            <span className="text-[9px] uppercase tracking-wider font-semibold text-slate-400">
-              Verified
+        {/* Header Ribbon */}
+        <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/40">
+              <ShieldCheck className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-wider text-amber-400">
+                Official Credential · ডিজিটাল পরিচয়পত্র
+              </p>
+              <h4 className="text-sm font-black text-white tracking-tight leading-none mt-0.5">
+                {organizationName}
+              </h4>
+              <p className="text-[11px] text-emerald-400 font-bangla font-semibold mt-0.5">
+                {organizationNameBn}
+              </p>
+            </div>
+          </div>
+
+          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border ${tierColors}`}>
+            {tier}
+          </span>
+        </div>
+
+        {/* Member Profile Body */}
+        <div className="grid grid-cols-3 gap-4 items-center">
+          {/* Portrait Placeholder & Hologram Seal */}
+          <div className="flex flex-col items-center">
+            <div className="relative h-24 w-20 rounded-xl overflow-hidden border-2 border-amber-500/40 bg-slate-800 flex items-center justify-center shadow-inner">
+              <div className="text-center p-2">
+                <ShieldCheck className="h-8 w-8 text-amber-400 mx-auto opacity-80" />
+                <span className="text-[9px] font-mono text-slate-300 mt-1 block">
+                  RSM PASS
+                </span>
+              </div>
+              {/* Security Shimmer */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+            </div>
+            <span className="mt-1.5 inline-flex items-center gap-1 text-[9px] font-bold text-emerald-400">
+              <CheckCircle2 className="h-3 w-3" />
+              Verified Activist
             </span>
           </div>
 
           {/* Member Details */}
-          <div className="flex-1 min-w-0 space-y-1.5">
+          <div className="col-span-2 space-y-2">
             <div>
-              <p className="text-sm font-bold text-white truncate">{memberName}</p>
-              {memberNameBn && (
-                <p className="text-xs font-medium text-slate-300 truncate">
-                  {memberNameBn}
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                Full Name / নাম
+              </p>
+              <p className="text-base font-extrabold text-white leading-tight">
+                {memberName}
+              </p>
+              <p className="text-xs text-slate-300 font-bangla font-semibold">
+                {memberNameBn}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">
+                  Activist ID
                 </p>
-              )}
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-slate-800">
-              <div>
-                <span className="text-[10px] uppercase text-slate-400 block font-mono">
-                  Member ID
-                </span>
-                <span className="font-mono font-semibold text-amber-300 text-xs">
+                <p className="font-mono font-bold text-amber-400 text-[11px]">
                   {memberId}
-                </span>
+                </p>
               </div>
               <div>
-                <span className="text-[10px] uppercase text-slate-400 block">
+                <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">
                   Blood Group
-                </span>
-                <span className="font-semibold text-rose-300 text-xs">
+                </p>
+                <p className="font-bold text-red-400 text-[11px] flex items-center gap-1">
+                  <Heart className="w-3 h-3 fill-current" />
                   {bloodGroup}
-                </span>
+                </p>
               </div>
             </div>
 
-            <div className="text-xs pt-1">
-              <span className="text-[10px] uppercase text-slate-400 block">
-                Branch / Node
-              </span>
-              <span className="text-slate-300 text-xs truncate block">
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">
+                Assigned Unit / চ্যাপ্টার
+              </p>
+              <p className="text-[11px] font-semibold text-slate-200 truncate">
                 {branchName}
-              </span>
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Footer with Cryptographic Verification Link & QR */}
-        <div className="mt-5 pt-3 border-t border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
-            <CheckCircle2 className="h-3.5 w-3.5" />
-            <span>Cryptographically Verified</span>
+        {/* Card Footer with Verified QR Code */}
+        <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+          <div>
+            <p className="text-[9px] text-slate-400">Movement Charter Status:</p>
+            <p className="text-[10px] font-bold text-emerald-400">{validThrough}</p>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="text-right">
-              <span className="text-[9px] text-slate-400 block">Status</span>
-              <span className="text-[10px] font-mono text-slate-200">
-                {validThrough}
-              </span>
-            </div>
-            <div className="h-8 w-8 rounded bg-white p-0.5 flex items-center justify-center">
-              <QrCode className="h-7 w-7 text-slate-900" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white p-1 shadow-sm">
+              <QrCode className="h-full w-full text-slate-950" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Action Button */}
-      <div className="flex items-center gap-2">
+      {/* Card Action Controls */}
+      <div className="flex items-center gap-3 w-full">
         <Button
           variant="outline"
           size="sm"
           onClick={handleDownload}
-          loading={downloading}
-          leftIcon={<Download className="h-3.5 w-3.5" />}
+          disabled={downloading}
+          className="flex-1 text-xs font-semibold gap-1.5 border-border bg-card text-foreground"
         >
-          Print / Export Card
+          <Download className="h-3.5 w-3.5" />
+          {downloading ? "Preparing Print..." : "Print Official ID"}
         </Button>
+
+        <Link href={`/verify/member/${memberId}`} className="flex-1">
+          <Button
+            variant="primary"
+            size="sm"
+            className="w-full text-xs font-semibold gap-1.5 shadow-sm"
+          >
+            <QrCode className="h-3.5 w-3.5" />
+            Verify Digital Seal
+          </Button>
+        </Link>
       </div>
     </div>
   );
 }
-
-// Alias for backward compatibility
-export { InstitutionalMemberCard as HolographicMemberCard };

@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  ShieldCheck,
-  FileText,
   QrCode,
   ArrowRight,
   Globe,
@@ -13,8 +11,12 @@ import {
   PhoneCall,
   Mail,
   MapPin,
+  AlertTriangle,
+  Users,
+  HeartHandshake,
+  Compass,
 } from "lucide-react";
-import { Button, Badge, Card, CopyButton } from "@org/ui";
+import { Button } from "@org/ui";
 import { InstitutionalMemberCard } from "@/components/cards/holographic-member-card";
 import { BangladeshBranchAtlas } from "@/components/geo/bangladesh-branch-atlas";
 import { HeritageChronicleTimeline } from "@/components/heritage/heritage-chronicle-timeline";
@@ -22,59 +24,65 @@ import { InteractiveOrganogram } from "@/components/governance/interactive-organ
 import { OrgLogo } from "@/components/brand/org-logo";
 import { DevCenterPointBranding } from "@/components/brand/devcenterpoint-branding";
 import { CommandPalette } from "@/components/ui/command-palette";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { soundEffects } from "@/lib/audio-effects";
 
-export default function TenantPublicPortfolio() {
+export default function RoadSafetyPublicPortfolio() {
   const [lang, setLang] = useState<"en" | "bn">("en");
 
   const toggleLang = () => {
+    soundEffects.playClick(650);
     setLang((prev) => (prev === "en" ? "bn" : "en"));
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/30">
+    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-amber-500/30 selection:text-foreground transition-colors duration-200">
       {/* ================= 1. FROSTED GLASS NAVIGATION ================= */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/75 backdrop-blur-2xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/">
+      <header className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-2xl transition-colors">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-6">
+          <Link href="/" onClick={() => soundEffects.playClick(500)} className="shrink-0">
             <OrgLogo size="md" />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <a href="#atlas" className="hover:text-white transition-colors">
-              {lang === "en" ? "Branch Atlas" : "শাখা মানচিত্র"}
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600 dark:text-slate-300">
+            <a href="#atlas" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {lang === "en" ? "64-District Atlas" : "৬৪ জেলা মানচিত্র"}
             </a>
-            <a href="#heritage" className="hover:text-white transition-colors">
-              {lang === "en" ? "Heritage (1952–2026)" : "ঐতিহ্য ও ইতিহাস"}
+            <a href="#heritage" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {lang === "en" ? "Movement Heritage" : "ঐতিহ্য ও ইতিহাস"}
             </a>
-            <a href="#organogram" className="hover:text-white transition-colors">
+            <a href="#organogram" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               {lang === "en" ? "Organogram" : "সাংগঠনিক কাঠামো"}
             </a>
-            <Link href="/journal" className="hover:text-white transition-colors">
-              {lang === "en" ? "Journal" : "জার্নাল"}
+            <a href="#pillars" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {lang === "en" ? "Activities" : "কার্যক্রম"}
+            </a>
+            <Link href="/causes" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {lang === "en" ? "Projects" : "প্রকল্পসমূহ"}
             </Link>
-            <Link href="/memorial" className="hover:text-white transition-colors">
-              {lang === "en" ? "Memorial" : "স্মৃতি চিরন্তন"}
+            <Link href="/memorial" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {lang === "en" ? "Victim Memorial" : "স্মৃতি চিরন্তন"}
             </Link>
-            <Link href="/events" className="hover:text-white transition-colors">
-              {lang === "en" ? "Conferences" : "সম্মেলন"}
-            </Link>
-            <Link href="/notices" className="hover:text-white transition-colors">
-              {lang === "en" ? "Notices" : "বিজ্ঞপ্তি"}
+            <Link href="/notices" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              {lang === "en" ? "Notices & Press" : "বিজ্ঞপ্তি"}
             </Link>
           </nav>
 
-          <div className="flex items-center gap-3">
-            {/* Quick Institutional Navigator */}
+          <div className="flex items-center gap-2.5">
+            {/* Quick Command Navigator */}
             <CommandPalette />
+
+            {/* High-Visibility Light/Dark Theme Switcher */}
+            <ThemeToggle variant="pill" />
 
             {/* Language Toggle */}
             <Button
               variant="outline"
               size="sm"
               onClick={toggleLang}
-              className="gap-1.5 text-xs text-muted-foreground hover:text-white border-white/10"
+              className="gap-1.5 text-xs text-slate-700 dark:text-slate-200 border-border bg-card"
             >
-              <Globe className="w-3.5 h-3.5 text-amber-400" />
+              <Globe className="w-3.5 h-3.5 text-amber-500" />
               {lang === "en" ? "বাংলা" : "English"}
             </Button>
 
@@ -83,7 +91,7 @@ export default function TenantPublicPortfolio() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-xs font-semibold hover:text-white"
+                className="text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white"
               >
                 {lang === "en" ? "Portal Login" : "লগইন"}
               </Button>
@@ -94,10 +102,10 @@ export default function TenantPublicPortfolio() {
               <Button
                 variant="primary"
                 size="sm"
-                className="gap-1.5 text-xs font-semibold shadow-lg shadow-primary/20"
+                className="gap-1.5 text-xs font-bold shadow-md shadow-primary/20 hidden sm:inline-flex"
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                {lang === "en" ? "Fast-Track Concierge" : "দ্রুত সেবা কেন্দ্র"}
+                {lang === "en" ? "Volunteer Desk" : "স্বেচ্ছাসেবী ডেস্ক"}
               </Button>
             </Link>
           </div>
@@ -105,395 +113,374 @@ export default function TenantPublicPortfolio() {
       </header>
 
       {/* ================= 2. KINETIC HERO SECTION ================= */}
-      <section className="relative pt-24 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
-        {/* Ambient Glow */}
-        <div className="absolute top-1/3 -translate-y-1/2 w-[600px] h-[350px] bg-primary/20 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <section className="relative pt-20 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+        {/* Ambient Warm Amber & Emerald Glow */}
+        <div className="absolute top-1/3 -translate-y-1/2 w-[600px] h-[350px] bg-amber-500/15 dark:bg-amber-500/20 rounded-full blur-[140px] pointer-events-none -z-10" />
+        <div className="absolute top-1/2 left-1/4 w-[400px] h-[250px] bg-emerald-500/10 dark:bg-emerald-500/15 rounded-full blur-[120px] pointer-events-none -z-10" />
 
         {/* Accreditation Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl mb-8">
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-          <span className="text-xs font-medium text-slate-300">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 backdrop-blur-xl mb-8">
+          <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+          <span className="text-xs font-bold text-amber-700 dark:text-amber-400 font-mono">
             {lang === "en"
-              ? "Established 1972 · Over 50 Years of Medical Leadership"
-              : "১৯৭২ সালে প্রতিষ্ঠিত · ৫০ বছরেরও বেশি সময় ধরে চিকিৎসা নেতৃত্বের প্রতীক"}
+              ? "ESTD. 2018 · BORN FROM THE STUDENTS' SAFE ROAD MOVEMENT"
+              : "২০১৮ সালের ঐতিহাসিক নিরাপদ সড়ক আন্দোলন থেকে প্রতিষ্ঠিত"}
           </span>
         </div>
 
         {/* Display H1 Kinetic Typography */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.08] max-w-5xl">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.08] max-w-5xl">
           {lang === "en" ? (
             <>
-              Uniting Physicians, Advancing Science,{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300">
-                Serving Humanity.
+              1.19 Million People Die on the Roads Every Year.{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-emerald-500">
+                Join Us to Ensure Safe Roads.
               </span>
             </>
           ) : (
             <>
-              চিকিৎসক ঐক্য, চিকিৎসা বিজ্ঞানের উৎকর্ষ এবং{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300">
-                মানবিক স্বাস্থ্যসেবার শপথ।
+              প্রতি বছর সড়কে ঝরে যায় ১১ লক্ষ ৯০ হাজার প্রাণ।{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-emerald-500">
+                নিরাপদ ও মানবিক সড়কের প্রত্যয়ে ঐক্যবদ্ধ হোন।
               </span>
             </>
           )}
         </h1>
 
-        <p className="mt-6 text-base sm:text-xl text-muted-foreground max-w-3xl leading-relaxed">
+        <p className="mt-6 text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
           {lang === "en"
-            ? "The apex representative statutory body for medical practitioners across Chattogram Division, governing professional ethics, scientific advancement, and community health."
-            : "চট্টগ্রাম বিভাগের চিকিৎসকদের শীর্ষ পেশাজীবী সংগঠন — চিকিৎসা নীতি, উচ্চতর বিজ্ঞান গবেষণা ও সার্বজনীন স্বাস্থ্যসেবা প্রসারে অঙ্গিকারবদ্ধ।"}
+            ? "Road Safety Movement is Bangladesh's apex volunteer-driven organization working to transform transportation into an accountable, sustainable, and humane system through crash research, policy advocacy, driver education, and victim rehabilitation."
+            : "নিরাপদ সড়ক আন্দোলন (Road Safety Movement) বাংলাদেশের শীর্ষ স্বেচ্ছাসেবী নাগরিক সংগঠন—গবেষণা, নীতি সংস্কার, চালক প্রশিক্ষণ এবং ভিকটিম সহায়তার মাধ্যমে একটি নিরাপদ ও টেকসই যোগাযোগ ব্যবস্থা প্রতিষ্ঠায় অঙ্গীকারবদ্ধ।"}
         </p>
 
         {/* Primary Call-to-Actions */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link href="/apply">
             <Button
-              variant="gold"
+              variant="primary"
               size="lg"
-              shimmer
-              rightIcon={<ArrowRight className="w-4 h-4" />}
+              className="gap-2 text-sm font-extrabold shadow-lg shadow-amber-500/25 px-7 py-3"
             >
-              {lang === "en" ? "Register as Associate Member" : "সহযোগী সদস্যপদ আবেদন"}
+              <Users className="w-4 h-4" />
+              {lang === "en" ? "Become A Volunteer" : "স্বেচ্ছাসেবী হিসেবে যোগ দিন"}
+              <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
 
-          <Link href="/verify/member/BMAC-2026-00421">
+          <a href="#atlas">
             <Button
-              variant="glass"
+              variant="outline"
               size="lg"
-              leftIcon={<ShieldCheck className="w-4 h-4 text-emerald-400" />}
+              className="gap-2 text-sm font-bold border-border bg-card text-slate-800 dark:text-slate-200 px-6 py-3"
             >
-              {lang === "en" ? "Verify Member Registry" : "সদস্য রেজিস্ট্রি যাচাই"}
+              <Compass className="w-4 h-4 text-amber-500" />
+              {lang === "en" ? "Explore 64 Districts Atlas" : "৬৪ জেলা নেটওয়ার্ক দেখুন"}
             </Button>
-          </Link>
+          </a>
 
-          <Link href="/portal/concierge">
+          <Link href="/memorial">
             <Button
-              variant="navy"
+              variant="ghost"
               size="lg"
+              className="gap-2 text-sm font-bold text-red-600 dark:text-red-400 hover:bg-red-500/10 px-5 py-3"
             >
-              {lang === "en" ? "Fast-Track Concierge" : "মেম্বার কনসিয়ার্জ"}
+              <HeartHandshake className="w-4 h-4" />
+              {lang === "en" ? "Victim Relief Fund" : "ভিকটিম সহায়তা তহবিল"}
             </Button>
           </Link>
         </div>
 
-        {/* ================= 3. STATS TICKER ================= */}
-        <div className="mt-20 w-full grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { label: lang === "en" ? "Registered Physicians" : "নিবন্ধিত চিকিৎসক", value: "3,850+" },
-            { label: lang === "en" ? "Affiliated Hospitals" : "সংযুক্ত হাসপাতাল", value: "48" },
-            { label: lang === "en" ? "Active Local Units" : "সক্রিয় স্থানীয় ইউনিট", value: "14" },
-            { label: lang === "en" ? "Relief Disbursed" : "জরুরি চিকিৎসা সহায়তা", value: "৳1.4 Cr" },
-          ].map((stat, i) => (
-            <Card
-              key={i}
-              interactive
-              accent={i === 0 ? "gold" : i === 1 ? "blue" : i === 2 ? "emerald" : "none"}
-              className="p-6 flex flex-col items-center justify-center text-center"
-            >
-              <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                {stat.value}
-              </div>
-              <div className="mt-1 text-xs sm:text-sm text-muted-foreground font-medium">
-                {stat.label}
-              </div>
-            </Card>
-          ))}
+        {/* ================= 3. STAT METRIC COUNTERS ================= */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-5xl">
+          <div className="p-5 rounded-2xl bg-card border border-border text-center shadow-sm">
+            <div className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">9,010+</div>
+            <div className="text-xs font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400 mt-1">
+              Registered Volunteers
+            </div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-bangla mt-0.5">দেশব্যাপী সক্রিয় স্বেচ্ছাসেবী</div>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-card border border-border text-center shadow-sm">
+            <div className="text-3xl sm:text-4xl font-black text-amber-600 dark:text-amber-400">82</div>
+            <div className="text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300 mt-1">
+              Active Committees
+            </div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-bangla mt-0.5">জেলা ও ক্যাম্পাস চ্যাপ্টার</div>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-card border border-border text-center shadow-sm">
+            <div className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400">6</div>
+            <div className="text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300 mt-1">
+              Ongoing Projects
+            </div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-bangla mt-0.5">চলমান জাতীয় কর্মসূচি</div>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-card border border-border text-center shadow-sm">
+            <div className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">25,000+</div>
+            <div className="text-xs font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mt-1">
+              People Reached
+            </div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-bangla mt-0.5">প্রশিক্ষিত ও সচেতন নাগরিক</div>
+          </div>
         </div>
       </section>
 
-      {/* ================= 4. BANGLADESH BRANCH & DIVISION ATLAS ================= */}
-      <section id="atlas" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
-        <div className="mb-10 text-center max-w-3xl mx-auto">
-          <Badge variant="warning" className="mb-2">
-            64-District Presence
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            {lang === "en" ? "National Branch & Hospital Atlas" : "সারাদেশের শাখা ও হাসপাতাল নেটওয়ার্ক"}
+      {/* ================= 4. 'ROAD CRASH, NOT ACCIDENT' SPOTLIGHT ================= */}
+      <section className="py-12 px-6 max-w-7xl mx-auto w-full">
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/10 via-card to-emerald-500/10 border-2 border-amber-500/40 shadow-xl relative overflow-hidden">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="space-y-3 flex-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/15 border border-red-500/30 text-red-600 dark:text-red-400 text-xs font-extrabold uppercase tracking-wider">
+                <AlertTriangle className="w-3.5 h-3.5" />
+                National Paradigm Shift Campaign
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                সড়ক নিরাপত্তা নিশ্চিতকরণে ‘দুর্ঘটনা’ নয়, ‘রোড ক্র্যাশ’ শব্দ ব্যবহারের আহ্বান
+              </h2>
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                Reckless driving, unlicensed operators, defective fitness, and missing road signage are not unavoidable acts of fate.
+                Calling collisions “Accidents” excuses culpability. Road Safety Movement champions the legal and cultural shift to
+                <strong className="text-slate-900 dark:text-white"> “Road Crash”</strong> to demand accountability, justice, and reform.
+              </p>
+            </div>
+
+            <div className="shrink-0 flex flex-col sm:flex-row items-center gap-3">
+              <Link href="/notices">
+                <Button variant="outline" size="sm" className="font-bold text-xs border-border">
+                  Read Press Release
+                </Button>
+              </Link>
+              <Link href="/apply">
+                <Button variant="primary" size="sm" className="font-bold text-xs shadow-md">
+                  Support the Charter
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= 5. CORE ACTION PILLARS ================= */}
+      <section className="py-16 px-6 max-w-7xl mx-auto w-full" id="pillars">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+            Strategic Pillars
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Our Core Strategic Activities
           </h2>
-          <p className="text-sm text-muted-foreground mt-2">
-            {lang === "en"
-              ? "Select any administrative division or district branch to inspect local executive leadership, active registered doctors, and 24/7 doctor emergency helplines."
-              : "বিভাগ অথবা জেলা শাখা নির্বাচন করে স্থানীয় নেতৃত্ব, সক্রিয় চিকিৎসকদের বিবরণ এবং সার্বক্ষণিক জরুরি সহায়তা লাইন দেখুন।"}
+          <p className="text-sm text-slate-600 dark:text-slate-300 font-bangla mt-2">
+            নিরাপদ সড়ক আন্দোলনের ৫টি মৌলিক প্রাতিষ্ঠানিক কার্যক্রম ও কর্মসূচি
           </p>
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {/* Pillar 1 */}
+          <div className="p-6 rounded-2xl bg-card border border-border hover:border-amber-500/50 hover:shadow-lg transition-all space-y-3 group">
+            <div className="text-3xl font-black text-amber-500/40 group-hover:text-amber-500 transition-colors font-mono">
+              01.
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Education & Awareness</h3>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bangla font-semibold">
+              শিক্ষা ও জনসচেতনতা
+            </p>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Promoting defensive habits through school programs, driver workshops, and community education for responsible road behavior.
+            </p>
+          </div>
+
+          {/* Pillar 2 */}
+          <div className="p-6 rounded-2xl bg-card border border-border hover:border-blue-500/50 hover:shadow-lg transition-all space-y-3 group">
+            <div className="text-3xl font-black text-blue-500/40 group-hover:text-blue-500 transition-colors font-mono">
+              02.
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Policy Advocacy</h3>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bangla font-semibold">
+              আইন সংস্কার ও অ্যাডভোকেসি
+            </p>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Advocating for strict enforcement of the Road Transport Act 2018, modern road infrastructure, and total transport accountability.
+            </p>
+          </div>
+
+          {/* Pillar 3 */}
+          <div className="p-6 rounded-2xl bg-card border border-border hover:border-emerald-500/50 hover:shadow-lg transition-all space-y-3 group">
+            <div className="text-3xl font-black text-emerald-500/40 group-hover:text-emerald-500 transition-colors font-mono">
+              03.
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Research & Data</h3>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bangla font-semibold">
+              ক্র্যাশ ডেটা ও ব্ল্যাকস্পট গবেষণা
+            </p>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Conducting geometric road audits to identify deadly blackspots and providing data-driven engineering solutions for national highways.
+            </p>
+          </div>
+
+          {/* Pillar 4 */}
+          <div className="p-6 rounded-2xl bg-card border border-border hover:border-red-500/50 hover:shadow-lg transition-all space-y-3 group">
+            <div className="text-3xl font-black text-red-500/40 group-hover:text-red-500 transition-colors font-mono">
+              04.
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Victim Support</h3>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bangla font-semibold">
+              ভিকটিম সহায়তা ও পুনর্বাসন
+            </p>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Providing road crash victim families with emergency guidance, legal aid, medical assistance, and prosthetic rehabilitation pathways.
+            </p>
+          </div>
+
+          {/* Pillar 5 */}
+          <div className="p-6 rounded-2xl bg-card border border-border hover:border-purple-500/50 hover:shadow-lg transition-all space-y-3 group">
+            <div className="text-3xl font-black text-purple-500/40 group-hover:text-purple-500 transition-colors font-mono">
+              05.
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Youth Initiatives</h3>
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bangla font-semibold">
+              ক্যাম্পাস ও সামাজিক উদ্যোগ
+            </p>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Mobilizing 9,010+ volunteer students across universities and colleges to foster a grassroots culture of road safety and shared civic responsibility.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= 6. INTERACTIVE 64-DISTRICT NATIONAL ATLAS ================= */}
+      <section className="py-16 px-6 max-w-7xl mx-auto w-full">
         <BangladeshBranchAtlas />
       </section>
 
-      {/* ================= 5. INSTITUTIONAL MEMBER CREDENTIAL SHOWCASE ================= */}
-      <section className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <Badge variant="success" className="mb-3">
-              Tamper-Proof Digital Identity
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-              {lang === "en" ? (
-                <>
-                  Institutional Digital Credentials for{" "}
-                  <span className="text-primary font-semibold">
-                    Every Verified Member.
-                  </span>
-                </>
-              ) : (
-                <>
-                  প্রত্যেক যাচাইকৃত সদস্যের জন্য{" "}
-                  <span className="text-primary font-semibold">
-                    প্রাতিষ্ঠানিক ডিজিটাল সনদ ও পরিচয়পত্র।
-                  </span>
-                </>
-              )}
+      {/* ================= 7. MOVEMENT HERITAGE TIMELINE ================= */}
+      <section className="py-16 px-6 max-w-7xl mx-auto w-full">
+        <HeritageChronicleTimeline />
+      </section>
+
+      {/* ================= 8. INTERACTIVE ORGANOGRAM WITH DRAG-AND-DROP ================= */}
+      <section className="py-16 px-6 max-w-7xl mx-auto w-full">
+        <InteractiveOrganogram />
+      </section>
+
+      {/* ================= 9. HOLOGRAPHIC VOLUNTEER ID CARD SHOWCASE ================= */}
+      <section className="py-16 px-6 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-card rounded-3xl border-2 border-border p-8 shadow-xl">
+          <div className="lg:col-span-6 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider">
+              <QrCode className="w-3.5 h-3.5" />
+              Digital Volunteer Registry Pass
+            </div>
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Cryptographically Verified Activist Credential
             </h2>
-            <p className="mt-4 text-base text-muted-foreground leading-relaxed">
-              {lang === "en"
-                ? "Paper-free, cryptographically verifiable membership identification. Each active physician holds an authoritative digital credential with instant QR code public verification, active tier endorsement, and standard printable pass export."
-                : "কাগজের সনদের দিন শেষ। প্রতিটি সক্রিয় সদস্য ক্রিপ্টোগ্রাফিক সুরক্ষা সিল, রিয়েল-টাইম কিউআর যাচাই এবং উচ্চ-মানের প্রিন্টযোগ্য ডিজিটাল আইডি কার্ড উপভোগ করেন।"}
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Every registered volunteer, campus chapter coordinator, and council officer in the Road Safety Movement receives an official CR80-compliant digital ID pass with verifiable QR authentication, blood group records, and chapter assignment.
+            </p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-bangla leading-relaxed p-3.5 rounded-xl bg-muted/60 border border-border">
+              স্বেচ্ছাসেবীদের মাঠপর্যায়ে ট্রাফিক শৃঙ্খলা ও সচেতনতামূলক কার্যক্রমে অংশগ্রহণের জন্য ডিজিটাল পরিচয়পত্র প্রদান করা হয়।
             </p>
 
-            <ul className="mt-6 space-y-3 text-sm text-slate-300">
-              <li className="flex items-center gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Cryptographic SHA-256 integrity hash issued by institutional ledger.</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <QrCode className="w-4 h-4 text-primary shrink-0" />
-                <span>Instant QR-based public register verification for statutory authorities.</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Multi-tier lifecycle (Associate, General, Life, Honorary) with branch endorsements.</span>
-              </li>
-            </ul>
+            <div className="pt-2 flex flex-wrap gap-3">
+              <Link href="/apply">
+                <Button variant="primary" size="md" className="font-bold text-xs gap-1.5 shadow-md">
+                  Apply for Volunteer Pass
+                </Button>
+              </Link>
+              <Link href="/verify/member/RSM-VOL-2018-001">
+                <Button variant="outline" size="md" className="font-semibold text-xs border-border">
+                  Verify Sample Pass
+                </Button>
+              </Link>
+            </div>
           </div>
 
-          <div className="flex justify-center">
+          <div className="lg:col-span-6 flex justify-center">
             <InstitutionalMemberCard />
           </div>
         </div>
       </section>
 
-      {/* ================= 6. EXECUTIVE LEADERSHIP ROSTER ================= */}
-      <section id="leadership" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <Badge variant="default" className="mb-2">
-            Governance Council
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            {lang === "en" ? "Executive Committee (2026–2028)" : "কার্যনির্বাহী পরিষদ (২০২৬–২০২৮)"}
-          </h2>
-          <p className="text-sm text-muted-foreground mt-2">
-            {lang === "en"
-              ? "Elected office-bearers leading policy, academic excellence, and institutional affairs."
-              : "নীতিমালা, শিক্ষা কার্যক্রম ও প্রাতিষ্ঠানিক ব্যবস্থাপনায় নেতৃত্বদানকারী নির্বাচিত নেতৃবৃন্দ।"}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              role: "President",
-              roleBn: "সভাপতি",
-              name: "Prof. Dr. Mujibul Haque",
-              nameBn: "অধ্যাপক ডাঃ মুজিবুল হক",
-              specialty: "FCPS (Medicine), FRCP (Glasg)",
-              tenure: "Term: 2026–2028",
-            },
-            {
-              role: "General Secretary",
-              roleBn: "সাধারণ সম্পাদক",
-              name: "Dr. Faisal Ahmed Chowdhury",
-              nameBn: "ডাঃ ফয়সাল আহমেদ চৌধুরী",
-              specialty: "MS (Ortho), FICS (USA)",
-              tenure: "Term: 2026–2028",
-            },
-            {
-              role: "Treasurer",
-              roleBn: "কোষাধ্যক্ষ",
-              name: "Dr. Nasrin Sultana",
-              nameBn: "ডাঃ নাসরিন সুলতানা",
-              specialty: "FCPS (Paediatrics), MD",
-              tenure: "Term: 2026–2028",
-            },
-          ].map((leader, i) => (
-            <div key={i} className="glass-card rounded-2xl p-6 flex flex-col items-center text-center">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/30 to-amber-500/20 border-2 border-primary/40 flex items-center justify-center font-bold text-2xl text-white shadow-xl mb-4">
-                {leader.name.split(" ")[2]?.[0] || "DR"}
-              </div>
-              <Badge variant="secondary" className="mb-2 text-[10px] uppercase font-bold tracking-wider">
-                {lang === "en" ? leader.role : leader.roleBn}
-              </Badge>
-              <h4 className="text-lg font-bold text-white tracking-tight">{leader.name}</h4>
-              <p className="text-xs text-muted-foreground font-bangla">{leader.nameBn}</p>
-              <p className="text-xs text-slate-400 mt-2 font-medium">{leader.specialty}</p>
-              <div className="mt-4 pt-3 border-t border-white/10 text-[11px] text-amber-400 font-medium">
-                {leader.tenure}
+      {/* ================= 10. ACTION FOOTER ================= */}
+      <footer className="border-t border-border bg-card/60 mt-auto">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="space-y-4">
+              <OrgLogo size="md" />
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Road Safety Movement is a non-profit and voluntary organization that emerged from the historic 2018 Students' Safe Road Movement in Bangladesh.
+              </p>
+              <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bangla font-semibold">
+                নিরাপদ সড়ক আন্দোলন — সকলের জন্য নিরাপদ ও মানবিক সড়ক
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* ================= 6B. INTERACTIVE ORGANOGRAM & COMMITTEES ================= */}
-      <section id="organogram" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
-        <InteractiveOrganogram />
-      </section>
-
-      {/* ================= 6C. HISTORICAL HERITAGE CHRONICLE ================= */}
-      <section id="heritage" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
-        <HeritageChronicleTimeline />
-      </section>
-
-      {/* ================= 7. NOTICE VAULT & OFFICIAL CIRCULARS ================= */}
-      <section id="notices" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
-        <div className="flex items-center justify-between mb-10">
-          <div>
-            <Badge variant="warning" className="mb-2">Official Circulars</Badge>
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">
-              {lang === "en" ? "Notice Board & Announcements" : "বিজ্ঞপ্তি বোর্ড ও ঘোষণা"}
-            </h2>
-          </div>
-          <Button variant="outline" size="sm" className="text-xs text-muted-foreground hover:text-white">
-            {lang === "en" ? "View Archive" : "আর্কাইভ দেখুন"}
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[
-            {
-              tag: "General Assembly",
-              date: "September 24, 2026",
-              title: "Notice for 52nd Annual General Meeting (AGM) and Academic Session",
-              titleBn: "৫২তম বার্ষিক সাধারণ সভা (এজিএম) ও বৈজ্ঞানিক অধিবেশনের নোটিশ",
-              isPinned: true,
-            },
-            {
-              tag: "Elections",
-              date: "September 18, 2026",
-              title: "Draft Voter List Publication for Central & Branch Executive Election 2026-2028",
-              titleBn: "কার্যনির্বাহী নির্বাচন ২০২৬-২০২৮ এর খসড়া ভোটার তালিকা প্রকাশ",
-              isPinned: false,
-            },
-          ].map((notice, i) => (
-            <div key={i} className="glass-card rounded-2xl p-6 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
-                  <span className="font-semibold text-amber-400">{notice.tag}</span>
-                  <span>{notice.date}</span>
-                </div>
-                <h4 className="text-base font-bold text-white leading-snug hover:text-primary transition-colors cursor-pointer">
-                  {lang === "en" ? notice.title : notice.titleBn}
-                </h4>
-              </div>
-              <div className="mt-6 flex items-center justify-between pt-4 border-t border-white/10">
-                <span className="text-xs text-emerald-400 flex items-center gap-1">
-                  <FileText className="w-3.5 h-3.5" /> PDF Signed Circular
-                </span>
-                <Button variant="ghost" size="sm" className="h-8 text-xs gap-1 text-primary">
-                  Download <ExternalLink className="w-3 h-3" />
-                </Button>
-              </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">
+                Quick Navigation
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400 font-medium">
+                <li>
+                  <a href="#atlas" className="hover:text-amber-500 transition-colors">64-District Branch Atlas</a>
+                </li>
+                <li>
+                  <a href="#heritage" className="hover:text-amber-500 transition-colors">Movement Chronicle (2018–2026)</a>
+                </li>
+                <li>
+                  <a href="#organogram" className="hover:text-amber-500 transition-colors">National Executive Council</a>
+                </li>
+                <li>
+                  <Link href="/causes" className="hover:text-amber-500 transition-colors">Ongoing Road Projects</Link>
+                </li>
+                <li>
+                  <Link href="/memorial" className="hover:text-amber-500 transition-colors">Road Crash Victims Memorial</Link>
+                </li>
+              </ul>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* ================= 8. PUBLIC VERIFICATION DESK ================= */}
-      <section id="verify" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
-        <div className="glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-          <div className="max-w-2xl">
-            <Badge variant="success" className="mb-3">
-              Public Trust Registry
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              {lang === "en"
-                ? "Verify Member Card or Conference Certificate"
-                : "সদস্য কার্ড অথবা সনদপত্র সত্যতা যাচাই করুন"}
-            </h2>
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-              {lang === "en"
-                ? "Enter the member registration number (e.g. BMA-LIFE-0001) or scan the QR code to verify standing, executive appointments, and validity status in real time."
-                : "সদস্য নিবন্ধন নম্বর লিখুন অথবা কিউআর কোড স্ক্যান করে তাৎক্ষণিকভাবে বৈধতা ও কার্যনির্বাহী পদবি যাচাই করুন।"}
-            </p>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <input
-                type="text"
-                placeholder="e.g. BMA-LIFE-0001"
-                className="h-12 px-5 rounded-xl bg-slate-900/80 border border-white/15 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-amber-400 text-sm flex-1"
-              />
-              <Button
-                variant="gold"
-                size="lg"
-                shimmer
-                leftIcon={<ShieldCheck className="w-4 h-4" />}
-                className="h-12 text-sm font-semibold shadow-lg"
-              >
-                {lang === "en" ? "Verify Status" : "যাচাই করুন"}
-              </Button>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">
+                National Secretariat
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                <li className="flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                  <span>Dhaka, Bangladesh</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <PhoneCall className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                  <span className="font-mono font-semibold">+880 1819 778899</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                  <span>contact@roadsafetymovement.org</span>
+                </li>
+              </ul>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ================= 9. EDITORIAL FOOTER ================= */}
-      <footer className="mt-auto border-t border-white/10 bg-slate-950 py-16 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="space-y-4 md:col-span-2">
-            <OrgLogo size="lg" />
-            <p className="text-xs text-muted-foreground max-w-md leading-relaxed">
-              Autonomous statutory association governing medical ethics, continuing medical education,
-              and professional welfare across Chattogram Division. Registered under Societies Registration Act XXI of 1860.
-            </p>
-            <div className="text-xs text-slate-500 pt-1">
-              Powered by Multi-Tenant Organization Operating System · MySQL 8.0 & Next.js 15 PWA
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+                Platform Architecture
+              </h4>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                Powered by DevCenterPoint Institutional Operating System. Enterprise multi-tenant governance with high-availability crash reporting.
+              </p>
+              <DevCenterPointBranding variant="subtle" />
             </div>
           </div>
 
-          <div>
-            <h5 className="text-xs font-bold uppercase tracking-wider text-white mb-3">
-              Institutional Links
-            </h5>
-            <ul className="space-y-2 text-xs text-muted-foreground">
-              <li><Link href="/journal" className="hover:text-white transition-colors">Peer-Reviewed Journal (ISSN 0301-4975)</Link></li>
-              <li><Link href="/memorial" className="hover:text-white transition-colors">Memorial Hall of Eternal Respect</Link></li>
-              <li><Link href="/events" className="hover:text-white transition-colors">Scientific Sessions & Conferences</Link></li>
-              <li><Link href="/notices" className="hover:text-white transition-colors">Official Gazette & Circulars</Link></li>
-              <li><Link href="/causes" className="hover:text-white transition-colors">Physician Welfare Fund</Link></li>
-              <li><Link href="/portal/concierge" className="hover:text-white transition-colors">Member Fast-Track Concierge</Link></li>
-              <li><Link href="/portal/reports" className="hover:text-white transition-colors">Societies Act 1860 Registers</Link></li>
-            </ul>
+          <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+            <div>
+              © 2018–2026 Road Safety Movement (নিরাপদ সড়ক আন্দোলন). All rights reserved.
+            </div>
+            <div className="flex items-center gap-4 text-[11px]">
+              <a href="https://www.roadsafetymovement.org" target="_blank" rel="noopener noreferrer" className="hover:underline flex items-center gap-1">
+                Official Website <ExternalLink className="w-3 h-3" />
+              </a>
+              <span>·</span>
+              <Link href="/portal" className="hover:underline">Council Portal</Link>
+            </div>
           </div>
-
-          <div>
-            <h5 className="text-xs font-bold uppercase tracking-wider text-white mb-3">
-              Secretariat Contact
-            </h5>
-            <ul className="space-y-3 text-xs text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <MapPin className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" />
-                <span>BMA Bhaban, K.B. Fazlul Kader Road, Chattogram, Bangladesh</span>
-              </li>
-              <li className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <PhoneCall className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span>+880 1819 000111</span>
-                </div>
-                <CopyButton text="+8801819000111" />
-              </li>
-              <li className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-primary shrink-0" />
-                  <span>secretariat@bma-ctg.org</span>
-                </div>
-                <CopyButton text="secretariat@bma-ctg.org" />
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* DevCenterPoint Engineering Attribution */}
-        <div className="max-w-7xl mx-auto">
-          <DevCenterPointBranding />
         </div>
       </footer>
     </div>
