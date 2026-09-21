@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: "Organization Operating System — Flagship Multi-Tenant Platform",
   description:
     "Enterprise Organization Management SaaS for Institutional Bodies, Professional Syndicates, and Alumni Foundations.",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
