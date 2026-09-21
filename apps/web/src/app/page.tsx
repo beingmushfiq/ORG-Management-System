@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   ShieldCheck,
   FileText,
@@ -53,18 +54,18 @@ export default function TenantPublicPortfolio() {
             <a href="#leadership" className="hover:text-white transition-colors">
               {lang === "en" ? "Leadership" : "নেতৃত্ব"}
             </a>
-            <a href="#events" className="hover:text-white transition-colors">
+            <Link href="/events" className="hover:text-white transition-colors">
               {lang === "en" ? "Conferences" : "সম্মেলন"}
-            </a>
-            <a href="#notices" className="hover:text-white transition-colors">
-              {lang === "en" ? "Circulars" : "বিজ্ঞপ্তি"}
-            </a>
-            <a href="#causes" className="hover:text-white transition-colors">
+            </Link>
+            <Link href="/notices" className="hover:text-white transition-colors">
+              {lang === "en" ? "Gazette & Notices" : "বিজ্ঞপ্তি"}
+            </Link>
+            <Link href="/causes" className="hover:text-white transition-colors">
               {lang === "en" ? "Causes" : "তহবিল"}
-            </a>
-            <a href="#verify" className="hover:text-white transition-colors">
-              {lang === "en" ? "Verify ID" : "যাচাই"}
-            </a>
+            </Link>
+            <Link href="/gallery" className="hover:text-white transition-colors">
+              {lang === "en" ? "Gallery" : "গ্যালারি"}
+            </Link>
           </nav>
 
           <div className="flex items-center gap-3">
