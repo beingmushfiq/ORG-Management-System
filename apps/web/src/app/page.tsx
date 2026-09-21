@@ -22,6 +22,7 @@ import { HeritageChronicleTimeline } from "@/components/heritage/heritage-chroni
 import { InteractiveOrganogram } from "@/components/governance/interactive-organogram";
 import { OrgLogo } from "@/components/brand/org-logo";
 import { DevCenterPointBranding } from "@/components/brand/devcenterpoint-branding";
+import { CommandPalette } from "@/components/ui/command-palette";
 
 export default function TenantPublicPortfolio() {
   const [lang, setLang] = useState<"en" | "bn">("en");
@@ -64,6 +65,9 @@ export default function TenantPublicPortfolio() {
           </nav>
 
           <div className="flex items-center gap-3">
+            {/* Quick Institutional Navigator */}
+            <CommandPalette />
+
             {/* Language Toggle */}
             <Button
               variant="outline"

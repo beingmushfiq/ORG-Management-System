@@ -10,7 +10,7 @@ import {
   QrCode,
   Printer,
 } from "lucide-react";
-import { Button, Badge, Card, CardContent } from "@org/ui";
+import { Button, Badge, Card, CardContent, useToast } from "@org/ui";
 import Link from "next/link";
 
 export default function MemberConciergePage() {
@@ -18,6 +18,7 @@ export default function MemberConciergePage() {
   const [showGoodStandingModal, setShowGoodStandingModal] = useState(false);
   const [showTaxModal, setShowTaxModal] = useState(false);
   const [chamberSaved, setChamberSaved] = useState(false);
+  const { success } = useToast();
 
   // Chamber State
   const [hospital, setHospital] = useState("Chattogram Metropolitan Hospital");
@@ -28,6 +29,10 @@ export default function MemberConciergePage() {
   const handleSaveChamber = (e: React.FormEvent) => {
     e.preventDefault();
     setChamberSaved(true);
+    success(
+      "Chamber Directory Synchronized",
+      "Your hospital practice hours and room number have been updated in the national BMA directory."
+    );
     setTimeout(() => setChamberSaved(false), 3000);
   };
 

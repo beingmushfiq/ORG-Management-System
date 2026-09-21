@@ -1,7 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import React, { Suspense } from "react";
 import { Plus_Jakarta_Sans, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
+import { ToastProvider } from "@org/ui";
+import { TopNavLoader } from "@/components/ui/top-nav-loader";
+import { AccessibilityDock } from "@/components/ui/accessibility-dock";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -87,8 +91,18 @@ export default function RootLayout({
         {/* Subtle Ambient Grain Texture */}
         <div className="fixed inset-0 pointer-events-none z-50 grain-overlay" />
 
-        {/* Momentum Inertia Smooth Scroll */}
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <ToastProvider>
+          {/* Razor-thin Top Bar Navigation Loader */}
+          <Suspense fallback={null}>
+            <TopNavLoader />
+          </Suspense>
+
+          {/* Momentum Inertia Smooth Scroll */}
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+
+          {/* Senior Physician Assistant & Accessibility Dock */}
+          <AccessibilityDock />
+        </ToastProvider>
       </body>
     </html>
   );

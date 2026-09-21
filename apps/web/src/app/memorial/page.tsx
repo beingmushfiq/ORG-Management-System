@@ -5,8 +5,9 @@ import {
   Flower2,
   CheckCircle2,
 } from "lucide-react";
-import { Button, Card, CardContent } from "@org/ui";
+import { Button, Card, CardContent, useToast } from "@org/ui";
 import Link from "next/link";
+import { OrgLogo } from "@/components/brand/org-logo";
 
 interface MemorialProfile {
   id: string;
@@ -82,14 +83,19 @@ export default function MemorialHallPage() {
     "mem-03": 940,
   });
   const [offeredSet, setOfferedSet] = useState<Set<string>>(new Set());
+  const { success } = useToast();
 
-  const handleOfferFlower = (id: string) => {
+  const handleOfferFlower = (id: string, name: string) => {
     if (offeredSet.has(id)) return;
     setTributes((prev) => ({
       ...prev,
       [id]: (prev[id] ?? 0) + 1,
     }));
     setOfferedSet((prev) => new Set(prev).add(id));
+    success(
+      "Floral Tribute Placed",
+      `Tribute formally recorded in honor of ${name}. May their noble legacy endure forever.`
+    );
   };
 
   return (
@@ -97,22 +103,9 @@ export default function MemorialHallPage() {
       {/* Top Header */}
       <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/85 backdrop-blur-2xl">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg"
-            >
-              BMA
-            </Link>
-            <div>
-              <Link href="/" className="font-bold text-base tracking-tight text-white hover:text-amber-400 transition-colors">
-                {lang === "en" ? "Memorial Hall of Eternal Respect" : "স্মৃতি চিরন্তন • শোক ও শ্রদ্ধাঞ্জলি"}
-              </Link>
-              <div className="text-xs text-slate-400 font-bangla">
-                {lang === "en" ? "Honoring Our Departed Physicians & Martyr Heroes" : "প্রয়াত সহকর্মী ও ভাষা-মুক্তিযুদ্ধের শহীদ চিকিৎসকদের স্মরণে"}
-              </div>
-            </div>
-          </div>
+          <Link href="/">
+            <OrgLogo size="md" subtitle="Memorial Hall" subtitleBn="স্মৃতি চিরন্তন" />
+          </Link>
 
           <div className="flex items-center gap-4">
             <button
@@ -200,7 +193,7 @@ export default function MemorialHallPage() {
                     </div>
 
                     <Button
-                      onClick={() => handleOfferFlower(person.id)}
+                      onClick={() => handleOfferFlower(person.id, person.name)}
                       disabled={isOffered}
                       className={`gap-2 text-xs font-bold transition-all ${
                         isOffered
