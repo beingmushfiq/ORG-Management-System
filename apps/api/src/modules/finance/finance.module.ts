@@ -5,7 +5,10 @@ import { BkashPaymentProvider } from "./providers/bkash.provider";
 import { NagadPaymentProvider } from "./providers/nagad.provider";
 import { SslCommerzPaymentProvider } from "./providers/sslcommerz.provider";
 
+import { FinanceController } from "./finance.controller";
+
 @Module({
+  controllers: [FinanceController],
   providers: [
     FinanceService,
     EpsPaymentProvider,

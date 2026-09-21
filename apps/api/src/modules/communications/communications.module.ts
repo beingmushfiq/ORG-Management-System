@@ -4,7 +4,10 @@ import { SslWirelessSmsProvider } from "./providers/ssl-wireless.provider";
 import { AlphaSmsProvider } from "./providers/alpha-sms.provider";
 import { GreenwebSmsProvider } from "./providers/greenweb.provider";
 
+import { CommunicationsController } from "./communications.controller";
+
 @Module({
+  controllers: [CommunicationsController],
   providers: [
     CommunicationsService,
     SslWirelessSmsProvider,
