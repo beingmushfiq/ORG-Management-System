@@ -1,7 +1,8 @@
+<div align="center">
+
 # Organization Operating System (ORG OS)
 ### Flagship Multi-Tenant SaaS for Institutional Bodies, Professional Syndicates & Foundations
 
-<div align="center">
 
 ![License](https://img.shields.io/badge/License-Proprietary-blue.svg?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7_Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
