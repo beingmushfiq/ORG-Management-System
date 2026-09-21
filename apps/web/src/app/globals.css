@@ -13,7 +13,7 @@
     --popover: 222 47% 10%;
     --popover-foreground: 210 40% 98%;
 
-    /* Dynamic Tenant Colors: Injected per organization */
+    /* Institutional Navy Primary */
     --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
 
@@ -33,11 +33,11 @@
     --input: 217 32% 20%;
     --ring: 221 83% 53%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 
   .light {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -46,56 +46,37 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 221 83% 53%;
+    --primary: 221 83% 45%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96%;
     --secondary-foreground: 222 47% 11%;
 
-    --muted: 210 40% 96%;
+    --muted: 210 40% 94%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 38 92% 50%;
+    --accent: 38 92% 45%;
     --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 84% 55%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 221 83% 45%;
   }
 }
 
 @layer utilities {
-  /* Ultra-smooth Frosted Glassmorphism */
-  .glass-card {
-    background: rgba(15, 23, 42, 0.65);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  /* Institutional Container Card */
+  .institutional-card {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 
-  /* Iridescent Rainbow Foil Sheen for 3D Member Cards */
-  .iridescent-foil {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.15) 0%,
-      rgba(255, 182, 193, 0.25) 25%,
-      rgba(173, 216, 230, 0.3) 50%,
-      rgba(255, 215, 0, 0.25) 75%,
-      rgba(255, 255, 255, 0.15) 100%
-    );
-    background-size: 200% 200%;
-  }
-
-  /* SVG Ambient Grain Overlay */
-  .grain-overlay {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
-  }
-
-  /* Indeterminate Progress Bar Animation */
+  /* Indeterminate Progress Bar */
   @keyframes indeterminate-bar {
     0% {
       transform: translateX(-100%) scaleX(0.2);
@@ -111,36 +92,6 @@
   .animate-indeterminate-bar {
     animation: indeterminate-bar 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
     transform-origin: left;
-  }
-
-  /* Shimmer sweep animation */
-  @keyframes button-shimmer {
-    from {
-      transform: translateX(-100%);
-    }
-    to {
-      transform: translateX(100%);
-    }
-  }
-
-  .animate-shimmer {
-    animation: button-shimmer 2.5s ease-in-out infinite;
-  }
-
-  /* Pulse Glow Animation */
-  @keyframes pulse-glow {
-    0%, 100% {
-      opacity: 0.4;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
-  }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 3s ease-in-out infinite;
   }
 }
 

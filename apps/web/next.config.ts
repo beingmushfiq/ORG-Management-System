@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@org/ui", "@org/database", "three"],
+  transpilePackages: ["@org/ui", "@org/database"],
   images: {
     remotePatterns: [
       {
@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
         hostname: "**",
       },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:4000/api/:path*",
+      },
+    ];
   },
 };
 

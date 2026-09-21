@@ -22,6 +22,7 @@ export interface ButtonProps
   loadingText?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  shimmer?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -35,6 +36,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loadingText,
       leftIcon,
       rightIcon,
+      shimmer: _shimmer,
       children,
       disabled,
       ...props

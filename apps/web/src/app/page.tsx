@@ -15,8 +15,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { Button, Badge, Card, CopyButton } from "@org/ui";
-import { BranchGalaxy } from "@/components/3d/branch-galaxy";
-import { HolographicMemberCard } from "@/components/cards/holographic-member-card";
+import { InstitutionalMemberCard } from "@/components/cards/holographic-member-card";
 import { BangladeshBranchAtlas } from "@/components/geo/bangladesh-branch-atlas";
 import { HeritageChronicleTimeline } from "@/components/heritage/heritage-chronicle-timeline";
 import { InteractiveOrganogram } from "@/components/governance/interactive-organogram";
@@ -203,32 +202,7 @@ export default function TenantPublicPortfolio() {
         </div>
       </section>
 
-      {/* ================= 4. THREE.JS 3D BRANCH GALAXY ================= */}
-      <section id="hierarchy" className="py-20 px-6 max-w-7xl mx-auto w-full">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-8 gap-4">
-          <div>
-            <Badge variant="warning" className="mb-2">
-              Spatial Architecture
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              {lang === "en" ? "Interactive Branch Network" : "ইন্টারেক্টিভ শাখা নেটওয়ার্ক"}
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1 max-w-xl">
-              {lang === "en"
-                ? "Every branch, hospital unit, and regional committee is interconnected in real-time under our unlimited-depth governance tree."
-                : "আমাদের সীমাহীন শাখা কাঠামোর আওতায় প্রতিটি হাসপাতাল ইউনিট ও আঞ্চলিক কমিটি রিয়েল-টাইমে সংযুক্ত।"}
-            </p>
-          </div>
-          <div className="text-xs text-muted-foreground">
-            {lang === "en" ? "Live WebGL Telemetry" : "লাইভ ওয়েবজিএল টেলিমিতি"}
-          </div>
-        </div>
-
-        {/* 3D WebGL Canvas */}
-        <BranchGalaxy />
-      </section>
-
-      {/* ================= 4B. BANGLADESH BRANCH & DIVISION ATLAS ================= */}
+      {/* ================= 4. BANGLADESH BRANCH & DIVISION ATLAS ================= */}
       <section id="atlas" className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
         <div className="mb-10 text-center max-w-3xl mx-auto">
           <Badge variant="warning" className="mb-2">
@@ -246,7 +220,7 @@ export default function TenantPublicPortfolio() {
         <BangladeshBranchAtlas />
       </section>
 
-      {/* ================= 5. HOLOGRAPHIC 3D MEMBER CARD SHOWCASE ================= */}
+      {/* ================= 5. INSTITUTIONAL MEMBER CREDENTIAL SHOWCASE ================= */}
       <section className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -256,44 +230,44 @@ export default function TenantPublicPortfolio() {
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
               {lang === "en" ? (
                 <>
-                  Holographic Digital Passes for{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-500">
+                  Institutional Digital Credentials for{" "}
+                  <span className="text-primary font-semibold">
                     Every Verified Member.
                   </span>
                 </>
               ) : (
                 <>
                   প্রত্যেক যাচাইকৃত সদস্যের জন্য{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-500">
-                    হলোগ্রাফিক ডিজিটাল পাস।
+                  <span className="text-primary font-semibold">
+                    প্রাতিষ্ঠানিক ডিজিটাল সনদ ও পরিচয়পত্র।
                   </span>
                 </>
               )}
             </h2>
             <p className="mt-4 text-base text-muted-foreground leading-relaxed">
               {lang === "en"
-                ? "Gone are paper certificates. Each active member holds a cryptographically sealed digital ID card with real-time QR code verification, 3D gyroscope tilt, and 300 DPI vector printing."
+                ? "Paper-free, cryptographically verifiable membership identification. Each active physician holds an authoritative digital credential with instant QR code public verification, active tier endorsement, and standard printable pass export."
                 : "কাগজের সনদের দিন শেষ। প্রতিটি সক্রিয় সদস্য ক্রিপ্টোগ্রাফিক সুরক্ষা সিল, রিয়েল-টাইম কিউআর যাচাই এবং উচ্চ-মানের প্রিন্টযোগ্য ডিজিটাল আইডি কার্ড উপভোগ করেন।"}
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-300">
               <li className="flex items-center gap-2.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>SHA-256 digital security hash backed by MySQL database.</span>
+                <span>Cryptographic SHA-256 integrity hash issued by institutional ledger.</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <QrCode className="w-4 h-4 text-primary shrink-0" />
-                <span>One-scan instant credential verification at conference venues.</span>
+                <span>Instant QR-based public register verification for statutory authorities.</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Apple Wallet & Google Wallet pass integration.</span>
+                <span>Multi-tier lifecycle (Associate, General, Life, Honorary) with branch endorsements.</span>
               </li>
             </ul>
           </div>
 
           <div className="flex justify-center">
-            <HolographicMemberCard />
+            <InstitutionalMemberCard />
           </div>
         </div>
       </section>
