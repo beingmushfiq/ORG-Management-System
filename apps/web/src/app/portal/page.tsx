@@ -24,6 +24,7 @@ import { Button, Badge, Card, CardContent } from "@org/ui";
 import Link from "next/link";
 import { RoleSelector } from "@/components/auth/role-selector";
 import { OrgLogo } from "@/components/brand/org-logo";
+import { DevCenterPointBranding } from "@/components/brand/devcenterpoint-branding";
 
 interface PortalModule {
   title: string;
@@ -295,6 +296,7 @@ export default function MemberPortalDashboard() {
             <Link href="/events" className="hover:text-slate-300 transition-colors">
               {lang === "en" ? "Conferences" : "সম্মেলন"}
             </Link>
+            <DevCenterPointBranding variant="subtle" />
           </div>
         </div>
       </footer>

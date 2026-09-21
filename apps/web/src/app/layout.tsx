@@ -42,9 +42,12 @@ export const metadata: Metadata = {
     "Continuing Medical Education",
     "Certificate of Good Standing",
   ],
-  authors: [{ name: "Central Secretariat, Bangladesh Medical Association" }],
-  creator: "BMA Information Systems Bureau",
-  publisher: "Bangladesh Medical Association",
+  authors: [
+    { name: "DevCenterPoint", url: "https://devcenterpoint.com" },
+    { name: "Central Secretariat, Bangladesh Medical Association" },
+  ],
+  creator: "DevCenterPoint (https://devcenterpoint.com)",
+  publisher: "Bangladesh Medical Association & DevCenterPoint",
   manifest: "/manifest.json",
   icons: {
     icon: [

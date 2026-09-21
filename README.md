@@ -12,12 +12,15 @@
 ![Prisma](https://img.shields.io/badge/Prisma-6.4_ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
 ![Tests](https://img.shields.io/badge/Tests-73%2F73_Passing-success?style=for-the-badge&logo=vitest&logoColor=white)
+[![DevCenterPoint](https://img.shields.io/badge/Architected_by-DevCenterPoint-D97706?style=for-the-badge&logo=shield&logoColor=white)](https://devcenterpoint.com)
 
 <br/>
 
 **A sovereign, high-trust digital platform engineered to represent the prestige of premier organizations with zero AI slop, zero futuristic cyber clutter, and maximum institutional dignity.**
 
-[Live Architecture](#system-architecture) • [Feature Showcase](#core-capabilities) • [Quick Start](#quick-start-guide) • [Security Invariants](#security--tenancy-invariants) • [Verification](#quality-gates--testing)
+*Architected & Engineered by [DevCenterPoint](https://devcenterpoint.com)*
+
+[Live Architecture](#system-architecture) • [Feature Showcase](#core-capabilities) • [Quick Start](#quick-start-guide) • [Security Invariants](#security--tenancy-invariants) • [Verification](#quality-gates--testing) • [About DevCenterPoint](#engineering--architecture-attribution)
 
 </div>
 
@@ -289,7 +292,24 @@ The application registers a custom Service Worker (`/sw.js`) and complies with W
 
 ---
 
+## Engineering & Architecture Attribution
+
+<div align="center">
+
+### Designed, Engineered & Maintained by [DevCenterPoint](https://devcenterpoint.com)
+
+**DevCenterPoint** builds mission-critical enterprise software, bespoke cloud architecture, and high-performance digital platforms with sovereign data integrity.
+
+[![Visit DevCenterPoint](https://img.shields.io/badge/Visit_Official_Website-devcenterpoint.com-2563EB?style=for-the-badge&logo=google-chrome&logoColor=white)](https://devcenterpoint.com)
+
+</div>
+
+For institutional licensing, white-label deployment for professional bodies, or custom enterprise architecture inquiries, visit **[devcenterpoint.com](https://devcenterpoint.com)**.
+
+---
+
 ## License & Attribution
 
-Copyright © 2026 Bangladesh Medical Association & Organization Management Systems Bureau.  
+Copyright © 2026 Bangladesh Medical Association & DevCenterPoint.  
 All rights reserved. Formulated under the statutory provisions of the **Societies Registration Act XXI of 1860**.
+Platform Architecture & Digital Infrastructure by **[DevCenterPoint](https://devcenterpoint.com)**.

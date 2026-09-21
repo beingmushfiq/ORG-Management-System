@@ -21,6 +21,7 @@ import { BangladeshBranchAtlas } from "@/components/geo/bangladesh-branch-atlas"
 import { HeritageChronicleTimeline } from "@/components/heritage/heritage-chronicle-timeline";
 import { InteractiveOrganogram } from "@/components/governance/interactive-organogram";
 import { OrgLogo } from "@/components/brand/org-logo";
+import { DevCenterPointBranding } from "@/components/brand/devcenterpoint-branding";
 
 export default function TenantPublicPortfolio() {
   const [lang, setLang] = useState<"en" | "bn">("en");
@@ -481,6 +482,11 @@ export default function TenantPublicPortfolio() {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* DevCenterPoint Engineering Attribution */}
+        <div className="max-w-7xl mx-auto">
+          <DevCenterPointBranding />
         </div>
       </footer>
     </div>
