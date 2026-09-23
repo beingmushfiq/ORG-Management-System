@@ -43,6 +43,16 @@ export function middleware(request: NextRequest) {
   requestHeaders.set("x-tenant-slug", tenantSlug);
   requestHeaders.set("x-pathname", url.pathname);
 
+  // 3. Strict Member Authentication Gate for /portal routes
+  if (url.pathname.startsWith("/portal")) {
+    const token = request.cookies.get("access_token")?.value;
+    if (!token) {
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("returnUrl", url.pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
   // In production, organizationId is resolved via Redis lookup at edge
   // For baseline scaffolding, we pass the verified slug down to Server Components
   const response = NextResponse.next({

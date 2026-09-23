@@ -1,14 +1,15 @@
 {
-  "name": "Bangladesh Medical Association — Institutional Operating System",
-  "short_name": "BMA Platform",
-  "description": "Apex statutory representative body for medical practitioners in Bangladesh. Governance, membership registry, journal, CPD accreditation, and emergency welfare network.",
-  "start_url": "/",
-  "id": "/",
+  "name": "Road Safety Movement (নিরাপদ সড়ক আন্দোলন) — Institutional Operating System",
+  "short_name": "RSM App",
+  "description": "Transforming road transport into a safe, sustainable, and humane system for all. 9,010+ volunteers across 82 committees.",
+  "start_url": "/portal",
+  "id": "/portal",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#020617",
-  "theme_color": "#020617",
-  "categories": ["medical", "governance", "productivity", "business"],
+  "background_color": "#0d3b25",
+  "theme_color": "#164e32",
+  "categories": ["social-advocacy", "governance", "productivity", "education"],
   "icons": [
     {
       "src": "/favicon.svg",
@@ -30,31 +31,31 @@
   ],
   "shortcuts": [
     {
-      "name": "Member Concierge Desk",
-      "short_name": "Concierge",
-      "description": "Download Certificate of Good Standing and tax deduction statements",
-      "url": "/portal/concierge",
+      "name": "Member Portal Dashboard",
+      "short_name": "Dashboard",
+      "description": "View membership standing, tasks, and credentials",
+      "url": "/portal",
       "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Executive Command War Room",
-      "short_name": "Command",
-      "description": "CEC quorum monitoring, resolutions, and branch telemetry",
-      "url": "/portal/command",
+      "name": "Field Tasks & Hazard Reports",
+      "short_name": "Field Tasks",
+      "description": "Submit road safety field audit reports",
+      "url": "/portal/tasks",
       "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Emergency Blood Network",
-      "short_name": "Blood Bank",
-      "description": "Find verified doctor blood donors across 64 districts",
-      "url": "/portal/blood-bank",
+      "name": "Contribution History & Receipts",
+      "short_name": "Receipts",
+      "description": "Download cryptographic money receipts",
+      "url": "/portal",
       "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Medical Journal Archive",
-      "short_name": "Journal",
-      "description": "Peer-reviewed Bangladesh Medical Journal publications",
-      "url": "/journal",
+      "name": "Academy & Safety Training",
+      "short_name": "Academy",
+      "description": "LMS certifications and defensive driving modules",
+      "url": "/portal/certificates",
       "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
     }
   ]

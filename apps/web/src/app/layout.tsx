@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ToastProvider } from "@org/ui";
 import { TopNavLoader } from "@/components/ui/top-nav-loader";
 import { AccessibilityDock } from "@/components/ui/accessibility-dock";
+import { PwaProvider } from "@/components/pwa/pwa-provider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#f59e0b",
+  themeColor: "#164e32",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -64,6 +65,11 @@ export const metadata: Metadata = {
       { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
     ],
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "RSM App",
+  },
   openGraph: {
     title: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন) — Institutional Operating System",
     description:
@@ -90,18 +96,20 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakartaSans.variable} ${hindSiliguri.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased min-h-screen relative selection:bg-amber-500/30 selection:text-foreground">
         <ThemeProvider defaultTheme="light" storageKey="rsm-ui-theme">
-          <ToastProvider>
-            {/* Razor-thin Top Bar Navigation Loader */}
-            <Suspense fallback={null}>
-              <TopNavLoader />
-            </Suspense>
+          <PwaProvider>
+            <ToastProvider>
+              {/* Razor-thin Top Bar Navigation Loader */}
+              <Suspense fallback={null}>
+                <TopNavLoader />
+              </Suspense>
 
-            {/* Momentum Inertia Smooth Scroll */}
-            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+              {/* Momentum Inertia Smooth Scroll */}
+              <SmoothScrollProvider>{children}</SmoothScrollProvider>
 
-            {/* Road Safety Rapid Action & Accessibility Dock */}
-            <AccessibilityDock />
-          </ToastProvider>
+              {/* Road Safety Rapid Action & Accessibility Dock */}
+              <AccessibilityDock />
+            </ToastProvider>
+          </PwaProvider>
         </ThemeProvider>
       </body>
     </html>

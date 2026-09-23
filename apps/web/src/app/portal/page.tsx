@@ -3,22 +3,41 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
-  Users,
   CreditCard,
-  Crown,
-  CheckCircle2,
-  Clock,
+  GraduationCap,
+  Award,
   ArrowRight,
-  FileCheck,
+  ShieldCheck,
   RefreshCw,
+  Sparkles,
+  Users,
+  Clock,
+  CheckCircle2,
+  FileCheck,
+  Crown,
 } from "lucide-react";
-import { Button, Badge, Card, CardContent, CardHeader, CardTitle, PageHeader, EmptyState } from "@org/ui";
+import { Badge, Button, Card, CardContent } from "@org/ui";
 import { apiClient } from "@/lib/api-client";
+import { MemberHeaderBanner } from "@/components/portal/member-header-banner";
+import { MembershipProgressTracker } from "@/components/portal/membership-progress-tracker";
+import { LmsCourseCards } from "@/components/portal/lms-course-cards";
+import { ContributionHistoryTable } from "@/components/portal/contribution-history-table";
 
-export default function PortalDashboardPage() {
+export default function MemberPortalDashboardPage() {
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({
-    totalMembers: 0,
+  const [userProfile, setUserProfile] = useState<any>({
+    fullName: "Tanvir Rahman",
+    fullNameBn: "তানভীর তানভীর",
+    membershipNumber: "18-23",
+    joinedDate: "20 june 2018",
+    status: "ACTIVE",
+    tier: "ASSOCIATE",
+    positionTitle: "National Executive Secretariat · Founding Member",
+  });
+
+  // State for Executive Mode Toggle (when holding administrative office)
+  const [viewMode, setViewMode] = useState<"MEMBER" | "EXECUTIVE">("MEMBER");
+  const [adminStats, setAdminStats] = useState({
     pendingMembers: 0,
     totalBilledBdt: "৳0.00",
     totalCollectedBdt: "৳0.00",
@@ -26,54 +45,58 @@ export default function PortalDashboardPage() {
     upcomingMeetings: 0,
   });
 
-  const [pendingApplications, setPendingApplications] = useState<any[]>([]);
-  const [pendingSlips, setPendingSlips] = useState<any[]>([]);
-  const [meetings, setMeetings] = useState<any[]>([]);
-  const [notices, setNotices] = useState<any[]>([]);
-
   const loadData = async () => {
     setLoading(true);
     try {
-      const [membersRes, financeStats, slipsRes, meetingsRes, noticesRes] =
-        await Promise.allSettled([
-          apiClient.membership.list({ limit: 5, status: "PENDING_KYC" }),
-          apiClient.finance.getStats(),
-          apiClient.finance.listInvoices({ status: "UNDER_VERIFICATION", limit: 5 }),
-          apiClient.governance.listMeetings(),
-          apiClient.communications.listNotices(),
-        ]);
+      const [meRes, financeRes, membersRes, meetingsRes] = await Promise.allSettled([
+        apiClient.auth.getMe(),
+        apiClient.finance.getStats(),
+        apiClient.membership.list({ limit: 5, status: "PENDING_KYC" }),
+        apiClient.governance.listMeetings(),
+      ]);
+
+      if (meRes.status === "fulfilled" && meRes.value?.user) {
+        const u = meRes.value.user;
+        setUserProfile({
+          fullName: u.fullName || "Tanvir Rahman",
+          fullNameBn: u.fullNameBn || "তানভীর তানভীর",
+          membershipNumber: u.membership?.membershipNumber || "18-23",
+          joinedDate: u.membership?.joinedDate
+            ? new Date(u.membership.joinedDate).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })
+            : "20 june 2018",
+          status: u.membership?.status || "ACTIVE",
+          tier: u.membership?.tier || "ASSOCIATE",
+          positionTitle:
+            meRes.value.activePosition?.position?.name ||
+            "National Executive Secretariat · Founding Member",
+        });
+      }
+
+      if (financeRes.status === "fulfilled") {
+        setAdminStats((prev) => ({
+          ...prev,
+          totalBilledBdt: financeRes.value.totalBilledBdt || "৳0.00",
+          totalCollectedBdt: financeRes.value.totalCollectedBdt || "৳0.00",
+          pendingSlips: financeRes.value.pendingVerificationCount || 0,
+        }));
+      }
 
       if (membersRes.status === "fulfilled") {
-        setPendingApplications(membersRes.value.items || []);
-        setStats((prev) => ({
+        setAdminStats((prev) => ({
           ...prev,
           pendingMembers: membersRes.value.total || 0,
         }));
       }
 
-      if (financeStats.status === "fulfilled") {
-        setStats((prev) => ({
-          ...prev,
-          totalBilledBdt: financeStats.value.totalBilledBdt || "৳0.00",
-          totalCollectedBdt: financeStats.value.totalCollectedBdt || "৳0.00",
-          pendingSlips: financeStats.value.pendingVerificationCount || 0,
-        }));
-      }
-
-      if (slipsRes.status === "fulfilled") {
-        setPendingSlips(slipsRes.value.items || []);
-      }
-
       if (meetingsRes.status === "fulfilled") {
-        setMeetings(meetingsRes.value || []);
-        setStats((prev) => ({
+        setAdminStats((prev) => ({
           ...prev,
           upcomingMeetings: (meetingsRes.value || []).length,
         }));
-      }
-
-      if (noticesRes.status === "fulfilled") {
-        setNotices(noticesRes.value || []);
       }
     } finally {
       setLoading(false);
@@ -86,17 +109,48 @@ export default function PortalDashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <PageHeader
-        title="Executive Command Workspace"
-        titleBn="নির্বাহী কমান্ড ও ওয়ার্কস্পেস"
-        description="Unified operational overview across membership KYC, statutory treasury, governance councils, and branch directives."
-        badge={
-          <Badge variant="success" size="sm">
-            Operational
-          </Badge>
-        }
-        actions={
+      {/* Top Controls: View Switcher (Member View vs Executive Console) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1 border-b border-border/60">
+        <div>
+          <h2 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
+            <span>Member Workspace</span>
+            <Badge variant="outline" className="text-[11px] font-mono text-emerald-600 border-emerald-500/30 bg-emerald-500/10">
+              Verified Session
+            </Badge>
+          </h2>
+          <p className="text-xs text-muted-foreground font-bangla">
+            নিরাপদ সড়ক আন্দোলন — সদস্য ড্যাশবোর্ড ও প্রাতিষ্ঠানিক সেবা পোর্টাল
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {/* Executive Mode Switcher */}
+          <div className="p-0.5 rounded-lg bg-muted border border-border flex items-center text-xs font-medium">
+            <button
+              type="button"
+              onClick={() => setViewMode("MEMBER")}
+              className={`px-3 py-1.5 rounded-md transition-all ${
+                viewMode === "MEMBER"
+                  ? "bg-card text-foreground font-bold shadow-xs"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Member View
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("EXECUTIVE")}
+              className={`px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5 ${
+                viewMode === "EXECUTIVE"
+                  ? "bg-[#164e32] text-white font-bold shadow-xs"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Crown className="h-3.5 w-3.5 text-amber-400" />
+              <span>Executive Console</span>
+            </button>
+          </div>
+
           <Button
             variant="outline"
             size="sm"
@@ -104,288 +158,229 @@ export default function PortalDashboardPage() {
             loading={loading}
             leftIcon={<RefreshCw className="h-3.5 w-3.5" />}
           >
-            Refresh
+            Sync
           </Button>
-        }
-      />
-
-      {/* Primary KPI Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* KPI 1: Membership */}
-        <Card>
-          <CardContent className="p-4 space-y-2">
-            <div className="flex items-center justify-between text-muted-foreground text-xs">
-              <span className="font-medium">Membership Applications</span>
-              <Users className="h-4 w-4 text-blue-500" />
-            </div>
-            <div className="text-2xl font-bold tracking-tight text-foreground">
-              {stats.pendingMembers}
-            </div>
-            <div className="flex items-center gap-1.5 text-xs text-amber-500 font-medium">
-              <Clock className="h-3.5 w-3.5" />
-              <span>Awaiting KYC / Endorsement</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* KPI 2: Treasury Collected */}
-        <Card>
-          <CardContent className="p-4 space-y-2">
-            <div className="flex items-center justify-between text-muted-foreground text-xs">
-              <span className="font-medium">Treasury Collection</span>
-              <CreditCard className="h-4 w-4 text-emerald-500" />
-            </div>
-            <div className="text-2xl font-bold tracking-tight text-emerald-500">
-              {stats.totalCollectedBdt}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Total Billed: <span className="font-mono">{stats.totalBilledBdt}</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* KPI 3: Bank Slips */}
-        <Card>
-          <CardContent className="p-4 space-y-2">
-            <div className="flex items-center justify-between text-muted-foreground text-xs">
-              <span className="font-medium">Deposit Slip Queue</span>
-              <FileCheck className="h-4 w-4 text-amber-500" />
-            </div>
-            <div className="text-2xl font-bold tracking-tight text-foreground">
-              {stats.pendingSlips}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Manual bank transfers awaiting signoff
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* KPI 4: Governance */}
-        <Card>
-          <CardContent className="p-4 space-y-2">
-            <div className="flex items-center justify-between text-muted-foreground text-xs">
-              <span className="font-medium">Governance Sessions</span>
-              <Crown className="h-4 w-4 text-primary" />
-            </div>
-            <div className="text-2xl font-bold tracking-tight text-foreground">
-              {stats.upcomingMeetings}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Executive council & branch meetings
-            </div>
-          </CardContent>
-        </Card>
+        </div>
       </div>
 
-      {/* Operational Queues: 2 Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Queue 1: Pending KYC & Endorsements */}
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-3">
-            <div>
-              <CardTitle className="text-base">Pending Membership Applications</CardTitle>
-              <p className="text-xs text-muted-foreground mt-0.5 font-bangla">
-                নতুন সদস্য আবেদন এবং কেওয়াইসি যাচাই তালিকা
-              </p>
-            </div>
-            <Link href="/portal/members">
-              <Button variant="ghost" size="sm" className="text-xs">
-                View All <ArrowRight className="h-3 w-3 ml-1" />
-              </Button>
-            </Link>
-          </CardHeader>
-          <CardContent className="pt-0 space-y-3">
-            {pendingApplications.length === 0 ? (
-              <EmptyState
-                icon={<CheckCircle2 className="h-6 w-6 text-emerald-500" />}
-                title="No Pending Applications"
-                titleBn="সকল সদস্য আবেদন যাচাই সম্পন্ন হয়েছে"
-                description="All submitted membership applications have been reviewed."
-              />
-            ) : (
-              <div className="divide-y divide-border">
-                {pendingApplications.map((app) => (
-                  <div
-                    key={app.id}
-                    className="py-3 flex items-center justify-between gap-3 text-xs"
-                  >
-                    <div>
-                      <p className="font-semibold text-foreground text-sm">
-                        {app.user?.fullName || "Applicant"}
-                      </p>
-                      <p className="text-muted-foreground font-mono text-[11px]">
-                        App #{app.membershipNumber} · {app.user?.phone}
-                      </p>
-                      <Badge variant="outline" size="sm" className="mt-1">
-                        {app.status}
-                      </Badge>
-                    </div>
+      {viewMode === "MEMBER" ? (
+        /* ================= 1. MEMBER DASHBOARD (MATCHING SAMPLE MOCKUP) ================= */
+        <div className="space-y-6">
+          {/* A. Hero Member Header Card Banner */}
+          <MemberHeaderBanner member={userProfile} />
 
-                    <Link href={`/portal/members?id=${app.id}`}>
-                      <Button variant="secondary" size="sm">
-                        Review KYC
-                      </Button>
-                    </Link>
+          {/* B. Row of 3 Summary Metric Cards (from sample wireframe) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Metric 1: Monthly Subscription / Contribution Status */}
+            <Card className="hover:border-emerald-500/40 transition-colors">
+              <CardContent className="p-4 sm:p-5 flex items-start justify-between">
+                <div className="space-y-1">
+                  <p className="text-xs font-medium text-muted-foreground uppercase font-mono">
+                    Monthly Contribution
+                  </p>
+                  <p className="text-2xl font-bold font-mono text-foreground">
+                    ৳300.00
+                  </p>
+                  <div className="flex items-center gap-1.5 text-xs text-amber-600 dark:text-amber-400 font-semibold pt-0.5">
+                    <Clock className="h-3.5 w-3.5" />
+                    <span>Sep 2026 Pending</span>
                   </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+                </div>
+                <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                  <CreditCard className="h-5 w-5" />
+                </div>
+              </CardContent>
+            </Card>
 
-        {/* Queue 2: Deposit Slip Verification */}
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-3">
-            <div>
-              <CardTitle className="text-base">Deposit Slips Under Verification</CardTitle>
-              <p className="text-xs text-muted-foreground mt-0.5 font-bangla">
-                ব্যাংক ডিপোজিট স্লিপ ও চালান যাচাই
-              </p>
-            </div>
-            <Link href="/portal/finance">
-              <Button variant="ghost" size="sm" className="text-xs">
-                Treasury Desk <ArrowRight className="h-3 w-3 ml-1" />
-              </Button>
-            </Link>
-          </CardHeader>
-          <CardContent className="pt-0 space-y-3">
-            {pendingSlips.length === 0 ? (
-              <EmptyState
-                icon={<CheckCircle2 className="h-6 w-6 text-emerald-500" />}
-                title="Slip Queue Clean"
-                titleBn="কোনো ব্যাংক স্লিপ যাচাইয়ের জন্য অপেক্ষমাণ নেই"
-                description="All submitted deposit receipts have been reconciled."
-              />
-            ) : (
-              <div className="divide-y divide-border">
-                {pendingSlips.map((invoice) => (
-                  <div
-                    key={invoice.id}
-                    className="py-3 flex items-center justify-between gap-3 text-xs"
-                  >
-                    <div>
-                      <p className="font-semibold text-foreground text-sm">
-                        {invoice.user?.fullName || "Member"}
-                      </p>
-                      <p className="text-muted-foreground font-mono text-[11px]">
-                        Inv #{invoice.invoiceNumber} · Ref: {invoice.transactionRef || "N/A"}
-                      </p>
-                      <span className="font-semibold text-emerald-500 font-mono block mt-0.5">
-                        ৳{(Number(invoice.amountPaisa) / 100).toFixed(2)}
-                      </span>
-                    </div>
-
-                    <Link href="/portal/finance">
-                      <Button variant="secondary" size="sm">
-                        Verify Slip
-                      </Button>
-                    </Link>
+            {/* Metric 2: Training & CPD Progress */}
+            <Card className="hover:border-emerald-500/40 transition-colors">
+              <CardContent className="p-4 sm:p-5 flex items-start justify-between">
+                <div className="space-y-1">
+                  <p className="text-xs font-medium text-muted-foreground uppercase font-mono">
+                    Academy & Training
+                  </p>
+                  <p className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
+                    3 Courses (60%)
+                  </p>
+                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground pt-0.5">
+                    <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+                    <span>10 CPD Points Earned</span>
                   </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                  <GraduationCap className="h-5 w-5" />
+                </div>
+              </CardContent>
+            </Card>
 
-      {/* Queue 3: Upcoming Council Meetings & Notices */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Governance Meetings */}
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-3">
-            <div>
-              <CardTitle className="text-base">Executive Council Meetings</CardTitle>
-              <p className="text-xs text-muted-foreground mt-0.5 font-bangla">
-                কার্যনির্বাহী পরিষদের সভার বিবরণ ও আলোচ্যসূচি
-              </p>
+            {/* Metric 3: Movement Attendance & Standing */}
+            <Card className="hover:border-emerald-500/40 transition-colors">
+              <CardContent className="p-4 sm:p-5 flex items-start justify-between">
+                <div className="space-y-1">
+                  <p className="text-xs font-medium text-muted-foreground uppercase font-mono">
+                    Movement Standing
+                  </p>
+                  <p className="text-2xl font-bold font-mono text-foreground">
+                    18 Events (96%)
+                  </p>
+                  <div className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-semibold pt-0.5">
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    <span>Good Standing Verified</span>
+                  </div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                  <Award className="h-5 w-5" />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* C. Automated Membership Lifecycle Progress Banner (Section 8 & 9) */}
+          <MembershipProgressTracker
+            currentTier={userProfile.tier}
+            activeMonths={19}
+            totalRequiredMonths={24}
+            isEligible={false}
+          />
+
+          {/* D. Two-Column Main Grid from Sample Image: LMS + Contribution History */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+            {/* Left Column: Learning Management System (LMS) */}
+            <LmsCourseCards />
+
+            {/* Right Column: Contribution History Table */}
+            <ContributionHistoryTable />
+          </div>
+        </div>
+      ) : (
+        /* ================= 2. EXECUTIVE & BRANCH COMMAND CONSOLE ================= */
+        <div className="space-y-6">
+          <div className="p-4 rounded-xl bg-[#164e32]/10 border border-emerald-700/30 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-lg bg-[#164e32] text-white">
+                <Crown className="h-5 w-5 text-amber-400" />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm text-foreground">
+                  National Executive Council Command War Room
+                </h3>
+                <p className="text-xs text-muted-foreground font-bangla">
+                  পূর্ণাঙ্গ প্রশাসনিক ক্ষমতা: সদস্য অনুমোদন, চাঁদা নিরীক্ষা ও শাখা নিয়ন্ত্রণ
+                </p>
+              </div>
             </div>
+
             <Link href="/portal/command">
-              <Button variant="ghost" size="sm" className="text-xs">
-                Manage <ArrowRight className="h-3 w-3 ml-1" />
+              <Button size="sm" variant="primary" className="bg-[#164e32] hover:bg-[#113d27] text-white text-xs">
+                Open Full War Room <ArrowRight className="h-3 w-3 ml-1" />
               </Button>
             </Link>
-          </CardHeader>
-          <CardContent className="pt-0">
-            {meetings.length === 0 ? (
-              <EmptyState
-                title="No Scheduled Sessions"
-                titleBn="আপাতত কোনো সভা নির্ধারিত নেই"
-                description="Create a draft council agenda to convene a formal session."
-              />
-            ) : (
-              <div className="divide-y divide-border">
-                {meetings.map((m) => (
-                  <div
-                    key={m.id}
-                    className="py-3 flex items-center justify-between gap-3 text-xs"
-                  >
-                    <div>
-                      <p className="font-semibold text-foreground text-sm">{m.title}</p>
-                      <p className="text-muted-foreground text-[11px]">
-                        {new Date(m.scheduledAt).toLocaleDateString("en-BD", {
-                          dateStyle: "medium",
-                        })}{" "}
-                        · Venue: {m.venue}
-                      </p>
-                      <Badge variant="outline" size="sm" className="mt-1">
-                        {m.status}
-                      </Badge>
-                    </div>
+          </div>
 
-                    <Link href={`/portal/command?meetingId=${m.id}`}>
-                      <Button variant="outline" size="sm">
-                        Agenda & Minutes
-                      </Button>
-                    </Link>
-                  </div>
-                ))}
+          {/* Operational Metrics Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card>
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center justify-between text-muted-foreground text-xs">
+                  <span className="font-medium">Pending KYC Applications</span>
+                  <Users className="h-4 w-4 text-blue-500" />
+                </div>
+                <div className="text-2xl font-bold font-mono text-foreground">
+                  {adminStats.pendingMembers}
+                </div>
+                <div className="text-xs text-amber-500 font-medium flex items-center gap-1">
+                  <Clock className="h-3.5 w-3.5" />
+                  <span>Awaiting Branch Endorsement</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center justify-between text-muted-foreground text-xs">
+                  <span className="font-medium">Treasury Collection</span>
+                  <CreditCard className="h-4 w-4 text-emerald-500" />
+                </div>
+                <div className="text-2xl font-bold font-mono text-emerald-500">
+                  {adminStats.totalCollectedBdt}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Total Billed: <span className="font-mono">{adminStats.totalBilledBdt}</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center justify-between text-muted-foreground text-xs">
+                  <span className="font-medium">Bank Deposit Slip Queue</span>
+                  <FileCheck className="h-4 w-4 text-amber-500" />
+                </div>
+                <div className="text-2xl font-bold font-mono text-foreground">
+                  {adminStats.pendingSlips}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Manual slips awaiting signoff
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center justify-between text-muted-foreground text-xs">
+                  <span className="font-medium">Statutory Council Sessions</span>
+                  <Crown className="h-4 w-4 text-primary" />
+                </div>
+                <div className="text-2xl font-bold font-mono text-foreground">
+                  {adminStats.upcomingMeetings}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Executive council & branch meetings
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Quick Action Navigation Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Link href="/portal/members">
+              <div className="p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors space-y-1.5 cursor-pointer">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-sm text-foreground">Member Registry & KYC</span>
+                  <Users className="h-4 w-4 text-primary" />
+                </div>
+                <p className="text-xs text-muted-foreground font-bangla">
+                  নতুন সদস্য আবেদন যাচাই, শাখা অনুমোদন ও বহিষ্কারাদেশ ব্যবস্থাপনা
+                </p>
               </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Notices & Directives */}
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-3">
-            <div>
-              <CardTitle className="text-base">Official Circulars & Directives</CardTitle>
-              <p className="text-xs text-muted-foreground mt-0.5 font-bangla">
-                সর্বশেষ বিজ্ঞপ্তি ও নির্দেশনা
-              </p>
-            </div>
-            <Link href="/portal/communications">
-              <Button variant="ghost" size="sm" className="text-xs">
-                Broadcast Desk <ArrowRight className="h-3 w-3 ml-1" />
-              </Button>
             </Link>
-          </CardHeader>
-          <CardContent className="pt-0">
-            {notices.length === 0 ? (
-              <EmptyState
-                title="No Active Circulars"
-                titleBn="কোনো সক্রিয় বিজ্ঞপ্তি প্রকাশিত হয়নি"
-                description="Publish an official notice or dispatch an emergency SMS broadcast."
-              />
-            ) : (
-              <div className="divide-y divide-border">
-                {notices.slice(0, 4).map((n) => (
-                  <div key={n.id} className="py-2.5 space-y-0.5 text-xs">
-                    <p className="font-semibold text-foreground text-sm">{n.title}</p>
-                    {n.titleBn && (
-                      <p className="text-muted-foreground text-[11px] font-bangla">
-                        {n.titleBn}
-                      </p>
-                    )}
-                    <p className="text-[10px] text-muted-foreground font-mono">
-                      Published: {new Date(n.publishedAt || n.createdAt).toLocaleDateString()}
-                    </p>
-                  </div>
-                ))}
+
+            <Link href="/portal/finance">
+              <div className="p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors space-y-1.5 cursor-pointer">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-sm text-foreground">Treasury Desk & Slips</span>
+                  <CreditCard className="h-4 w-4 text-emerald-500" />
+                </div>
+                <p className="text-xs text-muted-foreground font-bangla">
+                  ব্যাংক ডিপোজিট স্লিপ ভেরিফিকেশন, ইনভয়েস তৈরি ও ডিজিটাল মানি রিসিপ্ট
+                </p>
               </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+            </Link>
+
+            <Link href="/portal/branches">
+              <div className="p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors space-y-1.5 cursor-pointer">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-sm text-foreground">Branch Hierarchy Tree</span>
+                  <ShieldCheck className="h-4 w-4 text-blue-500" />
+                </div>
+                <p className="text-xs text-muted-foreground font-bangla">
+                  অসীম শাখা নেটওয়ার্ক, সাব-শাখা ও কমিটি পদমর্যাদা বিন্যাস
+                </p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
