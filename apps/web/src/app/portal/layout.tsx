@@ -27,11 +27,13 @@ import {
   ChevronDown,
   ShieldCheck,
   Sparkles,
+  Download,
 } from "lucide-react";
 import { OrgLogo } from "@/components/brand/org-logo";
 import { RoleSelector } from "@/components/auth/role-selector";
 import { apiClient } from "@/lib/api-client";
 import { PortalFooter } from "@/components/portal/portal-footer";
+import { usePwa } from "@/components/pwa/pwa-provider";
 
 // The 13 Canonical Member Dashboard Menus
 const MEMBER_NAV_ITEMS = [
@@ -158,6 +160,7 @@ export default function PortalLayout({
   const [aboutDropdown, setAboutDropdown] = useState(false);
   const [projectsDropdown, setProjectsDropdown] = useState(false);
   const [updatesDropdown, setUpdatesDropdown] = useState(false);
+  const { canInstall, promptInstall } = usePwa();
 
   useEffect(() => {
     let isMounted = true;
@@ -373,6 +376,18 @@ export default function PortalLayout({
               </span>
             )}
 
+            {canInstall && (
+              <button
+                type="button"
+                onClick={promptInstall}
+                className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 text-xs font-semibold transition-all cursor-pointer shadow-sm"
+                title="Install Road Safety OS App"
+              >
+                <Download className="h-3.5 w-3.5 text-emerald-600" />
+                <span>Install App</span>
+              </button>
+            )}
+
             <RoleSelector />
 
             {/* The Dedicated Deep Forest Green "Log Out" Pill Button from Sample Mockup */}
@@ -557,7 +572,21 @@ export default function PortalLayout({
                 </nav>
               </div>
 
-              <div className="pt-4 border-t border-border mt-4">
+              <div className="pt-4 border-t border-border mt-4 space-y-2">
+                {canInstall && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      promptInstall();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
+                  >
+                    <Download className="h-4 w-4" />
+                    <span>Install App on Device</span>
+                  </button>
+                )}
+
                 <button
                   type="button"
                   onClick={handleLogout}

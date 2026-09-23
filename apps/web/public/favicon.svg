@@ -1,35 +1,34 @@
 <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="crestGold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stopColor="#FDE047" />
-      <stop offset="50%" stopColor="#EAB308" />
-      <stop offset="100%" stopColor="#CA8A04" />
-    </linearGradient>
-    <linearGradient id="crestBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stopColor="#1E293B" />
-      <stop offset="100%" stopColor="#020617" />
-    </linearGradient>
-    <linearGradient id="crestEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="rsmEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stopColor="#10B981" />
-      <stop offset="100%" stopColor="#059669" />
+      <stop offset="100%" stopColor="#047857" />
+    </linearGradient>
+    <linearGradient id="rsmDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#164e32" />
+      <stop offset="100%" stopColor="#0d3b25" />
+    </linearGradient>
+    <linearGradient id="rsmGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FBBF24" />
+      <stop offset="100%" stopColor="#D97706" />
     </linearGradient>
   </defs>
 
-  <!-- Base Circle -->
-  <circle cx="50" cy="50" r="48" fill="url(#crestBg)" stroke="url(#crestGold)" stroke-width="3" />
-  <circle cx="50" cy="50" r="44" stroke="url(#crestGold)" stroke-width="1.2" stroke-dasharray="2 3" opacity="0.85" />
+  <!-- Background Shield/Circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#rsmDark)" stroke="url(#rsmEmerald)" stroke-width="3.5" />
+  <circle cx="50" cy="50" r="43" stroke="url(#rsmGold)" stroke-width="1" stroke-dasharray="3 3" opacity="0.75" />
 
-  <!-- Octagonal Star of Integrity -->
-  <polygon points="50,16 62,38 84,50 62,62 50,84 38,62 16,50 38,38" fill="none" stroke="url(#crestGold)" stroke-width="0.9" opacity="0.4" />
+  <!-- Shield Shape -->
+  <path d="M50 18L74 27V48C74 64 64 76 50 82C36 76 26 64 26 48V27L50 18Z" fill="url(#rsmDark)" stroke="url(#rsmEmerald)" stroke-width="2.5" />
 
-  <!-- Open Book of Knowledge -->
-  <path d="M35 68C41 65 47 66 50 69C53 66 59 65 65 68V55C59 52 53 53 50 56C47 53 41 52 35 55V68Z" fill="url(#crestGold)" />
-  <line x1="50" y1="56" x2="50" y2="70" stroke="#0F172A" stroke-width="1.5" />
+  <!-- Highway Road Perspective -->
+  <path d="M42 75L47 38H53L58 75H42Z" fill="#061a10" opacity="0.9" />
+  
+  <!-- Road Center Dashed Line -->
+  <line x1="50" y1="42" x2="50" y2="48" stroke="url(#rsmGold)" stroke-width="2" stroke-linecap="round" />
+  <line x1="50" y1="53" x2="50" y2="61" stroke="url(#rsmGold)" stroke-width="2.2" stroke-linecap="round" />
+  <line x1="50" y1="66" x2="50" y2="74" stroke="url(#rsmGold)" stroke-width="2.5" stroke-linecap="round" />
 
-  <!-- Staff of Asclepius -->
-  <line x1="50" y1="23" x2="50" y2="58" stroke="url(#crestGold)" stroke-width="3.5" stroke-linecap="round" />
-  <circle cx="50" cy="21" r="3.5" fill="url(#crestGold)" />
-
-  <!-- Emerald Serpent -->
-  <path d="M48 27C55 28 55 33 49 35C43 37 43 43 51 45C57 47 55 52 49 53" stroke="url(#crestEmerald)" stroke-width="2.8" stroke-linecap="round" fill="none" />
+  <!-- Safety Star Apex -->
+  <circle cx="50" cy="27" r="3" fill="url(#rsmGold)" />
 </svg>

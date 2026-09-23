@@ -17,35 +17,35 @@ export default function AppleIcon() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: "36px",
-          background: "radial-gradient(circle at 50% 30%, #1e293b 0%, #020617 100%)",
-          border: "4px solid #eab308",
+          borderRadius: "38px",
+          background: "radial-gradient(circle at 50% 30%, #164e32 0%, #0d3b25 100%)",
+          border: "4px solid #10b981",
           color: "#ffffff",
           fontFamily: "sans-serif",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
         }}
       >
         <div
           style={{
-            fontSize: 76,
-            color: "#eab308",
+            fontSize: 72,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginBottom: 2,
+            marginBottom: 4,
           }}
         >
-          ⚕
+          🛡️
         </div>
         <div
           style={{
-            fontSize: 22,
+            fontSize: 24,
             fontWeight: 900,
-            letterSpacing: "3px",
-            color: "#fde047",
+            letterSpacing: "4px",
+            color: "#34d399",
             display: "flex",
           }}
         >
-          BMA
+          RSM
         </div>
       </div>
     ),

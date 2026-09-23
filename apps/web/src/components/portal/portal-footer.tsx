@@ -2,9 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Download, CheckCircle2 } from "lucide-react";
+import { usePwa } from "@/components/pwa/pwa-provider";
 
 export function PortalFooter() {
+  const { isInstalled, canInstall, promptInstall, isOnline } = usePwa();
+
   return (
     <footer className="w-full bg-[#0d3b25] text-emerald-50 mt-12 border-t border-emerald-800/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -63,35 +66,28 @@ export function PortalFooter() {
             </ul>
           </div>
 
-          {/* Column 3: Contact Us */}
+          {/* Column 3: Contact & Emergency Helpline */}
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-white tracking-wide uppercase font-mono border-b border-emerald-700/50 pb-1.5 inline-block">
-              Contact Us
+              Central Secretariat
             </h4>
-            <div className="space-y-2.5 text-xs text-emerald-100/90">
-              <div className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-amber-400 shrink-0" />
-                <span className="font-mono font-medium">01521 336 207</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-amber-400 shrink-0" />
-                <a
-                  href="mailto:roadsafetymovementbd@gmail.com"
-                  className="hover:underline hover:text-white"
-                >
-                  roadsafetymovementbd@gmail.com
-                </a>
-              </div>
-              <div className="flex items-start gap-2.5">
+            <div className="space-y-2 text-xs text-emerald-100/90">
+              <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
-                <span className="leading-snug">
-                  Commissioner market (2nd floor), Farmgate, Dhaka, Bangladesh
-                </span>
+                <span>RSM National Headquarters, Level 4, Farmgate, Dhaka-1215, Bangladesh</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-amber-400 shrink-0" />
+                <span className="font-mono font-semibold">Emergency Helpline: 01521 336 207</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-amber-400 shrink-0" />
+                <span>secretariat@roadsafetymovement.org</span>
               </div>
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-2.5 pt-2">
+            <div className="pt-2 flex items-center gap-2">
               <a
                 href="https://facebook.com"
                 target="_blank"
@@ -132,9 +128,33 @@ export function PortalFooter() {
           </div>
         </div>
 
-        {/* Copyright Bar */}
-        <div className="mt-8 pt-6 border-t border-emerald-800/60 text-center text-xs text-emerald-200/70 font-mono">
-          © 2026 Road Safety Movement (নিরাপদ সড়ক আন্দোলন). All Rights Reserved.
+        {/* Dynamic PWA Status & Copyright Bar */}
+        <div className="mt-8 pt-6 border-t border-emerald-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-emerald-200/80">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-700/50">
+              <span className={`w-2 h-2 rounded-full ${isOnline ? "bg-emerald-400 animate-pulse" : "bg-amber-400"}`} />
+              <span>{isOnline ? "PWA Online & Synced" : "PWA Offline Mode"}</span>
+            </span>
+            {isInstalled ? (
+              <span className="flex items-center gap-1 text-emerald-300">
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                <span>Installed App</span>
+              </span>
+            ) : canInstall ? (
+              <button
+                type="button"
+                onClick={promptInstall}
+                className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition-all cursor-pointer shadow-sm"
+              >
+                <Download className="h-3.5 w-3.5" />
+                <span>Install Road Safety App</span>
+              </button>
+            ) : null}
+          </div>
+
+          <div className="text-center sm:text-right">
+            © 2026 Road Safety Movement (নিরাপদ সড়ক আন্দোলন). All Rights Reserved.
+          </div>
         </div>
       </div>
     </footer>

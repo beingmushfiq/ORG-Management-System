@@ -16,16 +16,17 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #1e293b 0%, #020617 100%)",
-          border: "2px solid #eab308",
-          color: "#fde047",
-          fontSize: 18,
+          borderRadius: "8px",
+          background: "linear-gradient(135deg, #164e32 0%, #0d3b25 100%)",
+          border: "2px solid #10b981",
+          color: "#ffffff",
+          fontSize: 16,
           fontWeight: 900,
           fontFamily: "sans-serif",
+          letterSpacing: "-0.5px",
         }}
       >
-        ⚕
+        🛡️
       </div>
     ),
     {
