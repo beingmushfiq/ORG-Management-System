@@ -266,18 +266,12 @@ importers:
 
   apps/web:
     dependencies:
-      '@org/database':
-        specifier: workspace:*
-        version: link:../../packages/database
       '@org/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      ioredis:
-        specifier: ^5.5.0
-        version: 5.11.1(supports-color@8.1.1)
       lucide-react:
         specifier: ^1.16.0
         version: 1.47.0(react@19.3.0)

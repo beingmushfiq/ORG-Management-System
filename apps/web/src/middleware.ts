@@ -21,20 +21,32 @@ export function middleware(request: NextRequest) {
 
   // 1. Extract subdomain from hostname or fallback query param
   // Examples: "bma-ctg.saasplatform.com" -> "bma-ctg", "bma-ctg.localhost:3000" -> "bma-ctg"
+  const defaultTenant = process.env.NEXT_PUBLIC_DEFAULT_TENANT || "bma-ctg";
   let tenantSlug = "";
   const hostParts = hostname.split(".");
+  const isLocal = hostname.includes("localhost") || hostname.includes("127.0.0.1");
+  const isVercel = hostname.endsWith(".vercel.app");
 
-  if (hostname.includes("localhost") || hostname.includes("127.0.0.1")) {
+  if (isLocal) {
     if (hostParts.length > 1 && hostParts[0] !== "localhost" && hostParts[0] !== "www") {
       tenantSlug = hostParts[0]!;
     } else {
       // Local development fallback: ?org=bma-ctg
-      tenantSlug = url.searchParams.get("org") || "bma-ctg";
+      tenantSlug = url.searchParams.get("org") || defaultTenant;
+    }
+  } else if (isVercel) {
+    // Vercel deployment: e.g. bma-ctg.my-org.vercel.app vs my-org.vercel.app
+    if (hostParts.length > 3 && hostParts[0] !== "www") {
+      tenantSlug = hostParts[0]!;
+    } else {
+      tenantSlug = url.searchParams.get("org") || defaultTenant;
     }
   } else {
     // Production domain: e.g. bma-ctg.yourdomain.com
     if (hostParts.length >= 3 && hostParts[0] !== "www") {
       tenantSlug = hostParts[0]!;
+    } else {
+      tenantSlug = url.searchParams.get("org") || defaultTenant;
     }
   }
 

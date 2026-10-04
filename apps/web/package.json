@@ -10,10 +10,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@org/database": "workspace:*",
     "@org/ui": "workspace:*",
     "clsx": "^2.1.1",
-    "ioredis": "^5.5.0",
     "lucide-react": "^1.16.0",
     "next": "^15.1.7",
     "react": "^19.0.0",
