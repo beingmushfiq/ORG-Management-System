@@ -5,6 +5,7 @@ import { Public } from "./common/decorators/public.decorator";
 @Controller()
 export class AppController {
   @Get()
+  @Get("api")
   getRoot() {
     return {
       status: "online",
@@ -54,6 +55,7 @@ export class AppController {
   }
 
   @Get("health")
+  @Get("api/health")
   getHealth() {
     return {
       status: "healthy",

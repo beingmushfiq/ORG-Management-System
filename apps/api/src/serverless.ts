@@ -24,7 +24,9 @@ async function bootstrap(): Promise<express.Express> {
       credentials: true,
     });
 
-    app.setGlobalPrefix("api");
+    app.setGlobalPrefix("api", {
+      exclude: ["/", "health"],
+    });
 
     app.useGlobalPipes(
       new ValidationPipe({
@@ -41,11 +43,6 @@ async function bootstrap(): Promise<express.Express> {
 }
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
-  // Normalize root requests to /api prefix so NestJS global prefix matches
-  if (req.url && !req.url.startsWith("/api")) {
-    req.url = `/api${req.url === "/" ? "" : req.url}`;
-  }
-
   await bootstrap();
   server(req, res);
 }
