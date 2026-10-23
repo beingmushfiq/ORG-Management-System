@@ -49,7 +49,7 @@ export function DevCenterPointBranding({
       className={`pt-8 mt-12 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground ${className}`}
     >
       <div className="flex items-center gap-2">
-        <span>© {new Date().getFullYear()} Road Safety Movement (নিরাপদ সড়ক আন্দোলন) · All Rights Reserved.</span>
+        <span>© {new Date().getFullYear()} National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড) · All Rights Reserved.</span>
       </div>
 
       <div className="flex items-center gap-2">

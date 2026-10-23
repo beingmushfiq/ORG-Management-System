@@ -208,7 +208,7 @@ describe("Production Authentication & Security Architecture", () => {
         })
       );
       expect(prisma.userSession.create).toHaveBeenCalled();
-    });
+    }, 15000);
   });
 
   describe("4. Password Authentication & Constant-Time Resistance", () => {

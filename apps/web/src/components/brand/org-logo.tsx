@@ -16,10 +16,10 @@ export function OrgLogo({
   size = "md",
   variant = "full",
   className = "",
-  tenantName = "Road Safety Movement",
-  tenantNameBn = "নিরাপদ সড়ক আন্দোলন",
-  subtitle = "Estd. 2018 · Born from the Students' Movement",
-  subtitleBn = "২০১৮ সালের ঐতিহাসিক নিরাপদ সড়ক আন্দোলন থেকে প্রতিষ্ঠিত",
+  tenantName = "National Agricultural Olympiad",
+  tenantNameBn = "জাতীয় কৃষি অলিম্পিয়াড",
+  subtitle = "Season 2025 · Empowering Youth for Sustainable Agriculture",
+  subtitleBn = "টেকসই কৃষির রূপান্তরে তরুণ প্রজন্মের নেতৃত্ব",
 }: OrgLogoProps) {
   const dimension = {
     sm: 32,
@@ -28,7 +28,11 @@ export function OrgLogo({
     xl: 96,
   }[size];
 
-  const emblem = (
+  const isAgri =
+    tenantName.toLowerCase().includes("agri") ||
+    tenantName.toLowerCase().includes("olympiad");
+
+  const emblem = isAgri ? (
     <svg
       width={dimension}
       height={dimension}
@@ -39,84 +43,78 @@ export function OrgLogo({
       aria-label={`${tenantName} Official Insignia`}
     >
       <defs>
-        <linearGradient id="safetyAmberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#F59E0B" />
-          <stop offset="50%" stopColor="#EAB308" />
-          <stop offset="100%" stopColor="#D97706" />
+        <linearGradient id="agriSunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FBBF24" />
+          <stop offset="100%" stopColor="#F59E0B" />
         </linearGradient>
-        <linearGradient id="safetyGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#10B981" />
+        <linearGradient id="agriLeafGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#34D399" />
           <stop offset="100%" stopColor="#059669" />
         </linearGradient>
-        <linearGradient id="roadAsphalt" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#1E293B" />
-          <stop offset="100%" stopColor="#0F172A" />
+        <linearGradient id="agriDeepGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#064E3B" />
+          <stop offset="100%" stopColor="#022C22" />
         </linearGradient>
-        <filter id="rsmGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#F59E0B" floodOpacity="0.4" />
+        <filter id="agriGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#10B981" floodOpacity="0.35" />
         </filter>
       </defs>
 
-      {/* Protective Shield Outer Boundary */}
+      {/* Outer Emblem Shield / Circular Seal */}
+      <circle cx="50" cy="50" r="46" fill="url(#agriDeepGreen)" stroke="url(#agriSunGrad)" strokeWidth="3" />
+      <circle cx="50" cy="50" r="41" fill="none" stroke="#10B981" strokeWidth="1.2" strokeDasharray="3 2" opacity="0.8" />
+
+      {/* Golden Rising Sun */}
+      <circle cx="50" cy="38" r="14" fill="url(#agriSunGrad)" />
+
+      {/* Sun Rays */}
       <path
-        d="M50 8 L85 24 V52 C85 72 50 92 50 92 C50 92 15 72 15 52 V24 Z"
-        fill="url(#roadAsphalt)"
-        stroke="url(#safetyAmberGrad)"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
-
-      {/* Inner Accent Inlay Ring */}
-      <path
-        d="M50 14 L80 28 V52 C80 68 50 85 50 85 C50 85 20 68 20 52 V28 Z"
-        fill="none"
-        stroke="url(#safetyGreenGrad)"
-        strokeWidth="1.2"
-        strokeDasharray="3 2"
-        opacity="0.75"
-      />
-
-      {/* Dynamic Road Highway converging to horizon */}
-      <polygon
-        points="44,38 56,38 68,76 32,76"
-        fill="#020617"
-        stroke="#475569"
-        strokeWidth="1"
-      />
-
-      {/* Center Dashed Highway Dividing Line (Safety Yellow) */}
-      <line x1="50" y1="42" x2="50" y2="48" stroke="url(#safetyAmberGrad)" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="50" y1="52" x2="50" y2="60" stroke="url(#safetyAmberGrad)" strokeWidth="3" strokeLinecap="round" />
-      <line x1="50" y1="64" x2="50" y2="74" stroke="url(#safetyAmberGrad)" strokeWidth="3.5" strokeLinecap="round" />
-
-      {/* Pedestrian Crosswalk / Zebra Crossing Stripes */}
-      <line x1="38" y1="68" x2="44" y2="68" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.9" />
-      <line x1="56" y1="68" x2="62" y2="68" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" opacity="0.9" />
-
-      {/* Guiding Safety Star / Beacon of Hope */}
-      <circle cx="50" cy="30" r="4.5" fill="url(#safetyAmberGrad)" filter="url(#rsmGlow)" />
-      <path
-        d="M50 20 V25 M50 35 V40 M42 30 H45 M55 30 H58"
-        stroke="url(#safetyAmberGrad)"
-        strokeWidth="1.5"
+        d="M50 18 V22 M50 54 V58 M30 38 H34 M66 38 H70 M36 24 L39 27 M64 24 L61 27"
+        stroke="url(#agriSunGrad)"
+        strokeWidth="2"
         strokeLinecap="round"
       />
 
-      {/* Twin Protective Green Laurel Arcs */}
+      {/* Sprouting Plant Leaves (Left Leaf) */}
       <path
-        d="M24 50 C24 64 36 74 46 79"
-        stroke="url(#safetyGreenGrad)"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        fill="none"
+        d="M50 72 C42 62 30 54 34 40 C46 42 49 56 50 72 Z"
+        fill="url(#agriLeafGreen)"
+        filter="url(#agriGlow)"
       />
+
+      {/* Sprouting Plant Leaves (Right Leaf) */}
       <path
-        d="M76 50 C76 64 64 74 54 79"
-        stroke="url(#safetyGreenGrad)"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        fill="none"
+        d="M50 72 C58 62 70 54 66 40 C54 42 51 56 50 72 Z"
+        fill="#10B981"
       />
+
+      {/* Central Sprout Stem & Leaf Vein */}
+      <path
+        d="M50 78 V48 M50 54 C46 50 42 48 40 48 M50 58 C54 54 58 52 60 52"
+        stroke="#FFFFFF"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* Ground / Earth Furrows */}
+      <path
+        d="M26 80 Q50 74 74 80 M32 86 Q50 81 68 86"
+        stroke="url(#agriSunGrad)"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  ) : (
+    <svg
+      width={dimension}
+      height={dimension}
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="shrink-0 drop-shadow-md"
+    >
+      <circle cx="50" cy="50" r="46" fill="#0F172A" stroke="#F59E0B" strokeWidth="3" />
+      <path d="M50 20 L80 80 H20 Z" fill="#10B981" />
     </svg>
   );
 
@@ -125,27 +123,25 @@ export function OrgLogo({
   }
 
   return (
-    <div className={`inline-flex items-center gap-3.5 shrink-0 select-none ${className}`}>
+    <div className={`inline-flex items-center gap-3 select-none ${className}`}>
       {emblem}
-      <div className="flex flex-col justify-center min-w-0">
-        <div className="flex items-center gap-2 whitespace-nowrap">
-          <span className="font-extrabold text-slate-900 dark:text-white tracking-tight leading-none text-base sm:text-lg">
+      <div className="flex flex-col justify-center leading-none">
+        <div className="flex items-center gap-1.5">
+          <span className="font-extrabold text-foreground tracking-tight text-sm sm:text-base">
             {tenantName}
           </span>
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-extrabold tracking-wider uppercase bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-            RSM
+          <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+            2025
           </span>
         </div>
-        <div
-          className="text-[11px] text-slate-600 dark:text-slate-300 font-bangla font-medium tracking-wide mt-1 flex items-center gap-2"
-          title={`${tenantNameBn} — ${subtitleBn}`}
-        >
-          <span className="text-emerald-700 dark:text-emerald-400 font-bold">{tenantNameBn}</span>
-          <span className="w-1 h-1 rounded-full bg-slate-400 dark:bg-slate-600 hidden sm:inline-block" />
-          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono hidden sm:inline-block">
-            {subtitle}
-          </span>
+        <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 font-bangla mt-0.5">
+          {tenantNameBn}
         </div>
+        {subtitle && (
+          <div className="text-[10px] text-muted-foreground mt-0.5 hidden sm:block truncate max-w-[240px]">
+            {subtitle} {subtitleBn ? `· ${subtitleBn}` : ""}
+          </div>
+        )}
       </div>
     </div>
   );

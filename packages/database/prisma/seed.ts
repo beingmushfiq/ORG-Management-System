@@ -11,180 +11,159 @@ import {
 async function main() {
   console.info("🌱 Starting database seed...");
 
-  // 1. Create Demo Organization (Tenant): Road Safety Movement
-  const tenant = await prisma.organization.upsert({
-    where: { slug: "rsm-bd" },
+  // 1. Create Flagship Organization: National Agricultural Olympiad
+  const agriTenant = await prisma.organization.upsert({
+    where: { slug: "agriolympiad" },
     update: {
-      name: "Road Safety Movement",
-      nameBn: "নিরাপদ সড়ক আন্দোলন",
-      tagline: "Building a Safe, Sustainable, and Humane Road Transport System for All",
-      taglineBn: "একটি নিরাপদ, টেকসই ও মানবিক সড়ক যোগাযোগ ব্যবস্থা গড়ে তোলার প্রত্যয়ে",
-      primaryColorHsl: "38 92% 50%", // Safety Amber
-      accentColorHsl: "160 84% 39%",  // Signal Emerald
-      contactEmail: "secretariat@roadsafetymovement.org",
-      contactPhone: "+880 1819 778899",
-      headOfficeAddress: "National Secretariat, Dhaka, Bangladesh",
-      headOfficeAddressBn: "জাতীয় সচিবালয়, ঢাকা, বাংলাদেশ",
+      name: "National Agricultural Olympiad",
+      nameBn: "জাতীয় কৃষি অলিম্পিয়াড",
+      customDomain: "agriculturalolympiad.com",
+      tagline: "Empowering Youth to Shape a Sustainable Future for Bangladesh Agriculture",
+      taglineBn: "টেকসই কৃষির রূপান্তরে তরুণ প্রজন্মের নেতৃত্ব ও উদ্ভাবন",
+      primaryColorHsl: "142 76% 22%", // Forest Emerald Green (#0F5132)
+      accentColorHsl: "38 92% 50%",   // Harvest Sun Gold (#F59E0B)
+      contactEmail: "agriculturalolympiad@gmail.com",
+      contactPhone: "+880 1717-395047",
+      whatsappNumber: "+880 1717-395047",
+      headOfficeAddress: "House 04, Road 12/b, Sector 10, Uttara Model Town, Dhaka, Bangladesh",
+      headOfficeAddressBn: "বাড়ি ০৪, রোড ১২/বি, সেক্টর ১০, উত্তরা মডেল টাউন, ঢাকা, বাংলাদেশ",
+      tradeLicenseNumber: "03247/2023-2025",
+      defaultCurrency: "BDT",
+      aboutStoryHtml: "<p>The National Agricultural Olympiad is Bangladesh's pioneering nationwide competition and youth empowerment movement, dedicated to transforming smart farming, climate resilience, and food systems through scientific education.</p>",
+      aboutStoryHtmlBn: "<p>জাতীয় কৃষি অলিম্পিয়াড বাংলাদেশের সর্ববৃহৎ কৃষিভিত্তিক মেধা অন্বেষণ প্ল্যাটফর্ম—যা আধুনিক কৃষি প্রযুক্তি, জলবায়ু অভিযোজন এবং খাদ্য সুরক্ষায় শিক্ষার্থীদের সম্পৃক্ত করতে কাজ করে যাচ্ছে।</p>",
+      termsHtml: "<p>Official Terms and Conditions for participation in National Agricultural Olympiad Season 2025.</p>",
+      refundPolicyHtml: "<p>Refund applications accepted within 14 calendar days; refunds processed within 5-7 working days back to original channel.</p>",
+      privacyPolicyHtml: "<p>Student data is strictly protected under institutional data privacy guidelines.</p>",
+      deliveryPolicyHtml: "<p>Digital admit cards and e-certificates delivered within 24 hours; physical medals delivered within 3-7 business days.</p>",
     },
     create: {
-      name: "Road Safety Movement",
-      nameBn: "নিরাপদ সড়ক আন্দোলন",
-      slug: "rsm-bd",
-      tagline: "Building a Safe, Sustainable, and Humane Road Transport System for All",
-      taglineBn: "একটি নিরাপদ, টেকসই ও মানবিক সড়ক যোগাযোগ ব্যবস্থা গড়ে তোলার প্রত্যয়ে",
-      primaryColorHsl: "38 92% 50%", // Safety Amber
-      accentColorHsl: "160 84% 39%",  // Signal Emerald
-      contactEmail: "secretariat@roadsafetymovement.org",
-      contactPhone: "+880 1819 778899",
-      headOfficeAddress: "National Secretariat, Dhaka, Bangladesh",
-      headOfficeAddressBn: "জাতীয় সচিবালয়, ঢাকা, বাংলাদেশ",
-      aboutHtml: "<p>Road Safety Movement is a non-profit and voluntary organization that emerged from the historic 2018 Students' Safe Road Movement in Bangladesh.</p>",
-      aboutHtmlBn: "<p>নিরাপদ সড়ক আন্দোলন ২০১৮ সালের ঐতিহাসিক শিক্ষার্থীদের নিরাপদ সড়ক আন্দোলন থেকে প্রতিষ্ঠিত একটি অলাভজনক ও স্বেচ্ছাসেবী নাগরিক প্ল্যাটফর্ম।</p>",
-      eligibilityRuleJson: {
-        associateToGeneral: {
-          minContinuousActiveDays: 365,
-          requireZeroDues: true,
-          minActivityPoints: 30,
-        },
-        generalToLife: {
-          minContinuousActiveDays: 730,
-          requireZeroDues: true,
-          minActivityPoints: 80,
-        },
-      },
+      name: "National Agricultural Olympiad",
+      nameBn: "জাতীয় কৃষি অলিম্পিয়াড",
+      slug: "agriolympiad",
+      customDomain: "agriculturalolympiad.com",
+      tagline: "Empowering Youth to Shape a Sustainable Future for Bangladesh Agriculture",
+      taglineBn: "টেকসই কৃষির রূপান্তরে তরুণ প্রজন্মের নেতৃত্ব ও উদ্ভাবন",
+      primaryColorHsl: "142 76% 22%", // Forest Emerald Green
+      accentColorHsl: "38 92% 50%",   // Harvest Sun Gold
+      contactEmail: "agriculturalolympiad@gmail.com",
+      contactPhone: "+880 1717-395047",
+      whatsappNumber: "+880 1717-395047",
+      headOfficeAddress: "House 04, Road 12/b, Sector 10, Uttara Model Town, Dhaka, Bangladesh",
+      headOfficeAddressBn: "বাড়ি ০৪, রোড ১২/বি, সেক্টর ১০, উত্তরা মডেল টাউন, ঢাকা, বাংলাদেশ",
+      tradeLicenseNumber: "03247/2023-2025",
+      defaultCurrency: "BDT",
+      aboutStoryHtml: "<p>The National Agricultural Olympiad is Bangladesh's pioneering nationwide competition and youth empowerment movement, dedicated to transforming smart farming, climate resilience, and food systems through scientific education.</p>",
+      aboutStoryHtmlBn: "<p>জাতীয় কৃষি অলিম্পিয়াড বাংলাদেশের সর্ববৃহৎ কৃষিভিত্তিক মেধা অন্বেষণ প্ল্যাটফর্ম—যা আধুনিক কৃষি প্রযুক্তি, জলবায়ু অভিযোজন এবং খাদ্য সুরক্ষায় শিক্ষার্থীদের সম্পৃক্ত করতে কাজ করে যাচ্ছে।</p>",
+      termsHtml: "<p>Official Terms and Conditions for participation in National Agricultural Olympiad Season 2025.</p>",
+      refundPolicyHtml: "<p>Refund applications accepted within 14 calendar days; refunds processed within 5-7 working days back to original channel.</p>",
+      privacyPolicyHtml: "<p>Student data is strictly protected under institutional data privacy guidelines.</p>",
+      deliveryPolicyHtml: "<p>Digital admit cards and e-certificates delivered within 24 hours; physical medals delivered within 3-7 business days.</p>",
       smsGatewayConfigJson: {
         provider: "SSL_WIRELESS",
-        senderId: "RSM-BD",
+        senderId: "AGRI-OLYMP",
         apiKeyConfigured: false,
       },
     },
   });
 
-  console.info(`✅ Seeded Organization: ${tenant.name} (${tenant.slug})`);
+  console.info(`✅ Seeded Organization: ${agriTenant.name} (${agriTenant.slug}) with Trade License: ${agriTenant.tradeLicenseNumber}`);
 
-  // 2. Create Branch Hierarchy
-  const centralNode = await prisma.branchNode.create({
+  // 2. Branch Chapters for Agricultural Olympiad
+  const centralSecretariat = await prisma.branchNode.create({
     data: {
-      organizationId: tenant.id,
-      name: "National Executive Secretariat",
-      nameBn: "কেন্দ্রীয় কার্যনির্বাহী সচিবালয়",
-      code: "RSM-HQ",
-      levelLabel: "National HQ",
+      organizationId: agriTenant.id,
+      name: "National Organizing Secretariat (Uttara HQ)",
+      nameBn: "জাতীয় সমন্বয় সচিবালয় (উত্তরা)",
+      code: "AGRI-HQ",
+      levelLabel: "National Secretariat",
       depth: 0,
       materializedPath: "1",
+      address: "House 04, Road 12/b, Sector 10, Uttara Model Town, Dhaka",
+      contactPhone: "+880 1717-395047",
     },
   });
 
-  const divisionNode = await prisma.branchNode.create({
+  const bauChapter = await prisma.branchNode.create({
     data: {
-      organizationId: tenant.id,
-      parentId: centralNode.id,
-      name: "Dhaka Metropolitan Division Council",
-      nameBn: "ঢাকা মহানগর বিভাগীয় কাউন্সিল",
-      code: "RSM-DHK",
-      levelLabel: "Division",
+      organizationId: agriTenant.id,
+      parentId: centralSecretariat.id,
+      name: "Bangladesh Agricultural University Chapter (BAU)",
+      nameBn: "বাংলাদেশ কৃষি বিশ্ববিদ্যালয় চ্যাপ্টার (বাকৃবি)",
+      code: "AGRI-BAU",
+      levelLabel: "University Division",
       depth: 1,
-      materializedPath: `${centralNode.materializedPath}/1`,
+      materializedPath: `${centralSecretariat.materializedPath}/1`,
+      address: "BAU Campus, Mymensingh-2202",
     },
   });
 
-  const branchUnit = await prisma.branchNode.create({
+  const dhakaChapter = await prisma.branchNode.create({
     data: {
-      organizationId: tenant.id,
-      parentId: divisionNode.id,
-      name: "Dhaka University Central Campus Chapter",
-      nameBn: "ঢাকা বিশ্ববিদ্যালয় কেন্দ্রীয় চ্যাপ্টার",
-      code: "RSM-DU",
-      levelLabel: "Campus Chapter",
-      depth: 2,
-      materializedPath: `${divisionNode.materializedPath}/1`,
+      organizationId: agriTenant.id,
+      parentId: centralSecretariat.id,
+      name: "Dhaka Regional Coordination Council",
+      nameBn: "ঢাকা আঞ্চলিক সমন্বয় পরিষদ",
+      code: "AGRI-DHK",
+      levelLabel: "Division Chapter",
+      depth: 1,
+      materializedPath: `${centralSecretariat.materializedPath}/2`,
     },
   });
 
-  console.info(`✅ Seeded Branch Hierarchy: ${centralNode.name} -> ${divisionNode.name} -> ${branchUnit.name}`);
+  console.info(`✅ Seeded Agricultural Olympiad Branches: ${centralSecretariat.name} -> ${bauChapter.name}, ${dhakaChapter.name}`);
 
-  // 3. Create Key Governance Positions
-  const presidentPos = await prisma.position.create({
-    data: {
-      organizationId: tenant.id,
-      title: "President & Movement Convener",
-      titleBn: "সভাপতি ও আন্দোলন আহ্বায়ক",
-      rankOrder: 1,
-      isCentralRole: true,
-      defaultPermissions: ["MEMBERS:ALL", "FINANCE:ALL", "GOVERNANCE:ALL", "CIRCULAR:SIGN"],
-    },
+  // 3. Seed Courses in BDT
+  await prisma.course.createMany({
+    data: [
+      {
+        organizationId: agriTenant.id,
+        title: "Foundations of Smart Agriculture & Hydroponics",
+        titleBn: "স্মার্ট কৃষি ও হাইড্রোপনিক্স পরিচিতি",
+        slug: "smart-agriculture-hydroponics",
+        description: "Hands-on guide to soilless farming, nutrient solutions, and urban agriculture for junior students.",
+        pricePaisa: BigInt(15000), // BDT 150.00
+        category: "Junior Class (Grades 6-8)",
+        durationHours: 12,
+        lessonsCount: 10,
+        isPublished: true,
+      },
+      {
+        organizationId: agriTenant.id,
+        title: "Climate-Resilient Crop Management & Soil Health",
+        titleBn: "জলবায়ু সহনশীল শস্য ব্যবস্থাপনা ও মৃত্তিকা স্বাস্থ্য",
+        slug: "climate-resilient-crops",
+        description: "Techniques for managing saline, drought, and flood-prone agricultural ecosystems.",
+        pricePaisa: BigInt(25000), // BDT 250.00
+        category: "Secondary Class (Grades 9-10)",
+        durationHours: 18,
+        lessonsCount: 15,
+        isPublished: true,
+      },
+      {
+        organizationId: agriTenant.id,
+        title: "Agricultural Biotechnology & Genetic Improvement",
+        titleBn: "কৃষি বায়োটেকনোলজি ও জেনেটিক উন্নয়ন",
+        slug: "agricultural-biotechnology",
+        description: "Plant tissue culture, molecular markers, and modern genetic tools in crop science.",
+        pricePaisa: BigInt(35000), // BDT 350.00
+        category: "Higher Secondary (Grades 11-12)",
+        durationHours: 24,
+        lessonsCount: 20,
+        isPublished: true,
+      },
+    ],
   });
 
-  const gsPos = await prisma.position.create({
-    data: {
-      organizationId: tenant.id,
-      title: "General Secretary",
-      titleBn: "সাধারণ সম্পাদক",
-      rankOrder: 2,
-      isCentralRole: true,
-      defaultPermissions: ["MEMBERS:ALL", "FINANCE:ALL", "GOVERNANCE:ALL", "CIRCULAR:SIGN", "EVENTS:ALL"],
-    },
-  });
+  console.info("✅ Seeded Courses in BDT.");
 
-  const researchPos = await prisma.position.create({
-    data: {
-      organizationId: tenant.id,
-      title: "Director of Research & Blackspot Mapping",
-      titleBn: "গবেষণা ও ব্ল্যাকস্পট ম্যাপিং পরিচালক",
-      rankOrder: 3,
-      isCentralRole: true,
-      defaultPermissions: ["RESEARCH:ALL", "AUDIT:RUN", "DATA:PUBLISH"],
-    },
-  });
-
-  // 4. Create Demo Admin / Executive User
-  const demoLeader = await prisma.user.create({
-    data: {
-      organizationId: tenant.id,
-      email: "convener@roadsafetymovement.org",
-      phone: "+8801819778899",
-      passwordHash: "$2b$10$EpRnTzVlqHNP0.fUbXUwSOyUIXe/0FgpT3N.rYqWwzLqfI4p2FkK.", // hashed demo password
-      fullName: "Engr. Tanvir Ahmed",
-      fullNameBn: "প্রকৌশলী তানভীর আহমেদ",
-      bloodGroup: "O+",
-      occupation: "Transport Systems Researcher & Safe Road Activist",
-      bio: "Founding organizer from the 2018 Students' Safe Road Movement, championing zero traffic crash fatalities.",
-    },
-  });
-
-  // Assign Central President Position
-  await prisma.userPosition.create({
-    data: {
-      organizationId: tenant.id,
-      userId: demoLeader.id,
-      positionId: presidentPos.id,
-      branchNodeId: centralNode.id,
-      committeeTermName: "National Executive Council 2026-2028",
-      termStartDate: new Date("2026-01-01"),
-      isActive: true,
-    },
-  });
-
-  // Create Executive Fellow Membership Record
-  await prisma.membership.create({
-    data: {
-      organizationId: tenant.id,
-      userId: demoLeader.id,
-      tier: MembershipTier.LIFE,
-      status: MemberStatus.ACTIVE,
-      membershipNumber: "RSM-VOL-2018-001",
-      securityHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    },
-  });
-
-  // 5. Seed Public Notices & Events
+  // 4. Seed Notice & Events for Season 2025
   await prisma.notice.create({
     data: {
-      organizationId: tenant.id,
-      title: "Press Release: Demand for Official Paradigm Shift from 'Accident' to 'Road Crash'",
-      titleBn: "বিজ্ঞপ্তি: সড়ক নিরাপত্তা নিশ্চিতকরণে ‘দুর্ঘটনা’ নয়, ‘রোড ক্র্যাশ’ শব্দ ব্যবহারের আহ্বান",
-      contentHtml: "<p>Road Safety Movement strongly calls upon the press, judiciary, and government agencies to reject the term 'accident' when referring to preventable collisions caused by recklessness or mechanical neglect.</p>",
-      contentHtmlBn: "<p>সড়ক দুর্ঘটনামুক্ত করার লক্ষ্যে গণমাধ্যম ও নীতিমালায় 'দুর্ঘটনা' শব্দের পরিবর্তে দায়বদ্ধতামূলক 'রোড ক্র্যাশ' শব্দ ব্যবহারের জন্য জোরালো আহ্বান জানাচ্ছে নিরাপদ সড়ক আন্দোলন।</p>",
+      organizationId: agriTenant.id,
+      title: "Announcement: National Agricultural Olympiad 2025 Season 2 Registration Open",
+      titleBn: "জরুরি বিজ্ঞপ্তি: জাতীয় কৃষি অলিম্পিয়াড ২০২৫ সিজন ২ নিবন্ধন শুরু",
+      contentHtml: "<p>Registration is officially live for Junior, Secondary, and Higher Secondary students across all 64 districts. Early bird fee is BDT 70.00 payable via SSLCommerz.</p>",
+      contentHtmlBn: "<p>দেশব্যাপী ৬৪টি জেলার স্কুল ও কলেজ শিক্ষার্থীদের জন্য জাতীয় কৃষি অলিম্পিয়াড ২০২৫-এর নিবন্ধন শুরু হয়েছে। নিবন্ধন ফি ৭০.০০ টাকা (SSLCommerz-এর মাধ্যমে প্রদেয়)।</p>",
       isPublic: true,
       isPinned: true,
     },
@@ -192,58 +171,22 @@ async function main() {
 
   await prisma.event.create({
     data: {
-      organizationId: tenant.id,
-      branchNodeId: centralNode.id,
-      title: "8th National Safe Road Youth Summit & Blackspot Audit 2026",
-      titleBn: "৮ম জাতীয় নিরাপদ সড়ক যুব সম্মেলন ও ব্ল্যাকস্পট অডিট ২০২৬",
-      description: "Gathering of 9,010+ volunteers across 64 districts, presenting data-driven blackspot surveys and youth policy charters.",
-      venue: "Bangabandhu International Conference Center (BICC), Dhaka",
-      venueBn: "বঙ্গবন্ধু আন্তর্জাতিক সম্মেলন কেন্দ্র (বিআইসিসি), ঢাকা",
-      startTime: new Date("2026-10-22T09:00:00Z"),
-      endTime: new Date("2026-10-23T18:00:00Z"),
-      ticketFeePaisa: BigInt(0), // Free voluntary event
-      pointsAwarded: 50,
+      organizationId: agriTenant.id,
+      branchNodeId: centralSecretariat.id,
+      title: "National Agricultural Olympiad 2025 — Grand Finale & Award Gala",
+      titleBn: "জাতীয় কৃষি অলিম্পিয়াড ২০২৫ — গ্র্যান্ড ফিনালে ও পুরস্কার বিতরণী",
+      description: "Final rounds, agricultural research tour, laptop awards, and ceremonial recognition for top national performers.",
+      venue: "Bangladesh Agricultural University (BAU) Auditorium, Mymensingh",
+      venueBn: "বাংলাদেশ কৃষি বিশ্ববিদ্যালয় অডিটোরিয়াম, ময়মনসিংহ",
+      startTime: new Date("2026-11-20T09:00:00Z"),
+      endTime: new Date("2026-11-21T18:00:00Z"),
+      ticketFeePaisa: BigInt(7000), // BDT 70.00
+      pointsAwarded: 100,
       isPublic: true,
     },
   });
 
-  // 6. Seed Official Executive Governance Meeting & Numbered Resolution
-  const executiveMeeting = await prisma.meeting.create({
-    data: {
-      organizationId: tenant.id,
-      branchNodeId: centralNode.id,
-      title: "1st Ordinary Session of National Executive Council (Term 2026-2028)",
-      titleBn: "জাতীয় কার্যনির্বাহী পরিষদের ১ম সাধারণ সভা (মেয়াদ ২০২৬-২০২৮)",
-      category: "CENTRAL_EXECUTIVE_COUNCIL",
-      status: MeetingStatus.MINUTES_APPROVED,
-      scheduledAt: new Date("2026-02-10T11:00:00Z"),
-      venue: "National Secretariat Council Hall, Dhaka",
-      venueBn: "জাতীয় সচিবালয় পরিষদ কক্ষ, ঢাকা",
-      presidedById: demoLeader.id,
-      recordedById: gsPos.id,
-      quorumCount: 19,
-      totalEligibleCount: 21,
-      minutesHtml: "<p>The council convened under the leadership of Engr. Tanvir Ahmed. 64-District branch reports ratified.</p>",
-      minutesHtmlBn: "<p>প্রকৌশলী তানভীর আহমেদের সভাপতিত্বে জাতীয় কার্যনির্বাহী সভা অনুষ্ঠিত হয়। ৬৪ জেলার শাখা প্রতিবেদন অনুমোদিত হয়।</p>",
-      approvedAt: new Date("2026-02-12T14:00:00Z"),
-      approvedById: demoLeader.id,
-    },
-  });
-
-  await prisma.meetingResolution.create({
-    data: {
-      organizationId: tenant.id,
-      meetingId: executiveMeeting.id,
-      resolutionNumber: "RES-RSM-2026-001",
-      agendaTitle: "Ratification of 420 Highway Blackspot Audit & Emergency Victim Fund",
-      decisionText: "Unanimously resolved that 420 surveyed blackspots will receive civic barricades, and 25% of annual contributions are reserved for direct victim medical relief.",
-      decisionTextBn: "সর্বসম্মতভাবে সিদ্ধান্ত গৃহীত হয় যে ৪২০টি ব্ল্যাকস্পটে নাগরিক ট্রাফিক সমাধান বাস্তবায়ন এবং বার্ষিক তহবিলের ২৫% সরাসরি ভিকটিমদের জরুরি চিকিৎসা অনুদানে সংরক্ষিত থাকবে।",
-      isUnanimous: true,
-      status: "ADOPTED",
-    },
-  });
-
-  console.info("🎉 Road Safety Movement database seeding completed successfully!");
+  console.info("🎉 Agricultural Olympiad database seeding completed successfully!");
 }
 
 main()

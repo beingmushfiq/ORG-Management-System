@@ -95,10 +95,28 @@ model Organization {
   accentColorHsl        String        @default("38 92% 50%") @db.VarChar(32)
   contactEmail          String?       @db.VarChar(191)
   contactPhone          String?       @db.VarChar(64)
+  whatsappNumber        String?       @db.VarChar(64)
   headOfficeAddress     String?       @db.VarChar(255)
   headOfficeAddressBn   String?       @db.VarChar(255)
   socialLinksJson       Json?         // { facebook, twitter, linkedin, youtube }
   bylawsPdfUrl          String?       @db.VarChar(500)
+  
+  // Statutory Compliance & Merchant Metadata
+  tradeLicenseNumber    String?       @db.VarChar(128) // e.g. "03247/2023-2025"
+  tinNumber             String?       @db.VarChar(128)
+  defaultCurrency       String        @default("BDT") @db.VarChar(8)
+  
+  // Dynamic Legal Policies CMS (English + বাংলা)
+  termsHtml             String?       @db.Text
+  termsHtmlBn           String?       @db.Text
+  refundPolicyHtml      String?       @db.Text
+  refundPolicyHtmlBn    String?       @db.Text
+  privacyPolicyHtml     String?       @db.Text
+  privacyPolicyHtmlBn   String?       @db.Text
+  deliveryPolicyHtml    String?       @db.Text
+  deliveryPolicyHtmlBn  String?       @db.Text
+  aboutStoryHtml        String?       @db.Text
+  aboutStoryHtmlBn      String?       @db.Text
   
   // Dynamic JSON Rules & Gateways
   eligibilityRuleJson   Json?         // Custom per-tenant progression rules
@@ -116,6 +134,7 @@ model Organization {
   notices               Notice[]
   galleryAlbums         GalleryAlbum[]
   donationCauses        DonationCause[]
+  courses               Course[]
   elections             Election[]
   auditLogs             AuditLog[]
   meetings              Meeting[]
@@ -610,5 +629,27 @@ model ImpersonationLog {
 
   @@index([targetOrganizationId, startedAt])
   @@index([actorId])
+}
+
+// -----------------------------------------------------------------------------
+// 14. COURSES & ACADEMIC MODULES
+// -----------------------------------------------------------------------------
+model Course {
+  id              String        @id @default(uuid())
+  organizationId  String
+  organization    Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  title           String        @db.VarChar(255)
+  titleBn         String?       @db.VarChar(255)
+  slug            String        @db.VarChar(191)
+  description     String?       @db.Text
+  coverImageUrl   String?       @db.VarChar(500)
+  pricePaisa      BigInt        @default(0) // Integer paisa: 7000 = BDT 70.00
+  isPublished     Boolean       @default(true)
+  category        String        @db.VarChar(64) // "Junior", "Secondary", "Higher Secondary", "Agri-Tech"
+  durationHours   Int           @default(10)
+  lessonsCount    Int           @default(5)
+  createdAt       DateTime      @default(now())
+
+  @@index([organizationId, isPublished])
 }
 

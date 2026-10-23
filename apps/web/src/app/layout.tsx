@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import React, { Suspense } from "react";
-import { Plus_Jakarta_Sans, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -9,22 +8,8 @@ import { TopNavLoader } from "@/components/ui/top-nav-loader";
 import { AccessibilityDock } from "@/components/ui/accessibility-dock";
 import { PwaProvider } from "@/components/pwa/pwa-provider";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const hindSiliguri = Hind_Siliguri({
-  subsets: ["bengali"],
-  variable: "--font-bangla",
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
 export const viewport: Viewport = {
-  themeColor: "#164e32",
+  themeColor: "#0f5132",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -32,58 +17,48 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন) — Institutional Operating System",
-    template: "%s | Road Safety Movement",
+    default: "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড) — Official Platform",
+    template: "%s | National Agricultural Olympiad",
   },
   description:
-    "Bangladesh's largest volunteer organization for road safety, established through the historic 2018 student-led Road Safety Movement. 9,010+ volunteers, 82 committees across 64 districts, crash registry, blackspot audits, and victim support fund.",
+    "Empowering youth to shape a sustainable future for Bangladesh agriculture. Join the National Agricultural Olympiad 2025 Season 2 & 3 across all 64 districts. Trade License: 03247/2023-2025.",
   keywords: [
-    "Road Safety Movement",
-    "নিরাপদ সড়ক আন্দোলন",
-    "Safe Road Movement 2018",
-    "Road Transport Act 2018",
-    "Road Crash Prevention",
-    "Black Spot Elimination",
-    "Victim Support Fund",
-    "Student Volunteer Brigade",
-    "Highway Safety Bangladesh",
+    "National Agricultural Olympiad",
+    "জাতীয় কৃষি অলিম্পিয়াড",
+    "Bangladesh Agricultural Olympiad",
+    "Smart Agriculture",
+    "Youth Leadership",
+    "Climate Resilient Farming",
+    "Agricultural Olympiad 2025",
+    "BAU Mymensingh",
   ],
   authors: [
-    { name: "Road Safety Movement National Secretariat", url: "https://www.roadsafetymovement.org" },
+    { name: "National Agricultural Olympiad Secretariat", url: "https://agriculturalolympiad.com" },
     { name: "DevCenterPoint", url: "https://devcenterpoint.com" },
   ],
-  creator: "Road Safety Movement & DevCenterPoint",
-  publisher: "Road Safety Movement",
+  creator: "National Agricultural Olympiad",
+  publisher: "National Agricultural Olympiad",
   manifest: "/manifest.json",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
     ],
-    apple: [
-      { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
-    ],
-  },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "RSM App",
   },
   openGraph: {
-    title: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন) — Institutional Operating System",
+    title: "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)",
     description:
-      "Transforming road transport into a safe, sustainable, and humane system for all. 9,010+ volunteers across 82 committees.",
-    url: "https://www.roadsafetymovement.org",
-    siteName: "Road Safety Movement",
+      "Empowering youth to shape a sustainable future for Bangladesh agriculture. All 64 districts participating.",
+    url: "https://agriculturalolympiad.com",
+    siteName: "National Agricultural Olympiad",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
+    title: "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)",
     description:
-      "Transforming road transport into a safe, sustainable, and humane system for all.",
+      "Empowering youth to shape a sustainable future for Bangladesh agriculture.",
   },
 };
 
@@ -93,7 +68,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} ${hindSiliguri.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased min-h-screen relative selection:bg-amber-500/30 selection:text-foreground">
         <ThemeProvider defaultTheme="light" storageKey="rsm-ui-theme">
           <PwaProvider>

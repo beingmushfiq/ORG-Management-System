@@ -223,6 +223,9 @@ describe("Strict Multi-Tenant & Security Boundary Enforcement", () => {
 
       const mockContext = {
         getHandler: () => {},
+        switchToHttp: () => ({
+          getRequest: () => ({}),
+        }),
       } as unknown as ExecutionContext;
 
       const guard = new PermissionGuard(mockReflector, mockCls);
@@ -264,6 +267,9 @@ describe("Strict Multi-Tenant & Security Boundary Enforcement", () => {
 
       const mockContext = {
         getHandler: () => {},
+        switchToHttp: () => ({
+          getRequest: () => ({}),
+        }),
       } as unknown as ExecutionContext;
 
       const guard = new PermissionGuard(mockReflector, mockCls);
