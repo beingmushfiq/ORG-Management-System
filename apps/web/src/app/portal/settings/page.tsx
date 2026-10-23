@@ -143,7 +143,7 @@ export default function MemberSettingsPage() {
                 <div className="space-y-0.5">
                   <p className="text-xs font-semibold text-foreground">Emergency SMS Broadcasts</p>
                   <p className="text-[11px] text-muted-foreground">
-                    Receive urgent road safety alerts & blood donation calls
+                    Receive urgent Olympiad notifications, admit card alerts & venue updates
                   </p>
                 </div>
                 <input

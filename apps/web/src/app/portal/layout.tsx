@@ -175,8 +175,8 @@ export default function PortalLayout({
           setUser({
             fullName: "Tanvir Rahman",
             fullNameBn: "তানভীর তানভীর",
-            email: "convener@roadsafetymovement.org",
-            membershipNumber: "18-23",
+            email: "admin@agriculturalolympiad.com",
+            membershipNumber: "NAO-2025-0104",
           });
         }
       })
@@ -188,8 +188,8 @@ export default function PortalLayout({
           setUser({
             fullName: "Tanvir Rahman",
             fullNameBn: "তানভীর তানভীর",
-            email: "convener@roadsafetymovement.org",
-            membershipNumber: "18-23",
+            email: "admin@agriculturalolympiad.com",
+            membershipNumber: "NAO-2025-0104",
           });
         } else {
           router.push(`/login?returnUrl=${encodeURIComponent(pathname || "/portal")}`);
@@ -348,7 +348,7 @@ export default function PortalLayout({
                     href="/journal"
                     className="block px-3 py-2 rounded-lg text-xs hover:bg-muted text-foreground transition-colors"
                   >
-                    Road Crash Data & Journal
+                    Youth Agri-Science Journal
                   </Link>
                   <Link
                     href="/gallery"
@@ -381,7 +381,7 @@ export default function PortalLayout({
                 type="button"
                 onClick={promptInstall}
                 className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 text-xs font-semibold transition-all cursor-pointer shadow-sm"
-                title="Install Road Safety OS App"
+                title="Install Agricultural Olympiad App"
               >
                 <Download className="h-3.5 w-3.5 text-emerald-600" />
                 <span>Install App</span>

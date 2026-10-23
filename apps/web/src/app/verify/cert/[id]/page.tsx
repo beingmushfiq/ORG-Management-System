@@ -41,49 +41,49 @@ interface CertificateRecord {
 }
 
 const MOCK_CERT_REGISTRY: Record<string, CertificateRecord> = {
-  "CERT-2026-001": {
-    certId: "CERT-2026-001",
-    title: "Fellow of Permanent Activist Council Conferral",
-    titleBn: "স্থায়ী সংগঠক পরিষদ সনদপত্র",
-    category: "LIFE_MEMBERSHIP",
-    recipientName: "Engr. Tanvir Ahmed",
-    recipientNameBn: "প্রকৌশলী তানভীর আহমেদ",
-    membershipId: "RSM-VOL-2018-001",
-    issueDate: "February 20, 2026",
-    validThrough: "Perpetual / Lifetime Standing",
+  "CERT-2025-001": {
+    certId: "CERT-2025-001",
+    title: "National Olympiad Champion & Merit Fellowship Award",
+    titleBn: "জাতীয় কৃষি অলিম্পিয়াড চ্যাম্পিয়ন ও গবেষণা মেধা ফেলোশিপ",
+    category: "EXCELLENCE_AWARD",
+    recipientName: "Tanvir Rahman",
+    recipientNameBn: "তানভীর রহমান",
+    membershipId: "NAO-STU-2025-0104",
+    issueDate: "November 21, 2025",
+    validThrough: "Perpetual Academic Merit",
     signatories: [
-      { name: "Advocate Shafiul Alam", designation: "Chief Coordinator", designationBn: "প্রধান সমন্বয়ক" },
-      { name: "Nusrat Jahan", designation: "General Secretary", designationBn: "সাধারণ সম্পাদক" },
+      { name: "Prof. Dr. A. K. Azad", designation: "National Convener & VC, BAU", designationBn: "জাতীয় আহ্বায়ক ও বাকৃবি উপাচার্য" },
+      { name: "Dr. Kazi Mostafa Kamal", designation: "Chief Scientific Officer, BARI", designationBn: "প্রধান বৈজ্ঞানিক কর্মকর্তা, বারি" },
     ],
     securityHash: "9f83c6b749d62d26f63beec29124be70df0498b8c9b91eb9725f57a94ee2e185",
-    issuerOrg: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
-    issuerOrgBn: "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়",
+    issuerOrg: "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)",
+    issuerOrgBn: "জাতীয় কৃষি অলিম্পিয়াড — কেন্দ্রীয় সচিবালয়",
     isRevoked: false,
   },
-  "CERT-2026-042": {
-    certId: "CERT-2026-042",
-    title: "Road Safety & First-Response Emergency Accreditation",
-    titleBn: "সড়ক নিরাপত্তা ও জরুরি উদ্ধার ব্যবস্থাপনা স্বীকৃতি",
+  "CERT-2025-042": {
+    certId: "CERT-2025-042",
+    title: "Certified Smart Agriculture & Climate-Resilience Young Innovator",
+    titleBn: "স্মার্ট কৃষি ও জলবায়ু সহনশীল তরুণ উদ্ভাবক সনদপত্র",
     category: "TRAINING_ACCREDITATION",
-    recipientName: "Nusrat Jahan",
-    recipientNameBn: "নুসরাত জাহান",
-    membershipId: "RSM-ACT-2019-042",
-    issueDate: "June 12, 2025",
-    validThrough: "June 11, 2028",
+    recipientName: "Nafisa Jahan",
+    recipientNameBn: "নাফিসা জাহান",
+    membershipId: "NAO-STU-2025-0422",
+    issueDate: "August 12, 2025",
+    validThrough: "August 11, 2028",
     signatories: [
-      { name: "Engr. Tanvir Ahmed", designation: "Academic Convener", designationBn: "একাডেমিক আহ্বায়ক" },
-      { name: "Advocate Shafiul Alam", designation: "Secretary General", designationBn: "মহাসচিব" },
+      { name: "Prof. Dr. Mahmudul Hasan", designation: "Academic Council Lead", designationBn: "অ্যাকাডেমিক কাউন্সিল প্রধান" },
+      { name: "Prof. Dr. A. K. Azad", designation: "National Convener", designationBn: "জাতীয় আহ্বায়ক" },
     ],
     securityHash: "3cb3416e788e04b4d7f57cb8f076b3f71c4c81a5336bf729524024316d3f2fc6",
-    issuerOrg: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
-    issuerOrgBn: "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়",
+    issuerOrg: "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)",
+    issuerOrgBn: "জাতীয় কৃষি অলিম্পিয়াড — কেন্দ্রীয় সচিবালয়",
     isRevoked: false,
   },
 };
 
 export default function CertificateVerificationPage() {
   const params = useParams();
-  const rawId = (params["id"] as string) || "CERT-2026-001";
+  const rawId = (params["id"] as string) || "CERT-2025-001";
   const certId = decodeURIComponent(rawId).toUpperCase();
 
   const [isScanning, setIsScanning] = useState(true);
@@ -94,20 +94,20 @@ export default function CertificateVerificationPage() {
     const timer = setTimeout(() => {
       const match = MOCK_CERT_REGISTRY[certId] ?? {
         certId,
-        title: "Official Institutional Credential",
-        titleBn: "প্রাতিষ্ঠানিক অফিসিয়াল সনদপত্র",
-        category: "LIFE_MEMBERSHIP" as const,
-        recipientName: "Verified Activist",
-        recipientNameBn: "যাচাইকৃত সক্রিয় সংগঠক",
-        membershipId: "RSM-VOL-AUTO",
+        title: "Official National Agricultural Olympiad Credential",
+        titleBn: "জাতীয় কৃষি অলিম্পিয়াড অফিসিয়াল মেধা সনদপত্র",
+        category: "EXCELLENCE_AWARD" as const,
+        recipientName: "Verified Candidate",
+        recipientNameBn: "যাচাইকৃত অলিম্পিয়াড প্রতিযোগী",
+        membershipId: "NAO-STU-AUTO",
         issueDate: "January 1, 2026",
         validThrough: "December 31, 2028",
         signatories: [
-          { name: "Chief Coordinator", designation: "Central Executive", designationBn: "কেন্দ্রীয় নির্বাহী" },
+          { name: "Prof. Dr. A. K. Azad", designation: "National Convener", designationBn: "জাতীয় আহ্বায়ক" },
         ],
         securityHash: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-        issuerOrg: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
-        issuerOrgBn: "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়",
+        issuerOrg: "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)",
+        issuerOrgBn: "জাতীয় কৃষি অলিম্পিয়াড — কেন্দ্রীয় সচিবালয়",
         isRevoked: false,
       };
       setRecord(match);
@@ -337,7 +337,7 @@ export default function CertificateVerificationPage() {
 
       {/* Footer */}
       <footer className="border-t border-border py-6 px-6 text-center text-xs text-muted-foreground font-mono">
-        Official Verification Engine · Secured with SHA-256 Ledger · Road Safety Movement
+        Official Verification Engine · Secured with SHA-256 Ledger · National Agricultural Olympiad (Trade License: 03247/2023-2025)
       </footer>
     </div>
   );

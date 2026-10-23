@@ -6,20 +6,19 @@ import {
   ShieldCheck,
   Sparkles,
   CheckCircle2,
-  ArrowLeft,
   AlertTriangle,
 } from "lucide-react";
 import { Button } from "@org/ui";
 import Link from "next/link";
-import { OrgLogo } from "@/components/brand/org-logo";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { InstitutionalHeader } from "@/components/layout/institutional-header";
+import { InstitutionalFooter } from "@/components/layout/institutional-footer";
 import { soundEffects } from "@/lib/audio-effects";
 
 interface CauseItem {
   id: string;
   title: string;
   titleBn: string;
-  category: "BLACKSPOT" | "VICTIM_AID" | "SCHOOL_SAFETY" | "HELMET_DRIVE";
+  category: "AGRI_LABS" | "YOUTH_GRANTS" | "FELLOWSHIPS" | "SCHOLARSHIPS";
   categoryLabel: string;
   categoryLabelBn: string;
   targetPaisa: bigint;
@@ -34,83 +33,83 @@ interface CauseItem {
 
 const CAUSES_DATA: CauseItem[] = [
   {
-    id: "cause-blackspot-420",
-    title: "Nationwide 420 Highway Blackspot Elimination & Warning Network",
-    titleBn: "সারাদেশে ৪২০টি বিপজ্জনক কালো স্থান সংস্কার ও সতর্কতা সংকেত স্থাপন",
-    category: "BLACKSPOT",
-    categoryLabel: "Highway Engineering",
-    categoryLabelBn: "মহাসড়ক প্রকৌশল",
+    id: "cause-school-agrolabs",
+    title: "Nationwide High School Smart-Agro Labs & Hydroponics Kits",
+    titleBn: "সারাদেশে মাধ্যমিক বিদ্যালয়ে স্মার্ট এগ্রো-ল্যাব ও হাইড্রোপনিক্স কিট স্থাপন",
+    category: "AGRI_LABS",
+    categoryLabel: "School Innovation",
+    categoryLabelBn: "বিদ্যালয় উদ্ভাবন",
     targetPaisa: 500000000n, // 50,00,000 BDT
     raisedPaisa: 384500000n, // 38,45,000 BDT
     donorCount: 642,
     description:
-      "Direct civic intervention at surveyed high-fatality highway blind spots: installing solar-powered blinkers, high-grade convex mirrors, rumble strips, and illuminated chevron signs across 8 divisions.",
+      "Deploying soilless hydroponics units, soil testing kits, and IoT moisture sensors across 100 rural high schools to inspire practical agricultural science from grade 6 to 10.",
     descriptionBn:
-      "৮টি বিভাগের বিপজ্জনক মহাসড়ক ব্লাইন্ড স্পটগুলোতে সোলার ব্লিঙ্কার, কনভেক্স মিরর, রাম্বল স্ট্রিপস এবং রিফ্লেক্টিভ সাইনবোর্ড স্থাপন কর্মসূচি।",
-    bankAccount: "Road Safety Movement Blackspot Fund A/C: 104-120-449102",
-    routingNo: "Sonali Bank PLC, High Court Branch, Dhaka",
+      "১০০টি গ্রামীণ বিদ্যালয়ে সয়েল টেস্টিং কিট, হাইড্রোপনিক্স ইউনিট এবং আইওটি আর্দ্রতা সেন্সর সমৃদ্ধ মিনি-এগ্রো ল্যাব স্থাপন প্রকল্প।",
+    bankAccount: "Agricultural Olympiad Youth Innovation Fund A/C: 104-120-449102",
+    routingNo: "Sonali Bank PLC, Uttara Model Town Branch, Dhaka",
     isUrgent: true,
   },
   {
-    id: "cause-victim-emergency",
-    title: "Road Crash Victims Emergency Medical Aid & Prosthetic Fund",
-    titleBn: "রোড ক্র্যাশে আহতদের জরুরি আইসিইউ চিকিৎসা ও কৃত্রিম অঙ্গ প্রতিস্থাপন তহবিল",
-    category: "VICTIM_AID",
-    categoryLabel: "Humanitarian Relief",
-    categoryLabelBn: "মানবিক চিকিৎসা অনুদান",
+    id: "cause-climate-grants",
+    title: "Youth Climate-Resilience & Agro-Biotechnology Research Grants",
+    titleBn: "জলবায়ু সহনশীল কৃষি উদ্ভাবন ও বায়োটেকনোলজি যুব গবেষণা অনুদান",
+    category: "YOUTH_GRANTS",
+    categoryLabel: "Climate Action",
+    categoryLabelBn: "জলবায়ু ও জীবপ্রযুক্তি",
     targetPaisa: 1000000000n, // 1,00,00,000 BDT
     raisedPaisa: 812000000n, // 81,20,000 BDT
     donorCount: 1140,
     description:
-      "Providing immediate financial grants for life-saving trauma surgeries, prosthetic limbs for amputee survivors, and ongoing legal litigation aid for bereaved families seeking justice.",
+      "Awarding competitive seed funding to college and university students researching drought-resistant seeds, saline agriculture in coastal belts, and biological pest control.",
     descriptionBn:
-      "মারাত্মক ক্র্যাশে আহতদের জরুরি অস্ত্রোপচার, কৃত্রিম হাত-পা প্রতিস্থাপন এবং আইনি লড়াইয়ে সহায়তায় সার্বক্ষণিক ভিকটিম তহবিল।",
-    bankAccount: "RSM Victim Support Trust A/C: 002-111-987441",
+      "উপকূলীয় লবণাক্ততা ও খরা সহনশীল জাত উদ্ভাবন এবং পরিবেশবান্ধব বালাইনাশক গবেষণায় তরুণ গবেষকদের সিড ফান্ডিং প্রদান।",
+    bankAccount: "National Agricultural Olympiad Trust A/C: 002-111-987441",
     routingNo: "Pubali Bank PLC, Central Branch, Dhaka",
     isUrgent: true,
   },
   {
-    id: "cause-school-zone",
-    title: "Safe School Zones: Raised Speed Tables & Zebra Walkways",
-    titleBn: "নিরাপদ স্কুল জোন: স্পিড টেবিল ও হাই-ভিজিবিলিটি জেব্রা ক্রসিং প্রজেক্ট",
-    category: "SCHOOL_SAFETY",
-    categoryLabel: "Child Protection",
-    categoryLabelBn: "শিশু ও শিক্ষার্থী সুরক্ষা",
+    id: "cause-university-fellowships",
+    title: "Undergraduate Fellowships for Agricultural University Students",
+    titleBn: "কৃষি বিশ্ববিদ্যালয়ের স্নাতক শিক্ষার্থীদের জন্য উচ্চতর গবেষণা ফেলোশিপ",
+    category: "FELLOWSHIPS",
+    categoryLabel: "Higher Education",
+    categoryLabelBn: "উচ্চশিক্ষা ফেলোশিপ",
     targetPaisa: 300000000n, // 30,00,000 BDT
     raisedPaisa: 215000000n, // 21,50,000 BDT
     donorCount: 480,
     description:
-      "Constructing raised asphalt speed tables, child-safety guardrails, and thermoplastic reflective pedestrian crosswalks in front of 100 high-risk schools across district highways.",
+      "Full academic travel and stipend grants for undergraduate researchers from BAU, BSMRAU, SAU, and PSTU conducting field trials in remote farming communities.",
     descriptionBn:
-      "মহাসড়ক সংলগ্ন ১০০টি উচ্চ-ঝুঁকিপূর্ণ শিক্ষা প্রতিষ্ঠানের সামনে স্পিড টেবিল, নিরাপত্তা রেলিং এবং থার্মোপ্লাস্টিক জেব্রা ক্রসিং নির্মাণ।",
-    bankAccount: "RSM Child Transit Safety A/C: 220-450-112390",
-    routingNo: "Islami Bank Bangladesh PLC, Dhaka",
+      "বাকৃবি, ইকরিমবি, সিকৃবি ও পটুয়াখালী বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়ের শিক্ষার্থীদের মাঠপর্যায়ের গবেষণা ও ভ্রমণের জন্য ফেলোশিপ বৃত্তি।",
+    bankAccount: "NAO Academic Fellowship Fund A/C: 220-450-112390",
+    routingNo: "Islami Bank Bangladesh PLC, Uttara Branch, Dhaka",
   },
   {
-    id: "cause-helmet-drive",
-    title: "National Rider Helmet & Night Reflector Distribution Campaign",
-    titleBn: "সার্বজনীন স্ট্যান্ডার্ড হেলমেট ও সাইকেল আরোহীদের রিফ্লেক্টর পোশাক ড্রাইভ",
-    category: "HELMET_DRIVE",
-    categoryLabel: "Preventative Safety",
-    categoryLabelBn: "প্রতিরোধমূলক সুরক্ষা",
+    id: "cause-marginalized-scholarship",
+    title: "Marginalized Farmer-Child Olympiad Participation & Travel Sponsorship",
+    titleBn: "প্রান্তিক কৃষক পরিবারের সন্তানদের অলিম্পিয়াড অংশগ্রহণ ও ভ্রমণ সহায়তা তহবিল",
+    category: "SCHOLARSHIPS",
+    categoryLabel: "Equal Opportunity",
+    categoryLabelBn: "সমঅধিকার ও সামাজিক অন্তর্ভুক্তি",
     targetPaisa: 200000000n, // 20,00,000 BDT
     raisedPaisa: 145000000n, // 14,50,000 BDT
     donorCount: 390,
     description:
-      "Distributing certified safety helmets to rural motorcycle commuters and reflective fluorescent vests to night-time highway pedal cyclists and delivery workers.",
+      "Covering registration fees (BDT 70), regional travel, exam kits, and lodging at Bangladesh Agricultural University for promising children of smallholder farming families.",
     descriptionBn:
-      "গ্রাম ও দূরপাল্লার মহাসড়কে চলাচলকারী বাইকার ও সাইকেল আরোহীদের মাঝে মানসম্মত হেলমেট এবং রাতের রিফ্লেক্টিভ জ্যাকেট বিতরণ।",
-    bankAccount: "RSM Protective Gear Drive A/C: 310-900-554120",
-    routingNo: "Dutch-Bangla Bank PLC, Karwan Bazar Branch",
+      "প্রান্তিক কৃষক পরিবারের মেধাবী সন্তানদের বিনামূল্যে অলিম্পিয়াড নিবন্ধন, বিভাগীয় ভ্রমণ এবং জাতীয় ফিনালেতে থাকা-খাওয়ার সম্পূর্ণ ব্যয় বহন।",
+    bankAccount: "NAO Marginalized Student Fund A/C: 310-900-554120",
+    routingNo: "Dutch-Bangla Bank PLC, Uttara Model Town Branch, Dhaka",
   },
 ];
 
 const RECENT_DONATIONS = [
-  { donor: "DU Alumni Road Safety Brigade", branch: "Dhaka Central", amount: "৳50,000", time: "12m ago" },
-  { donor: "Chattogram Highway Action Council", branch: "Chattogram", amount: "৳1,50,000", time: "1h ago" },
-  { donor: "Anonymous Transport Researcher", branch: "Sylhet", amount: "৳25,000", time: "3h ago" },
-  { donor: "Rajshahi University Youth Chapter", branch: "Rajshahi", amount: "৳35,000", time: "5h ago" },
-  { donor: "RSM Khulna District Committee", branch: "Khulna", amount: "৳1,00,000", time: "8h ago" },
+  { donor: "BAU Alumni Agriculturists Guild", branch: "Mymensingh", amount: "৳50,000", time: "12m ago" },
+  { donor: "Chattogram Agro-Exporters Association", branch: "Chattogram", amount: "৳1,50,000", time: "1h ago" },
+  { donor: "Anonymous Plant Breeder", branch: "Dhaka HQ", amount: "৳25,000", time: "3h ago" },
+  { donor: "Sylhet Agricultural University Youth Cell", branch: "Sylhet", amount: "৳35,000", time: "5h ago" },
+  { donor: "Barishal Coastal Farmers Collective", branch: "Barishal", amount: "৳1,00,000", time: "8h ago" },
 ];
 
 export default function CausesPage() {
@@ -118,7 +117,7 @@ export default function CausesPage() {
   const [selectedCause, setSelectedCause] = useState<CauseItem | null>(null);
   const [donationAmount, setDonationAmount] = useState<number>(5000);
   const [donorName, setDonorName] = useState("");
-  const [gateway, setGateway] = useState<"BKASH" | "EPS" | "NAGAD" | "SSL">("BKASH");
+  const [gateway, setGateway] = useState<"BKASH" | "NAGAD" | "EPS" | "SSL">("SSL");
   const [donationSuccess, setDonationSuccess] = useState(false);
 
   const handleOpenDonate = (cause: CauseItem) => {
@@ -135,48 +134,29 @@ export default function CausesPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col transition-colors duration-200">
-      {/* Navigation Header */}
-      <header className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-2xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/">
-            <OrgLogo size="md" />
-          </Link>
-
-          <div className="flex items-center gap-3">
-            <ThemeToggle variant="pill" />
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                soundEffects.playClick(650);
-                setLang((prev) => (prev === "en" ? "bn" : "en"));
-              }}
-              className="text-xs font-semibold border-border bg-card"
-            >
-              {lang === "en" ? "বাংলা" : "English"}
-            </Button>
-            <Link href="/">
-              <Button variant="ghost" size="sm" className="gap-1.5 text-xs font-semibold">
-                <ArrowLeft className="w-3.5 h-3.5" />
-                Back to Home
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      {/* Institutional Top Header */}
+      <InstitutionalHeader lang={lang} onToggleLang={() => setLang(lang === "en" ? "bn" : "en")} />
 
       {/* Hero Header */}
       <section className="py-14 px-6 max-w-7xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
-          <Heart className="w-3.5 h-3.5" />
-          Transparent Civic Trust & Impact Campaigns
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
+          <Heart className="w-3.5 h-3.5 text-amber-500" />
+          {lang === "en" ? "HopeNest Impact Campaigns · 100% Transparent Trust" : "হোপনেস্ট ইমপ্যাক্ট ক্যাম্পেইন · শতভাগ স্বচ্ছতা"}
         </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Active Road Safety Projects & Victim Relief
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-foreground tracking-tight font-serif">
+          {lang === "en" ? "Youth Agricultural Innovation Funds & Sponsorships" : "কৃষি উদ্ভাবন তহবিল ও শিক্ষার্থী সহায়তা প্রকল্প"}
         </h1>
-        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mt-3 leading-relaxed">
-          Every contribution directly funds physical blackspot warning retrofits, pedestrian zebra crossing construction, emergency medical subsidies for crash survivors, and safety gear distribution.
+        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto mt-3 leading-relaxed">
+          {lang === "en"
+            ? "Your contribution directly finances high school science kits, climate resilience research fellowships, and full travel sponsorships for children of marginalized farming families across Bangladesh."
+            : "আপনার প্রতিটি অনুদান সরাসরি গ্রামীণ স্কুলে স্মার্ট এগ্রো-ল্যাব স্থাপন, তরুণদের জলবায়ু কৃষি গবেষণা এবং প্রান্তিক কৃষকের সন্তানদের জাতীয় অলিম্পিয়াড অংশগ্রহণে ব্যবহৃত হয়।"}
         </p>
+
+        {/* Statutory Compliance Mention */}
+        <div className="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-mono">
+          <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <span>Statutory Registered · Trade License: 03247/2023-2025 · Prices Denominated in BDT (৳)</span>
+        </div>
       </section>
 
       {/* Main Causes Grid */}
@@ -191,67 +171,67 @@ export default function CausesPage() {
             return (
               <div
                 key={cause.id}
-                className="p-6 rounded-3xl bg-card border-2 border-border hover:border-amber-500/50 shadow-md transition-all space-y-5"
+                className="p-6 rounded-3xl bg-card border-2 border-border hover:border-emerald-500/50 shadow-md transition-all space-y-5"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-md text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
-                      {cause.categoryLabel}
+                    <span className="px-3 py-1 rounded-md text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                      {lang === "en" ? cause.categoryLabel : cause.categoryLabelBn}
                     </span>
                     {cause.isUrgent && (
-                      <span className="px-2.5 py-1 rounded-md text-xs font-bold bg-red-500/15 text-red-600 dark:text-red-400 border border-red-500/30 flex items-center gap-1">
-                        <AlertTriangle className="w-3 h-3" />
-                        Urgent Priority
+                      <span className="px-2.5 py-1 rounded-md text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3 text-amber-600" />
+                        {lang === "en" ? "Season 2025 Priority" : "সিজন ২০২৫ অগ্রাধিকার"}
                       </span>
                     )}
                   </div>
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 font-mono">
-                    {cause.donorCount} Civic Donors
+                  <span className="text-xs font-semibold text-muted-foreground font-mono">
+                    {cause.donorCount} {lang === "en" ? "Patron Donors" : "দাতা সদস্য"}
                   </span>
                 </div>
 
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
-                    {cause.title}
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-foreground font-serif">
+                    {lang === "en" ? cause.title : cause.titleBn}
                   </h2>
                   <h3 className="text-sm font-bold text-emerald-600 dark:text-emerald-400 font-bangla mt-1">
-                    {cause.titleBn}
+                    {lang === "en" ? cause.titleBn : cause.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                    {cause.description}
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-2 leading-relaxed">
+                    {lang === "en" ? cause.description : cause.descriptionBn}
                   </p>
                 </div>
 
-                {/* Progress Bar */}
+                {/* HopeNest Progress Bar */}
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-bold">
-                    <span className="text-slate-900 dark:text-white font-mono">
-                      ৳{raised.toLocaleString()} raised
+                  <div className="flex items-center justify-between text-xs font-bold font-mono">
+                    <span className="text-foreground">
+                      ৳{raised.toLocaleString()} BDT raised
                     </span>
-                    <span className="text-slate-500 dark:text-slate-400 font-mono">
-                      Goal: ৳{target.toLocaleString()} ({percent}%)
+                    <span className="text-muted-foreground">
+                      Goal: ৳{target.toLocaleString()} BDT ({percent}%)
                     </span>
                   </div>
                   <div className="w-full h-3 rounded-full bg-muted overflow-hidden border border-border">
                     <div
-                      className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-emerald-600 to-amber-500 rounded-full transition-all duration-500"
                       style={{ width: `${percent}%` }}
                     />
                   </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-border">
-                  <div className="text-xs text-slate-500 dark:text-slate-400">
-                    Direct Bank Account: <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{cause.bankAccount}</span>
+                  <div className="text-xs text-muted-foreground">
+                    Bank Account: <span className="font-mono font-bold text-foreground">{cause.bankAccount}</span>
                   </div>
                   <Button
                     variant="primary"
                     size="sm"
                     onClick={() => handleOpenDonate(cause)}
-                    className="font-bold text-xs gap-1.5 shadow-md w-full sm:w-auto"
+                    className="font-bold text-xs gap-1.5 shadow-md w-full sm:w-auto bg-[#0F5132] hover:bg-[#0c4028] text-white"
                   >
-                    <Heart className="w-3.5 h-3.5" />
-                    Contribute to Project
+                    <Heart className="w-3.5 h-3.5 text-amber-400" />
+                    {lang === "en" ? "Contribute in BDT" : "বিডিটি অনুদান দিন"}
                   </Button>
                 </div>
               </div>
@@ -259,82 +239,108 @@ export default function CausesPage() {
           })}
         </div>
 
-        {/* Right: Live Donation Feed & Quick Action */}
+        {/* Right 4 Cols: Live Impact & Recent Patrons */}
         <div className="lg:col-span-4 space-y-6">
-          <div className="p-6 rounded-3xl bg-card border-2 border-border shadow-md space-y-4">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+          {/* Statutory Trust Card */}
+          <div className="p-6 rounded-3xl bg-card border border-border space-y-4">
+            <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+              <ShieldCheck className="w-5 h-5" />
+              <span>National Governance Trust</span>
+            </div>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              National Agricultural Olympiad operates strictly under transparent civic governance. Detailed quarterly expenditure registers for lab kit distribution and student sponsorships are audited annually.
+            </p>
+            <div className="text-[11px] font-mono text-muted-foreground border-t border-border pt-3">
+              Trade License: <span className="font-bold text-foreground">03247/2023-2025</span>
+              <br />
+              Secretariat: House 04, Road 12/b, Sector 10, Uttara Model Town, Dhaka
+            </div>
+          </div>
+
+          {/* Recent Contributions Ticker */}
+          <div className="p-6 rounded-3xl bg-card border border-border space-y-4">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-foreground flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-amber-500" />
-              Recent Civic Contributions
+              Recent Benefactors (BDT)
             </h3>
             <div className="space-y-3">
-              {RECENT_DONATIONS.map((d, i) => (
-                <div key={i} className="p-3 rounded-xl bg-muted/60 border border-border text-xs flex items-center justify-between">
+              {RECENT_DONATIONS.map((d, idx) => (
+                <div key={idx} className="flex items-center justify-between text-xs pb-2 border-b border-border/50 last:border-0 last:pb-0">
                   <div>
-                    <div className="font-bold text-slate-900 dark:text-white">{d.donor}</div>
-                    <div className="text-[10px] text-slate-500 dark:text-slate-400">{d.branch} · {d.time}</div>
+                    <div className="font-semibold text-foreground">{d.donor}</div>
+                    <div className="text-[10px] text-muted-foreground">{d.branch} · {d.time}</div>
                   </div>
-                  <span className="font-mono font-extrabold text-emerald-600 dark:text-emerald-400">{d.amount}</span>
+                  <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400">{d.amount}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="p-6 rounded-3xl bg-amber-500/10 border-2 border-amber-500/30 text-slate-900 dark:text-white space-y-3">
-            <h4 className="font-extrabold text-sm flex items-center gap-1.5 text-amber-700 dark:text-amber-400">
-              <ShieldCheck className="w-4 h-4" />
-              100% Tax-Exempt & Publicly Audited
+          {/* Direct WhatsApp Contact */}
+          <div className="p-6 rounded-3xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-950 dark:text-emerald-200 space-y-2">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+              Institutional / CSR Partnerships
             </h4>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Road Safety Movement operates strictly under transparent civic governance. Detailed quarterly expenditure registers for blackspot engineering and victim disbursement are published openly.
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Agri-businesses, universities, and philanthropic foundations interested in sponsoring an entire district round or endowed medals may contact our Secretariat directly.
             </p>
+            <div className="pt-1 text-xs font-mono font-bold text-emerald-700 dark:text-emerald-300">
+              Hotline & WhatsApp: +880 1717-395047
+            </div>
           </div>
         </div>
       </section>
 
       {/* Donation Modal */}
       {selectedCause && (
-        <div className="fixed inset-0 z-[10000] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="max-w-md w-full rounded-3xl bg-card border-2 border-amber-500/50 p-6 shadow-2xl space-y-5 text-foreground">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-card border-2 border-emerald-500/40 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-5 animate-in fade-in zoom-in duration-200 text-card-foreground">
             <div className="flex items-start justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
-                  Civic Action Contribution
+                <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">
+                  OFFICIAL BDT CONTRIBUTION
                 </span>
-                <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mt-1">
+                <h3 className="text-lg font-bold font-serif text-foreground mt-1">
                   {selectedCause.title}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedCause(null)}
-                className="text-slate-400 hover:text-slate-900 dark:hover:text-white font-bold text-lg"
+                className="text-muted-foreground hover:text-foreground text-sm font-bold p-1"
               >
                 ✕
               </button>
             </div>
 
             {donationSuccess ? (
-              <div className="p-6 text-center space-y-3">
-                <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-500 mx-auto flex items-center justify-center">
-                  <CheckCircle2 className="w-7 h-7" />
+              <div className="text-center py-6 space-y-3">
+                <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center">
+                  <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h4 className="font-extrabold text-base text-slate-900 dark:text-white">
-                  Thank You for Your Civic Solidarity!
-                </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-300">
-                  Your contribution voucher <span className="font-mono font-bold text-amber-500">#RSM-TX-{Date.now().toString().slice(-6)}</span> has been registered. An official receipt has been dispatched.
+                <h4 className="text-lg font-bold text-foreground">Contribution Pledged Successfully!</h4>
+                <p className="text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                  Thank you for empowering future agriculturists of Bangladesh. An automated money receipt has been reserved under your reference.
                 </p>
-                <Button variant="primary" size="sm" onClick={() => setSelectedCause(null)} className="w-full mt-2 font-bold text-xs">
-                  Done
+                <div className="p-3 rounded-xl bg-muted text-xs font-mono">
+                  Pledged: <span className="font-bold text-emerald-600 dark:text-emerald-400">৳{donationAmount.toLocaleString()} BDT</span>
+                </div>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => setSelectedCause(null)}
+                  className="font-bold text-xs mt-2"
+                >
+                  Return to Impact Campaigns
                 </Button>
               </div>
             ) : (
               <form onSubmit={handleSubmitDonation} className="space-y-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
-                    Select Contribution Amount (BDT)
+                  <label className="text-xs font-bold text-foreground block mb-1">
+                    Select Contribution Amount (BDT ৳)
                   </label>
-                  <div className="grid grid-cols-4 gap-2 mb-2">
+                  <div className="grid grid-cols-4 gap-2">
                     {[1000, 2500, 5000, 10000].map((amt) => (
                       <button
                         key={amt}
@@ -345,60 +351,80 @@ export default function CausesPage() {
                         }}
                         className={`py-2 rounded-xl text-xs font-bold font-mono transition-all ${
                           donationAmount === amt
-                            ? "bg-amber-500 text-slate-950 shadow-sm"
-                            : "bg-muted border border-border text-foreground"
+                            ? "bg-emerald-600 text-white shadow-sm"
+                            : "bg-muted border border-border text-foreground hover:bg-muted/80"
                         }`}
                       >
-                        ৳{amt}
+                        ৳{amt.toLocaleString()}
                       </button>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
-                    Donor Name / Organization
+                  <label className="text-xs font-bold text-foreground block mb-1">
+                    Benefactor Name / Organization
                   </label>
                   <input
                     type="text"
                     value={donorName}
                     onChange={(e) => setDonorName(e.target.value)}
-                    placeholder="Enter your name or keep anonymous"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-muted border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    placeholder="Enter your name or organization (or anonymous)"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-muted border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
-                    Select Payment Method
+                  <label className="text-xs font-bold text-foreground block mb-1">
+                    Payment Gateway (Bangladesh Bank Compliant)
                   </label>
                   <div className="grid grid-cols-4 gap-2">
-                    {["BKASH", "NAGAD", "EPS", "SSL"].map((gw) => (
+                    {["SSL", "BKASH", "NAGAD", "EPS"].map((gw) => (
                       <button
                         key={gw}
                         type="button"
                         onClick={() => setGateway(gw as any)}
                         className={`py-2 rounded-xl text-xs font-bold transition-all ${
                           gateway === gw
-                            ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm"
-                            : "bg-muted border border-border text-foreground"
+                            ? "bg-[#0F5132] text-white shadow-sm"
+                            : "bg-muted border border-border text-foreground hover:bg-muted/80"
                         }`}
                       >
-                        {gw}
+                        {gw === "SSL" ? "SSLCommerz" : gw}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <Button type="submit" variant="primary" size="md" className="w-full font-bold text-xs gap-1.5 shadow-md mt-2">
-                  <Heart className="w-3.5 h-3.5" />
-                  Confirm Contribution of ৳{donationAmount.toLocaleString()}
+                <div className="p-3 rounded-xl bg-muted/40 border border-border text-[11px] text-muted-foreground leading-relaxed">
+                  By confirming, you agree to the{" "}
+                  <Link href="/terms-condition" target="_blank" className="text-emerald-600 hover:underline font-semibold">
+                    Terms & Conditions
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/refund-policy" target="_blank" className="text-emerald-600 hover:underline font-semibold">
+                    Refund Policy
+                  </Link>
+                  . All funds are charged in Bangladeshi Taka (BDT).
+                </div>
+
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="md"
+                  className="w-full font-bold text-xs gap-1.5 shadow-md mt-2 bg-[#0F5132] hover:bg-[#0c4028] text-white"
+                >
+                  <Heart className="w-3.5 h-3.5 text-amber-400" />
+                  Confirm Contribution of ৳{donationAmount.toLocaleString()} BDT
                 </Button>
               </form>
             )}
           </div>
         </div>
       )}
+
+      {/* Institutional Footer */}
+      <InstitutionalFooter lang={lang} />
     </div>
   );
 }

@@ -33,7 +33,7 @@ export default function MemberLoginPage() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   // Email/Password State
-  const [email, setEmail] = useState("test@roadsafetymovement.org");
+  const [email, setEmail] = useState("admin@agriculturalolympiad.com");
   const [password, setPassword] = useState("12345678");
 
   const getReturnUrl = () => {
@@ -356,15 +356,15 @@ export default function MemberLoginPage() {
               className="w-full py-2.5 px-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-sm"
             >
               <ShieldCheck className="w-4 h-4 text-emerald-500" />
-              <span>1-Click Member Access: Tanvir Rahman (ID 18-23)</span>
+              <span>1-Click Portal Access: Tanvir Rahman (National Secretariat)</span>
             </button>
           </div>
 
           {/* New Member Prompt */}
           <div className="pt-4 border-t border-border text-center text-xs text-muted-foreground">
-            <span>Not a member yet? </span>
-            <Link href="/apply" className="text-primary hover:underline font-semibold">
-              Apply for Volunteer Pass
+            <span>Not registered for Season 2025 yet? </span>
+            <Link href="/apply" className="text-emerald-600 hover:underline font-semibold">
+              Register for Olympiad (BDT 70)
             </Link>
           </div>
         </div>
@@ -372,7 +372,7 @@ export default function MemberLoginPage() {
 
       {/* Footer */}
       <footer className="py-4 text-center text-xs text-muted-foreground font-mono">
-        Secured with Strict Tenant Isolation & Encrypted Session Cookies · Road Safety Movement (RSM)
+        Secured with Strict Tenant Isolation & Encrypted Session Cookies · National Agricultural Olympiad (Trade License: 03247/2023-2025)
       </footer>
     </div>
   );

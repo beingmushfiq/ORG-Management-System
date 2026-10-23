@@ -199,10 +199,10 @@ export default function MeetingMinutesBuilderPage() {
           {/* Official Letterhead */}
           <div className="border-b-2 border-amber-500/40 pb-6 text-center space-y-1 print:border-black">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground uppercase font-serif tracking-wider print:text-black">
-              Road Safety Movement (নিরাপদ সড়ক আন্দোলন)
+              National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)
             </h1>
             <p className="text-xs text-muted-foreground font-bangla print:text-gray-700">
-              জাতীয় সচিবালয় • সেগুনবাগিচা, ঢাকা-১০০০ (সোসাইটিজ রেজিস্ট্রেশন আইন ১৮৬০)
+              জাতীয় সমন্বয় সচিবালয় • বাড়ি ০৪, রোড ১২/বি, সেক্টর ১০, উত্তরা মডেল টাউন, ঢাকা (ট্রেড লাইসেন্স: ০৩২৪৭/২০২৩-২০২৫)
             </p>
             <div className="text-sm font-bold font-serif text-amber-500 dark:text-amber-400 pt-2 uppercase tracking-wide print:text-black">
               {meetingTitle}
@@ -213,7 +213,7 @@ export default function MeetingMinutesBuilderPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-3 border-b border-border text-xs text-muted-foreground font-mono print:text-black print:border-black">
             <div>
               <span className="text-muted-foreground/70 block">MEMO REF:</span>
-              <span className="font-bold text-amber-600 dark:text-amber-400 print:text-black">RSM/MINUTES/2026/NEC-01</span>
+              <span className="font-bold text-amber-600 dark:text-amber-400 print:text-black">NAO/MINUTES/2026/SEC-01</span>
             </div>
             <div>
               <span className="text-muted-foreground/70 block">MEETING DATE:</span>

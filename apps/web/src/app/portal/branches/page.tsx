@@ -316,7 +316,7 @@ export default function BranchNetworkPage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Chattogram Medical College Hospital Unit"
+                  placeholder="e.g. Bangladesh Agricultural University Chapter (BAU)"
                   className="w-full px-3 py-2 rounded-md border border-input bg-background"
                 />
               </div>
@@ -327,7 +327,7 @@ export default function BranchNetworkPage() {
                   type="text"
                   value={nameBn}
                   onChange={(e) => setNameBn(e.target.value)}
-                  placeholder="e.g. চট্টগ্রাম মেডিকেল কলেজ হাসপাতাল ইউনিট"
+                  placeholder="e.g. বাংলাদেশ কৃষি বিশ্ববিদ্যালয় চ্যাপ্টার (বাকৃবি)"
                   className="w-full px-3 py-2 rounded-md border border-input bg-background font-bangla"
                 />
               </div>
@@ -339,7 +339,7 @@ export default function BranchNetworkPage() {
                     type="text"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
-                    placeholder="CMCH-UNIT"
+                    placeholder="AGRI-BAU"
                     className="w-full px-3 py-2 rounded-md border border-input bg-background font-mono"
                   />
                 </div>
@@ -351,12 +351,12 @@ export default function BranchNetworkPage() {
                     onChange={(e) => setLevelLabel(e.target.value)}
                     className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground"
                   >
-                    <option value="National HQ">National HQ</option>
-                    <option value="Division">Division</option>
-                    <option value="District Branch">District Branch</option>
-                    <option value="Upazila / Unit">Upazila / Unit</option>
-                    <option value="Hospital Unit">Hospital Unit</option>
-                    <option value="Specialized Committee">Specialized Committee</option>
+                    <option value="National Secretariat">National Secretariat</option>
+                    <option value="Division Directorate">Division Directorate</option>
+                    <option value="District Chapter (64 Districts)">District Chapter (64 Districts)</option>
+                    <option value="University Chapter">University Chapter (BAU, BSMRAU, SAU, PSTU)</option>
+                    <option value="School / Upazila Club">School / Upazila Club</option>
+                    <option value="Academic Advisory Panel">Academic Advisory Panel</option>
                   </select>
                 </div>
               </div>

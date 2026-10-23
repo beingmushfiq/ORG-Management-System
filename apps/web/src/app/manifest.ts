@@ -2,18 +2,18 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন) — Institutional Operating System",
-    short_name: "RSM App",
+    name: "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)",
+    short_name: "AgriOlympiad",
     description:
-      "Transforming road transport into a safe, sustainable, and humane system for all. Volunteer brigades, black spot audits, membership registry, and digital money receipts.",
+      "Empowering youth to shape a sustainable future for Bangladesh agriculture. 25,000+ participants across 64 districts. Trade License: 03247/2023-2025.",
     start_url: "/portal",
     id: "/portal",
     scope: "/",
     display: "standalone",
     orientation: "portrait-primary",
     background_color: "#0d3b25",
-    theme_color: "#164e32",
-    categories: ["social-advocacy", "governance", "productivity", "education"],
+    theme_color: "#0f5132",
+    categories: ["education", "agriculture", "governance", "productivity"],
     icons: [
       {
         src: "/favicon.svg",
@@ -37,29 +37,22 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Member Portal Dashboard",
         short_name: "Dashboard",
-        description: "View membership standing, tasks, and credentials",
+        description: "View registration standing, examination schedule, and credentials",
         url: "/portal",
         icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
       },
       {
-        name: "Field Missions & Tasks",
-        short_name: "Field Tasks",
-        description: "Report road hazards, audits, and earn activity points",
-        url: "/portal/tasks",
-        icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
-      },
-      {
-        name: "Contribution History & Receipts",
-        short_name: "Receipts",
-        description: "Monthly dues ledger and cryptographic money receipts",
-        url: "/portal",
-        icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
-      },
-      {
-        name: "Academy & Safety Training",
-        short_name: "Academy",
-        description: "LMS certifications and defensive driving modules",
+        name: "Olympiad E-Admit Cards",
+        short_name: "Admit Cards",
+        description: "Download verified E-Admit Cards and Certificates",
         url: "/portal/certificates",
+        icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
+      },
+      {
+        name: "Agri-Skill Courses (BDT)",
+        short_name: "Courses",
+        description: "Explore smart agriculture and hydroponics courses",
+        url: "/courses",
         icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
       },
     ],

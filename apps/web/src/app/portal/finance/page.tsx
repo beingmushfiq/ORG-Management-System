@@ -508,9 +508,9 @@ export default function TreasuryDeskPage() {
 
             <div className="space-y-4 text-xs border border-border p-4 rounded-lg bg-card text-foreground">
               <div className="text-center pb-3 border-b border-border space-y-1">
-                <p className="font-bold text-sm">Road Safety Movement (নিরাপদ সড়ক আন্দোলন)</p>
+                <p className="font-bold text-sm">National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)</p>
                 <p className="text-[10px] text-muted-foreground">
-                  Statutory Non-Profit Organization • Reg. Under Act XXI of 1860
+                  Trade License: 03247/2023-2025 • Dhaka City Corporation
                 </p>
                 <Badge variant="success" size="sm">
                   PAID & SETTLED

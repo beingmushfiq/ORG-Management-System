@@ -11,20 +11,20 @@ export async function GET(request: NextRequest) {
 
   const manifest = {
     name: isBn
-      ? `নিরাপদ সড়ক আন্দোলন — ${branch} অপারেটিং সিস্টেম`
-      : `Road Safety Movement (${branch}) — Institutional Operating System`,
-    short_name: isBn ? "নিরাপদ সড়ক" : "RSM App",
+      ? `জাতীয় কৃষি অলিম্পিয়াড — ${branch} প্ল্যাটফর্ম`
+      : `National Agricultural Olympiad (${branch}) — Institutional Platform`,
+    short_name: isBn ? "কৃষি অলিম্পিয়াড" : "AgriOlympiad",
     description: isBn
-      ? "সবার জন্য নিরাপদ ও মানবিক সড়ক পরিবহন ব্যবস্থা গড়ে তোলার জাতীয় আন্দোলন।"
-      : "Transforming road transport into a safe, sustainable, and humane system for all.",
+      ? "টেকসই কৃষির রূপান্তরে তরুণ প্রজন্মের নেতৃত্ব ও উদ্ভাবন। ৬৪ জেলার ২৫,০০০+ শিক্ষার্থী।"
+      : "Empowering youth to shape a sustainable future for Bangladesh agriculture. Trade License: 03247/2023-2025.",
     start_url: "/portal",
     id: "/portal",
     scope: "/",
     display: "standalone",
     orientation: "portrait-primary",
     background_color: isDark ? "#061a10" : "#0d3b25",
-    theme_color: isDark ? "#0d3b25" : "#164e32",
-    categories: ["social-advocacy", "governance", "productivity", "education"],
+    theme_color: isDark ? "#0d3b25" : "#0f5132",
+    categories: ["education", "agriculture", "governance", "productivity"],
     icons: [
       {
         src: "/favicon.svg",
@@ -48,22 +48,24 @@ export async function GET(request: NextRequest) {
       {
         name: isBn ? "সদস্য পোর্টাল ড্যাশবোর্ড" : "Member Portal Dashboard",
         short_name: isBn ? "ড্যাশবোর্ড" : "Dashboard",
-        description: isBn ? "সদস্যপদ স্থিতি ও কার্যক্রম" : "View membership standing and tasks",
+        description: isBn
+          ? "সদস্যপদ স্থিতি, কাজ ও সার্টিফিকেট দেখুন"
+          : "View registration standing, examination schedule, and credentials",
         url: "/portal",
         icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
       },
       {
-        name: isBn ? "মাঠপর্যায়ের দায়িত্ব ও রিপোর্ট" : "Field Tasks & Hazard Reports",
-        short_name: isBn ? "মাঠ দায়িত্ব" : "Field Tasks",
-        description: isBn ? "সড়ক নিরাপত্তা নিরীক্ষা" : "Submit road safety field audit reports",
-        url: "/portal/tasks",
+        name: isBn ? "ডিজিটাল প্রবেশপত্র" : "Olympiad E-Admit Cards",
+        short_name: isBn ? "প্রবেশপত্র" : "Admit Cards",
+        description: isBn ? "প্রবেশপত্র ও সার্টিফিকেট ডাউনলোড করুন" : "Download verified E-Admit Cards and Certificates",
+        url: "/portal/certificates",
         icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
       },
       {
-        name: isBn ? "চাঁদা পরিশোধ ও মানি রিসিপ্ট" : "Contribution History & Receipts",
-        short_name: isBn ? "রিসিপ্ট" : "Receipts",
-        description: isBn ? "ডিজিটাল মানি রিসিপ্ট" : "Download cryptographic money receipts",
-        url: "/portal",
+        name: isBn ? "এগ্রো-স্কিল কোর্সসমূহ (বিডিটি)" : "Agri-Skill Courses (BDT)",
+        short_name: isBn ? "কোর্স" : "Courses",
+        description: isBn ? "স্মার্ট কৃষি ও হাইড্রোপনিক্স কোর্স দেখুন" : "Explore smart agriculture and hydroponics courses",
+        url: "/courses",
         icons: [{ src: "/icons/icon-192x192.png", sizes: "192x192" }],
       },
     ],
@@ -71,8 +73,8 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json(manifest, {
     headers: {
-      "Content-Type": "application/manifest+json",
-      "Cache-Control": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400",
+      "Content-Type": "application/manifest+json; charset=utf-8",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600",
     },
   });
 }

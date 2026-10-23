@@ -207,12 +207,12 @@ export default function StatutoryReportsPage() {
           {/* Official Letterhead in Print / Screen Header */}
           <div className="border-b-2 border-amber-500/40 pb-6 mb-6 text-center space-y-1 print:border-black">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground uppercase font-serif tracking-wider print:text-black">
-              {lang === "en" ? "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)" : "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়"}
+              {lang === "en" ? "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)" : "জাতীয় কৃষি অলিম্পিয়াড — কেন্দ্রীয় সচিবালয়"}
             </h1>
             <p className="text-xs text-muted-foreground font-bangla print:text-gray-700">
               {lang === "en"
-                ? "Secretariat Archive & Statutory Compliance Bureau • Reg No: S-1048 Under Societies Registration Act XXI of 1860"
-                : "জাতীয় সচিবালয় • সংবিধিবদ্ধ রেকর্ড ও সরকারী নিরীক্ষা অনুবিভাগ (রেজিস্ট্রেশন নং: এস-১০৪৮)"}
+                ? "Secretariat Archive & Statutory Compliance Bureau • Trade License No: 03247/2023-2025 (Dhaka City Corporation)"
+                : "জাতীয় সচিবালয় • সংবিধিবদ্ধ রেকর্ড ও সরকারী নিরীক্ষা অনুবিভাগ (ট্রেড লাইসেন্স: ০৩২৪৭/২০২৩-২০২৫)"}
             </p>
             <div className="text-xs font-bold font-serif text-amber-500 dark:text-amber-400 pt-2 uppercase tracking-wide print:text-black">
               {activeTab === "MEMBER_REGISTER" &&

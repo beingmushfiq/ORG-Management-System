@@ -23,30 +23,30 @@ interface CertificateItem {
 
 const CERTS: CertificateItem[] = [
   {
-    id: "cert-mem-18-23",
-    certNumber: "RSM-MBR-2018-0023",
-    title: "Certificate of Active Membership & Good Standing",
-    titleBn: "সক্রিয় সদস্যপদ ও নিষ্ঠা প্রত্যয়নপত্র",
-    issueDate: "20 June 2018",
-    type: "MEMBERSHIP",
+    id: "cert-champion-2025",
+    certNumber: "NAO-EXC-2025-001",
+    title: "Certificate of Excellence & National Award — Senior Secondary Champion",
+    titleBn: "জাতীয় কৃষি অলিম্পিয়াড শ্রেষ্ঠত্ব ও মেধা সনদ — ১ম স্থান (ল্যাপটপ ও ৫০,০০০ টাকা)",
+    issueDate: "21 November 2025",
+    type: "COMMENDATION",
     securityHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   },
   {
-    id: "cert-def-2026",
-    certNumber: "RSM-ACAD-2026-0814",
-    title: "Defensive Driving & Emergency Golden Hour First Aid",
-    titleBn: "ডিফেন্সিভ ড্রাইভিং ও গোল্ডেন আওয়ার জরুরি চিকিৎসা প্রশিক্ষণ",
-    issueDate: "12 August 2026",
+    id: "cert-smart-agro-2025",
+    certNumber: "NAO-ACAD-2025-0418",
+    title: "Certified Smart Agriculture & Climate-Resilience Young Innovator",
+    titleBn: "স্মার্ট কৃষি ও জলবায়ু সহনশীল তরুণ উদ্ভাবক সনদপত্র",
+    issueDate: "12 August 2025",
     type: "TRAINING",
     securityHash: "8f2d1e0b5c3a4f6d8e9a2b1c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e",
   },
   {
-    id: "cert-blackspot-2025",
-    certNumber: "RSM-AUD-2025-0419",
-    title: "Highway Blackspot Forensic Surveyor & Auditor Seal",
-    titleBn: "মহাসড়ক ব্ল্যাকস্পট অডিট ও জিও-ম্যাপিং বিশেষজ্ঞ সনদ",
-    issueDate: "14 November 2025",
-    type: "COMMENDATION",
+    id: "cert-admit-2025",
+    certNumber: "NAO-ADMIT-2025-1042",
+    title: "Official Examination E-Admit Card & Registration Pass Season 2025",
+    titleBn: "জাতীয় কৃষি অলিম্পিয়াড প্রবেশপত্র ও আসন বিন্যাস সনদ",
+    issueDate: "15 September 2025",
+    type: "MEMBERSHIP",
     securityHash: "2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b",
   },
 ];
@@ -149,7 +149,7 @@ export default function CertificatesPage() {
               </h2>
               <p className="text-sm text-muted-foreground font-bangla">{selectedCert.titleBn}</p>
               <div className="pt-2 text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
-                This is to officially certify that <strong className="text-foreground">Tanvir Rahman</strong> (Member ID: 18-23) has fulfilled all statutory training, ethical commitment, and volunteer operational standards of the Road Safety Movement.
+                This is to officially certify that <strong className="text-foreground">Tanvir Rahman</strong> (Candidate ID: NAO-STU-2025-0104) has demonstrated exceptional academic excellence in the National Agricultural Olympiad Season 2025 under Trade License: 03247/2023-2025.
               </div>
             </div>
 
@@ -164,8 +164,8 @@ export default function CertificatesPage() {
               </div>
 
               <div className="text-right space-y-0.5">
-                <p className="text-xs font-serif font-bold text-foreground">President & General Secretary</p>
-                <p className="text-[10px] text-muted-foreground font-bangla">জাতীয় কার্যনির্বাহী পরিষদ, নিরাপদ সড়ক আন্দোলন</p>
+                <p className="text-xs font-serif font-bold text-foreground">National Advisory Convener & VC, BAU</p>
+                <p className="text-[10px] text-muted-foreground font-bangla">জাতীয় সমন্বয় সচিবালয়, জাতীয় কৃষি অলিম্পিয়াড</p>
               </div>
             </div>
 

@@ -31,37 +31,37 @@ interface VerificationRecord {
 }
 
 const MOCK_REGISTRY: Record<string, VerificationRecord> = {
-  "RSM-VOL-2018-001": {
-    memberId: "RSM-VOL-2018-001",
-    fullName: "Engr. Tanvir Ahmed",
-    fullNameBn: "প্রকৌশলী তানভীর আহমেদ",
+  "NAO-STU-2025-0104": {
+    memberId: "NAO-STU-2025-0104",
+    fullName: "Tanvir Rahman",
+    fullNameBn: "তানভীর রহমান",
     tier: "LIFE",
     status: "ACTIVE",
-    branchName: "National Executive Secretariat",
-    joinedDate: "July 29, 2018",
-    validThrough: "Founding Organizer (Honorary Fellow)",
+    branchName: "National Organizing Secretariat (Uttara HQ)",
+    joinedDate: "July 29, 2024",
+    validThrough: "Season 2025 · Verified Candidate",
     securityHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    issuerOrg: "Road Safety Movement",
-    issuerOrgBn: "নিরাপদ সড়ক আন্দোলন",
+    issuerOrg: "National Agricultural Olympiad",
+    issuerOrgBn: "জাতীয় কৃষি অলিম্পিয়াড",
   },
-  "RSM-DU-2024-082": {
-    memberId: "RSM-DU-2024-082",
-    fullName: "Nafisa Rahman",
-    fullNameBn: "নাফিসা রহমান",
+  "NAO-STU-2025-0422": {
+    memberId: "NAO-STU-2025-0422",
+    fullName: "Nafisa Jahan",
+    fullNameBn: "নাফিসা জাহান",
     tier: "GENERAL",
     status: "ACTIVE",
-    branchName: "Dhaka University Central Chapter",
-    joinedDate: "February 10, 2024",
+    branchName: "Dhaka Regional Coordination Council",
+    joinedDate: "February 10, 2025",
     validThrough: "December 31, 2026",
     securityHash: "7d1a54127b222502f5b79b5fb0803061152a44f92b37e23c65dd0f329d1b41ca",
-    issuerOrg: "Road Safety Movement",
-    issuerOrgBn: "নিরাপদ সড়ক আন্দোলন",
+    issuerOrg: "National Agricultural Olympiad",
+    issuerOrgBn: "জাতীয় কৃষি অলিম্পিয়াড",
   },
 };
 
 export default function MemberVerificationPage() {
   const params = useParams();
-  const rawId = (params["id"] as string) || "RSM-VOL-2018-001";
+  const rawId = (params["id"] as string) || "NAO-STU-2025-0104";
   const memberId = decodeURIComponent(rawId).toUpperCase();
 
   const [isScanning, setIsScanning] = useState(true);
@@ -72,16 +72,16 @@ export default function MemberVerificationPage() {
     const timer = setTimeout(() => {
       const match = MOCK_REGISTRY[memberId] || {
         memberId,
-        fullName: "Engr. Tanvir Ahmed",
-        fullNameBn: "প্রকৌশলী তানভীর আহমেদ",
+        fullName: "Tanvir Rahman",
+        fullNameBn: "তানভীর রহমান",
         tier: "LIFE",
         status: "ACTIVE",
-        branchName: "Dhaka Central Secretariat",
-        joinedDate: "August 01, 2018",
+        branchName: "National Organizing Secretariat (Uttara HQ)",
+        joinedDate: "August 01, 2024",
         validThrough: "December 31, 2026",
         securityHash: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-        issuerOrg: "Road Safety Movement (নিরাপদ সড়ক আন্দোলন)",
-        issuerOrgBn: "নিরাপদ সড়ক আন্দোলন — জাতীয় সচিবালয়",
+        issuerOrg: "National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)",
+        issuerOrgBn: "জাতীয় কৃষি অলিম্পিয়াড — কেন্দ্রীয় সচিবালয়",
       };
       setRecord(match);
       setIsScanning(false);
@@ -106,7 +106,7 @@ export default function MemberVerificationPage() {
             Public Trust & Credential Verification Desk
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-            Official cryptographic registry for Road Safety Movement (নিরাপদ সড়ক আন্দোলন).
+            Official cryptographic registry for National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড).
           </p>
         </div>
         <Badge variant="success" className="px-3 py-1 text-xs">

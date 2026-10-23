@@ -22,27 +22,27 @@ interface TaskItem {
 const INITIAL_TASKS: TaskItem[] = [
   {
     id: "task-1",
-    title: "Farmgate Intersection Pedestrian Zebra Repaint & Barrier Audit",
-    titleBn: "ফার্মগেট মোড় পথচারী ক্রসিং ও জেব্রা ক্রসিং দৃশ্যমানতা অডিট",
-    assignedBranch: "Dhaka Central Chapter",
+    title: "School Outreach: Smart-Agro Science Kit Demonstration (5 Schools)",
+    titleBn: "৫টি গ্রামীণ বিদ্যালয়ে এগ্রো-ল্যাব কিট ডেমো ও অলিম্পিয়াড সচেতনতা প্রচার",
+    assignedBranch: "Dhaka Regional Coordination Council",
     points: 15,
     status: "IN_PROGRESS",
     dueDate: "30 Sep 2026",
   },
   {
     id: "task-2",
-    title: "School Zone Speed Calming Signboard Inspection (10 Schools)",
-    titleBn: "১০টি শিক্ষা প্রতিষ্ঠানের সম্মুখে গতিসীমা নির্দেশক সাইনবোর্ড সমীক্ষা",
-    assignedBranch: "Gazipur Unit",
+    title: "Regional Venue Coordination & Candidate Seating Map Verification",
+    titleBn: "আঞ্চলিক পরীক্ষা ভেন্যু পরিদর্শন ও পরীক্ষার্থী আসন বিন্যাস যাচাই",
+    assignedBranch: "BAU Campus Chapter",
     points: 20,
     status: "PENDING_REVIEW",
     dueDate: "25 Sep 2026",
   },
   {
     id: "task-3",
-    title: "Highway Crash Telemetry Digital Log Upload",
-    titleBn: "মহাসড়ক দুর্ঘটনা সংক্রান্ত প্রাথমিক ডাটা আপলোড",
-    assignedBranch: "Mymensingh Branch",
+    title: "Submit Soil Testing & Hydroponics Student Project Dossier",
+    titleBn: "মাটি পরীক্ষা ও হাইড্রোপনিক্স শিক্ষার্থী প্রজেক্ট রিপোর্ট আপলোড",
+    assignedBranch: "Gazipur Unit",
     points: 10,
     status: "COMPLETED",
     dueDate: "10 Sep 2026",
@@ -85,8 +85,8 @@ export default function MemberTasksPage() {
     <div className="space-y-6">
       <PageHeader
         title="Field Missions & Activity Reports"
-        titleBn="মাঠপর্যায়ের দায়িত্ব, ব্ল্যাকস্পট রিপোর্ট ও কার্যক্রম"
-        description="Execute assigned road safety volunteer tasks, document road hazards, and record activity points for tier progression."
+        titleBn="মাঠপর্যায়ের দায়িত্ব, প্রজেক্ট রিপোর্ট ও কার্যক্রম"
+        description="Execute assigned Agricultural Olympiad campus tasks, submit school outreach reports, and record activity merit points."
         badge={
           <Badge variant="outline" className="text-xs font-mono text-emerald-600 border-emerald-500/30 bg-emerald-500/10">
             Field Operations
@@ -183,7 +183,7 @@ export default function MemberTasksPage() {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Gazipur Highway Zebra Crossing Audit"
+                    placeholder="e.g. BAU Mymensingh Agro-Lab Demonstration Audit"
                     value={reportTitle}
                     onChange={(e) => setReportTitle(e.target.value)}
                     className="w-full px-3 py-2 rounded-lg border border-input bg-background text-xs text-foreground focus:outline-none focus:border-primary"
@@ -199,7 +199,7 @@ export default function MemberTasksPage() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Joydebpur Chowrasta, 23.9982° N, 90.3742° E"
+                      placeholder="e.g. BAU Agricultural Engineering Dept, 24.7212° N, 90.4326° E"
                       value={reportLocation}
                       onChange={(e) => setReportLocation(e.target.value)}
                       className="w-full pl-9 pr-3 py-2 rounded-lg border border-input bg-background text-xs text-foreground focus:outline-none focus:border-primary"
@@ -214,7 +214,7 @@ export default function MemberTasksPage() {
                   <textarea
                     rows={3}
                     required
-                    placeholder="Document vehicle speeds, pedestrian counts, barrier gaps, or enforcement challenges..."
+                    placeholder="Document school participation, kit demonstrations, seed lab setups, or workshop feedback..."
                     value={reportDescription}
                     onChange={(e) => setReportDescription(e.target.value)}
                     className="w-full p-3 rounded-lg border border-input bg-background text-xs text-foreground focus:outline-none focus:border-primary"

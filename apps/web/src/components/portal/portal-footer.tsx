@@ -15,13 +15,13 @@ export function PortalFooter() {
           {/* Column 1: Organization Identity */}
           <div className="space-y-3">
             <h3 className="font-serif font-bold text-lg text-white tracking-wide">
-              Road Safety Movement (নিরাপদ সড়ক আন্দোলন)
+              National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)
             </h3>
             <p className="text-xs text-emerald-100/80 leading-relaxed font-bangla">
-              একটি নিরাপদ, টেকসই ও মানবিক সড়ক যোগাযোগ ব্যবস্থা গড়ে তোলার লক্ষ্যে কাজ করে যাওয়া জাতীয় নাগরিক প্ল্যাটফর্ম। ২০১৮ সালের ঐতিহাসিক নিরাপদ সড়ক আন্দোলনের চেতনা বাস্তবায়নে নিবেদিত।
+              টেকসই ও আধুনিক কৃষির রূপান্তরে স্কুল, কলেজ ও বিশ্ববিদ্যালয়ের তরুণ নেতৃত্ব তৈরিতে অঙ্গীকারবদ্ধ বাংলাদেশের সর্ববৃহৎ জাতীয় মেধা অন্বেষণ প্ল্যাটফর্ম।
             </p>
             <div className="pt-2 text-[11px] font-mono text-emerald-300/80">
-              Estd. 2018 · Registered Under Societies Registration Act XXI of 1860
+              Trade License: 03247/2023-2025 · Dhaka City Corporation Authorized
             </div>
           </div>
 
@@ -74,15 +74,15 @@ export function PortalFooter() {
             <div className="space-y-2 text-xs text-emerald-100/90">
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
-                <span>RSM National Headquarters, Level 4, Farmgate, Dhaka-1215, Bangladesh</span>
+                <span>House 04, Road 12/b, Sector 10, Uttara Model Town, Dhaka, Bangladesh</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-amber-400 shrink-0" />
-                <span className="font-mono font-semibold">Emergency Helpline: 01521 336 207</span>
+                <span className="font-mono font-semibold">Hotline / WhatsApp: +880 1717-395047</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-amber-400 shrink-0" />
-                <span>secretariat@roadsafetymovement.org</span>
+                <span>agriculturalolympiad@gmail.com</span>
               </div>
             </div>
 
@@ -147,13 +147,13 @@ export function PortalFooter() {
                 className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition-all cursor-pointer shadow-sm"
               >
                 <Download className="h-3.5 w-3.5" />
-                <span>Install Road Safety App</span>
+                <span>Install Agricultural Olympiad App</span>
               </button>
             ) : null}
           </div>
 
           <div className="text-center sm:text-right">
-            © 2026 Road Safety Movement (নিরাপদ সড়ক আন্দোলন). All Rights Reserved.
+            © 2026 National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড) · Trade License: 03247/2023-2025. All Rights Reserved.
           </div>
         </div>
       </div>

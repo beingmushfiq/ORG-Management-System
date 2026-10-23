@@ -1,7 +1,7 @@
-// Road Safety Movement (RSM) — Enterprise Dynamic Service Worker
-// Version: rsm-pwa-v2.1.0
+// National Agricultural Olympiad (NAO) — Enterprise Dynamic Service Worker
+// Version: nao-pwa-v2.1.0
 
-const CACHE_NAME = "rsm-pwa-v2.1.0";
+const CACHE_NAME = "nao-pwa-v2.1.0";
 const OFFLINE_URL = "/offline";
 
 const PRECACHE_ASSETS = [
@@ -69,7 +69,7 @@ self.addEventListener("fetch", (event) => {
           const cached = await caches.match(request);
           if (cached) return cached;
           const offlinePage = await caches.match(OFFLINE_URL);
-          return offlinePage || new Response("Offline — Road Safety Movement", { status: 503 });
+          return offlinePage || new Response("Offline — National Agricultural Olympiad", { status: 503 });
         })
     );
     return;

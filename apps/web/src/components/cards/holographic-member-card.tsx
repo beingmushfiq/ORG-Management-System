@@ -19,14 +19,14 @@ export interface InstitutionalMemberCardProps {
 }
 
 export function InstitutionalMemberCard({
-  memberName = "Engr. Tanvir Ahmed",
-  memberNameBn = "প্রকৌশলী তানভীর আহমেদ",
-  memberId = "RSM-VOL-2018-001",
+  memberName = "Tanvir Rahman",
+  memberNameBn = "তানভীর রহমান",
+  memberId = "NAO-STU-2025-0104",
   tier = "EXECUTIVE",
-  organizationName = "Road Safety Movement",
-  organizationNameBn = "নিরাপদ সড়ক আন্দোলন",
-  branchName = "Dhaka Central Secretariat",
-  validThrough = "Permanent Active Organizer",
+  organizationName = "National Agricultural Olympiad",
+  organizationNameBn = "জাতীয় কৃষি অলিম্পিয়াড",
+  branchName = "National Organizing Secretariat (Uttara HQ)",
+  validThrough = "Season 2025 · Verified Candidate",
   bloodGroup = "O+",
 }: InstitutionalMemberCardProps) {
   const [downloading, setDownloading] = useState(false);
@@ -55,7 +55,7 @@ export function InstitutionalMemberCard({
 
   return (
     <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto select-none">
-      {/* Official Road Safety Volunteer / Activist ID Card (Standard CR80 Ratio) */}
+      {/* Official Agricultural Olympiad Candidate / Ambassador ID Card (Standard CR80 Ratio) */}
       <div
         onClick={handleCardClick}
         className="w-full rounded-2xl border-2 border-amber-500/50 bg-gradient-to-br from-slate-900 via-slate-850 to-slate-950 text-white shadow-2xl overflow-hidden p-6 relative cursor-pointer group transition-all duration-300 hover:shadow-amber-500/10 hover:border-amber-400"

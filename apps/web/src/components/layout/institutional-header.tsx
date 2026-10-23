@@ -54,6 +54,12 @@ export function InstitutionalHeader({ lang, onToggleLang }: HeaderProps) {
           <Link href="/courses" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
             {lang === "en" ? "Courses (BDT)" : "কোর্সসমূহ"}
           </Link>
+          <Link href="/events" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+            {lang === "en" ? "Events" : "ইভেন্ট"}
+          </Link>
+          <Link href="/causes" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+            {lang === "en" ? "Impact Funds" : "তহবিল ও অনুদান"}
+          </Link>
           <Link href="/notices" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
             {lang === "en" ? "Notices" : "বিজ্ঞপ্তি"}
           </Link>
@@ -135,6 +141,20 @@ export function InstitutionalHeader({ lang, onToggleLang }: HeaderProps) {
               className="p-2 rounded-lg hover:bg-muted text-foreground"
             >
               {lang === "en" ? "Agri-Skill Courses (BDT)" : "কোর্সসমূহ (বিডিটি)"}
+            </Link>
+            <Link
+              href="/events"
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-lg hover:bg-muted text-foreground"
+            >
+              {lang === "en" ? "Olympiad Events & Finale" : "অলিম্পিয়াড ইভেন্ট ও ফিনালে"}
+            </Link>
+            <Link
+              href="/causes"
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-lg hover:bg-muted text-foreground"
+            >
+              {lang === "en" ? "Youth Agri-Impact Funds" : "তহবিল ও অনুদান"}
             </Link>
             <Link
               href="/notices"

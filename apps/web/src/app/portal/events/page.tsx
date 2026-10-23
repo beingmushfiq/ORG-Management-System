@@ -25,36 +25,36 @@ interface EventItem {
 const INITIAL_EVENTS: EventItem[] = [
   {
     id: "evt-1",
-    title: "8th National Safe Road Youth Summit & Blackspot Audit 2026",
-    titleBn: "৮ম জাতীয় নিরাপদ সড়ক যুব সম্মেলন ও ব্ল্যাকস্পট অডিট ২০২৬",
-    venue: "Bangabandhu International Conference Center (BICC), Dhaka",
-    date: "15 Oct 2026",
-    time: "09:30 AM - 05:00 PM",
+    title: "National Agricultural Olympiad 2025 — Grand Finale & Award Gala",
+    titleBn: "জাতীয় কৃষি অলিম্পিয়াড ২০২৫ — গ্র্যান্ড ফিনালে ও পুরস্কার বিতরণী",
+    venue: "Bangladesh Agricultural University (BAU) Auditorium, Mymensingh",
+    date: "20 Nov 2026",
+    time: "09:00 AM - 06:00 PM",
     registered: true,
-    type: "National Assembly",
+    type: "National Finale",
     status: "UPCOMING",
   },
   {
     id: "evt-2",
-    title: "Highway Patrol & Golden Hour First Responder Simulation",
-    titleBn: "হাইওয়ে পেট্রোল ও গোল্ডেন আওয়ার ফার্স্ট এইড উদ্ধার মহড়া",
-    venue: "Dhaka-Mymensingh Highway Corridor (Gazipur Section)",
-    date: "28 Oct 2026",
-    time: "10:00 AM - 02:00 PM",
-    registered: false,
-    type: "Field Exercise",
+    title: "Dhaka Regional Selection Round & Youth Agri-Hackathon",
+    titleBn: "ঢাকা বিভাগীয় বাছাই পর্ব ও যুব এগ্রি-হ্যাক্যাথন ২০২৫",
+    venue: "Sher-e-Bangla Agricultural University (SAU), Dhaka",
+    date: "18 Oct 2026",
+    time: "10:00 AM - 03:00 PM",
+    registered: true,
+    type: "Regional Qualifier",
     status: "UPCOMING",
   },
   {
     id: "evt-3",
-    title: "Defensive Driving Instructor Certification Cohort 4",
-    titleBn: "ডিফেন্সিভ ড্রাইভিং প্রশিক্ষক সনদ প্রদান কর্মশালা",
-    venue: "National Secretariat Auditorium, Farmgate, Dhaka",
-    date: "12 Sep 2026",
-    time: "03:00 PM - 07:00 PM",
-    registered: true,
-    type: "CPD Training",
-    status: "PAST",
+    title: "Hands-on Masterclass: Smart Farming & Hydroponics Automation",
+    titleBn: "স্মার্ট কৃষি, হাইড্রোপনিক্স ও সেন্সর প্রযুক্তি প্রশিক্ষণ",
+    venue: "BSMRAU Agri-Tech Incubator, Gazipur",
+    date: "05 Nov 2026",
+    time: "02:00 PM - 06:00 PM",
+    registered: false,
+    type: "Skill Workshop",
+    status: "UPCOMING",
   },
 ];
 
@@ -71,9 +71,9 @@ export default function MemberEventsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Events & Movement Programs"
-        titleBn="ইভেন্ট, কর্মশালা ও কর্মসূচি"
-        description="Participate in national road safety summits, blackspot audit field missions, and youth volunteer rallies."
+        title="Olympiad Events & Programs"
+        titleBn="অলিম্পিয়াড ইভেন্ট, কর্মশালা ও কর্মসূচি"
+        description="Participate in regional qualifiers, smart farming masterclasses, and the National Grand Finale at BAU Mymensingh."
         badge={
           <Badge variant="outline" className="text-xs font-mono text-emerald-600 border-emerald-500/30 bg-emerald-500/10">
             Participation Track

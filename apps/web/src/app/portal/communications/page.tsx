@@ -35,7 +35,7 @@ export default function CommunicationsPage() {
   // Broadcast Form State
   const [targetBranchPath, setTargetBranchPath] = useState("1");
   const [messageBn, setMessageBn] = useState(
-    "জরুরী বিজ্ঞপ্তি: বাংলাদেশ মেডিকেল এসোসিয়েশন এর বিশেষ কার্যনির্বাহী অধিবেশন আহ্বান করা হয়েছে।"
+    "জাতীয় কৃষি অলিম্পিয়াড: আপনার প্রবেশপত্র (E-Admit Card) প্রস্তুত হয়েছে। ডাউনলোড করতে পোর্টাল ভিজিট করুন: agriculturalolympiad.com/portal"
   );
   const [messageEn, setMessageEn] = useState("");
   const [broadcastLoading, setBroadcastLoading] = useState(false);

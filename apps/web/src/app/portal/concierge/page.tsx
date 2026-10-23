@@ -301,20 +301,20 @@ export default function MemberConciergePage() {
                 OFFICIAL CERTIFICATE
               </Badge>
               <h3 className="text-xl font-bold font-serif text-foreground">Certificate of Good Standing</h3>
-              <div className="text-xs text-muted-foreground">Road Safety Movement • National Secretariat</div>
+              <div className="text-xs text-muted-foreground">National Agricultural Olympiad • Organizing Secretariat</div>
             </div>
 
             <div className="bg-muted/50 border border-border rounded-2xl p-6 text-xs space-y-3 font-sans">
               <div className="flex justify-between items-center border-b border-border pb-2 font-mono text-[11px]">
                 <div className="flex items-center gap-2">
-                  <span className="text-muted-foreground">CERT NO: RSM-GS-2026-08821</span>
-                  <CopyButton text="RSM-GS-2026-08821" label="Copy" />
+                  <span className="text-muted-foreground">CERT NO: NAO-GS-2025-08821</span>
+                  <CopyButton text="NAO-GS-2025-08821" label="Copy" />
                 </div>
                 <span className="text-amber-600 dark:text-amber-400 font-bold">VALID: 1 YEAR</span>
               </div>
 
               <p className="text-foreground/90 leading-relaxed">
-                This is to certify that <strong>Engr. Tanvir Ahmed</strong>, holder of Activist ID <strong>RSM-VOL-2018-001</strong> and Executive Standing in <strong>Dhaka Central Secretariat</strong>, is an active organizer in good standing of the Road Safety Movement (নিরাপদ সড়ক আন্দোলন).
+                This is to certify that <strong>Tanvir Rahman</strong>, holder of Candidate ID <strong>NAO-STU-2025-0104</strong> and Executive Standing in <strong>National Secretariat</strong>, is an active organizer in good standing of the National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড).
               </p>
 
               <p className="text-muted-foreground leading-relaxed text-[11px]">

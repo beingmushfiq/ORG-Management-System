@@ -199,7 +199,7 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
             </button>
           </div>
           <p className="text-[11px] text-white/80">
-            A new version of the Road Safety Movement Operating System has been downloaded.
+            A new version of the National Agricultural Olympiad Platform has been downloaded.
           </p>
           <Button
             size="sm"
@@ -215,21 +215,21 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
       {/* Dynamic Install Banner */}
       {showBanner && deferredPrompt && !isInstalled && (
         <aside
-          aria-label="Install Road Safety Movement Application"
+          aria-label="Install National Agricultural Olympiad Application"
           className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-50 max-w-md w-full animate-in fade-in slide-in-from-bottom-5"
         >
           <div className="rounded-2xl border border-emerald-500/40 bg-[#0d3b25]/95 backdrop-blur-xl p-4 sm:p-5 text-white shadow-2xl space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-emerald-600/30 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-lg shadow-inner">
-                  🛡️
+                  🌱
                 </div>
                 <div>
                   <h2 className="text-xs sm:text-sm font-bold tracking-tight text-white">
-                    Install Road Safety App (PWA)
+                    Install Agricultural Olympiad App
                   </h2>
                   <p className="text-[11px] text-emerald-300 font-bangla">
-                    অফলাইন এক্সেস ও দ্রুততম অভিজ্ঞতার জন্য ইনস্টল করুন
+                    অফলাইন এক্সেস ও প্রবেশপত্রের জন্য ইনস্টল করুন
                   </p>
                 </div>
               </div>

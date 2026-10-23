@@ -81,7 +81,7 @@ export default function RootLayout({
               {/* Momentum Inertia Smooth Scroll */}
               <SmoothScrollProvider>{children}</SmoothScrollProvider>
 
-              {/* Road Safety Rapid Action & Accessibility Dock */}
+              {/* National Agricultural Olympiad Support & Accessibility Dock */}
               <AccessibilityDock />
             </ToastProvider>
           </PwaProvider>

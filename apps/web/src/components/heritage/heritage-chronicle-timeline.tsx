@@ -24,87 +24,73 @@ interface HeritageMilestone {
 
 const MILESTONES: HeritageMilestone[] = [
   {
-    year: "2018 (July)",
-    period: "The Historic Student Uprising",
-    periodBn: "ঐতিহাসিক নিরাপদ সড়ক আন্দোলন ২০১৮",
-    title: "Birth of the Movement: Students Take to the Streets",
-    titleBn: "শিক্ষার্থীদের স্বতঃস্ফূর্ত জাগরণ ও ৯ দফা গণদাবি",
+    year: "2023 (Founding)",
+    period: "Conception & Academic Coalition",
+    periodBn: "উদ্যোগ গ্রহণ ও অ্যাকাডেমিক সূচনা",
+    title: "Conception at BAU: Inspiring Youth in Modern Agriculture",
+    titleBn: "বাকৃবিতে সূচনা: কৃষি শিক্ষায় তরুণ প্রজন্মকে অনুপ্রাণিত করার মহতী উদ্যোগ",
     narrative:
-      "Following the tragic loss of students Diya and Rajib on Airport Road in Dhaka, school and college students took to the streets in an unprecedented peaceful movement. Students checked driving licenses, enforced designated emergency lanes, and united the nation around a singular call: 'We Want Justice, We Want Safe Roads'.",
+      "Recognizing the critical need to engage school and college students in food security, agricultural science, and climate-resilience, university faculty and scientists at Bangladesh Agricultural University (BAU) Mymensingh laid the foundations for the National Agricultural Olympiad.",
     narrativeBn:
-      "২০১৮ সালের জুলাই মাসে বিমানবন্দর সড়কে দুই শিক্ষার্থীর মর্মান্তিক মৃত্যুর পর স্কুল-কলেজের সাধারণ শিক্ষার্থীরা রাস্তায় নেমে আসে। সুশৃঙ্খল ট্রাফিক নিয়ন্ত্রণ, জরুরি লেন তৈরি এবং 'উই ওয়ান্ট জাস্টিস' স্লোগানে পুরো জাতিকে পথ দেখায় তরুণ প্রজন্ম।",
-    historicalSignificance: "Formation of the core student volunteer brigades that evolved into the Road Safety Movement.",
-    significanceBn: "শিক্ষার্থী আন্দোলনের ভিত্তি থেকে একটি প্রাতিষ্ঠানিক নাগরিক প্ল্যাটফর্মের রূপলাভ।",
-    accentColor: "from-amber-600 to-red-600",
+      "জলবায়ু পরিবর্তন মোকাবিলা ও খাদ্য সুরক্ষায় শিক্ষার্থীদের আধুনিক কৃষির প্রতি আগ্রহী করতে বাংলাদেশ কৃষি বিশ্ববিদ্যালয়ের (বাকৃবি) শিক্ষক ও বিজ্ঞানীদের উদ্যোগে জাতীয় কৃষি অলিম্পিয়াডের যাত্রা শুরু হয়।",
+    historicalSignificance: "Formation of Bangladesh's premier youth agricultural science competition network.",
+    significanceBn: "দেশের প্রথম সমন্বিত জাতীয় যুব কৃষিবিজ্ঞান অলিম্পিয়াড নেটওয়ার্ক প্রতিষ্ঠা।",
+    accentColor: "from-emerald-600 to-teal-700",
   },
   {
-    year: "2018 (Sept)",
-    period: "Legislative Reform",
-    periodBn: "আইন প্রণয়ন ও সাংবিধানিক দাবি",
-    title: "Enactment of the Road Transport Act 2018",
-    titleBn: "সড়ক পরিবহন আইন ২০১৮ প্রণয়ন ও ৯ দফা সনদ",
+    year: "2023 (Dec)",
+    period: "Statutory Incorporation",
+    periodBn: "সংবিধিবদ্ধ লাইসেন্স ও সচিবালয়",
+    title: "Trade License Issuance & Uttara Secretariat Establishment",
+    titleBn: "ট্রেড লাইসেন্স অর্জন ও উত্তরা কেন্দ্রীয় সচিবালয় প্রতিষ্ঠা",
     narrative:
-      "In response to the youth mobilization, the national parliament passed the long-awaited Road Transport Act 2018 with elevated penalties for reckless driving, stringent vehicle fitness mandates, and institutional oversight.",
+      "Formally authorized and registered under Dhaka City Corporation with Trade License No. 03247/2023-2025. The permanent National Organizing Secretariat was inaugurated at House 04, Road 12/b, Sector 10, Uttara Model Town, Dhaka.",
     narrativeBn:
-      "শিক্ষার্থী ও নাগরিক সমাজের সম্মিলিত দাবির মুখে মহান জাতীয় সংসদে বহু প্রতীক্ষিত 'সড়ক পরিবহন আইন ২০১৮' পাস হয়, যা চালকের যোগ্যতা ও ফিটনেস সংক্রান্ত কড়াকড়ি নিশ্চিত করে।",
-    historicalSignificance: "Official statutory baseline anchoring road accountability in Bangladesh transport law.",
-    significanceBn: "সড়কে নাগরিক অধিকারের প্রথম সমন্বিত আইনি স্বীকৃতি।",
-    accentColor: "from-blue-600 to-indigo-600",
-  },
-  {
-    year: "2020",
-    period: "Scientific Blackspot Audit",
-    periodBn: "কালো স্থান ম্যাপিং ও গবেষণা কার্যক্রম",
-    title: "Nationwide Highway Crash Registry & 420+ Blackspot Demarcation",
-    titleBn: "জাতীয় হাইওয়ে ক্র্যাশ রেজিস্ট্রি ও ৪২০টি ব্ল্যাকস্পট চিহ্নিতকরণ",
-    narrative:
-      "Transitioning from protest to evidence-based science, the movement partnered with transport engineering researchers to survey national highways, pinpointing 420+ deadly blackspots with blind corners, absence of speed tables, and missing pedestrian footbridges.",
-    narrativeBn:
-      "প্রকৌশলী ও বিশেষজ্ঞদের সাথে যৌথ গবেষণায় দেশের জাতীয় মহাসড়কগুলোতে ৪২০টিরও বেশি ঝুঁকিপূর্ণ 'কালো স্থান' চিহ্নিত করে বৈজ্ঞানিক সমাধানের প্রস্তাবনা উপস্থাপন।",
-    historicalSignificance: "Launch of Bangladesh's first civic-led open crash data repository.",
-    significanceBn: "নাগরিক উদ্যোগে প্রথম উন্মুক্ত রোড ক্র্যাশ ডেটাবেজ প্রতিষ্ঠা।",
-    accentColor: "from-emerald-600 to-teal-600",
-  },
-  {
-    year: "2022",
-    period: "National Safety Campaigns",
-    periodBn: "সারাদেশে গণসচেতনতা কর্মসূচি",
-    title: "National Helmet Enforcement, Speed Checks & Campus Desks",
-    titleBn: "সার্বজনীন হেলমেট ব্যবহার ও স্কুল জোন নিরাপত্তা ক্যাম্পেইন",
-    narrative:
-      "Mobilized across 40+ districts with intensive campaigns targeting two-wheeler helmet compliance, pedestrian zebra crossing repainting, and establishment of dedicated road safety desks in schools and colleges.",
-    narrativeBn:
-      "মোটরসাইকেল আরোহীদের শতভাগ হেলমেট ব্যবহার, স্কুলের সামনে নিরাপদ স্পিড টেবিল স্থাপন এবং জেব্রা ক্রসিং সংস্কারে দেশব্যাপী প্রত্যক্ষ নাগরিক কর্মসূচি।",
-    historicalSignificance: "Over 25,000 citizens directly trained in pedestrian safety and defensive habits.",
-    significanceBn: "২৫,০০০-এর বেশি নাগরিক ও শিক্ষার্থীকে সরাসরি প্রশিক্ষণ প্রদান।",
-    accentColor: "from-purple-600 to-pink-600",
+      "ঢাকা উত্তর সিটি কর্পোরেশন থেকে ট্রেড লাইসেন্স (০৩২৪৭/২০২৩-২০২৫) গ্রহণ এবং উত্তরা মডেল টাউনে স্থায়ী কেন্দ্রীয় সমন্বয় সচিবালয় স্থাপন।",
+    historicalSignificance: "Official legal compliance baseline under Bangladesh regulations.",
+    significanceBn: "সংবিধিবদ্ধ আইনি ও প্রাতিষ্ঠানিক স্বীকৃতির মাইলফলক।",
+    accentColor: "from-amber-600 to-yellow-600",
   },
   {
     year: "2024",
-    period: "Paradigm Shift Advocacy",
-    periodBn: "'দুর্ঘটনা' নয়, 'রোড ক্র্যাশ' আন্দোলন",
-    title: "Call for Terminology Shift: 'Road Crash' Not 'Accident'",
-    titleBn: "সড়ক নিরাপত্তা নিশ্চিতকরণে 'দুর্ঘটনা' নয়, 'রোড ক্র্যাশ' শব্দ ব্যবহারের ডাক",
+    period: "Season 1 National Debut",
+    periodBn: "১ম সিজন জাতীয় অভিষেক",
+    title: "Season 1 National Olympiad: 15,000+ Enrolled & BAU Grand Finale",
+    titleBn: "প্রথম জাতীয় অলিম্পিয়াড: ১৫,০০০+ শিক্ষার্থী ও বাকৃবিতে গ্র্যান্ড ফিনালে",
     narrative:
-      "Launched the nationwide media and policy campaign establishing that crashes caused by negligence, overspeeding, or defective brakes are preventable crimes of neglect—not unavoidable 'accidents' (দৈব দুর্ঘটনা). This historic paradigm shift was embraced across national press councils.",
+      "Successfully convened written preliminary tests across all 8 divisions. The Grand Finale was hosted at BAU Mymensingh where Champion trophies, laptops, and research tours to BARI and BRRI were awarded.",
     narrativeBn:
-      "বেপরোয়া গতি, ত্রুটিপূর্ণ যানবাহন ও ওভারটেকিং দৈব দুর্ঘটনা নয়—এটি প্রতিরোধযোগ্য মানবসৃষ্ট রোড ক্র্যাশ। দায়মুক্তির সংস্কৃতি দূর করতে গণমাধ্যম ও নীতিমালায় শব্দ পরিবর্তনের জোরালো আহ্বান।",
-    historicalSignificance: "Adopted by leading media outlets, setting legal precedents for accountability.",
-    significanceBn: "জাতীয় গণমাধ্যম ও আইনি সংস্কৃতিতে দায়বদ্ধতার স্থায়ী পরিবর্তন।",
-    accentColor: "from-amber-600 to-emerald-600",
+      "৮টি বিভাগে প্রাথমিক বাছাই এবং ময়মনসিংহের বাকৃবি অডিটোরিয়ামে প্রথম জাতীয় গ্র্যান্ড ফিনালে সম্পন্ন। বিজয়ীদের ল্যাপটপ, নগদ অর্থ ও গবেষণা সফর প্রদান।",
+    historicalSignificance: "First nationwide agricultural olympiad with over 15,000 participating students.",
+    significanceBn: "১৫,০০০-এর বেশি শিক্ষার্থীর প্রত্যক্ষ অংশগ্রহণে সফল অভিষেক।",
+    accentColor: "from-blue-600 to-indigo-600",
+  },
+  {
+    year: "2025",
+    period: "Curriculum Expansion",
+    periodBn: "সিলেবাস সম্প্রসারণ ও ৩টি ক্যাটাগরি",
+    title: "Launch of Smart Agriculture, Hydroponics & Junior-Secondary Tracks",
+    titleBn: "স্মার্ট এগ্রিকালচার, হাইড্রোপনিক্স ও ৩টি প্রাতিষ্ঠানিক ক্যাটাগরি প্রবর্তন",
+    narrative:
+      "Structured competitive tracks into Junior Class (Grades 6–8), Secondary Class (Grades 9–10), and Higher Secondary Class (Grades 11–12), integrating hands-on kits for soil testing and soilless vertical farming.",
+    narrativeBn:
+      "জুনিয়র (৬ষ্ঠ-৮ম), মাধ্যমিক (৯ম-১০ম) এবং উচ্চ মাধ্যমিক (১১শ-১২শ) স্তরে সিলেবাস পুনর্বিন্যাস এবং ব্যবহারিক স্মার্ট এগ্রো-ল্যাব কিট প্রদান।",
+    historicalSignificance: "Integration of modern biotechnology, robotics, and climate science into student syllabi.",
+    significanceBn: "শিক্ষার্থীদের পাঠ্যক্রমে আধুনিক জীবপ্রযুক্তি ও রোবোটিক্স কৃষির অন্তর্ভুক্তি।",
+    accentColor: "from-purple-600 to-violet-600",
   },
   {
     year: "2026",
-    period: "Digital Movement OS Era",
-    periodBn: "ডিজিটাল প্ল্যাটফর্ম ও স্থায়ী ভিকটিম তহবিল",
-    title: "9,010+ Volunteers, 82 Committees & Digital Movement OS",
-    titleBn: "৮২টি কমিটি, ৯,০১০+ স্বেচ্ছাসেবী এবং ডিজিটাল অর্গানাইজেশন প্ল্যাটফর্ম",
+    period: "Enterprise Platform Era",
+    periodBn: "ডিজিটাল প্ল্যাটফর্ম ও ৬৪ জেলা নেটওয়ার্ক",
+    title: "25,000+ Students, 64 Districts & DevCenterPoint SaaS Platform",
+    titleBn: "২৫,০০০+ শিক্ষার্থী, ৬৪ জেলা নেটওয়ার্ক ও আধুনিক ডিজিটাল প্ল্যাটফর্ম",
     narrative:
-      "Today, Road Safety Movement operates as Bangladesh's largest structured road advocacy body, uniting 9,010+ registered youth volunteers, 82 active regional/campus committees, and a 24/7 crash victim legal relief and emergency fund.",
+      "Adopting the DevCenterPoint Institutional Operating System featuring integer-paisa financial ledger in BDT, SSLCommerz gateway integration, cryptographic E-Admit Cards, and edge CMS governance.",
     narrativeBn:
-      "একটি সংগঠিত পেশাদার ও স্বেচ্ছাসেবী প্রতিষ্ঠান হিসেবে বর্তমানে দেশের ৬৪ জেলায় ৮২টি কমিটি, ৯,০১০+ সক্রিয় তরুণ নেতৃত্ব এবং ক্র্যাশ ভিকটিমদের জন্য জরুরি আইনি ও পুনর্বাসন সহায়তা কার্যক্রম চলমান।",
-    historicalSignificance: "A self-sustaining, youth-driven institutional force for human dignity and safe transit.",
-    significanceBn: "নিরাপদ, টেকসই ও মানবিক সড়ক যোগাযোগ ব্যবস্থার টেকসই আন্দোলন।",
+      "বিডিটি কারেন্সি, এসএসএলকমার্জ পেমেন্ট, কিউআর ভেরিফায়েড প্রবেশপত্র এবং ডিজিটাল সিএমএস সমৃদ্ধ আধুনিক প্রাতিষ্ঠানিক প্ল্যাটফর্ম রূপান্তর।",
+    historicalSignificance: "Bangladesh's leading technology-powered youth agricultural platform.",
+    significanceBn: "প্রযুক্তিভিত্তিক জাতীয় মেধা অন্বেষণে শীর্ষস্থানীয় প্রাতিষ্ঠানিক প্ল্যাটফর্ম।",
     accentColor: "from-emerald-600 to-sky-600",
   },
 ];
@@ -248,7 +234,7 @@ export function HeritageChronicleTimeline() {
                 Archival Record Verified
               </span>
               <span className="text-xs text-slate-600 dark:text-slate-300 font-mono mt-0.5 block">
-                RSM-CHRONICLE-{activeMilestone.year.slice(0, 4)}
+                NAO-CHRONICLE-{activeMilestone.year.slice(0, 4)}
               </span>
             </div>
           </div>

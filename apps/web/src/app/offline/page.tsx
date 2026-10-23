@@ -23,8 +23,8 @@ export default function OfflinePage() {
         <Link href="/portal" className="flex items-center gap-3">
           <OrgLogo size="sm" />
           <div>
-            <h1 className="text-sm font-bold text-white tracking-wide">ROAD SAFETY MOVEMENT</h1>
-            <p className="text-[10px] text-emerald-400 font-bangla">নিরাপদ সড়ক আন্দোলন</p>
+            <h1 className="text-sm font-bold text-white tracking-wide">NATIONAL AGRICULTURAL OLYMPIAD</h1>
+            <p className="text-[10px] text-emerald-400 font-bangla">জাতীয় কৃষি অলিম্পিয়াড</p>
           </div>
         </Link>
         <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono">
@@ -89,7 +89,7 @@ export default function OfflinePage() {
             {/* Emergency Hotline */}
             <div className="pt-4 border-t border-emerald-500/20 flex items-center justify-center gap-2 text-xs text-emerald-300 font-mono">
               <PhoneCall className="h-3.5 w-3.5 text-amber-400" />
-              <span>National Safety Hotline: 01521 336 207</span>
+              <span>National Secretariat Hotline: +880 1717-395047</span>
             </div>
           </CardContent>
         </Card>
@@ -97,7 +97,7 @@ export default function OfflinePage() {
 
       {/* Footer */}
       <footer className="text-center text-xs text-emerald-400/60 font-mono">
-        Road Safety Movement PWA Engine • Service Worker Dynamic Offline Cache
+        National Agricultural Olympiad PWA Engine • Service Worker Dynamic Offline Cache
       </footer>
     </div>
   );

@@ -155,19 +155,19 @@ export function MembershipProgressTracker({
                   <ul className="list-disc list-inside text-emerald-700 dark:text-emerald-300/90 text-[11px] space-y-0.5">
                     <li>Continuous Active Duration: 1 Year 7+ Months verified</li>
                     <li>Subscription Dues: 100% Paid (No pending invoices)</li>
-                    <li>Events Participated: 18 Road Safety Workshops</li>
+                    <li>Events Participated: 18 Olympiad Workshops & Field Tours</li>
                   </ul>
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-mono uppercase text-muted-foreground">
-                    Volunteer Achievements Summary
+                    Olympiad Achievements & Project Summary
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="Describe your major contributions, blackspot audits, or road safety campaigns..."
+                    placeholder="Describe your research contributions, school workshops, or Olympiad projects..."
                     className="w-full p-2.5 rounded-lg border border-input bg-background text-xs text-foreground focus:outline-none focus:border-primary"
-                    defaultValue="Conducted 4 high-risk road blackspot surveys in Dhaka-Mymensingh corridor and led 3 defensive driving youth training sessions."
+                    defaultValue="Conducted 4 high-school smart agro-lab demonstrations in Dhaka-Mymensingh corridor and led 3 hydroponics workshops."
                   />
                 </div>
 

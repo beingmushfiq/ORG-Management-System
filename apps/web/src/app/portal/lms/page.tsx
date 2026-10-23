@@ -22,9 +22,9 @@ interface CourseLesson {
 }
 
 const INITIAL_LESSONS: CourseLesson[] = [
-  { id: "les-1", title: "Road Transport Act 2018 & Legal Rights of Pedestrians", durationMinutes: 25, completed: true },
-  { id: "les-2", title: "Emergency Crash Response, Golden Hour First Aid & Evacuation", durationMinutes: 30, completed: true },
-  { id: "les-3", title: "Digital Evidence Capture, Dashcam Forensics & Blackspot Mapping", durationMinutes: 20, completed: false },
+  { id: "les-1", title: "Foundations of Smart Agriculture & Soilless Hydroponics", durationMinutes: 25, completed: true },
+  { id: "les-2", title: "Climate-Resilient Crops & Coastal Soil Salinity Management", durationMinutes: 30, completed: true },
+  { id: "les-3", title: "IoT Precision Farming, Drip Automation & Pest Control", durationMinutes: 20, completed: false },
 ];
 
 export default function LmsPortalPage() {
@@ -54,17 +54,17 @@ export default function LmsPortalPage() {
           </Link>
           <span className="text-border font-mono">|</span>
           <div className="flex items-center gap-2">
-            <GraduationCap className="w-5 h-5 text-amber-500" />
+            <GraduationCap className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             <span className="text-sm font-semibold tracking-wide uppercase text-foreground">
-              Road Safety Academy & Volunteer Training Protocol
+              Agricultural Olympiad Academy & Innovator Training
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <ThemeToggle variant="pill" />
-          <Badge variant="outline" className="border-amber-500/40 text-amber-600 dark:text-amber-400 bg-amber-500/10 font-mono text-xs">
-            10 CPD Credits Track
+          <Badge variant="outline" className="border-emerald-500/40 text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 font-mono text-xs">
+            10 Merit Credits Track
           </Badge>
         </div>
       </header>
@@ -76,23 +76,23 @@ export default function LmsPortalPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <Badge variant="outline" className="border-amber-500/40 text-amber-600 dark:text-amber-300 bg-amber-500/10 text-xs">
+                <Badge variant="outline" className="border-emerald-500/40 text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 text-xs">
                   Certified Training Program
                 </Badge>
-                <span className="text-xs font-mono text-muted-foreground">Course #RSM-ACAD-2026-08</span>
+                <span className="text-xs font-mono text-muted-foreground">Course #NAO-ACAD-2025-08</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-display font-bold text-foreground">
-                Defensive Driving, Road Transport Act 2018 & Crash Response
+                Smart Agriculture, Climate Resilience & Biotechnology Foundations
               </h1>
               <p className="text-sm text-muted-foreground font-bangla">
-                ডিফেন্সিভ ড্রাইভিং, সড়ক পরিবহন আইন ২০১৮ ও জরুরি উদ্ধার ব্যবস্থাপনা
+                স্মার্ট কৃষি, জলবায়ু সহনশীল শস্য ব্যবস্থাপনা ও কৃষি জীবপ্রযুক্তি
               </p>
             </div>
 
             <div className="p-4 rounded-2xl bg-muted/50 border border-border shrink-0 text-right font-mono">
               <p className="text-[11px] uppercase text-muted-foreground">Credits Awarded</p>
-              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">10 CPD Points</p>
-              <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">RSM Recognized</p>
+              <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">10 Merit Points</p>
+              <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">NAO Recognized</p>
             </div>
           </div>
 
@@ -163,7 +163,7 @@ export default function LmsPortalPage() {
           <CardHeader className="pb-3">
             <CardTitle className="text-base font-bold text-foreground flex items-center gap-2">
               <Award className="w-5 h-5 text-amber-500" />
-              Cryptographic Road Safety Accreditation Certificate
+              Cryptographic Smart Agriculture Innovator Certificate
             </CardTitle>
             <CardDescription className="text-xs text-muted-foreground">
               Complete all course modules to unlock your digitally signed institutional certificate.
@@ -173,15 +173,15 @@ export default function LmsPortalPage() {
             {certificateClaimed ? (
               <div className="p-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono space-y-2">
                 <div className="flex items-center gap-2 font-bold">
-                  <CheckCircle2 className="w-4 h-4" /> Certificate Issued: CERT-2026-042
+                  <CheckCircle2 className="w-4 h-4" /> Certificate Issued: CERT-2025-042
                 </div>
                 <p className="text-muted-foreground">
                   Your credential is sealed on the permanent ledger with SHA-256 seal 3cb3...fc6.
                 </p>
                 <div className="pt-2">
                   <Link
-                    href="/verify/cert/CERT-2026-042"
-                    className="text-amber-600 dark:text-amber-400 hover:underline inline-flex items-center gap-1 font-semibold"
+                    href="/verify/cert/CERT-2025-042"
+                    className="text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 font-semibold"
                   >
                     View & Download Verified Certificate <ExternalLink className="w-3.5 h-3.5" />
                   </Link>
@@ -196,11 +196,11 @@ export default function LmsPortalPage() {
                 </p>
                 <Button
                   disabled={!isEligibleForCert}
-                  className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold"
+                  className="bg-[#0F5132] hover:bg-[#0c4028] text-white font-bold"
                   onClick={() => setCertificateClaimed(true)}
                 >
-                  <Award className="w-4 h-4 mr-2" />
-                  Claim Accreditation Certificate
+                  <Award className="w-4 h-4 mr-2 text-amber-400" />
+                  Claim Innovator Certificate
                 </Button>
               </div>
             )}

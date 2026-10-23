@@ -17,25 +17,25 @@ interface SurveyPoll {
 const INITIAL_POLLS: SurveyPoll[] = [
   {
     id: "poll-1",
-    title: "Priority Action for Dhaka-Chattogram Highway Corridor (2026)",
-    titleBn: "ঢাকা-চট্টগ্রাম মহাসড়কে দুর্ঘটনা প্রতিরোধে সর্বাধিক অগ্রাধিকার কোনটি?",
-    category: "Highway Infrastructure",
+    title: "Priority Focus for Season 2025 Smart Farming Curriculum",
+    titleBn: "জাতীয় কৃষি অলিম্পিয়াড ২০২৫ পাঠ্যক্রমে সর্বাধিক গুরুত্ব কোনটি হওয়া উচিত?",
+    category: "Curriculum Design",
     totalVotes: 1420,
     options: [
-      { id: "opt-1", text: "Automated Speed Radar & Instant Fine Cameras", votes: 852 },
-      { id: "opt-2", text: "Physical Separation of Slow-Moving Local Vehicles", votes: 412 },
-      { id: "opt-3", text: "Night Highway Patrol & Drowsy Driver Checkpoints", votes: 156 },
+      { id: "opt-1", text: "Hydroponics, Soilless Vertical Farming & Urban Ag", votes: 852 },
+      { id: "opt-2", text: "Climate-Resilient Crops & Salinity Adaptations", votes: 412 },
+      { id: "opt-3", text: "IoT Precision Irrigation & Drone Crop Monitoring", votes: 156 },
     ],
   },
   {
     id: "poll-2",
-    title: "School Zone Pedestrian Safety & Mandatory 20 km/h Speed Limit",
-    titleBn: "শিক্ষা প্রতিষ্ঠানের সামনে বাধ্যতামূলক ২০ কিমি/ঘণ্টা গতিসীমা কার্যকর করার দাবি",
-    category: "Youth & Child Protection",
+    title: "Regional Qualifying Venue Allocation for Season 2025",
+    titleBn: "বিভাগীয় বাছাই পরীক্ষার ভেন্যু ব্যবস্থাপনা ও কেন্দ্র নির্বাচন",
+    category: "Regional Logistics",
     totalVotes: 2180,
     options: [
-      { id: "opt-4", text: "Strict Enforcement with License Suspension", votes: 1680 },
-      { id: "opt-5", text: "Elevated Crosswalks & Speed Cushions", votes: 500 },
+      { id: "opt-4", text: "Central Agricultural Universities (BAU, SAU, BSMRAU)", votes: 1680 },
+      { id: "opt-5", text: "District Headquarters Model Colleges (64 Districts)", votes: 500 },
     ],
   },
 ];
@@ -76,7 +76,7 @@ export default function MemberSurveysPage() {
       <PageHeader
         title="Surveys & Public Opinion Desk"
         titleBn="সার্ভে, জনমত ও নাগরিক প্রস্তাবনা"
-        description="Democratic member consultations on road safety legislation, national blackspots, and advocacy campaigns."
+        description="Democratic member and student consultations on Agricultural Olympiad curricula, district qualifiers, and youth innovation grants."
         badge={
           <Badge variant="outline" className="text-xs font-mono text-emerald-600 border-emerald-500/30 bg-emerald-500/10">
             Citizen Polling
