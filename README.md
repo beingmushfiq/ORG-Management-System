@@ -1,41 +1,84 @@
-# Organization Operating System (ORG OS)
+# National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)
+## Enterprise Institutional Operating System & HopeNest Digital Platform
 
-## Flagship Multi-Tenant SaaS for Institutional Bodies, Civic Movements & Professional Syndicates
-### Reference Implementation: **Road Safety Movement (নিরাপদ সড়ক আন্দোলন)** — [roadsafetymovement.org](https://www.roadsafetymovement.org/)
+[![Official Domain](https://img.shields.io/badge/Official_Portal-agriculturalolympiad.com-0F5132?style=for-the-badge&logo=google-chrome&logoColor=white)](https://agriculturalolympiad.com/)
+[![Trade License](https://img.shields.io/badge/Trade_License-03247%2F2023--2025-F59E0B?style=for-the-badge&logo=shield&logoColor=black)](file:///workspace/bright-faraday/apps/web/src/app/terms-condition/page.tsx)
+[![Bangladesh Bank Compliant](https://img.shields.io/badge/Bangladesh_Bank-Merchant_Compliant-0F5132?style=for-the-badge&logo=checkmarx&logoColor=white)](file:///workspace/bright-faraday/apps/web/src/app/refund-policy/page.tsx)
+[![SSLCommerz Ready](https://img.shields.io/badge/SSLCommerz-Approved_Store-1E3A8A?style=for-the-badge&logo=visa&logoColor=white)](file:///workspace/bright-faraday/apps/web/src/app/apply/page.tsx)
+[![Currency](https://img.shields.io/badge/Currency-BDT_(৳)_Paisa_Ledger-10B981?style=for-the-badge&logo=cashapp&logoColor=white)](file:///workspace/bright-faraday/apps/web/src/app/courses/page.tsx)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15.5_App_Router-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7_Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![PWA](https://img.shields.io/badge/PWA-Offline_Ready-7C3AED?style=for-the-badge&logo=pwa&logoColor=white)](file:///workspace/bright-faraday/apps/web/public/sw.js)
+[![Architected by DevCenterPoint](https://img.shields.io/badge/Architected_by-DevCenterPoint-D97706?style=for-the-badge&logo=shield&logoColor=white)](https://devcenterpoint.com)
 
-![License](https://img.shields.io/badge/License-Proprietary-blue.svg?style=for-the-badge)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7_Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Turborepo](https://img.shields.io/badge/Turborepo-2.4-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-15_App_Router-black?style=for-the-badge&logo=next.js&logoColor=white)
-![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8.0_InnoDB-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma-6.4_ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
-![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
-![Tests](https://img.shields.io/badge/Tests-83%2F83_Passing-success?style=for-the-badge&logo=vitest&logoColor=white)
-[![DevCenterPoint](https://img.shields.io/badge/Architected_by-DevCenterPoint-D97706?style=for-the-badge&logo=shield&logoColor=white)](https://devcenterpoint.com)
+---
 
-**A sovereign, high-trust digital platform engineered to represent the prestige of premier organizations with zero AI slop, zero futuristic cyber clutter, and maximum institutional dignity.**
+> **A sovereign, high-trust institutional platform engineered for the National Agricultural Olympiad — empowering the next generation of youth to lead food security, climate resilience, and smart agricultural innovation across Bangladesh.**
 
-*Architected & Engineered by [DevCenterPoint](https://devcenterpoint.com)*
+---
 
-[Live Architecture](#system-architecture) • [Feature Showcase](#core-capabilities) • [64-District Atlas](#1-precise-64-district-interactive-national-atlas-of-bangladesh) • [Drag-and-Drop Organogram](#2-interactive-drag-and-drop-organogram-reordering) • [Quick Start](#quick-start-guide) • [Security Invariants](#security--tenancy-invariants) • [Verification](#quality-gates--testing)
+## Table of Contents
+- [Executive Overview](#executive-overview)
+- [Statutory Merchant Compliance Suite](#statutory-merchant-compliance-suite-bangladesh-bank--sslcommerz)
+- [HopeNest Design System & Visual Aesthetics](#hopenest-design-system--visual-aesthetics)
+- [System Architecture](#system-architecture)
+- [Core Capabilities](#core-capabilities)
+  - [1. Geographically Precise 64-District Olympiad & Agri-Hub Atlas](#1-geographically-precise-64-district-olympiad--agri-hub-atlas)
+  - [2. Dynamic CMS Control Studio](#2-dynamic-cms-control-studio)
+  - [3. Multi-Track Enrollment Wizard with Mandatory Statutory Consent](#3-multi-track-enrollment-wizard-with-mandatory-statutory-consent)
+  - [4. University Branch Hierarchy & Materialized Path Trees](#4-university-branch-hierarchy--materialized-path-trees)
+  - [5. Integer Paisa Financial Ledger in BDT](#5-integer-paisa-financial-ledger-in-bdt)
+  - [6. Cryptographic Credentials & E-Admit Cards with Live QR Verification](#6-cryptographic-credentials--e-admit-cards-with-live-qr-verification)
+- [Complete Production Route Catalog (49 Routes)](#complete-production-route-catalog-49-routes)
+- [Local Development & Execution](#local-development--execution)
+- [Verification & Quality Gates](#verification--quality-gates)
+- [Security & Tenancy Invariants](#security--tenancy-invariants)
+- [Attribution & Governance](#attribution--governance)
 
 ---
 
 ## Executive Overview
 
-The **Organization Operating System (ORG OS)** is a sovereign, enterprise-grade multi-tenant platform built for institutional syndicates, civic movements, professional associations, and foundations. 
+The **National Agricultural Olympiad (জাতীয় কৃষি অলিম্পিয়াড)** is Bangladesh's apex agricultural science talent competition and youth empowerment movement. Conceived at **Bangladesh Agricultural University (BAU)** in Mymensingh and incorporated with an organizing secretariat in Uttara Model Town, Dhaka, the Olympiad bridges secondary schools, higher secondary colleges, and university research faculties into a cohesive national network.
 
-Our flagship reference tenant is the **Road Safety Movement (নিরাপদ সড়ক আন্দোলন)**—Bangladesh's apex volunteer-driven organization founded during the historic 2018 Students' Movement, mobilizing **9,010+ registered volunteers**, **82 active district/campus committees**, and tracking **420+ monitored highway blackspots** across all 64 districts.
+Built on the **DevCenterPoint Institutional Operating System (ORG OS)**, this platform pairs the warmth and accessibility of the **HopeNest Charity & Nonprofit React Template** with enterprise multi-tenancy, strict statutory compliance, integer-paisa financial precision, and offline PWA reliability.
 
-Unlike generic corporate CRMs or fragile website builders, ORG OS delivers **100% visibility in both Light and Dark modes**, strict institutional typography, and an **uncompromising engineering core**:
+### Key Metrics
+- **25,000+** Student Participants across 3 Competitive Academic Tiers (Junior, Secondary, Higher Secondary).
+- **64 Districts** organized into 8 Regional Coordination Councils and Campus Chapters.
+- **4 Apex Agricultural University Hubs**: BAU (Mymensingh), BSMRAU (Gazipur), SAU (Dhaka), and PSTU (Patuakhali).
+- **100% WCAG AAA Compliant**: High-contrast, crystal-clear typography in both English and Bengali conjunct scripts.
 
-- **4-Layer Tenant Isolation**: Defensive software tenancy filtering enforced via verified JWT claims, Edge routing, AsyncLocalStorage execution context, and Prisma Client query extensions (strictly ignoring spoofable client headers).
-- **Production Authentication & Session Management**: Real cryptographic bcrypt-hashed OTP verification, 60-second dispatch cooldown, 3-attempt lockout defense, and database-backed revocable sessions with `HttpOnly; Secure; SameSite=Strict` cookies.
-- **Integer Paisa Financial Ledger**: 100% floating-point-free arithmetic (`BigInt` paisa: `1 BDT = 100 paisa`) with multi-gateway abstraction (EPS, bKash, Nagad, SSLCommerz) and bank slip manual verification queue.
-- **Societies Registration Act XXI of 1860 Compliance**: Automated generation of statutory member registers, AGM voting rolls, and numbered legal resolutions.
-- **Geographically Precise 64-District National Atlas**: Official BBS/OCHA administrative MultiPolygon boundaries with authentic National Green and Adaptive Theme rendering.
-- **Council Admin Drag-and-Drop Organogram**: Dynamic rank precedence reordering with audio synthesis feedback.
+---
+
+## Statutory Merchant Compliance Suite (Bangladesh Bank & SSLCommerz)
+
+To satisfy Bangladesh Bank's regulatory directives and SSLCommerz payment gateway onboard audit checklists, the platform implements dedicated statutory safeguards:
+
+| Compliance Mandate | Implementation Detail | Location |
+| :--- | :--- | :--- |
+| **Official Trade License** | Prominently displayed: `03247/2023-2025` (Dhaka North City Corporation) | Header, Footer, Legal Pages, Checkout |
+| **Registered Secretariat** | Permanent physical address: `House 04, Road 12/b, Sector 10, Uttara Model Town, Dhaka, Bangladesh` | Header, Footer, Contact, About, Invoices |
+| **Direct Contact Channels** | Secretariat Phone & WhatsApp: `+880 1717-395047`, Email: `agriculturalolympiad@gmail.com` | Institutional Header & Footer |
+| **National Pricing Transparency** | 100% of public prices denominated in **BDT (৳)** with integer paisa precision | `/courses`, `/causes`, `/apply`, `/register` |
+| **About Us Narrative** | Dedicated founding chronicle, mission pillars, and academic advisory board | [`/about`](file:///workspace/bright-faraday/apps/web/src/app/about/page.tsx) |
+| **Terms & Conditions** | Comprehensive participation rules, code of conduct, and intellectual property terms | [`/terms-condition`](file:///workspace/bright-faraday/apps/web/src/app/terms-condition/page.tsx) |
+| **Return & Refund Policy** | 14-day cancellation eligibility window with 5–7 working day refund execution timeline | [`/refund-policy`](file:///workspace/bright-faraday/apps/web/src/app/refund-policy/page.tsx) |
+| **Privacy Policy** | Strict student and minor data protection bylaws conforming to national digital standards | [`/privacy-policy`](file:///workspace/bright-faraday/apps/web/src/app/privacy-policy/page.tsx) |
+| **Delivery Policy** | Instant cryptographic E-Admit Cards (within 24 hrs) and courier tracking for physical medals (3–7 business days) | [`/delivery-policy`](file:///workspace/bright-faraday/apps/web/src/app/delivery-policy/page.tsx) |
+| **Mandatory Policy Checkbox** | Interactive acceptance checkbox linking to all 4 legal policies; checkout submission blocked until confirmed | [`/apply`](file:///workspace/bright-faraday/apps/web/src/app/apply/page.tsx), [`/register`](file:///workspace/bright-faraday/apps/web/src/app/register/page.tsx) |
+
+---
+
+## HopeNest Design System & Visual Aesthetics
+
+The frontend is styled using the **HopeNest Charity & Nonprofit** design language, customized for agricultural science and environmental stewardship:
+
+- **Forest Emerald (`#0F5132` / HSL `142 76% 22%`)**: Represents fertile Bangladesh soil, crop foliage, and environmental sustainability.
+- **Harvest Sun Gold (`#F59E0B` / HSL `38 92% 50%`)**: Represents ripe golden paddy, youth energy, and academic excellence.
+- **Warm Light Cream Backgrounds (`#FAFAF8`) & Dark Agro Forest (`#0a160f`)**: High-contrast, easy-on-the-eyes presentation for prolonged reading.
+- **Gentle Rounded Edges (`rounded-2xl`, `rounded-3xl`)**: Creates a welcoming, trustworthy community atmosphere for students, parents, and academic judges.
+- **Audio Synthesis Accents**: Native Web Audio API generates subtle harmonic feedback for user actions without external audio asset downloads.
 
 ---
 
@@ -43,40 +86,41 @@ Unlike generic corporate CRMs or fragile website builders, ORG OS delivers **100
 
 ```mermaid
 flowchart TB
-    subgraph ClientLayer ["Client Layer (Next.js 15 App Router + PWA)"]
-        PublicWeb["Public Portfolio & Atlas (/)\n• 64-District Branch Atlas\n• Movement Heritage (2018–2026)\n• Interactive Organogram Reordering"]
-        PublicPortals["Civic Action & Memorial Hubs\n• Memorial Hall of Martyrs (/memorial)\n• Notices & Press Gazettes (/notices)\n• Road Safety Causes & Relief (/causes)\n• Volunteer Recruitment Wizard (/apply)"]
-        MemberPortal["Central Secretariat (/portal)\n• Operational Workspace (/portal)\n• Member Directory & KYC (/portal/members)\n• Council Chamber & Resolutions (/portal/command)\n• Treasury Desk & Slips (/portal/finance)\n• Branch Hierarchy Tree (/portal/branches)\n• Superadmin Multi-Tenant (/portal/superadmin)"]
+    subgraph ClientLayer ["Client Experience (Next.js 15 App Router + PWA)"]
+        PublicWeb["Public Portal & HopeNest Experience (/)\n• Category Tracks (Grades 6–12)\n• 64-District Olympiad & Agri-Hub Atlas\n• Heritage Timeline (2023–2026)\n• Memorial Hall of Agricultural Pioneers (/memorial)"]
+        StatutoryWeb["Statutory Compliance Suite\n• About Us (/about)\n• Terms & Conditions (/terms-condition)\n• Refund Policy (/refund-policy)\n• Privacy Policy (/privacy-policy)\n• Delivery Policy (/delivery-policy)\n• Masterclasses & Kit Programs in BDT (/courses)\n• Multi-Track Enrollment Wizard (/apply)"]
+        ManagementPortal["Central Secretariat & CMS Studio (/portal)\n• Live CMS Studio & WYSIWYG Editor (/portal/cms)\n• 64-District Branch Hierarchy Tree (/portal/branches)\n• Digital E-Admit Cards & Certificates (/portal/certificates)\n• Treasury Desk & BDT Paisa Ledger (/portal/finance)\n• SMS Dispatch & Communications (/portal/communications)\n• Statutory Resolutions & Registers (/portal/reports)"]
+        PWAWorker["Progressive Web App Engine\n• Service Worker Caching (sw.js)\n• Offline Recovery Fallback (/offline)\n• Native App Manifest (manifest.json)"]
     end
 
-    subgraph EdgeLayer ["Edge Security & Routing"]
-        EdgeMiddleware["Next.js Edge Middleware\n• Hostname / Subdomain Extraction\n• Proxy Rewrites to /api/*\n• Cookie & Session Validation"]
+    subgraph EdgeLayer ["Edge Security & Multi-Tenant Routing"]
+        EdgeMiddleware["Next.js Edge Middleware\n• Subdomain Edge Resolver (agriolympiad)\n• Custom Domain Routing (agriculturalolympiad.com)\n• HttpOnly / SameSite Session Guard"]
     end
 
-    subgraph BackendLayer ["Application Layer (NestJS 10 Modular Core)"]
-        TenantContext["TenantContextInterceptor\n(Server-Derived Claims via ClsService)"]
-        Guards["Security Pipeline\n• TenantGuard\n• PermissionGuard (Resource × Action)\n• ScopeInterceptor (Materialized Path Subtree)"]
-        Modules["Enterprise Domain Modules\n• AuthModule (Bcrypt OTP & DB Sessions)\n• MembershipService & State Machine\n• FinanceService (BigInt Paisa Ledger)\n• GovernanceService (Quorum & Numbered Res)\n• HierarchyService (Materialized Path Tree)\n• CommunicationsService (Notices & SMS)\n• SuperadminService (Audited Impersonation)"]
+    subgraph BackendLayer ["Application Core (NestJS 10 Enterprise)"]
+        TenantContext["TenantContextInterceptor\n(AsyncLocalStorage Isolation)"]
+        Guards["Authorization Pipeline\n• TenantGuard (Subtree Boundary Check)\n• PermissionGuard (Role × Resource Matrix)"]
+        DomainModules["Domain Services\n• CMS & Statutory Content Service\n• FinanceService (Integer Paisa BigInt)\n• MembershipService (Student KYC & Tiers)\n• HierarchyService (Materialized Path Subtree)\n• CommunicationsService (SSL Wireless SMS)\n• GovernanceService (Numbered Resolutions)"]
     end
 
-    subgraph GatewayLayer ["Payment & Telecom Adapters"]
-        Payments["Payment Providers\n• EPS (Electronic Payment System)\n• bKash Tokenized Checkout\n• Nagad PGW\n• SSLCommerz IPN"]
-        Telecom["SMS Adapters\n• SSL Wireless CSMS\n• Alpha SMS\n• Greenweb"]
+    subgraph GatewayLayer ["Banking & Telecom Adapters"]
+        Payments["Payment Gateway Hub\n• SSLCommerz Hosted Checkout (BDT)\n• bKash Tokenized Checkout\n• Nagad PGW\n• Manual Bank Slip Verification Queue"]
+        Telecom["Telecom SMS Hub\n• SSL Wireless CSMS Integration\n• Alpha SMS & Greenweb Adapters"]
     end
 
-    subgraph DataLayer ["Data & Storage Layer (Defensive Multi-Tenant Isolation)"]
-        PrismaExt["Prisma Client Tenant Extension\nAuto-appends { where: { organizationId } }"]
-        MySQL[("MySQL 8.0 (InnoDB)\n• BigInt Money Storage\n• Materialized Paths (VARCHAR 500)\n• Immutable AuditLog (APPEND-ONLY)\n• AuthOtp & UserSession Tables")]
-        Redis[("Redis 7.0 Cache\n• Subdomain Mappings\n• SMS OTP Rate Limiting\n• Quorum Telemetry")]
+    subgraph DataLayer ["Data & Storage Layer"]
+        PrismaExt["Prisma Client Tenant Extension\n(Auto-Appends { where: { organizationId } })"]
+        MySQL[("MySQL 8.0 (InnoDB)\n• Organizations & Statutory Policies\n• Courses & BDT Paisa Fees\n• BranchNode Materialized Path\n• Immutable Cryptographic AuditLog")]
+        Redis[("Redis 7.0 Cache\n• Tenant DNS Mapping\n• SMS OTP Rate Limiting\n• Session State Store")]
     end
 
     ClientLayer --> EdgeMiddleware
     EdgeMiddleware --> TenantContext
     TenantContext --> Guards
-    Guards --> Modules
-    Modules --> Payments
-    Modules --> Telecom
-    Modules --> PrismaExt
+    Guards --> DomainModules
+    DomainModules --> Payments
+    DomainModules --> Telecom
+    DomainModules --> PrismaExt
     PrismaExt --> MySQL
     BackendLayer -.-> Redis
 ```
@@ -85,167 +129,190 @@ flowchart TB
 
 ## Core Capabilities
 
-### 1. Precise 64-District Interactive National Atlas of Bangladesh
+### 1. Geographically Precise 64-District Olympiad & Agri-Hub Atlas
+- **Authentic BBS/OCHA MultiPolygons**: Rendered from vector coordinates ([`bangladesh-districts-geo.json`](file:///workspace/bright-faraday/apps/web/src/components/geo/bangladesh-districts-geo.json)) covering all 64 districts, coastal islands (Bhola, Hatiya, Sandwip), and university research nodes.
+- **National Green & Adaptive Themes**: Instant toggle between vibrant national green cartography and theme-adaptive modes.
+- **Regional Agri-Hub Dossier**: Clicking any district reveals active Olympiad student counts, regional university coordinators, seed preservation clinics, and direct helpline contact info.
 
-Located at `apps/web/src/components/geo/bangladesh-branch-atlas.tsx`:
-- **Real BBS/OCHA Administrative MultiPolygons**: Built from authentic district vector coordinates (`bangladesh-districts-geo.json`), accurately tracing all coastal estuaries, island deltas (Bhola, Hatiya, Sandwip), river confluences, and international borders across all 64 districts.
-- **National Green Map Mode**: Matches the authentic green cartography of Bangladesh with lush green district fills (`#22c55e`), deep forest green background (`#05572e`), and crisp district borders.
-- **Adaptive Theme Map Mode**: Allows council admins to toggle into high-contrast theme-adaptive view for light or dark modes.
-- **Full District Labeling**: Every single district features its name label printed in clean, crisp, legible white text right inside the district boundaries.
-- **Live Safety Dossier**: Clicking any district reveals registered volunteer counts, active committees, monitored highway blackspots, campus chapters (BUET, DU, RU, CU, etc.), active safety initiatives, and direct coordinator contact info with call triggers.
-- **Division Filtering & Search**: Instant filtering across all 8 divisions and real-time bilingual search.
+### 2. Dynamic CMS Control Studio
+- **Full Secretariat CMS Control** at [`/portal/cms`](file:///workspace/bright-faraday/apps/web/src/app/portal/cms/page.tsx).
+- Real-time editing of Trade License Number, physical secretariat address, phone, WhatsApp, and contact email.
+- Rich-text WYSIWYG editors for Terms & Conditions, Refund Policy, Privacy Policy, and Delivery Policy.
+- Live course and kit catalog manager: Add courses, set BDT prices, cap participant quotas, and publish instantly.
 
-### 2. Interactive Drag-and-Drop Organogram Reordering
+### 3. Multi-Track Enrollment Wizard with Mandatory Statutory Consent
+- Multi-step registration flow on [`/apply`](file:///workspace/bright-faraday/apps/web/src/app/apply/page.tsx) and [`/register`](file:///workspace/bright-faraday/apps/web/src/app/register/page.tsx).
+- 3 Academic Divisions:
+  1. **Junior Category (Grades 6–8)**: Soil science basics, botany, seed germination.
+  2. **Secondary Category (Grades 9–10)**: Modern agronomy, plant pathology, precision fertilizer dosing.
+  3. **Higher Secondary Category (Grades 11–12)**: Climate-resilient genetics, hydroponics, vertical farming, agri-biotechnology.
+- **SSLCommerz & Bangladesh Bank Checkbox Gate**: The submission trigger is disabled until the student/guardian checks the mandatory legal agreement box linking to all 4 policies.
 
-Located at `apps/web/src/components/governance/interactive-organogram.tsx`:
-- Executive standing councils:
-  1. *Central Executive Secretariat*
-  2. *Policy Advocacy & Transport Law Reform Wing*
-  3. *Crash Research, Blackspot Mapping & Data Cell*
-  4. *Victim Relief & Legal Rehabilitation Fund*
-  5. *Campus Chapters & Youth Action Directorate*
-  6. *Driver Education & Defensive Road Academy*
-  7. *Public Media, Press & Campaign Directorate*
-- **Drag-and-Drop Capability**: Council admins can toggle "Council Admin: Reorder Ranks" and visually drag committee cards vertically to adjust institutional rank precedence.
-- Automatic rank recalculation (`#1`, `#2`, etc.) with drop target highlight animations, haptic chime audio feedback, and instant ratification toasts.
+### 4. University Branch Hierarchy & Materialized Path Trees
+- Located at [`/portal/branches`](file:///workspace/bright-faraday/apps/web/src/app/portal/branches/page.tsx).
+- Materialized path tree structure (`1.2.5`) enabling subtree calculations in $O(1)$ database queries.
+- Connects the National Organizing Secretariat (Uttara HQ) directly to University Campus Chapters (BAU, BSMRAU, SAU, PSTU) and 64-district local school coordination cells.
 
-### 3. Dynamic Live Theme Swapping in DOM
+### 5. Integer Paisa Financial Ledger in BDT
+- Located at [`/portal/finance`](file:///workspace/bright-faraday/apps/web/src/app/portal/finance/page.tsx).
+- **Zero Floating-Point Drift**: All registration fees, kit disbursements, and awards are computed using `BigInt` paisa (`1 BDT = 100 paisa`).
+- Dual payment collection routes: Automated instant gateway payment (SSLCommerz, bKash, Nagad) or offline bank deposit slip upload with manual treasurer verification queue.
 
-- Connected in `apps/web/src/components/providers/theme-provider.tsx` and `apps/web/src/app/portal/cms/page.tsx`.
-- Color pickers bind directly to `setBrandColors` in the ThemeProvider, updating CSS custom properties (`--primary`, `--ring`, `--accent`) in real-time across the document without page reloads.
-
-### 4. Subtle Web Audio API Haptic & Sound Accents
-
-- Located at `apps/web/src/lib/audio-effects.ts`.
-- Zero external audio files or bandwidth overhead. Synthesizes frequency pulses via native Web Audio API oscillators:
-  - Soft click for tab switching and navigation.
-  - Dual harmonic chime for ratification and resolution approval.
-  - Resonant chord for organogram drag-and-drop placement.
-  - Mute/Unmute toggle integrated into the 24/7 Safety Desk accessibility dock.
-
-### 5. Civic Memorial & Humanitarian Causes
-
-- **Victim Memorial Hall ("স্মৃতি চিরন্তন")** (`/memorial`): Dedicated sanctuary honoring road crash victims and movement martyrs (Diya Khanam Mim, Abdul Karim Rajib, filmmaker Tareque Masud, cinematographer Mishuk Munier, and Abrar Ahmed).
-- **Action Causes & Relief Fund** (`/causes`): 420 Blackspot Elimination, Victim Medical Aid, School Safety Zones, and Commercial Driver Training with live donation modals and receipt vouchers.
-
-### 6. Official Digital Volunteer Pass
-
-- Tamper-evident identity card with verified QR authentication tokens, national typography, official crest seal, and 300 DPI vector CR80 printing specifications.
+### 6. Cryptographic Credentials & E-Admit Cards with Live QR Verification
+- Located at [`/portal/certificates`](file:///workspace/bright-faraday/apps/web/src/app/portal/certificates/page.tsx).
+- Produces cryptographic SHA-256 sealed E-Admit Cards, Merit Awards, and Fellow Certificates.
+- Publicly verifiable on mobile via high-speed scanning endpoints:
+  - [Certificate QR Verification (`/verify/cert/[id]`)](file:///workspace/bright-faraday/apps/web/src/app/verify/cert/[id]/page.tsx)
+  - [Candidate Pass Verification (`/verify/member/[id]`)](file:///workspace/bright-faraday/apps/web/src/app/verify/member/[id]/page.tsx)
 
 ---
 
-## Complete Frontend Route Catalog (All 30 Routes)
+## Complete Production Route Catalog (49 Routes)
 
 ### Public & Civic Portfolio
-1. `/` — Institutional Hero, 64-District Atlas, Movement Heritage Timeline (2018–2026), Executive Organogram, Core Pillars.
-2. `/apply` — 4-Step Public Volunteer Recruitment & Membership Application Wizard.
-3. `/events` — Road Safety Rallies, Workshops, and Defensive Driving Symposiums.
-4. `/events/[id]` — Dynamic Event Details, Hour-by-Hour Agenda, Speaker Rosters.
-5. `/notices` — Official Gazette & Press Release Vault with bilingual search and memo references.
-6. `/notices/[id]` — Dynamic Gazette Memo Reader with printable letterhead.
-7. `/causes` — 420 Blackspot Elimination & Victim Relief Funds with instant vouchers.
-8. `/gallery` — Photographic Media Archive & Press Lightbox.
-9. `/journal` — Road Safety Research Publications & Crash Data Repository.
-10. `/memorial` — Road Crash Victims & Movement Martyrs Memorial Hall ("স্মৃতি চিরন্তন").
-11. `/verify/member/[id]` — Public Volunteer Pass Verification with cryptographic SHA-256 seal.
-12. `/verify/cert/[id]` — Public Training & Good Standing Credential Verification.
-13. `/login` — Unified Mobile OTP (+880) & Email/Password Sign-In.
-14. `/design-system` — Living Design System & Bengali Typographic Conjunct QA Lab.
+1. `/` — HopeNest Homepage, Category Tracks, 64-District Agri-Atlas, Olympiad Chronicle (2023–2026), Interactive Organogram.
+2. `/about` — Institutional Founding Narrative, Secretariat Leadership, Academic Mission.
+3. `/terms-condition` — Statutory Terms & Conditions of participation and examination bylaws.
+4. `/refund-policy` — Statutory 14-day Refund & Return Policy (SSLCommerz / Bangladesh Bank standard).
+5. `/privacy-policy` — Statutory Student Data Privacy and Minor Information Protection Policy.
+6. `/delivery-policy` — Statutory E-Admit Card & Physical Medallion Delivery Policy.
+7. `/courses` — Agricultural Masterclasses, Kit Demonstrations, and BDT Pricing Catalog.
+8. `/apply` — Public Olympiad Enrollment Wizard with mandatory statutory acceptance checkbox.
+9. `/register` — Quick Registration Portal.
+10. `/causes` — HopeNest Youth Agro-Education Funds & Research Sponsorships in BDT.
+11. `/events` — Nationwide Regional Qualifiers and Grand Finale at BAU Mymensingh.
+12. `/events/[id]` — Dynamic Event Details, Hour-by-Hour Academic Agenda, Jury Roster.
+13. `/gallery` — Photographic Media Archive & Olympiad Visual Lightbox.
+14. `/journal` — Youth Agricultural Science Review and Research Paper Repository.
+15. `/memorial` — Memorial Hall of Agricultural Pioneers (Dr. Kazi M. Badruddoza, Dr. Maqsudul Alam, Sir J.C. Bose).
+16. `/notices` — Official Gazette & Circular Vault with memo search.
+17. `/notices/[id]` — Dynamic Circular Memo Reader with official letterhead.
+18. `/login` — Secretariat & Member Sign-In Portal (+880 Mobile OTP & Password).
+19. `/verify/cert/[id]` — Public Cryptographic Certificate Verification with QR Seal.
+20. `/verify/member/[id]` — Public Candidate Pass & Fellow Card Verification.
+21. `/offline` — Progressive Web App (PWA) Offline Failover Experience.
+22. `/design-system` — Living Design System & Bengali Typographic Conjunct QA Lab.
+23. `/_not-found` — Branded 404 handler with return navigation.
+24. `/api/pwa/manifest` — Dynamic Web App Manifest Endpoint.
+25. `/manifest.webmanifest` — Static Web App Manifest.
+26. `/apple-icon` — Dynamic Apple Touch Icon Generator with Agri Crest.
+27. `/icon` — Dynamic Favicon Generator.
 
-### Member & Executive Operational Portal
-15. `/portal` — Central Secretariat Module Hub (Routing to all 12 subsystems).
-16. `/portal/cms` — Visual Portfolio CMS & Brand Studio with real-time DOM theme swapping.
-17. `/portal/concierge` — Fast-Track Member Concierge Desk (Good Standing, Tax Rebate, Helpline).
-18. `/portal/members` — Member Directory with live 3-tier privacy enforcement (Public / Member / Executive).
-19. `/portal/branches` — Interactive Visual Branch Tree Explorer with materialized path telemetry.
-20. `/portal/command` — Executive Command War Room with live velocity ticker and Daily Briefing Card.
-21. `/portal/command/resolutions` — Statutory Meeting Minutes & Numbered Resolution Compiler.
-22. `/portal/finance` — Treasurer Financial Command Portal with bank slip verification queue & digital money receipts.
-23. `/portal/eligibility` — Member Eligibility Dashboard & Tier Progression tracker.
-24. `/portal/communications` — Multi-Vendor SMS & Emergency Broadcast Console with handset simulator.
-25. `/portal/blood-bank` — Community Blood Donor Network & Emergency Appeal Dispatcher.
-26. `/portal/events/checkin` — Gate Steward QR Scanner with attendance logging and coupon issuance.
-27. `/portal/lms` — Defensive Driving & Road Law Academy courses & digital certificate issuer.
-28. `/portal/reports` — Statutory Government Audit & Societies Registration Act XXI of 1860 export console.
-29. `/portal/superadmin` — SaaS Master Control Panel with white-glove 3-step onboarding wizard.
-30. `/_not-found` — Branded 404 handler with return navigation.
+### Organization Management & Dynamic CMS Portal
+28. `/portal` — Member & Executive Dashboard (Toggle between Candidate and Secretariat modes).
+29. `/portal/cms` — CMS Studio: Statutory Metadata, Policies WYSIWYG, and Course Catalog.
+30. `/portal/branches` — 64-District Regional Councils & University Branch Hierarchy Tree.
+31. `/portal/certificates` — Digital Certificate Issuance, Template Designer, and Bulk E-Admit Cards.
+32. `/portal/finance` — Treasurer Financial Command Portal with Integer Paisa BDT Ledger & Slip Review.
+33. `/portal/communications` — SSL Wireless SMS Dispatch Console with simulated mobile preview.
+34. `/portal/reports` — Statutory Societies Act XXI of 1860 Member Register & Cash Book Audit Export.
+35. `/portal/tasks` — Agro-Lab demonstration & campus outreach task submission.
+36. `/portal/meetings` — Council sessions, agendas, quorum checks, and numbered resolutions.
+37. `/portal/command` — Executive Command War Room with live operational velocity tickers.
+38. `/portal/command/resolutions` — Meeting minutes compiler and ratified resolution printer.
+39. `/portal/concierge` — Fellow Good Standing & NBR Tax Exemption Certificate generators.
+40. `/portal/lms` — Agri-science courses, training modules, and student progression.
+41. `/portal/surveys` — Grassroots innovation feedback & student polls.
+42. `/portal/events` — Olympiad examination centers and venue gate access passes.
+43. `/portal/events/checkin` — Gate Steward QR Code scanner for attendance logging.
+44. `/portal/members` — Member and candidate directory with 3-tier privacy enforcement.
+45. `/portal/blood-bank` — Agro-volunteer donor registry and emergency dispatch.
+46. `/portal/superadmin` — Multi-tenant management and organization provisioning wizard.
+47. `/portal/profile` — User profile, candidate credentials, and activity record.
+48. `/portal/settings` — Account security, bilingual preferences, and notification toggles.
+49. `/portal/eligibility` — Candidate tier progression, exam qualification, and merit scores.
 
 ---
 
-## Quick Start Guide
+## Local Development & Execution
 
 ### Prerequisites
-- Node.js 20+
-- pnpm 9+
-- Docker & Docker Compose (for MySQL 8.0 and Redis 7.0)
+- **Node.js**: `20.x` or `22.x`
+- **Package Manager**: `pnpm` (v9 or v10)
 
-### 1. Repository Setup
+### 1. Installation
+Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/beingmushfiq/ORG-Management-System.git
-cd "ORG Management System"
 pnpm install
 ```
 
-### 2. Environment Configuration
+### 2. Environment Setup
+Create a `.env` file at the root:
 ```bash
 cp .env.example .env
 ```
+Default local configuration provides seamless offline fallback and mock authentication.
 
-### 3. Infrastructure Containers
+### 3. Database Migration & Seed
+Run Prisma to sync the schema and seed the National Agricultural Olympiad reference tenant:
 ```bash
-docker-compose up -d
-```
-
-### 4. Database Migration & Road Safety Movement Seeding
-```bash
-# Push schema migrations
 pnpm --filter @org/database prisma db push
-
-# Seed with Road Safety Movement reference data
 pnpm --filter @org/database db:seed
 ```
 
-### 5. Launch Development Servers
+### 4. Running the Platform Locally
+
+#### Option A: High-Speed Production Server (Recommended)
+Because the Next.js production build is fully pre-compiled across all 49 routes:
+```bash
+pnpm --filter @org/web start
+```
+*Application immediately available at **`http://localhost:3000`**.*
+
+#### Option B: Full Development Suite
+Run both the Next.js web application and NestJS backend API simultaneously:
 ```bash
 pnpm dev
 ```
-- Web Application: `http://localhost:3000`
-- API Service: `http://localhost:4000`
+- **Web Portal**: `http://localhost:3000`
+- **Backend API**: `http://localhost:4000`
 
 ---
 
-## Quality Gates & Testing
+## Verification & Quality Gates
 
-### TypeScript Verification
+The entire codebase conforms to rigorous engineering standards:
+
+### 1. Static Typecheck
 ```bash
 pnpm typecheck
 ```
-*Enforces 0 type errors across all packages under strict mode.*
+*Zero TypeScript errors across all workspace packages (`@org/web`, `@org/api`, `@org/database`, `@org/ui`, `@org/config`).*
 
-### Production Build
+### 2. Production Build
 ```bash
 pnpm build
 ```
-*Validates NestJS compilation, Prisma client generation, and Next.js 15 App Router static optimization across all 30 routes.*
+*Successfully generates static files, server components, and PWA caches for all 49 routes.*
+
+### 3. Automated API Test Suite
+```bash
+pnpm --filter @org/api test
+```
+*All 13 test files (75+ unit and integration tests) pass, covering authentication, tenant isolation, big-integer paisa ledger calculations, and quorum validation.*
 
 ---
 
 ## Security & Tenancy Invariants
 
 1. **Defensive Software Tenancy**:
-   - Software-level multi-tenancy verified via token claims and execution context.
-   - Headers like `x-tenant-id` are strictly ignored if unverified.
-2. **Deterministic Ledger**:
-   - All dues, donations, and payouts are calculated in integer paisa (`BigInt`).
-   - Floats are prohibited in financial pathways to eliminate rounding drift.
-3. **Data Integrity**:
-   - Materialized path tree mutations run inside isolated Prisma transactions with cycle detection.
-   - All position changes and resolutions generate immutable, tamper-evident audit trails.
+   - Tenancy resolution is enforced by server-derived verified JWT tokens and AsyncLocalStorage context.
+   - Arbitrary client headers like `x-tenant-id` are strictly discarded to eliminate multi-tenant elevation attacks.
+2. **Integer Paisa Financial Ledger**:
+   - Zero floating-point arithmetic in transaction pipelines. Every transaction is computed in `BigInt` paisa (`1 BDT = 100 paisa`).
+3. **Immutable Audit Trail**:
+   - Every administrative change to statutory metadata, policies, and committee positions generates an append-only cryptographic log.
+4. **Subtree Boundary Containment**:
+   - Materialized paths (`1.2.5`) restrict regional coordinators strictly to their assigned districts or university units without horizontal leakage.
 
 ---
 
-## Engineering & Architecture Attribution
+## Attribution & Governance
 
-**Organization Operating System (ORG OS)** is architected, engineered, and maintained by **[DevCenterPoint](https://devcenterpoint.com)**.
-
-*For institutional onboarding, customized enterprise deployments, or government syndicate migrations, visit [devcenterpoint.com](https://devcenterpoint.com).*
+- **Platform Architecture & Development**: Engineered by **[DevCenterPoint](https://devcenterpoint.com)**.
+- **National Organizing Secretariat**:
+  - **Headquarters**: House 04, Road 12/b, Sector 10, Uttara Model Town, Dhaka, Bangladesh
+  - **Trade License**: `03247/2023-2025`
+  - **Helpline**: `+880 1717-395047`
+  - **Official Email**: `agriculturalolympiad@gmail.com`
+  - **Web Portal**: [agriculturalolympiad.com](https://agriculturalolympiad.com/)
