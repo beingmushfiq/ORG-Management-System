@@ -103,10 +103,10 @@ export function BangladeshBranchAtlas() {
             National Geographic Network · 64 Districts
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Interactive Branch & Blackspot Atlas of Bangladesh
+            Interactive 64-District Olympiad Network & Agri-Hub Atlas
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-300 font-bangla mt-1">
-            বাংলাদেশের ৬৪টি জেলায় নিরাপদ সড়ক আন্দোলনের ৮২টি কমিটি, ৯,০১০+ স্বেচ্ছাসেবী এবং ৪২০+ কালো স্থান (Blackspot) পর্যবেক্ষণ নেটওয়ার্ক
+            বাংলাদেশের ৬৪টি জেলায় কৃষি অলিম্পিয়াডের আঞ্চলিক সমন্বয় কাউন্সিল, ক্যাম্পাস চ্যাপ্টার ও এগ্রো-রিসার্চ ল্যাব নেটওয়ার্ক
           </p>
         </div>
 
@@ -475,13 +475,13 @@ export function BangladeshBranchAtlas() {
                 <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-border">
                   <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
                     <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                    <span>Blackspots Monitored</span>
+                    <span>Agri-Tech Hubs & Labs</span>
                   </div>
                   <div className="text-2xl font-black text-amber-600 dark:text-amber-400 mt-1">
                     {activeDistrict.blackspotsIdentified}
                   </div>
                   <span className="text-[10px] text-amber-700 dark:text-amber-300 font-medium">
-                    Continuous Speed Audits
+                    Active Research Testbeds
                   </span>
                 </div>
               </div>
@@ -506,7 +506,7 @@ export function BangladeshBranchAtlas() {
               {/* Ongoing Local Initiatives */}
               <div className="space-y-2 mb-5">
                 <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                  Active Safety Initiatives:
+                  Active Agri-Science Initiatives:
                 </div>
                 <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
                   {activeDistrict.initiatives.map((init, idx) => (
@@ -522,7 +522,7 @@ export function BangladeshBranchAtlas() {
               <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-4 mb-5">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 block">
-                    District Volunteer Coordinator:
+                    District Chapter Coordinator:
                   </span>
                   <span className="font-extrabold text-sm text-slate-900 dark:text-white block mt-0.5">
                     {activeDistrict.coordinatorName}
@@ -548,7 +548,7 @@ export function BangladeshBranchAtlas() {
                 className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>Join Volunteer Brigade in {activeDistrict.nameEn}</span>
+                <span>Join Olympiad Chapter in {activeDistrict.nameEn}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -590,7 +590,7 @@ export function BangladeshBranchAtlas() {
                     <span className="font-bold text-slate-900 dark:text-white">{dist.volunteers}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 block">Blackspots:</span>
+                    <span className="text-[10px] text-slate-400 block">Agri-Hubs:</span>
                     <span className="font-bold text-amber-600 dark:text-amber-400">
                       {dist.blackspotsIdentified}
                     </span>

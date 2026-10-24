@@ -110,7 +110,7 @@ export default function MemberLoginPage() {
     setErrorMessage(null);
     try {
       // Direct demo login with convener account or dev token
-      const res = await apiClient.auth.login("convener@roadsafetymovement.org", "RSM@Secretariat2026!");
+      const res = await apiClient.auth.login("agriculturalolympiad@gmail.com", "AgriOlympiad@2026!");
       if (res?.accessToken) {
         document.cookie = `access_token=${res.accessToken}; path=/; max-age=604800; SameSite=Lax`;
       }
@@ -159,7 +159,7 @@ export default function MemberLoginPage() {
               Member & Council Sign In
             </h1>
             <p className="text-xs text-muted-foreground font-bangla">
-              নিরাপদ সড়ক আন্দোলন — জাতীয় নির্বাহী ও স্বেচ্ছাসেবী পোর্টাল
+              জাতীয় কৃষি অলিম্পিয়াড — কেন্দ্রীয় সচিবালয় ও ফেলোশিপ পোর্টাল
             </p>
           </div>
 

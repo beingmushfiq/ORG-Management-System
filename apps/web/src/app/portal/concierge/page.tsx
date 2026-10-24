@@ -25,9 +25,9 @@ export default function MemberConciergePage() {
   const { success } = useToast();
 
   // Deployment Desk State
-  const [chapterUnit, setChapterUnit] = useState("Dhaka Central Secretariat / DU Chapter");
-  const [corridorZone, setCorridorZone] = useState("Shahbagh - Farmgate - Airport Corridor");
-  const [availability, setAvailability] = useState("24/7 Rapid Crash Response & Weekend Drives");
+  const [chapterUnit, setChapterUnit] = useState("BAU Mymensingh Campus Chapter / Central Secretariat");
+  const [corridorZone, setCorridorZone] = useState("Mymensingh - Dhaka Academic Corridor");
+  const [availability, setAvailability] = useState("Academic & Field Outreach Deployments");
   const [phone, setPhone] = useState("01819-112233");
 
   const handleGenerateGoodStanding = () => {
@@ -37,7 +37,7 @@ export default function MemberConciergePage() {
       setShowGoodStandingModal(true);
       success(
         "Certificate Cryptographically Signed",
-        "Activist Accreditation Certificate #RSM-GS-2026-08821 generated with official QR seal."
+        "Fellow Accreditation Certificate #AGRI-GS-2026-08821 generated with official QR seal."
       );
     }, 700);
   };
@@ -196,12 +196,12 @@ export default function MemberConciergePage() {
 
               <p className="text-xs text-muted-foreground leading-relaxed">
                 {lang === "en"
-                  ? "Aggregates all volunteer membership fees and road crash victim relief donations into a certified tax exemption statement for submission to the National Board of Revenue."
-                  : "বার্ষিক চাঁদা ও সড়ক ক্র্যাশ ভিকটিম ত্রাণ তহবিলে প্রদত্ত অনুদানের সম্পূর্ণ নিরীক্ষিত স্টেটমেন্ট যা জাতীয় রাজস্ব বোর্ডে দাখিলযোগ্য।"}
+                  ? "Aggregates all membership fees and agricultural science student research sponsorships into a certified tax exemption statement for submission to the National Board of Revenue."
+                  : "বার্ষিক ফি ও যুব কৃষি গবেষণা ফেলোশিপ তহবিলে প্রদত্ত অনুদানের সম্পূর্ণ নিরীক্ষিত স্টেটমেন্ট যা জাতীয় রাজস্ব বোর্ডে দাখিলযোগ্য।"}
               </p>
 
               <div className="pt-2 flex items-center justify-between border-t border-border text-xs">
-                <span className="text-muted-foreground font-mono">Deduction Ref: NBR-RSM-TAX-8821</span>
+                <span className="text-muted-foreground font-mono">Deduction Ref: NBR-AGRI-TAX-8821</span>
                 <Button
                   onClick={handleGenerateTax}
                   size="sm"
@@ -221,16 +221,16 @@ export default function MemberConciergePage() {
         <div className="lg:col-span-5 space-y-6">
           <Card className="bg-card border border-border rounded-2xl p-6 shadow-md space-y-4">
             <div>
-              <Badge className="bg-blue-500/15 text-blue-700 dark:text-blue-400 border border-blue-500/30 text-[10px] font-bold mb-1">
-                VOLUNTEER DEPLOYMENT
+              <Badge className="bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 text-[10px] font-bold mb-1">
+                CHAPTER & VENUE DEPLOYMENT
               </Badge>
               <h3 className="text-lg font-bold font-serif text-foreground">
-                {lang === "en" ? "Action Desk & Patrol Schedule" : "মাঠপর্যায়ের দায়িত্ব ও শিডিউল"}
+                {lang === "en" ? "Action Desk & Olympiad Schedule" : "মাঠপর্যায়ের দায়িত্ব ও শিডিউল"}
               </h3>
               <p className="text-xs text-muted-foreground mt-0.5">
                 {lang === "en"
-                  ? "Keep your emergency corridor assignment updated for rapid accident response and zebra crossing safety patrols."
-                  : "আপনার দায়িত্বপ্রাপ্ত মহাসড়ক করিডোর ও ইমার্জেন্সি রেসপন্স শিডিউল হালনাগাদ রাখুন।"}
+                  ? "Keep your regional campus assignment updated for competition venue management, school kit demonstrations, and exams."
+                  : "আপনার দায়িত্বপ্রাপ্ত আঞ্চলিক ক্যাম্পাস ইউনিট ও অলিম্পিয়াড সমন্বয় শিডিউল হালনাগাদ রাখুন।"}
               </p>
             </div>
 

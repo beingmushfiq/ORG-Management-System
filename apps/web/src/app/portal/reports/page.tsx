@@ -36,7 +36,7 @@ interface CashBookRow {
 const SAMPLE_REGISTER: MemberRecord[] = [
   {
     serial: 1,
-    membershipNo: "RSM-VOL-2018-001",
+    membershipNo: "NAO-VOL-2018-001",
     name: "Engr. Tanvir Ahmed",
     fatherOrHusbandName: "Md. Rafiqul Ahmed",
     tier: "PERMANENT",
@@ -48,7 +48,7 @@ const SAMPLE_REGISTER: MemberRecord[] = [
   },
   {
     serial: 2,
-    membershipNo: "RSM-ACT-2019-042",
+    membershipNo: "NAO-ACT-2019-042",
     name: "Nusrat Jahan",
     fatherOrHusbandName: "Late Anwar Hossain",
     tier: "CAMPUS_MARSHAL",
@@ -60,7 +60,7 @@ const SAMPLE_REGISTER: MemberRecord[] = [
   },
   {
     serial: 3,
-    membershipNo: "RSM-GEN-2020-108",
+    membershipNo: "NAO-GEN-2020-108",
     name: "Rafiqul Islam",
     fatherOrHusbandName: "Alhaj M. Hossain",
     tier: "GENERAL",
@@ -72,7 +72,7 @@ const SAMPLE_REGISTER: MemberRecord[] = [
   },
   {
     serial: 4,
-    membershipNo: "RSM-VOL-2021-319",
+    membershipNo: "NAO-VOL-2021-319",
     name: "Tasnim Sultana",
     fatherOrHusbandName: "Dr. A. Islam",
     tier: "FIELD_VOLUNTEER",
@@ -88,7 +88,7 @@ const SAMPLE_CASH_BOOK: CashBookRow[] = [
   {
     date: "2026-09-01",
     voucherNo: "VR-2026-001",
-    particulars: "Volunteer Pass Subscriptions & Chapter Allocations",
+    particulars: "Student Olympiad Registrations & Chapter Allocations",
     accountHead: "MEMBERSHIP_FEE_COLLECTION",
     receiptTaka: 250000,
     paymentTaka: 0,
@@ -96,15 +96,15 @@ const SAMPLE_CASH_BOOK: CashBookRow[] = [
   {
     date: "2026-09-05",
     voucherNo: "VP-2026-001",
-    particulars: "High-Visibility Safety Vests & Zebra Stencils Procurement",
-    accountHead: "SAFETY_EQUIPMENT_EXPENSE",
+    particulars: "Agricultural Science Demonstration Kits & Soil Testing Sensor Procurement",
+    accountHead: "AGRO_KIT_EQUIPMENT_EXPENSE",
     receiptTaka: 0,
     paymentTaka: 120000,
   },
   {
     date: "2026-09-10",
     voucherNo: "VR-2026-002",
-    particulars: "Corporate CSR Donation for Highway Radar Deployment",
+    particulars: "Corporate CSR Grant for Youth Agro-Innovation Scholarships",
     accountHead: "INSTITUTIONAL_DONATION",
     receiptTaka: 500000,
     paymentTaka: 0,
@@ -112,8 +112,8 @@ const SAMPLE_CASH_BOOK: CashBookRow[] = [
   {
     date: "2026-09-14",
     voucherNo: "VP-2026-002",
-    particulars: "Emergency Trauma Hospital Aid & Legal Defense Grants",
-    accountHead: "VICTIM_RELIEF_DISBURSEMENT",
+    particulars: "Student Agro-Innovation Research Grants & Competition Awards",
+    accountHead: "FELLOWSHIP_GRANT_DISBURSEMENT",
     receiptTaka: 0,
     paymentTaka: 230000,
   },

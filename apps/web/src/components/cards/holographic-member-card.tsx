@@ -100,7 +100,7 @@ export function InstitutionalMemberCard({
               <div className="text-center p-2">
                 <ShieldCheck className="h-8 w-8 text-amber-400 mx-auto opacity-80" />
                 <span className="text-[9px] font-mono text-slate-300 mt-1 block">
-                  RSM PASS
+                  NAO PASS
                 </span>
               </div>
               {/* Security Shimmer */}
@@ -108,7 +108,7 @@ export function InstitutionalMemberCard({
             </div>
             <span className="mt-1.5 inline-flex items-center gap-1 text-[9px] font-bold text-emerald-400">
               <CheckCircle2 className="h-3 w-3" />
-              Verified Activist
+              Verified Candidate
             </span>
           </div>
 

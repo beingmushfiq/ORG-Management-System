@@ -122,13 +122,13 @@ export function HeritageChronicleTimeline() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">
             <Clock className="w-3.5 h-3.5" />
-            Movement Chronicle · 2018 to 2026
+            Olympiad Chronicle · 2023 to 2026
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Heritage of the Safe Road Movement
+            Chronicle of the National Agricultural Olympiad
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-300 font-bangla mt-1">
-            ২০১৮ সালের শিক্ষার্থীদের নিরাপদ সড়ক আন্দোলন থেকে ২০২৬ সালের ডিজিটাল প্ল্যাটফর্ম পর্যন্ত ঐতিহাসিক রূপরেখা
+            ২০২৩ সালে বাকৃবিতে অ্যাকাডেমিক সূচনা থেকে ২০২৬ সালের ৬৪-জেলা ডিজিটাল প্ল্যাটফর্ম পর্যন্ত ঐতিহাসিক রূপরেখা
           </p>
         </div>
 

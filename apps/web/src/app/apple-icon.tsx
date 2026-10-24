@@ -34,7 +34,7 @@ export default function AppleIcon() {
             marginBottom: 4,
           }}
         >
-          🛡️
+          🌾
         </div>
         <div
           style={{
@@ -45,7 +45,7 @@ export default function AppleIcon() {
             display: "flex",
           }}
         >
-          RSM
+          NAO
         </div>
       </div>
     ),

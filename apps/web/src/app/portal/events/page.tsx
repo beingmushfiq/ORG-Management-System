@@ -184,7 +184,7 @@ export default function MemberEventsPage() {
                 <QrCode className="w-32 h-32 text-white" />
               </div>
               <p className="text-[11px] font-mono font-bold mt-2 text-slate-700">
-                PASS: RSM-EVT-2026-0819
+                PASS: NAO-EVT-2026-0819
               </p>
             </div>
 

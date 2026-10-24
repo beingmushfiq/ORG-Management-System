@@ -206,7 +206,7 @@ export function InteractiveOrganogram() {
             National Executive Council & Standing Wings
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-300 font-bangla mt-1">
-            নিরাপদ সড়ক আন্দোলনের জাতীয় নির্বাহী পরিষদ এবং স্থায়ী পরিচালক পর্ষদের দায়িত্ব ও কাঠামো
+            জাতীয় কৃষি অলিম্পিয়াডের নির্বাহী পরিষদ, একাডেমি জুরি বোর্ড এবং ফেলোশিপ সচিবালয় কাঠামো
           </p>
         </div>
 

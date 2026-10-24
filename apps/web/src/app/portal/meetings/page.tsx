@@ -27,39 +27,39 @@ interface MeetingItem {
 const MEETINGS: MeetingItem[] = [
   {
     id: "mtg-2026-09",
-    meetingNumber: "RSM-SEC-2026-09",
+    meetingNumber: "NAO-SEC-2026-09",
     title: "14th National Executive Council Quarterly Review & Budget Ratification",
     titleBn: "১৪তম জাতীয় কার্যনির্বাহী ত্রৈমাসিক পর্যালোচনা ও বাজেট অনুমোদন সভা",
     date: "28 September 2026",
     time: "06:30 PM - 09:00 PM",
-    venue: "Council Chamber, Farmgate Secretariat & Hybrid Zoom Room",
+    venue: "Central Secretariat Council Chamber, Uttara Model Town & Hybrid Zoom Room",
     type: "National Council",
     status: "SCHEDULED",
     quorumTarget: 21,
     quorumPresent: 18,
     agendaItems: [
-      "Review of 420 Blackspot Elimination Fund Allocations",
-      "Dhaka-Mymensingh Branch Restructuring and New Unit Charters",
-      "Ratification of 2026 Youth Brigade Training Protocols",
+      "Review of 64-District Olympiad Rounds & Agro-Kit Grants",
+      "Dhaka-Mymensingh Campus Chapter Restructuring and New Unit Charters",
+      "Ratification of 2026 Olympiad Jury Evaluation Protocols",
       "Review of Q3 Audited Financial Statement & Paisa Ledger",
     ],
   },
   {
     id: "mtg-2026-08",
-    meetingNumber: "RSM-SEC-2026-08",
-    title: "Special General Assembly on Road Transport Act Implementation Audit",
-    titleBn: "সড়ক পরিবহন আইন বাস্তবায়ন নিরীক্ষা বিষয়ক বিশেষ সাধারণ অধিবেশন",
+    meetingNumber: "NAO-SEC-2026-08",
+    title: "Special General Assembly on Smart Agriculture Education & Olympiad Roadmap",
+    titleBn: "স্মার্ট কৃষি শিক্ষা ও অলিম্পিয়াড কর্মপরিকল্পনা বিষয়ক বিশেষ সাধারণ অধিবেশন",
     date: "14 August 2026",
     time: "04:00 PM - 08:00 PM",
-    venue: "National Press Club Auditorium, Dhaka",
+    venue: "BAU Auditorium / National Secretariat Conference Hall, Dhaka",
     type: "General Assembly",
     status: "MINUTES_RATIFIED",
     quorumTarget: 50,
     quorumPresent: 74,
     agendaItems: [
-      "Presentation of 64-District Crash Telemetry Audit",
-      "Adoption of Resolution No. RSM-RES-2026-042 (Pedestrian Charter)",
-      "Approval of 12 New Campus Chapter Conveners",
+      "Presentation of 64-District Regional Qualifiers Progress",
+      "Adoption of Resolution No. NAO-RES-2026-042 (Junior & Secondary STEM Curriculum)",
+      "Approval of 12 New University Campus Chapter Conveners",
     ],
   },
 ];
@@ -204,10 +204,10 @@ export default function MemberMeetingsPage() {
                 </h4>
                 <div className="p-3 rounded-lg border border-border bg-background space-y-1.5">
                   <p className="font-mono font-bold text-foreground">
-                    Resolution No. RSM-RES-2026-042
+                    Resolution No. NAO-RES-2026-042
                   </p>
                   <p className="text-muted-foreground leading-relaxed font-bangla text-[11px]">
-                    "সর্বসম্মতিক্রমে সিদ্ধান্ত গৃহীত হইল যে, ঢাকা-চট্টগ্রাম মহাসড়কের সকল অবৈধ পার্কিং ও বিপজ্জনক ব্ল্যাকস্পট নিরসনে সড়ক ও জনপথ অধিদপ্তর বরাবর আনুষ্ঠানিক প্রতিবেদন দাখিল করা হইবে।"
+                    "সর্বসম্মতিক্রমে সিদ্ধান্ত গৃহীত হইল যে, ৬৪ জেলার সকল আঞ্চলিক অলিম্পিয়াড ভেন্যুতে আধুনিক এগ্রো-ল্যাব কিট ও ডিজিটাল প্রশ্নপত্র বিতরণ নিশ্চিত করা হইবে।"
                   </p>
                   <div className="text-[10px] font-mono text-emerald-600">
                     Ratified by President & General Secretary

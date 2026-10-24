@@ -164,7 +164,7 @@ export default function MemberSurveysPage() {
         <div className="space-y-4">
           <h3 className="text-sm font-bold text-foreground uppercase tracking-wider font-mono flex items-center gap-2">
             <MessageSquare className="h-4 w-4 text-emerald-600" />
-            <span>Submit Grassroots Opinion or Hazard Report</span>
+            <span>Submit Academic Feedback or Innovation Proposal</span>
           </h3>
 
           <Card>
@@ -173,7 +173,7 @@ export default function MemberSurveysPage() {
                 Direct Submission to National Secretariat
               </CardTitle>
               <p className="text-xs text-muted-foreground font-bangla">
-                আপনার এলাকার বিপজ্জনক ব্ল্যাকস্পট বা ট্রাফিক আইন ভঙ্গের ব্যাপারে সরাসরি কেন্দ্রীয় গবেষণা শাখায় মতামত দিন
+                আপনার আঞ্চলিক অলিম্পিয়াড বা কৃষি ল্যাব কার্যক্রমের ব্যাপারে সরাসরি কেন্দ্রীয় সচিবালয়ে মতামত দিন
               </p>
             </CardHeader>
 
@@ -190,12 +190,12 @@ export default function MemberSurveysPage() {
                 <form onSubmit={handleSendSuggestion} className="space-y-3">
                   <div className="space-y-1">
                     <label className="text-xs font-mono uppercase text-muted-foreground">
-                      Hazard Topic / Corridor Location
+                      Subject / Regional Venue or Chapter
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Farmgate Footbridge blind spot or Joydebpur intersection"
+                      placeholder="e.g. BAU Venue Hydroponics Setup or Mymensingh Regional Exam Center"
                       className="w-full px-3 py-2 rounded-lg border border-input bg-background text-xs text-foreground focus:outline-none focus:border-primary"
                     />
                   </div>
@@ -209,7 +209,7 @@ export default function MemberSurveysPage() {
                       required
                       value={suggestion}
                       onChange={(e) => setSuggestion(e.target.value)}
-                      placeholder="Specify the risk factor, crash frequency, and recommended engineering or enforcement remedy..."
+                      placeholder="Specify observation, kit trial feedback, student engagement level, or recommendations..."
                       className="w-full p-3 rounded-lg border border-input bg-background text-xs text-foreground focus:outline-none focus:border-primary leading-relaxed"
                     />
                   </div>

@@ -119,7 +119,7 @@ export default function MemberPortalDashboardPage() {
             </Badge>
           </h2>
           <p className="text-xs text-muted-foreground font-bangla">
-            নিরাপদ সড়ক আন্দোলন — সদস্য ড্যাশবোর্ড ও প্রাতিষ্ঠানিক সেবা পোর্টাল
+            জাতীয় কৃষি অলিম্পিয়াড — সদস্য ড্যাশবোর্ড ও প্রাতিষ্ঠানিক সেবা পোর্টাল
           </p>
         </div>
 

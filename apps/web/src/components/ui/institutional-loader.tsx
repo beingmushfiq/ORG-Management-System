@@ -79,7 +79,7 @@ export function InstitutionalLoader({
       {/* Institutional Security Pill */}
       <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-muted/60 border border-border text-[10px] text-muted-foreground font-mono">
         <ShieldCheck className="w-3 h-3 text-emerald-500" />
-        <span>RSM Autonomous Governance System</span>
+        <span>National Agricultural Olympiad OS</span>
       </div>
     </div>
   );

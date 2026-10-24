@@ -25,7 +25,7 @@ export default function MeetingMinutesBuilderPage() {
   const [lang, setLang] = useState<"en" | "bn">("en");
   const [meetingCategory, setMeetingCategory] = useState("CENTRAL_EXECUTIVE_COUNCIL");
   const [meetingTitle, setMeetingTitle] = useState("5th Bi-Monthly Executive Council Meeting 2026");
-  const [venue, setVenue] = useState("National Secretariat Conference Hall, Segunbagicha, Dhaka");
+  const [venue, setVenue] = useState("Central Secretariat Conference Hall, Uttara Model Town, Dhaka");
   const [totalSeats] = useState(25);
   const [presentSeats, setPresentSeats] = useState(20);
 
@@ -40,10 +40,10 @@ export default function MeetingMinutesBuilderPage() {
     },
     {
       id: "ag-2",
-      title: "Approval of National Highway Blackspot Audit & FY 2026 Legal Aid Fund",
-      titleBn: "২০২৬ সালের জাতীয় মহাসড়ক ব্ল্যাকস্পট অডিট ও দুর্ঘটনা আইনি সহায়তা তহবিল অনুমোদন",
-      decisionText: "Audited statement of 420 crash zones and budget for emergency victim legal defense ratified for presentation to the upcoming National Council.",
-      decisionBn: "৪২০টি দুর্ঘটনাপ্রবণ এলাকার সমীক্ষা এবং ক্ষতিগ্রস্ত পরিবারদের জরুরি আইনি সহায়তা বাবদ বরাদ্দ বাজেট সর্বসম্মতভাবে অনুমোদিত হইল।",
+      title: "Approval of National 64-District Olympiad Rounds & FY 2026 Agri-Innovation Fund",
+      titleBn: "২০২৬ সালের জাতীয় ৬৪-জেলা অলিম্পিয়াড রাউন্ড ও কৃষি উদ্ভাবনী ফেলোশিপ বাজেট অনুমোদন",
+      decisionText: "Budget for 64-district regional rounds, 4 university hubs (BAU, BSMRAU, SAU, PSTU), and agro-innovation grants ratified for presentation to the National Council.",
+      decisionBn: "৬৪ জেলার আঞ্চলিক অলিম্পিয়াড পর্ব ও কৃষি বিশ্ববিদ্যালয় সমূহের চূড়ান্ত গ্র্যান্ড ফিনালের বাজেট সর্বসম্মতভাবে অনুমোদিত হইল।",
       isUnanimous: true,
     },
   ]);
@@ -243,7 +243,7 @@ export default function MeetingMinutesBuilderPage() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-2">
                     <Badge className="bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-[10px] font-mono font-bold print:text-black">
-                      RESOLUTION #{String(idx + 1).padStart(2, "0")} • RES-RSM-2026-{String(idx + 1).padStart(3, "0")}
+                      RESOLUTION #{String(idx + 1).padStart(2, "0")} • RES-NAO-2026-{String(idx + 1).padStart(3, "0")}
                     </Badge>
                     {item.isUnanimous && (
                       <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 print:text-black">
@@ -280,20 +280,20 @@ export default function MeetingMinutesBuilderPage() {
           {/* Statutory Certification & Signatures */}
           <div className="mt-14 pt-8 border-t border-border space-y-8 print:border-black">
             <p className="text-xs text-muted-foreground font-bangla italic text-center print:text-black">
-              "উক্ত সভার সকল প্রস্তাবনা ও কার্যবিবরণী নিরাপদ সড়ক আন্দোলনের গঠনতন্ত্র অনুযায়ী যথারীতি পর্যালোচিত ও সর্বসম্মত সিদ্ধান্তে চূড়ান্ত অনুমোদিত হইল।"
+              "উক্ত সভার সকল প্রস্তাবনা ও কার্যবিবরণী জাতীয় কৃষি অলিম্পিয়াডের গঠনতন্ত্র অনুযায়ী যথারীতি পর্যালোচিত ও সর্বসম্মত সিদ্ধান্তে চূড়ান্ত অনুমোদিত হইল।"
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-4">
               <div className="text-center sm:text-left space-y-1">
                 <div className="w-40 border-b border-foreground/30 print:border-black mb-1 mx-auto sm:mx-0" />
-                <div className="text-xs font-bold text-foreground print:text-black">Engr. Tanvir Ahmed</div>
-                <div className="text-[11px] text-muted-foreground print:text-gray-600">Chief National Coordinator, RSM</div>
+                <div className="text-xs font-bold text-foreground print:text-black">Prof. Dr. Mahbubur Rahman</div>
+                <div className="text-[11px] text-muted-foreground print:text-gray-600">Chief Convener, National Agricultural Olympiad</div>
               </div>
 
               <div className="text-center sm:text-right space-y-1">
                 <div className="w-40 border-b border-foreground/30 print:border-black mb-1 mx-auto sm:ml-auto sm:mr-0" />
-                <div className="text-xs font-bold text-foreground print:text-black">Advocate Shafiul Alam</div>
-                <div className="text-[11px] text-muted-foreground print:text-gray-600">Executive Council Secretary, RSM</div>
+                <div className="text-xs font-bold text-foreground print:text-black">Dr. Farhana Yasmin</div>
+                <div className="text-[11px] text-muted-foreground print:text-gray-600">Executive Council Secretary, National Agricultural Olympiad</div>
               </div>
             </div>
           </div>
